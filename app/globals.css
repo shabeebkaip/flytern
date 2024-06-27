@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+ */
+ body {
+  background: #eeeeee;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+.rtl {
+  direction: rtl;
+}
+
+/* Add this to your CSS file or style component */
+.swiper-pagination-bullet {
+  background-color: white;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: orange !important;
+  /* You can adjust the active bullet color */
+}
+
+.muirtl-yh1top-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: orange !important;
+}
+
+.muirtl-1mvl8x9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: orange !important;
+
+}
+
+.muirtl-c9ooex.Mui-selected {
+  background-color: orange !important;
+}
+
+.muirtl-1k1mw4.Mui-selected {
+  background-color: orange !important;
+}
+
+.muirtl-5ir5xx-MuiLinearProgress-bar1 {
+  background-color: orange !important;
+}
+
+.muirtl-1r8wrcl-MuiLinearProgress-bar2 {
+  background-color: orange !important;
+}
+
+.MuiLinearProgress-bar1Indeterminate {
+  background-color: orange !important;
+}
+.MuiLinearProgress-bar2Indeterminate {
+  background-color: orange !important;
+}

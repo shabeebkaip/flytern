@@ -1,0 +1,44 @@
+import React, { useEffect } from 'react'
+import dynamic from 'next/dynamic'
+import StoreProvider from '@/app/StoreProvider'
+import { getExploresApi } from '../api'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import Layout from '@/hoc/Layout'
+
+
+const SubHeader = dynamic(() => import('@/app/home/components/SubHeader'))
+const Hero = dynamic(() => import('@/app/home/components/Hero'))
+const Recommended = dynamic(() => import('@/app/home/components/Recommended'))
+const TravelStories = dynamic(() => import('@/app/home/components/TravelStories'))
+const PopularDestination = dynamic(() => import('@/app/home/components/PopularDestination'))
+
+const HomeChild = () => {
+  const location = typeof window !== "undefined" ? window.location?.pathname : '';
+  const { selectedLanguageAndCountry } = useAppSelector((state) => state.sharedState);
+  const { data } = useAppSelector((state) => state.exploreState)
+  const flightBgUrl = data?.bgGrounds?.length && data?.bgGrounds[0]['flightBgURL']
+  const hotelBgUrl = data?.bgGrounds?.length && data?.bgGrounds[0]['hotelBgURL']
+  
+  return (
+    <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" || location.includes("/ar") ? 'rtl font-arabic' : 'font-inter'}`}>
+      <SubHeader />
+      <Hero backgroundImage={['/', '/ar', '/ar/flights', '/flights'].includes(location) ? flightBgUrl : hotelBgUrl} />
+      <Layout>
+        <div className='flex flex-col gap-5 my-5 ' >
+          <Recommended />
+          <PopularDestination />
+          <TravelStories />
+        </div>
+      </Layout>
+    </div>
+  )
+}
+const Home = () => {
+  return (
+    <StoreProvider>
+      <HomeChild />
+    </StoreProvider>
+  )
+}
+
+export default Home
