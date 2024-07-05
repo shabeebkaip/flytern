@@ -12,23 +12,23 @@ const SubHeaderChild = ({ }) => {
     <div className="w-full h-[55px] bg-emerald-800 shadow border-b border-neutral-200 text-white hidden md:block">
       <div className="container flex items-center justify-between h-full px-4 mx-auto">
         <div className="flex items-center justify-between gap-10">
-          <Link href="/flights"
+          <div onClick={() => window.location.href = "/flights"}
             className="flex items-center gap-3 cursor-pointer"
           >
             <Image width={20} height={20} src={"/icons/flight.svg"} alt="flight" className=" flight" />
             <p className="">
               {translation?.flights}
             </p>
-          </Link>
-          <Link href="/hotels"
+          </div>
+          <div onClick={() => window.location.href = "/hotels"}
             className="flex items-center gap-3 cursor-pointer"
           >
             <Image width={20} height={20} src={"/icons/Buildings.svg"} alt="flight" className=" hotel" />
             <p className="">
               {translation?.hotels}
             </p>
-          </Link>
-          <Link href="/packages">
+          </div>
+          <div  onClick={() => window.location.href = "/packages"} >
             <div
               className="flex items-center gap-3 cursor-pointer"
             //  onClick={() => lang ? navigate(`/${lang}/packages`) : navigate("/packages")}
@@ -38,8 +38,8 @@ const SubHeaderChild = ({ }) => {
                 {translation?.packages}
               </p>
             </div>
-          </Link>
-         <Link href="/insurance">
+          </div>
+         <div onClick={() => window.location.href = "/insurance"}>
           <div
             className="flex items-center gap-3 cursor-pointer"
           // onClick={() => lang ? navigate(`/${lang}/insurance`) : navigate("/insurance")}
@@ -49,7 +49,7 @@ const SubHeaderChild = ({ }) => {
               {translation?.travel_insurance}
             </p>
           </div>
-         </Link>
+         </div>
         </div>
       </div>
     </div>

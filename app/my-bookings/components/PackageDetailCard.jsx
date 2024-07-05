@@ -1,8 +1,10 @@
 import { Rating } from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const PackageDetailCard = ({ item }) => {
+    const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     return (
         <div>
             <div className='container flex items-center p-4 mx-auto overflow-hidden bg-white rounded-md'>
@@ -53,8 +55,8 @@ const PackageDetailCard = ({ item }) => {
                                 if (typeof window !== 'undefined') {
                                     window.location.href = `/packages/details/${item.refID}`
                                 }
-                            }} >View Bookings</button>
-                            <h5 className='text-red-500 underline cursor-pointer text-end'>Cancel</h5>
+                            }} >  {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Bookings"}</button>
+                            {/* <h5 className='text-red-500 underline cursor-pointer text-end'>Cancel</h5> */}
                         </div>
 
                     </div>

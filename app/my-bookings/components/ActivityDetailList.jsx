@@ -1,8 +1,10 @@
 import React from 'react'
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
 
 
 const ActivityDetailList = ({ activity }) => {
+    const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     return (
         <div className="container grid items-center justify-between w-full grid-cols-12 gap-2 px-4 py-5 mx-auto bg-white rounded-md md:items-center sm:items-start md:gap-7">
             <div className="col-span-2 ">
@@ -28,8 +30,9 @@ const ActivityDetailList = ({ activity }) => {
                     <h4 className=' md:text-end text-[10px] md:text-xl font-semibold text-tag-color-two'><span className='text-[9px] md:text-sm font-medium'>{activity.currency} </span>{parseFloat(activity.paidAmount).toFixed(3)}</h4>
                 </div>
                 <div className='flex flex-col items-end justify-end w-full gap-3'>
-                    <button className='flex items-center justify-center px-4 py-2 text-xs text-white rounded-md md:w-32 md:p-0 md:h-10 bg-dark-green'>View Bookings</button>
-                    <h5 className='text-red-500 underline cursor-pointer'>Cancel</h5>
+                    <button className='flex items-center justify-center px-4 py-2 text-xs text-white rounded-md md:w-32 md:p-0 md:h-10 bg-dark-green'> {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Booking"}
+                    </button>
+                    <h5 className='text-red-500 underline cursor-pointer'>{selectedLanguageAndCountry?.language?.code === "ar" ? "يلغي" : "Cancel"}</h5>
                 </div>
             </div>
 

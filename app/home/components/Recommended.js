@@ -18,9 +18,9 @@ const Recommended = ({ recommends }) => {
         title={
           <div className='flex items-center justify-between'>
             <h4 className='text-xs font-bold sm:text-2xl'>{translation?.recommended_for_you}</h4>
-            <Link href="/general/recomended" className='flex items-center gap-2 font-normal text-blue-400'>
+            <div onClick={() => window.location.href="/recomended"} className='flex items-center gap-2 font-normal text-blue-400'>
               <span className='text-xs sm:text-lg '>{translation?.see_all}</span> <SeeAllIconSvg />
-            </Link>
+            </div>
           </div>
         }
       >
@@ -28,7 +28,10 @@ const Recommended = ({ recommends }) => {
           slidesPerView={isTabletAndMobile ? 1.7 : 3}
           modules={[Autoplay]}
           spaceBetween={20}
-          navigation
+          navigation={{
+            prevEl: null,
+            nextEl: null,
+          }}
           pagination={{ clickable: true }}
           autoplay={{
             delay: 2000,

@@ -88,11 +88,11 @@ const PackageDetails = ({id}) => {
               height={30}
             /> :
             <div className="flex gap-1 mt-1 text-sm font-normal text-neutral-400">
-              <Link href="/packages">
+              <div  onClick={() => window.location.href="/packages"}>
               <h3 className='cursor-pointer'  >
                 {translation?.packages}
               </h3>
-              </Link>
+              </div>
               <h3>/</h3>
               <h3 className="font-medium text-black">
                 {translation?.package_details}

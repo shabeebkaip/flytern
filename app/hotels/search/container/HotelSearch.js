@@ -122,9 +122,9 @@ const HotelSearch = (props) => {
                 />
               ) : (
                 <div className="flex items-center gap-1 text-sm font-normal text-neutral-400">
-                  <Link href={"/"}>
+                  <div onClick={() => window.location.href = "/"}>
                     <h3 className="cursor-pointer">{translation?.hotel}</h3>
-                  </Link>
+                  </div>
                   <h3>/</h3>
                   <h3 className="font-medium text-black">
                     {translation?.search_results}

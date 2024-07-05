@@ -3,8 +3,9 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import Image from 'next/image';
 import { useAppSelector } from '@/lib/hooks';
 
-const HotelSearchField = ({ data, destinationList, onSearchChange, setData, setDestinationList, destinationError, destinationLoader, openSearch, setOpenSearch }) => {
+const HotelSearchField = ({ data, destinationList, onSearchChange, setData, setDestinationList, destinationError, destinationLoader, openSearch, setOpenSearch, setDestinationError }) => {
   const { translation } = useAppSelector((state) => state.sharedState)
+
   return (
     <div>
       <div class="px-2.5 py-1 bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex relative cursor-pointer w-full">
@@ -21,6 +22,7 @@ const HotelSearchField = ({ data, destinationList, onSearchChange, setData, setD
                 class="text-black text-[10px] md:text-xs xl:text-sm  w-full font-medium focus:outline-none"
                 placeholder={translation?.select_destination}
                 onChange={e => onSearchChange(e.target.value)}
+                onFocus={()=> setDestinationError(false)}
                 value={data.destination ? data.destination : data.destinationLabel}
               />
             </div>

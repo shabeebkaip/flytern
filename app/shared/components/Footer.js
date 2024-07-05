@@ -6,6 +6,7 @@ import { socialsuccess } from '@/lib/slices/sharedSlice'
 import StoreProvider from '@/app/StoreProvider'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useAppSelector } from '@/lib/hooks'
 
 const FooterChild = () => {
     const { genericLoader } = useSelector(state => state.flightState)
@@ -30,11 +31,12 @@ const FooterChild = () => {
     const twitter = terms?.twitter
     const linikedin = terms?.linkedIn
     const { translation } = useSelector((state) => state.sharedState)
+    const { loading } = useAppSelector((state) => state.exploreState);
 
     return (
         <div>
             {
-                genericLoader || saveTravellerLoader || paymentWaitLoader || buttonLoader ?
+                loading || genericLoader || saveTravellerLoader || paymentWaitLoader || buttonLoader ?
                     null :
                     <div className='container mx-auto'>
                         <div className='grid lg:grid-cols-10'>
@@ -46,7 +48,7 @@ const FooterChild = () => {
                                     <div className='flex flex-col gap-4 text-sm font-normal cursor-pointer text-neutral-400'>
                                         <a className='hover:text-emerald-800' href="/" ><h6>{translation?.home}</h6></a>
                                         <a className='hover:text-emerald-800' href='/?service=flight' >{translation?.flights}</a>
-                                        <a className='hover:text-emerald-800' href='/?service=hotel'>{translation?.hotels}</a>
+                                        <a className='hover:text-emerald-800' href='/hotels'>{translation?.hotels}</a>
                                         <a className='hover:text-emerald-800' href="/packages"> {translation?.packages}</a>
                                         <a className='hover:text-emerald-800' href="/insurance">{translation?.travel_insurance}</a>
                                         <a className='hover:text-emerald-800' href="/activityCities" >{translation?.activities}</a>
@@ -58,9 +60,9 @@ const FooterChild = () => {
                                         <h3 className='text-lg font-bold text-black '>{translation?.about}</h3>
                                     </div>
                                     <div className='flex flex-col gap-4 text-sm font-normal cursor-pointer text-neutral-400'>
-                                        <a className='hover:text-emerald-800' href="/general/aboutus"><h6>{translation?.about_us}</h6></a>
-                                        <a className='hover:text-emerald-800' href="/general/terms-conditions"><h6>{translation?.terms_n_conditions}</h6></a>
-                                        <a className='hover:text-emerald-800' href="/general/privacy-policy"><h6>{translation?.privacy_policy}</h6></a>
+                                        <a className='hover:text-emerald-800' href="/aboutus"><h6>{translation?.about_us}</h6></a>
+                                        <a className='hover:text-emerald-800' href="/terms-conditions"><h6>{translation?.terms_n_conditions}</h6></a>
+                                        <a className='hover:text-emerald-800' href="/privacy-policy"><h6>{translation?.privacy_policy}</h6></a>
                                     </div>
 
                                 </div>
@@ -71,7 +73,7 @@ const FooterChild = () => {
                                     <div className='flex flex-col gap-4 text-sm font-normal text-neutral-400'>
                                         <a className='hover:text-emerald-800' href="/login"><h6>{translation?.login}</h6></a>
                                         <a className='hover:text-emerald-800' href="/register"><h6>{translation?.register}</h6></a>
-                                        <a className='hover:text-emerald-800' href='/general/settings'>{translation?.settings}</a>
+                                        <a className='hover:text-emerald-800' href='/settings'>{translation?.settings}</a>
                                     </div>
 
                                 </div>

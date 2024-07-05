@@ -25,6 +25,8 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
   const _paymentInfo = paymentStatus?._paymentInfo;
   const alertMsg = paymentStatus?.alertMsg;
   const servicetype = paymentStatus?.servicetype
+  
+  console.log(_hotelservice)
   useEffect(() => {
     if (!_paymentInfo || _paymentInfo.length === 0) {
       setTimeout(() => {
@@ -49,7 +51,7 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
               <div className='flex flex-col'>
                 <h4 class="text-black text-2xl font-bold">{translation?.booking_summary}</h4>
                 <div className='flex gap-1 mt-1 text-sm font-normal text-neutral-400'>
-                  <Link href="/">{translation?.home}</Link>
+                  <div onClick={() => window.location.href = "/"}>{translation?.home}</div>
                   <h3>/</h3>
                   <h3 className='font-medium text-black'>{translation?.booking_summary}</h3>
                 </div>
@@ -109,13 +111,13 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
                     <BasicDetails data={_hotelservice?._lstBasicDetails} /> : null
                 }
                 {
-                  _hotelservice?._lstamenitys ?
+                  _hotelservice?._lstamenitys.length ?
                     <TitleCard  >
                       <Amenities amenities={_hotelservice?._lstamenitys} />
                     </TitleCard> : null
                 }
                 {
-                  _hotelservice?.roomRateConditions ?
+                  _hotelservice?.roomRateConditions?.length ?
                     <RoomRateConditions data={_hotelservice?.roomRateConditions} /> : null
                 }
 
@@ -138,7 +140,7 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
           <>
             {
               paymentStatus?.redirectionAlert?.length ?
-                <div className=' mt-10'>
+                <div className='mt-10 '>
                   <AlertMessage message={paymentStatus?.redirectionAlert} />
                 </div>
                 : null

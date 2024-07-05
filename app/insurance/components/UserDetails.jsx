@@ -47,7 +47,7 @@ const UserDetails = () => {
             }
         });
         setData(generatedForms);
-        setOpenIndexes(generatedForms.map(() => true)); 
+        setOpenIndexes(generatedForms.map(() => true));
     }, [policyRelationshipValues, setData]);
 
     useEffect(() => {
@@ -101,9 +101,8 @@ const UserDetails = () => {
             .then(response => {
                 if (checkApiStatus(response)) {
                     enqueueSnackbar('Insurance Details Added Successfully', { variant: 'success' });
-                    const encryptedBookingRef = encryptUrl(response.data.data.bookingRef);
                     setTimeout(() => {
-                        // navigate(`/payment-method/?ref=${encryptedBookingRef}`)
+                     window.location.href=`/payment-method/?ref=${response.data.data.bookingRef}`
                     }, 1000);
                 } else {
                     dispatch(setSaveTravellerLoader(false))
@@ -177,9 +176,11 @@ const UserDetails = () => {
                                         <CustomDatePicker
                                             label={selectedLanguageAndCountry?.language?.code === 'ar' ? arabic_translation.dob : 'Date of Birth'}
                                             value={parse(item.dateOfBirth, 'dd-MM-yyyy', new Date())}
-                                            className='bg-stone-50 '
+                                            className='bg-stone-50'
                                             onChange={(e) => updateDataAndSetMainData('dateOfBirth', format(e, 'dd-MM-yyyy'), index)}
                                             renderInput={(params) => <CustomTextField {...params} className='bg-stone-50' />}
+                                            maxDate={new Date()}
+                                            disableFuture
                                         />
                                     </LocalizationProvider>
 

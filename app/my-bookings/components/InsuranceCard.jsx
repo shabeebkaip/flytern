@@ -2,9 +2,11 @@ import LabelValue from '@/app/shared/components/LabelValue'
 import { HeartIconSvg } from '@/app/shared/components/SVG'
 import TitleCard from '@/app/shared/components/TitleCard'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 
 const InsuranceCard = ({ item }) => {
+    const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     return (
         <TitleCard
             topMargin='mt-0'
@@ -12,7 +14,7 @@ const InsuranceCard = ({ item }) => {
                 <>
                     <div className='flex items-center gap-2 '>
                         <HeartIconSvg color={'#066651'} />
-                        <h4>Policy List</h4>
+                        <h4>{selectedLanguageAndCountry?.language?.code === "ar" ? "قائمة السياسات" : "Policy List"}</h4>
                     </div>
 
                 </>

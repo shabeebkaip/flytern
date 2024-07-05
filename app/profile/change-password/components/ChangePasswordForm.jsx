@@ -79,7 +79,7 @@ const ChangePasswordForm = () => {
                                 onClick={() => setShowPassword({ ...showPassword, stateOne: !showPassword.stateOne })}
                             />}
                         </div>
-                        <label>New password</label>
+                        <label>{selectedLanguageAndCountry?.language?.code === "ar" ? "كلمة المرور الجديدة" : "New password"}</label>
                         <div className="relative">
                             <InputField styles={'w-full '} type={`${showPassword.stateTwo ? "text" : "password"}`} placeholder={translation?.enter_new_password} value={data.newPassword} onChange={(e) => { seterror({ ...noError }); setData({ ...data, newPassword: e.target.value }) }} />
                             {error.repeatingPassword && <p className='text-red-800 cursor-pointer'> {error.repeatingPassword}</p>}

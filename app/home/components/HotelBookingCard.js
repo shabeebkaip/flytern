@@ -160,6 +160,7 @@ const HotelBookingCard = () => {
           setData={setData}
           setDestinationList={setDestinationList}
           destinationError={destinationError}
+          setDestinationError={setDestinationError}
           destinationLoader={destinationLoader}
           setDestinationLoader={setDestinationLoader}
           openSearch={openSearch}

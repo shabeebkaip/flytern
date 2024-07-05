@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 
 const HotelBookingDetailsList = ({ hotel }) => {
+    const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     return (
         <div className="container grid items-center justify-between w-full grid-cols-12 gap-2 px-4 py-5 mx-auto bg-white rounded-md md:items-center sm:items-start md:gap-7">
             <div className="col-span-2 ">
@@ -36,9 +38,10 @@ const HotelBookingDetailsList = ({ hotel }) => {
                             }
                         }}
                     >
-                        View Bookings
+                   {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Booking"}
+
                     </button>
-                    <h5 className='text-red-500 underline '>Cancel</h5>
+                    {/* <h5 className='text-red-500 underline '>Cancel</h5> */}
                 </div>
             </div>
 

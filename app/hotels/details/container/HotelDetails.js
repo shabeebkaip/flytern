@@ -89,9 +89,9 @@ const HotelDetails = (props) => {
                     />
                   ) :
                     <div className='flex gap-1 mt-1 text-[11px] md:text-sm font-normal text-neutral-400'>
-                      <Link href="/">{translation?.home}</Link>
+                      <div onClick={() => window.location.href = "/"}>{translation?.home}</div>
                       <h3>/</h3>
-                      <Link href="/hotels/search" className='cursor-pointer'>{translation?.search_results}</Link>
+                      <div onClick={() => window.location.href = "/hotels/search"} className='cursor-pointer'>{translation?.search_results}</div>
                       {
                         hotelDetails?.hotelName ?
                           <>

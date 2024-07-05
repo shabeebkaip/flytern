@@ -36,6 +36,7 @@ const PaymentMethodChild = ({gatewayList,refrence}) => {
 
  
   const { paymentLoader } = useAppSelector(state => state.paymentState)
+  console.log(paymentLoader,"paymentLoader");
   const flightSegments = gatewayList?._flightservice?._flightDetail?.flightSegments;
   const isRefund = gatewayList?._flightservice?._flightDetail?.isRefund;
   const paymentWaitLoader = useAppSelector(state => state.paymentState.paymentWaitLoader)
@@ -220,17 +221,18 @@ const PaymentMethodChild = ({gatewayList,refrence}) => {
 
               </div>
               <div className='flex flex-col col-span-10 gap-5 sm:col-span-10 lg:col-span-3'>
-                {
-                  paymentLoader ?
-                    <Skeleton
-                      sx={{ bgcolor: 'grey.300' }}
-                      variant="rectangular"
-                      className="w-full h-full bg-stone-50"
-                      height={300}
-                    /> :
-                    isGateway ?
-                      <PaymentSummaryFlight /> : null
-                }
+                {paymentLoader ? (
+                  <Skeleton
+                    sx={{ bgcolor: 'grey.300' }}
+                    variant="rectangular"
+                    className="w-full h-full bg-stone-50"
+                    height={300}
+                  />
+                ) : (
+                  !paymentLoader && isGateway ? (
+                    <PaymentSummaryFlight />
+                  ) : null
+                )}
 
                 {
                   paymentLoader ?

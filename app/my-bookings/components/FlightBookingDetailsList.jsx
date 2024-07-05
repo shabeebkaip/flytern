@@ -1,12 +1,14 @@
 import { encryptUrl } from '@/lib/utils'
 import Image from 'next/image'
 import React from 'react'
+import { useSelector } from 'react-redux'
 // import { format } from 'date-fns'
 
 
 
 const FlightBookingDetailsList = ({ flight }) => {
     const encryptedBookingRef = encryptUrl(flight.bookingRef)
+    const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     return (
         <div className="container grid items-center justify-between w-full grid-cols-12 p-4 mx-auto overflow-hidden bg-white rounded-md ">
             <div className="col-span-2 h-7 w-28">
@@ -48,7 +50,7 @@ const FlightBookingDetailsList = ({ flight }) => {
                                     }
                                 }}
                             >
-                                View Booking
+                                {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Booking"}
                             </button>
                             : flight.status === "PENDING" ?
                                 <button
@@ -59,7 +61,7 @@ const FlightBookingDetailsList = ({ flight }) => {
                                         }
                                     }}
                                 >
-                                    Pay Now
+                                    {selectedLanguageAndCountry?.language?.code === "ar" ? "ادفع الآن" : "Pay Now"}
                                 </button>
                                 : null
                     }

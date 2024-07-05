@@ -6,6 +6,7 @@ import { exploresFail, exploresRequest, exploresSuccess, setHotelQuickSearch } f
 export const getExploresApi = () => {
   return async (dispatch) => {
     try {
+      dispatch(exploresRequest())
       const response = await globalGetService('/api/Explores/GetExplores');
       if (checkApiStatus(response)) {
         dispatch(exploresSuccess(response.data.data))

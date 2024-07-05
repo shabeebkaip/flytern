@@ -20,7 +20,7 @@ const PopularDestination = () => {
           <div className='flex items-center justify-between'>
             <h4 className='text-xs font-bold sm:text-2xl'>{translation?.popular_destinations}</h4>
             <div className='flex items-center'>
-              <Link href="/general/popular-destination" className='flex items-center gap-2 font-normal text-blue-400'><span className='flex items-center gap-2 text-xs sm:text-lg'>{translation?.see_all} <SeeAllIconSvg /> </span> </Link>
+              <div onClick={() => window.location.href="/popular-destination"} className='flex items-center gap-2 font-normal text-blue-400'><span className='flex items-center gap-2 text-xs sm:text-lg'>{translation?.see_all} <SeeAllIconSvg /> </span> </div>
             </div>
           </div>
         </>
@@ -29,7 +29,10 @@ const PopularDestination = () => {
           slidesPerView={isTabletAndMobile ? 1.7 : 3}
           modules={[Autoplay]}
           spaceBetween={20}
-          navigation
+          navigation={{
+            prevEl: null,
+            nextEl: null,
+          }}
           pagination={{ clickable: true }}
           autoplay={{
             delay: 2500,

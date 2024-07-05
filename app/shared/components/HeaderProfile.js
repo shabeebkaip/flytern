@@ -85,7 +85,7 @@ const HeaderProfile = () => {
                             {profileOptions.map((option, index) => (
                                 <div
                                     key={index}
-                                    className='flex items-center h-16 gap-5 text-sm font-normal border-b w-60 hover:bg-stone-50 rounded-md cursor-pointer p-1'
+                                    className='flex items-center h-16 gap-5 p-1 text-sm font-normal border-b rounded-md cursor-pointer w-60 hover:bg-stone-50'
                                     onClick={() => typeof window !== 'undefined' && (window.location.href = option.path)}
                                 >
                                     <div className=''>
@@ -95,13 +95,13 @@ const HeaderProfile = () => {
                                 </div>
                             ))}
                             <div
-                                className='flex items-center h-16 gap-5 text-sm font-normal border-b w-60 hover:bg-stone-50 rounded-md cursor-pointer p-1'
+                                className='flex items-center h-16 gap-5 p-1 text-sm font-normal border-b rounded-md cursor-pointer w-60 hover:bg-stone-50'
                                 onClick={userLogout}
                             >
                                 <div className=''>
                                     <Image width={24} height={24} className='w-6 h-6' src={"/icons/logout.png"} alt="" />
                                 </div>
-                                Logout
+                                {selectedLanguageAndCountry?.language?.code === "ar" ? 'تسجيل خروج' : 'Logout'}
                             </div>
                         </ul>
                     </PopoverContent>

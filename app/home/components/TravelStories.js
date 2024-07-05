@@ -20,7 +20,7 @@ const TravelStories = () => {
         <>
           <div className='flex items-center justify-between'>
             <h4 className='text-xs font-bold sm:text-2xl'>{translation?.travel_stories}</h4>
-            <Link href="/general/travel-stories" className='flex items-center gap-2 font-normal text-blue-400'><span className='flex items-center gap-2 text-xs sm:text-lg'>{translation?.see_all} <SeeAllIconSvg /> </span> </Link>
+            <div onClick={() => window.location.href="/travel-stories"} className='flex items-center gap-2 font-normal text-blue-400'><span className='flex items-center gap-2 text-xs sm:text-lg'>{translation?.see_all} <SeeAllIconSvg /> </span> </div>
           </div>
         </>
       } >
@@ -28,7 +28,10 @@ const TravelStories = () => {
           slidesPerView={isTabletAndMobile ? 1.3 : 3.2}
           spaceBetween={20}
           modules={[Autoplay]}
-          navigation
+          navigation={{
+            prevEl: null,
+            nextEl: null,
+          }}
           pagination={{ clickable: true }}
           autoplay={{
             delay: 2000,
@@ -51,7 +54,9 @@ const TravelStories = () => {
                     controls
                   />
                 ) : (
-                  <Image width={500} height={500} src={story.url} alt='' className='object-cover w-full h-40 rounded-md sm:h-48 md:h-full' />
+                  <div className='md:h-96'>
+                    <Image width={500} height={500} src={story.url} alt='' className='object-cover w-full h-40 rounded-md sm:h-48 md:h-full' />
+                  </div>
                 )}
                 <div className='flex flex-col gap-5'>
                   <div className='flex flex-col justify-between gap-2 mt-3 md:flex-row md:items-center'>

@@ -50,16 +50,16 @@ const Profile = () => {
                     {translation?.login_head_content}
                   </h1>
                   <div className='flex gap-4'>
-                    <Link href={`/login`} >
+                    <div onClick={() => window.location.href = "/login"}>
                       <button className='text-center text-white text-base font-normal px-2 py-1.5 bg-orange-400 rounded-md justify-center items-center h-12 w-full' >
                         {translation?.sign_in}
                       </button>
-                    </Link>
-                    <Link href={`/register`}>
+                    </div>
+                    <div onClick={() => window.location.href = "/register"}>
                       <button className='text-center text-white text-normal font-medium px-2 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full' >
                         {translation?.create_account}
                       </button>
-                    </Link>
+                    </div>
                   </div>
 
                 </TitleCard>

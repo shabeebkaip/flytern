@@ -2,6 +2,7 @@ import TitleCard from "@/app/shared/components/TitleCard";
 import { useAppSelector } from "@/lib/hooks";
 
 const RoomRateConditions = ({ data }) => {
+  console.log(data,"j")
   const  { translation} = useAppSelector((state) =>  state.sharedState)
   return (
     <div>

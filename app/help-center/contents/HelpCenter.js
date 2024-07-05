@@ -11,7 +11,7 @@ const HelpCenter = () => {
     return (
         <div  className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} mt-12 px-3 md:px-0 mb-20 `}>
             <div className='flex gap-1 text-sm font-normal cursor-pointer text-neutral-400'>
-                <Link href="/"><h3 className='cursor-pointer' >{translation?.home}</h3></Link>
+                <div onClick={() => window.location.href = "/"}><h3 className='cursor-pointer' >{translation?.home}</h3></div>
                 <h3>/</h3>
                 <h3 className='font-medium text-black cursor-pointer'>{translation?.help_center}</h3>
             </div>

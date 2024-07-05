@@ -1,4 +1,3 @@
-
 "use client"
 import Link from "next/link";
 import Image from 'next/image';
@@ -14,10 +13,11 @@ import translations from "@/lib/translations.json";
 import HeaderMore from "@/app/shared/components/HeaderMore";
 import HeaderProfile from "@/app/shared/components/HeaderProfile";
 import { getExploresApi } from "@/app/home/api";
+import HeaderNotifiction from "./HeaderNotification";
 
 
 const HeaderChild = () => {
-  const location = typeof window !== "undefined" ? window.location?.pathname : '';
+  const location =  typeof window !== "undefined" ? window.location?.pathname : '';
   const dispatch = useAppDispatch();
   const isArabic = getGlobalCookie('language');
   const language = isArabic === "ar" ? 'ar' : 'en';
@@ -111,33 +111,39 @@ const HeaderChild = () => {
   // }, []);
 
   // const location = useLocation();
-  const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
+
   const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
-  const isHome = validPaths.includes(location);
+
+  const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
+  const isHome = validPaths.some(path => location.endsWith(path));
   const isAuth = authPaths.includes(location);
+ 
   return (
-    <div className={`${isAuth ? 'hidden' : 'flex'}  box-border  items-center justify-between w-full h-20 border-b  ${isHome ? "bg-white" : "bg-emerald-800"}`}>
+    <div
+      className={`${isAuth ? 'hidden' : 'flex'} box-border items-center justify-between w-full h-20 border-b`}
+      style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
+    >
       <div className="container flex items-center justify-between px-4 mx-auto ">
-        <Link href="/">
+        <div onClick={() => window.location.href = "/"} className="cursor-pointer">
           <Image src={isHome ? "/header/logo-green.svg" : "/header/logo-white.svg"} alt="logo" width={150} height={50} />
-        </Link>
-        <div className="hidden md:flex  items-center gap-9"  >
-          <Link href="/" className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
+        </div>
+        <div className="items-center hidden md:flex gap-9"  >
+          <div  onClick={() => window.location.href = "/"} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
             <div className="flex items-center gap-4 cursor-pointer">
               {translation?.home}
             </div>
-          </Link>
-          <Link href="/my-bookings" className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
-            My Bookings
-          </Link>
-          <Link href="/help-center" className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
-            Help Center
-          </Link>
-          <Link href="/contact-us" className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
-            Contact
-          </Link>
-          <HeaderMore />
-          <Link href="/settings">
+          </div>
+          <div onClick={() => window.location.href = "/my-bookings"} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+            {selectedLanguageAndCountry?.language?.code === "ar" ? 'حجوزاتي' : 'My Bookings'}
+          </div>
+          <div onClick={() => window.location.href = "/help-center"} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+            {selectedLanguageAndCountry?.language?.code === "ar" ? 'مركز المساعدة' : 'Help Center'}
+          </div>
+          <div onClick={() => window.location.href = "/contact-us"} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+            {selectedLanguageAndCountry?.language?.code === "ar" ? 'اتصال' : 'Contact'}
+          </div>
+          <HeaderMore isHome={isHome}/>
+          <div onClick={() => window.location.href = "/settings"}>
             <div className="flex items-center gap-2 cursor-pointer">
               {
                 selectedLanguageAndCountry?.country?.flag && (
@@ -147,7 +153,8 @@ const HeaderChild = () => {
               <h3 className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"
                 }`}>{selectedLanguageAndCountry?.language?.name ? selectedLanguageAndCountry?.language?.name : "English"} / {selectedLanguageAndCountry?.country?.countryName_Ar}</h3>
             </div>
-          </Link>
+          </div>
+          <HeaderNotifiction />
           <HeaderProfile />
         </div>
       </div>
@@ -161,5 +168,4 @@ const Header = () => {
     </StoreProvider>
   )
 }
-export default Header;
-
+export default Header;

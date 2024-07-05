@@ -102,7 +102,7 @@ export const getFlightDetailsApi = (payload) => {
   };
 };
 export const getPreTravellerApi = (detailId) => {
-  debugger
+ 
   return async (dispatch) => {
     try {
       dispatch(loaderOn());

@@ -34,6 +34,7 @@ const RoomCard = ({ active, room }) => {
       userDetailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+ 
   return (
     <div className='flex flex-col gap-5'>
       {room?._lstRoomsDtls?.length &&

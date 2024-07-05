@@ -246,7 +246,7 @@ const RegisterView = () => {
         <div className="text-center flex justify-center w-full lg:max-w-[450px] gap-1">
           <span className="text-xs font-normal text-black sm:text-sm ">{translation?.already_have} {" "}</span>
           <span className="text-xs font-normal text-black sm:text-sm ">{" "} </span>
-          <Link href="/login" className="text-xs font-semibold text-orange-400 cursor-pointer sm:text-sm " >{translation?.sign_in}</Link>
+          <div onClick={() => window.location.href = "/login"} className="text-xs font-semibold text-orange-400 cursor-pointer sm:text-sm " >{translation?.sign_in}</div>
         </div>
         <div class=" h-[19px]  items-center gap-1.5 lg:inline-flex flex justify-center w-full lg:max-w-[450px]">
           <div class="w-full h-[0px] opacity-10 border border-neutral-400"></div>
@@ -255,7 +255,7 @@ const RegisterView = () => {
         </div>
         <div class="text-center flex gap-2 justify-center items-center w-full lg:max-w-[450px]">
           <span className="text-xs font-normal text-black sm:text-sm ">{translation?.continue_as_a} </span>
-          <Link href="/" className="text-xs font-medium text-orange-400 sm:text-sm ">{translation?.guest_user}</Link></div>
+          <div onClick={() => window.location.href = "/"} className="text-xs font-medium text-orange-400 sm:text-sm ">{translation?.guest_user}</div></div>
       </div>
     </div>
   )

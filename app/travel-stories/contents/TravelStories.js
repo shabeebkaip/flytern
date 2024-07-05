@@ -18,14 +18,14 @@ const TravelStories = () => {
 
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-1 text-[10px] sm:text-sm font-normal text-neutral-400'>
-          <Link href="/" ><h3 className='cursor-pointer'  >{translation?.home}</h3></Link>
+          <div onClick={() => window.location.href = "/"}><h3 className='cursor-pointer'  >{translation?.home}</h3></div>
           <h3>/</h3>
           <h3 className='font-medium text-black'>{type === "general" ? '' : 'My'} {translation?.travel_stories}</h3>
         </div>
         <div className=''>
           {
             profile && Object.keys(profile).length ?
-              <button className='text-orange-400 text-[11px] sm:text-[13px] font-medium  px-2.5 bg-white rounded-[5px] border border-orange-400 justify-center items-center h-10 sm:w-40' onClick={() => navigate('/profile/my-travel-stories/add-testimonial')}  >{translation?.add_testmonial}</button>
+              <button className='text-orange-400 text-[11px] sm:text-[13px] font-medium  px-2.5 bg-white rounded-[5px] border border-orange-400 justify-center items-center h-10 sm:w-40'><div onClick={() => window.location.href = "/profile/travel-stories/add-testimonial"} >{translation?.add_testmonial}</div></button>
               : null
           }
         </div>

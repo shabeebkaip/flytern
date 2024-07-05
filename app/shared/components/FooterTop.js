@@ -9,10 +9,11 @@ const FooterTopChild = () => {
     const { genericLoader } = useSelector(state => state.flightState)
     const { saveTravellerLoader } = useSelector(state => state.insuranceState)
     const { paymentWaitLoader } = useSelector(state => state.paymentState)
+    const {  loading } = useSelector((state) => state.exploreState);
 
     return (
         <> {
-            genericLoader || saveTravellerLoader || paymentWaitLoader ?
+            loading || genericLoader || saveTravellerLoader || paymentWaitLoader ?
                 null :
                 <div className=' bg-black lg:grid grid-cols-10 h-[356px] hidden '>
                     <div className='relative col-span-4 '>
