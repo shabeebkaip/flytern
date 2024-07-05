@@ -30,11 +30,11 @@ const SideBar = ({ sideBarList }) => {
       {
         data.map((item, index) => {
           return (
-            <div onClick={() => { if (typeof window !== undefined) { window.location.href = item.route } }} key={index}>
-              <div className='flex w-full gap-2 py-5 border-b cursor-pointer tems-center border-zinc-100' key={index}>
-                {item.image}
-                <h3 className={`${item?.route.toLowerCase() === pathSegments?.toLowerCase() ? 'text-orange-500' : ''}`}>{item.name}</h3>
-              </div>
+            <div onClick={() => { window.location.href = item.route }} key={index}> 
+            <div className='flex w-full gap-2 py-5 border-b cursor-pointer tems-center border-zinc-100'  key={index}>
+              {item.image}
+              <h3 className={`${item?.route.toLowerCase() === pathSegments?.toLowerCase() ? 'text-orange-500' : ''}`}>{item.name}</h3>
+            </div>
             </div>
           )
         })

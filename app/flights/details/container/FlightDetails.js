@@ -35,6 +35,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     if (typeof window !== "undefined") {
+
     let hash = window.location.hash;
     if (hash) {
       var targetId = hash.substring(1);

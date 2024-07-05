@@ -8,6 +8,7 @@ const HotelBookingCard = dynamic(() => import('@/app/home/components/HotelBookin
 
 const Hero = ({ backgroundImage }) => {
   const location = typeof window !== "undefined" ? window.location?.pathname : '';
+  console.log(location)
   const [selectedCard, setSelectedCard] = useState('flight')
   useEffect(() => {
     ['/', '/ar', '/ar/flights', '/flights'].includes(location) ? setSelectedCard('flight') : setSelectedCard('hotel')

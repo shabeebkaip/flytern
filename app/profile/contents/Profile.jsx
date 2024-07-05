@@ -25,7 +25,7 @@ const Profile = () => {
   }, [dispatch])
   const { translation } = useAppSelector((state) => state.sharedState)
   return (
-    <div className={`${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} `}>
+    <div className={`${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} `}>
       {loading ?
         <SuspenseLoader /> :
         (profile && Object.keys(profile).length) ?
@@ -50,12 +50,12 @@ const Profile = () => {
                     {translation?.login_head_content}
                   </h1>
                   <div className='flex gap-4'>
-                    <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/login" } }}>
+                    <div onClick={() => window.location.href = "/login"}>
                       <button className='text-center text-white text-base font-normal px-2 py-1.5 bg-orange-400 rounded-md justify-center items-center h-12 w-full' >
                         {translation?.sign_in}
                       </button>
                     </div>
-                    <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/register" } }}>
+                    <div onClick={() => window.location.href = "/register"}>
                       <button className='text-center text-white text-normal font-medium px-2 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full' >
                         {translation?.create_account}
                       </button>

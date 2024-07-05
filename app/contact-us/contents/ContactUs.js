@@ -37,7 +37,7 @@ const ContactUs = () => {
   return (
     <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} mt-12`}>
       <div className='flex gap-1 mt-1 text-sm font-normal text-neutral-400'>
-        <div onClick={() => { if (typeof window !== undefined) { window.location.href = "/" } }}><h3 className='cursor-pointer' >{translation?.home}</h3></div>
+        <div onClick={() =>  window.location.href = "/"}><h3 className='cursor-pointer' >{translation?.home}</h3></div>
         <h3>/</h3>
         <h3 className='font-medium text-black cursor-pointer ' >{translation?.contact_us}</h3>
 

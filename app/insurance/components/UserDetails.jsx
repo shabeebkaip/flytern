@@ -101,11 +101,9 @@ const UserDetails = () => {
             .then(response => {
                 if (checkApiStatus(response)) {
                     enqueueSnackbar('Insurance Details Added Successfully', { variant: 'success' });
-                    if (typeof window !== 'undefined') {
-                        setTimeout(() => {
-                            window.location.href = `/payment-method/?ref=${response.data.data.bookingRef}`
-                        }, 1000);
-                    }
+                    setTimeout(() => {
+                     window.location.href=`/payment-method/?ref=${response.data.data.bookingRef}`
+                    }, 1000);
                 } else {
                     dispatch(setSaveTravellerLoader(false))
                 }

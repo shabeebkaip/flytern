@@ -25,7 +25,7 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
   const _paymentInfo = paymentStatus?._paymentInfo;
   const alertMsg = paymentStatus?.alertMsg;
   const servicetype = paymentStatus?.servicetype
-
+  
   console.log(_hotelservice)
   useEffect(() => {
     if (!_paymentInfo || _paymentInfo.length === 0) {
@@ -51,7 +51,7 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
               <div className='flex flex-col'>
                 <h4 class="text-black text-2xl font-bold">{translation?.booking_summary}</h4>
                 <div className='flex gap-1 mt-1 text-sm font-normal text-neutral-400'>
-                  <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }}>{translation?.home}</div>
+                  <div onClick={() => window.location.href = "/"}>{translation?.home}</div>
                   <h3>/</h3>
                   <h3 className='font-medium text-black'>{translation?.booking_summary}</h3>
                 </div>

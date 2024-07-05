@@ -19,8 +19,8 @@ import Link from 'next/link';
 const Mybookings = () => {
     const isTabletAndMobile = useMediaQuery({ maxWidth: '1024px' })
     const { bookings: { _MyFlightBookingResponse, _MyHotelBookingResponse, _MyPackageBookingResponse, _MyInsuranceBookingResponse, _MyActivityBookingResponse = [] }, loading } = useAppSelector(state => state.profileState)
-    console.log(_MyInsuranceBookingResponse, "_MyInsuranceBookingResponse")
-    console.log(_MyPackageBookingResponse, "_MyPackageBookingResponse")
+    console.log(_MyInsuranceBookingResponse,"_MyInsuranceBookingResponse")
+    console.log(_MyPackageBookingResponse,"_MyPackageBookingResponse")
     const [tabIndex, setTabIndex] = useState(0)
     const dispatch = useAppDispatch()
     const { profile } = useAppSelector(state => state.sharedState)
@@ -32,10 +32,10 @@ const Mybookings = () => {
     }, [dispatch])
     const { translation } = useAppSelector((state) => state.sharedState)
     return (
-        <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} mt-12 mb-8`}>
+        <div  className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} mt-12 mb-8`}>
             <div className='flex flex-col gap-3'>
                 <div className='flex items-center gap-1 text-sm font-normal text-neutral-400'>
-                    <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }}><h3 className='cursor-pointer' >{translation?.home}</h3></div>
+                    <div onClick={() => window.location.href = "/"}><h3 className='cursor-pointer' >{translation?.home}</h3></div>
                     <h3>/</h3>
                     <h3 className='font-medium text-black'>{translation?.my_bookings}</h3>
                 </div>
