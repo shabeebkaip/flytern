@@ -20,7 +20,7 @@ const Recomended = ({ data }) => {
                     className='grid grid-cols-3 gap-8 mt-5 cursor-pointer'
                 >
                     {records.map((data, index) => (
-                        <div onClick={() => { window.location.href = `/packages/${data.refID}` }} key={index} >
+                        <div onClick={() => { if (typeof window !== undefined) { window.location.href = `/packages/${data.refID}` } }} key={index} >
                             <div key={index} >
                                 <div className="inline-flex flex-col items-start justify-start w-full gap-4">
                                     <Image className="w-full rounded-md" src={data.url} alt='' width={100} height={100} />

@@ -80,7 +80,7 @@ const MyBookingGuest = () => {
               <div class="text-center text-stone-500 text-base font-normal ">{translation?.or}</div>
               <div class="w-full h-[0px] opacity-10 border border-neutral-400"></div>
             </div>
-            <div onClick={() => window.location.href = "/login"}>
+            <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/login" } }}>
               <button
                 className='text-center text-white text-base font-medium px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full'
               >

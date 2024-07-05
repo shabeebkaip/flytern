@@ -79,13 +79,13 @@ const RegisterView = () => {
           if (checkApiStatus(response)) {
             enqueueSnackbar('Account Created Successfully', { variant: 'success', autoHideDuration: 2000, anchorOrigin: { vertical: 'top', horizontal: 'right' } })
             if (typeof window !== 'undefined') {
-            window.location.href='/login'
+              window.location.href = '/login'
             }
           }
           else if (response.data.statusCode === 100) {
             enqueueSnackbar("OTP Verification Required", { variant: 'error', autoHideDuration: 2000, anchorOrigin: { vertical: 'top', horizontal: 'right' } })
             if (typeof window !== 'undefined') {
-            window.location.href = `/otp?${response.data.data.userID}?${response.data.data.otpTo}`
+              window.location.href = `/otp?${response.data.data.userID}?${response.data.data.otpTo}`
             }
           }
           else {
@@ -107,7 +107,7 @@ const RegisterView = () => {
         <div className='relative w-20 h-20 border border-dotted rounded-full bg-[#f8f8f8] cursor-pointer '>
           {
             previewImages.File ?
-              <Image src={previewImages.File} alt="" className="object-cover w-full h-full rounded-full"  width={100} height={100}/> :
+              <Image src={previewImages.File} alt="" className="object-cover w-full h-full rounded-full" width={100} height={100} /> :
               <Image src="/Camera_duotone_line.svg" alt="" className="absolute w-10 h-10 mt-3 top-[5px] left-[18px]" width={100} height={100} />
           }
           <input
@@ -246,7 +246,7 @@ const RegisterView = () => {
         <div className="text-center flex justify-center w-full lg:max-w-[450px] gap-1">
           <span className="text-xs font-normal text-black sm:text-sm ">{translation?.already_have} {" "}</span>
           <span className="text-xs font-normal text-black sm:text-sm ">{" "} </span>
-          <div onClick={() => window.location.href = "/login"} className="text-xs font-semibold text-orange-400 cursor-pointer sm:text-sm " >{translation?.sign_in}</div>
+          <div onClick={() => { if (typeof window !== undefined) { window.location.href = "/login" } }} className="text-xs font-semibold text-orange-400 cursor-pointer sm:text-sm " >{translation?.sign_in}</div>
         </div>
         <div class=" h-[19px]  items-center gap-1.5 lg:inline-flex flex justify-center w-full lg:max-w-[450px]">
           <div class="w-full h-[0px] opacity-10 border border-neutral-400"></div>
@@ -255,7 +255,7 @@ const RegisterView = () => {
         </div>
         <div class="text-center flex gap-2 justify-center items-center w-full lg:max-w-[450px]">
           <span className="text-xs font-normal text-black sm:text-sm ">{translation?.continue_as_a} </span>
-          <div onClick={() => window.location.href = "/"} className="text-xs font-medium text-orange-400 sm:text-sm ">{translation?.guest_user}</div></div>
+          <div onClick={() => { if (typeof window !== undefined) { window.location.href = "/" } }} className="text-xs font-medium text-orange-400 sm:text-sm ">{translation?.guest_user}</div></div>
       </div>
     </div>
   )

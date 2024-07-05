@@ -25,7 +25,7 @@ const HotelCard = ({ hotel, objectID }) => {
             case rating > 1:
                 return 'text-[#ffa534]';
             case rating <= 1:
-                return 'text-[#ff4545]';    
+                return 'text-[#ff4545]';
             default:
                 return '';
         }
@@ -98,8 +98,8 @@ const HotelCard = ({ hotel, objectID }) => {
                     </div>
                 </div>
                 <div className='justify-end w-full md:flex '>
-                    <div onClick={() => { window.location.href = `/hotels/details?objId=${objectID}&ind=${hotel.hotelId}` }}>
-                    <button className='flex items-center justify-center px-5 py-2 text-xs text-white rounded-md md:w-32 md:p-0 md:h-10 bg-dark-green'  >{translation?.select}</button>
+                    <div onClick={() => { if (typeof window !== "undefined") { window.location.href = `/hotels/details?objId=${objectID}&ind=${hotel.hotelId}` } }}>
+                        <button className='flex items-center justify-center px-5 py-2 text-xs text-white rounded-md md:w-32 md:p-0 md:h-10 bg-dark-green'  >{translation?.select}</button>
                     </div>
                 </div>
             </div>

@@ -23,20 +23,20 @@ const CoPax = () => {
                     <h3 className='text-base font-semibold text-black sm:text-lg '>{translation?.copax} </h3>
                 </div>
                 <div>
-                    <div onClick={() => window.location.href="/profile/co-pax"} className='flex items-center gap-2 font-normal text-blue-400 cursor-pointer' ><span> {translation?.see_all}</span> <SeeAllIconSvg /></div>
+                    <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/profile/co-pax" } }} className='flex items-center gap-2 font-normal text-blue-400 cursor-pointer' ><span> {translation?.see_all}</span> <SeeAllIconSvg /></div>
                 </div>
             </div>
             <HeaderBorder />
             <div className='mt-6 lg:grid md:grid-cols-2 ' >
                 {coPax && coPax.length ? coPax.slice(0, maxCoPaxCount).map((item, index) => {
                     const lastArray = maxCoPaxCount > 2 ? (maxCoPaxCount % 2 === 0 ? [maxCoPaxCount - 1, maxCoPaxCount - 2] : [maxCoPaxCount - 1]) : [];
-                    
+
                     return (
                         <div className={` ${lastArray.includes(index) ? 'border-none' : 'border-b'}  pb-5 mt-6`} key={index}>
                             <div className=''>
                                 <div className='flex items-center justify-start gap-10'>
                                     <h3 class="text-black text-sm font-semibold ">{translation?.copax} #{index + 1}</h3>
-                                    <div onClick={() => { window.location.href=`/profile/co-pax/${item.id}` }}><EditIconSvg color='#Fb923C' /></div>
+                                    <div onClick={() => { if (typeof window !== "undefined") { window.location.href = `/profile/co-pax/${item.id}` } }}><EditIconSvg color='#Fb923C' /></div>
                                 </div>
                                 {/* <HeaderBorder /> */}
                             </div>
@@ -53,7 +53,7 @@ const CoPax = () => {
                 }) :
                     <div className='flex flex-col items-center justify-center col-span-2 gap-5'>
                         <h3 className='text-base font-semibold text-black sm:text-lg '>{translation?.no_copax_added}</h3>
-                        <button className='p-2 sm:w-[160px] sm:h-[46px] rounded-md border border-emerald-800 text-center text-emerald-800 text-sm font-medium' onClick={() => typeof window !== 'undefined' && (window.location.href='/profile/co-pax/add')}>{translation?.add_copax}</button>
+                        <button className='p-2 sm:w-[160px] sm:h-[46px] rounded-md border border-emerald-800 text-center text-emerald-800 text-sm font-medium' onClick={() => typeof window !== 'undefined' && (window.location.href = '/profile/co-pax/add')}>{translation?.add_copax}</button>
                     </div>
                 }
             </div>

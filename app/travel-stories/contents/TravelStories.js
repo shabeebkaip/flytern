@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import TravelStoriesList from '../components/TravelStoriesList.js'
 import { generalSidebarData, profileSidebarData } from '@/lib/constants/index.js'
 import { useAppSelector } from '@/lib/hooks.js'
@@ -11,14 +11,14 @@ const TravelStories = () => {
   const type = "general"
 
 
-  const  { translation} = useAppSelector((state) =>  state.sharedState)
+  const { translation } = useAppSelector((state) => state.sharedState)
   const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
   return (
-    <div className={`${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} mt-12 mb-8`}>
+    <div className={`${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} mt-12 mb-8`}>
 
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-1 text-[10px] sm:text-sm font-normal text-neutral-400'>
-          <div onClick={() => window.location.href = "/"}><h3 className='cursor-pointer'  >{translation?.home}</h3></div>
+          <div onClick={() => { if (typeof window !== undefined) { window.location.href = "/" } }}><h3 className='cursor-pointer'  >{translation?.home}</h3></div>
           <h3>/</h3>
           <h3 className='font-medium text-black'>{type === "general" ? '' : 'My'} {translation?.travel_stories}</h3>
         </div>

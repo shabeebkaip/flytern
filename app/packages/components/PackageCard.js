@@ -53,7 +53,7 @@ const PackageCard = ({ item }) => {
                                 {item.price}
                             </span>
                         </h3>
-                        <div onClick={() => { window.location.href = `/packages/${item.refID}` }}>
+                        <div onClick={() => { { if (typeof window !== "undefined") { window.location.href = `/packages/${item.refID}` } } }}>
                             <button
                                 className="h-10 px-4 text-white rounded-md md:w-32 md:p-0 bg-dark-green"
                             // onClick={() => lang ? navigate(`/${lang}/packages/details/${item.refID}`) : navigate(`/packages/details/${item.refID}`)}
