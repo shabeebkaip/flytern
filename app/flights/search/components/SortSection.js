@@ -118,7 +118,7 @@ const SortSection = (props) => {
           <div className="">
             <Popover placement="bottom-end" open={open} handler={setOpen}>
               <PopoverHandler>
-                <div className="flex items-center justify-between h-10 px-3 bg-white rounded-md ">
+                <div className="flex items-center justify-between h-12 px-3 bg-white rounded-md ">
                   <div className="flex items-center gap-2">
                     <Image
                       width={24}

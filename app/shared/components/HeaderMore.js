@@ -3,11 +3,10 @@ import React, { useState } from 'react';
 import { Popover, PopoverContent, PopoverHandler } from '@material-tailwind/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useAppSelector } from '@/lib/hooks';
 
-    const HeaderMore = ({isHome}) => {
-    const location =  window.location?.pathname
+const HeaderMore = ({ isHome }) => {
     const [openPopOver, setOpenPopOver] = useState(false);
     const { translation } = useAppSelector((state) => state.sharedState);
 
@@ -56,11 +55,13 @@ import { useAppSelector } from '@/lib/hooks';
                     </div>
                     <ul className="w-full">
                         {listItems.map((item, index) => (
-                            <div 
-                            onClick={() => {
-                                window.location.href = item.path;
-                                handlePopoverClose();
-                              }}
+                            <div
+                                onClick={() => {
+                                    if (typeof window !== 'undefined') {
+                                        window.location.href = item.path;
+                                    }
+                                    handlePopoverClose();
+                                }}
                                 key={index}
                                 className={`flex items-center h-16 gap-5 text-sm font-normal w-full cursor-pointer rounded-lg p-2 focus-visible:outline-none hover:bg-emerald-50 border-b`}
                                 style={{ direction: selectedLanguageAndCountry?.language?.code === "ar" ? "rtl" : "ltr" }}

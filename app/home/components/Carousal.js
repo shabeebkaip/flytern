@@ -31,7 +31,7 @@ const Carousal = () => {
       {
         apiSlider?.map((item, index) => (
           <SwiperSlide key={index} className='cursor-pointer'>
-            <div onClick={() => { window.location.href = `/packages/details/${item.refID}` }}>
+            <div onClick={() => { if (typeof window !== "undefined") {window.location.href = `/packages/details/${item.refID}` }}}>
               <Image width={300} height={300} src={item?.url} alt="" className='rounded-md w-full h-full' />
             </div>
           </SwiperSlide>

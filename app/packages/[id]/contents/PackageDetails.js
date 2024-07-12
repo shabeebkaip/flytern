@@ -88,7 +88,7 @@ const PackageDetails = ({id}) => {
               height={30}
             /> :
             <div className="flex gap-1 mt-1 text-sm font-normal text-neutral-400">
-              <div  onClick={() => window.location.href="/packages"}>
+              <div  onClick={() => { if (typeof window !== "undefined") {window.location.href="/packages"}}}>
               <h3 className='cursor-pointer'  >
                 {translation?.packages}
               </h3>

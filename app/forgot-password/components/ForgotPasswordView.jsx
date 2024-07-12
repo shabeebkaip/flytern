@@ -51,7 +51,7 @@ const ForgotPasswordView = () => {
     <div className='flex flex-col items-center justify-center h-full bg-white lg:items-start'>
       <div className='container flex flex-col gap-6 px-10 mx-auto md:px-32' >
         <div className='flex gap-3 item-center'>
-          <div onClick={() => window.location.href = "/login"}><Image src="/arrow-left.svg" alt=""  className='duration-300 ease-in cursor-pointer hover:scale-105 w-7' width={100} height={100} /></div>
+          <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/login"}}}><Image src="/arrow-left.svg" alt=""  className='duration-300 ease-in cursor-pointer hover:scale-105 w-7' width={100} height={100} /></div>
           <h4 class="text-black text-lg sm:text-2xl font-bold ">{translation?.forgot_password}</h4>
         </div>
         <p class="w-full lg:max-w-[450px] text-stone-500 text-xs sm:text-sm font-normal  leading-[200%]">{translation?.forgot_content}</p>

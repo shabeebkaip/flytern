@@ -174,10 +174,10 @@ export const postTravellersDetailsApi = (payload, enqueueSnackbar) => {
         // dispatch(getSaveResponseSuccess(responseData));
         dispatch(flightLoaderOn());
         const bookingReference = responseData.bookingRef;
-        const encryptedBookingReference = encryptUrl(responseData.bookingRef);
+        // const encryptedBookingReference = encryptUrl(responseData.bookingRef);
 
         if (typeof window !== "undefined") {
-          window.location.href = `/payment-method/?ref=${encryptedBookingReference}`;
+          window.location.href = `/payment-method/?ref=${bookingReference}`;
           window.scrollTo({
             top: 0,
             behavior: 'smooth'

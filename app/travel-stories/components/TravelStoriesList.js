@@ -56,17 +56,17 @@ const TravelStoriesList = ({ type }) => {
                   <div className='flex flex-col justify-start gap-3' key={index}>
                     {type === 'profile' ? (
                       <div className='w-[300px] h-[300px]'>
-                        <Image src={story?.fileUrl} alt='image' className='w-full h-full rounded-md' width={100} height={100}  />
+                        <Image src={story?.fileUrl} alt='image' className='w-full h-full rounded-md object-cover' width={1000} height={1000}  />
                       </div>
                     ) : story.urlType === 'VIDEO' ? (
                       <ReactPlayer url={story?.url} width='100%' height='100%' controls />
                     ) : (
-                      <Image src={story?.url} alt='' className='object-cover w-full h-40 rounded-md sm:h-48 md:h-full' width={100} height={100} />
+                      <Image src={story?.url} alt='' className=' w-full h-40 rounded-md sm:h-48 md:h-[400px]  ' width={10000} height={10000} />
                     )}
                     <div className='flex flex-col gap-5'>
                       <div className='flex flex-col gap-2 sm:flex-row sm:items-center'>
                         <div className='flex items-center gap-3'>
-                          <Image src={story?.profileUrl} alt='' className='w-6 h-6 rounded-full' width={100} height={100} />
+                          <Image src={story?.profileUrl} alt='' className='w-6 h-6 rounded-full' width={10000} height={10000} />
                           <p className='text-xs font-medium text-black'>{story?.firstName}</p>
                         </div>
                         <div>

@@ -35,7 +35,7 @@ const Mybookings = () => {
         <div  className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} mt-12 mb-8`}>
             <div className='flex flex-col gap-3'>
                 <div className='flex items-center gap-1 text-sm font-normal text-neutral-400'>
-                    <div onClick={() => window.location.href = "/"}><h3 className='cursor-pointer' >{translation?.home}</h3></div>
+                    <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/"}}}><h3 className='cursor-pointer' >{translation?.home}</h3></div>
                     <h3>/</h3>
                     <h3 className='font-medium text-black'>{translation?.my_bookings}</h3>
                 </div>

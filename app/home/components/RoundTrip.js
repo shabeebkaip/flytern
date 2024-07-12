@@ -17,6 +17,7 @@ import PassengerAndCabin from "./PassengerAndCabin";
 import { setFlightSearch } from "@/lib/slices/exploreSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Image from "next/image";
+import { getFlightSearchApi } from "@/app/flights/api";
 
 
 
@@ -209,7 +210,7 @@ const RoundTrip = ({ flightReqBody, lang }) => {
       if (typeof window !== 'undefined') {
         if (location?.pathname.includes("/search")) {
           localStorage.setItem("searchData", JSON.stringify(payload));
-          // dispatch(getFlightSearchApi(payload));
+          dispatch(getFlightSearchApi(payload));
         } else {
           dispatch(setFlightRequest(payload))
           localStorage.setItem("searchData", JSON.stringify(payload));

@@ -15,7 +15,7 @@ const AddTestimonial = ({type}) => {
 
             <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-1 text-[11px] sm:text-sm font-normal text-neutral-400'>
-                    <h3  className='cursor-pointer' ><div onClick={() => window.location.href = "/"} >{translation?.home}</div></h3>
+                    <h3  className='cursor-pointer' ><div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/"}}} >{translation?.home}</div></h3>
                     <h3>/</h3>
                     <h3>{type === "general" ? '' : 'My'} Travel Stories</h3>
                     <h3>/</h3>

@@ -7,6 +7,7 @@ import PaymentMethod from './contents/PaymentMethod';
 const page = async ({ searchParams }) => {
   try {
     const refrence  = searchParams?.ref;
+    console.log(refrence);
     if (!refrence) {
       throw new Error('Missing ref parameter');
     }
@@ -30,6 +31,7 @@ const page = async ({ searchParams }) => {
 
 
       gatewayList = response.data.data;
+      console.log(gatewayList);
     } catch (error) {
       console.error('Error calling getgatewayApi:', error);
       gatewayList = []; // or handle the error as appropriate

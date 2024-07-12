@@ -6,7 +6,7 @@ import { useAppSelector } from '@/lib/hooks';
 
 const FareRule = (props) => {
     const { fareRule } = props;
-    const [accordionOpen, setAccordionOpen] = useState(false);
+    const [accordionOpen, setAccordionOpen] = useState(true);
     const toggleAccordion = () => {
         setAccordionOpen(!accordionOpen);
     };

@@ -27,7 +27,7 @@ const CoPax = () => {
                     <h3 className='text-base font-semibold text-black sm:text-lg '>{translation?.copax} </h3>
                 </div>
                 <div>
-                    <div onClick={() => window.location.href = "/profile/co-pax"} className='flex items-center gap-2 font-normal text-blue-400' ><span> {translation?.see_all}</span> <SeeAllIconSvg /></div>
+                    <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/profile/co-pax"}}} className='flex items-center gap-2 font-normal text-blue-400' ><span> {translation?.see_all}</span> <SeeAllIconSvg /></div>
                 </div>
             </div>
             <HeaderBorder />
@@ -51,7 +51,7 @@ const CoPax = () => {
                                     <div className=''>
                                         <div className='flex items-center justify-start gap-10'>
                                             <h3 class="text-black text-sm font-semibold ">{translation?.copax} #{index + 1}</h3>
-                                            <div onClick={() => window.location.href=`/profile/co-pax/${item.id}`}><EditIconSvg color='#Fb923C' /></div>
+                                            <div onClick={() => { if (typeof window !== "undefined") {window.location.href=`/profile/co-pax/${item.id}`}}}><EditIconSvg color='#Fb923C' /></div>
                                         </div>
                                         {/* <HeaderBorder /> */}
                                     </div>

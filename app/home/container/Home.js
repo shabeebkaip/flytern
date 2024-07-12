@@ -23,13 +23,15 @@ const HomeChild = () => {
   const dispatch = useDispatch();
   const flightBgUrl = data?.bgGrounds?.length && data?.bgGrounds[0]['flightBgURL']
   const hotelBgUrl = data?.bgGrounds?.length && data?.bgGrounds[0]['hotelBgURL']
-console.log(data,"data")
-console.log(loading,"loading")
+  console.log(data, "data")
+  console.log(loading, "loading")
 
-useEffect(() => {
-  window.scrollTo(0, 0);
-  dispatch(exploresRequest());
-}, []);
+  useEffect(() => {
+      if (typeof window !== "undefined") {
+        window.scrollTo(0, 0);
+        dispatch(exploresRequest());
+      }
+    }, []);
 
   return (
     <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" || location.includes("/ar") ? 'rtl font-arabic' : 'font-inter'}`}>

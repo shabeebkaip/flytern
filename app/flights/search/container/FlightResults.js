@@ -20,6 +20,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import FlightCard from "@/app/flights/search/components/FlightCard";
 import FlightCardMobile from "@/app/flights/search/components/FlightCardMobile";
 import AlertMessage from "@/app/shared/components/AlertMessage";
+import CalenderTab from "../components/CalenderTab";
 const FlightResultsChild = (props) => {
   const isTabletAndMobile = useMediaQuery({ maxWidth: "1024px" });
   const dispatch = useAppDispatch();
@@ -147,7 +148,7 @@ const FlightResultsChild = (props) => {
                     <div className="p-4 bg-white border-b-4">
                       <OneWay flightReqBody={request} selectedDate={selectedDate} lang={lang} />
                     </div>
-                    {/* <CalenderTab onDateSelect={handleDateSelect} flightReqBody={request} /> */}
+                    <CalenderTab onDateSelect={handleDateSelect} flightReqBody={request} />
                   </div>
 
                 ) : request?.mode === "ROUNDTRIP" ? (
@@ -199,7 +200,7 @@ const FlightResultsChild = (props) => {
               <Skeleton
                 sx={{ bgcolor: 'grey.300' }}
                 variant="rectangular"
-                className="w-full h-full bg-stone-50"
+                className="w-full h-full "
                 height={200}
                 key={index}
               />
@@ -224,9 +225,11 @@ const FlightResultsChild = (props) => {
               </InfiniteScroll> :
               <div className="flex items-center justify-center w-full h-96">
                 {
+                  flightLoader ?
                   flightResults.alertMsg ?
                     <AlertMessage message={flightResults.alertMsg} /> :
                     <h1 className="text-2xl font-semibold text-center text-stone-500">Uh-oh! No Flights Found</h1>
+                    :null
                 }
 
               </div>

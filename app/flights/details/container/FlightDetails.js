@@ -34,21 +34,22 @@ const FlightDetailsChild = ({ objId, ind }) => {
   const { showUserDetails } = useAppSelector(state => state.sharedState)
   const dispatch = useAppDispatch()
   useEffect(() => {
-    if (typeof window !== "undefined") {
-
     let hash = window.location.hash;
-    if (hash) {
-      var targetId = hash.substring(1);
-      var targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
+    { if (typeof window !== "undefined")
+      if (hash) {
+        var targetId = hash.substring(1);
+        var targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          console.error('Element with id "' + targetId + '" not found.');
+        }
       } else {
-        console.error('Element with id "' + targetId + '" not found.');
+        if (typeof window !== "undefined") {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }
     dispatch(getFlightDetailsApi({ objectID: objId, index: ind }))
   }, [ind, objId])
   useEffect(() => {
@@ -63,7 +64,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
   }, []);
   const { translation } = useAppSelector((state) => state.sharedState)
   return (
-    <div className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} container mx-auto px-4`}>
+    <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} container mx-auto px-4`}>
       {
         genericLoader ?
           <GenericLoader text={"Securing your seat - your travel experience is just a payment away! "} /> :
@@ -73,7 +74,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
                 <Skeleton
                   sx={{ bgcolor: 'grey.300' }}
                   variant="rectangular"
-                  className="h-full bg-stone-50"
+                  className="h-full "
                   height={20}
                   width={"10vw"}
                 /> : <h3 className='text-lg font-bold text-black sm:text-2xl '>{translation?.flight_details}</h3>
@@ -83,13 +84,13 @@ const FlightDetailsChild = ({ objId, ind }) => {
                 <Skeleton
                   sx={{ bgcolor: 'grey.300' }}
                   variant="rectangular"
-                  className="h-full mt-5 bg-stone-50"
+                  className="h-full mt-5 "
                   height={20}
                   width={"10vw"}
                 /> : <div className='flex gap-1 mt-1 text-[11px] sm:text-sm font-normal text-neutral-400'>
-              <h3 className='cursor-pointer' onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }}>{translation?.home}</h3>
-              <h3>/</h3>
-                  <h3 className='cursor-pointer' onClick={() => { if (typeof window !== "undefined")  {window.location.href = "/flights/search" }}}>{translation?.search_results}</h3>
+                  <h3 className='cursor-pointer' onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }}>{translation?.home}</h3>
+                  <h3>/</h3>
+                  <h3 className='cursor-pointer' onClick={() => { if (typeof window !== "undefined") { window.location.href = "/flights/search" } }}>{translation?.search_results}</h3>
                   <h3>/</h3>
                   <h3 className='font-medium text-black'>{translation?.flight_details}</h3>
                 </div>
@@ -109,7 +110,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
                           <Skeleton
                             sx={{ bgcolor: 'grey.300' }}
                             variant="rectangular"
-                            className="w-full bg-stone-50"
+                            className="w-full "
                             height={"50vh"}
                           /> : <FlightDetailsCard flightSegments={flightSegments} isRefund={isRefund} />
 
@@ -119,7 +120,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
                           <Skeleton
                             sx={{ bgcolor: 'grey.300' }}
                             variant="rectangular"
-                            className="w-full bg-stone-50"
+                            className="w-full "
                             height={"40vh"}
                           /> : <PriceDetails />
                       }
@@ -128,7 +129,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
                           <Skeleton
                             sx={{ bgcolor: 'grey.300' }}
                             variant="rectangular"
-                            className="w-full bg-stone-50"
+                            className="w-full "
                             height={"40vh"}
                           /> : <FareRule />
                       }
@@ -137,7 +138,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
                           <Skeleton
                             sx={{ bgcolor: 'grey.300' }}
                             variant="rectangular"
-                            className="w-full bg-stone-50"
+                            className="w-full "
                             height={"30vh"}
                           /> : <FLightAndHotelContactForm />
                       }
@@ -145,7 +146,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
                         <Skeleton
                           sx={{ bgcolor: 'grey.300' }}
                           variant="rectangular"
-                          className="w-full bg-stone-50"
+                          className="w-full "
                           height={"40vh"}
                         />
                       ) : (
@@ -161,7 +162,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
                           <Skeleton
                             sx={{ bgcolor: 'grey.300' }}
                             variant="rectangular"
-                            className="w-full bg-stone-50"
+                            className="w-full "
                             height={"30vh"}
                           /> : <FlightPaymentSummary />
                       }
@@ -170,7 +171,7 @@ const FlightDetailsChild = ({ objId, ind }) => {
                           <Skeleton
                             sx={{ bgcolor: 'grey.300' }}
                             variant="rectangular"
-                            className="w-full bg-stone-50"
+                            className="w-full "
                             height={"50vh"}
                           /> : <PackagePoster />
                       }

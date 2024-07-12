@@ -86,7 +86,7 @@ const Filter = (props) => {
               <Skeleton
                 sx={{ bgcolor: 'grey.300' }}
                 variant="rectangular"
-                className="w-3/4 h-full bg-stone-50"
+                className="w-3/4 h-full "
 
               /> : <h4 className="text-2xl font-bold text-black ">
                 {translation?.search_results}
@@ -97,7 +97,7 @@ const Filter = (props) => {
               <Skeleton
                 sx={{ bgcolor: 'grey.300' }}
                 variant="rectangular"
-                className="w-2/4 h-full mt-2 bg-stone-50"
+                className="w-2/4 h-full mt-2 "
 
               /> : <div className="flex gap-1 cursor-pointer">
                 <h6 className="text-xs font-normal cursor-pointer xl:text-sm text-font-gray" onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }}>
@@ -117,7 +117,7 @@ const Filter = (props) => {
               <Skeleton
                 sx={{ bgcolor: 'grey.300' }}
                 variant="rectangular"
-                className="w-full h-full bg-stone-50"
+                className="w-full h-full "
 
               /> :
               <div className="flex items-center justify-between mb-3">
@@ -142,12 +142,10 @@ const Filter = (props) => {
                 <Skeleton
                   sx={{ bgcolor: 'grey.300' }}
                   variant="rectangular"
-                  className="w-full h-full bg-stone-50"
+                  className="w-full h-full"
                   height={"100vh"}
-
                 /> :
                 <div className="container flex flex-col items-center gap-10 px-4 py-5 mx-auto overflow-hidden bg-white rounded-lg">
-
                   <div className="container w-full px-2 mx-auto group">
                     <button
                       onClick={toggleStopsAccordion}

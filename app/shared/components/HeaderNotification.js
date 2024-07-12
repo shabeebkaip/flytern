@@ -19,7 +19,9 @@ const HeaderNotifiction = () => {
 
     const handleRedirection = (item) => {
         if (item.isRedirection) {
-            window.location.assign(item.redirectionUrl, '_blank')
+            if (typeof window !== 'undefined') {
+                window.location.assign(item.redirectionUrl, '_blank')
+            }
             handleClose()
         } else {
             handleClose()
@@ -36,7 +38,7 @@ const HeaderNotifiction = () => {
                 {isHome ? (
                     <div className='relative'>
                         {/* <img className="w-8 h-8" src={require('../../assets/notification.png')} alt="" /> */}
-                        <Image width={40} height={40}  className='w-8 h-8' src="/notification.png" alt="" />
+                        <Image width={40} height={40} className='w-8 h-8' src="/notification.png" alt="" />
                         {notifications?.length > 0 ?
                             <div className='absolute flex items-center justify-center w-5 h-5 rounded-full -right-1 bg-emerald-800 -top-1 '>
                                 <span className='text-xs text-white'>{notifications?.length}</span>
@@ -45,7 +47,7 @@ const HeaderNotifiction = () => {
                     </div>
                 ) : (
                     <div>
-                        <Image width={40} height={40}  className='w-8 h-8' src="/notification.svg" alt="" />
+                        <Image width={40} height={40} className='w-8 h-8' src="/notification.svg" alt="" />
                         {notifications?.length > 0 ?
                             <div className='absolute top-0 flex items-center justify-center w-5 h-5 bg-white rounded-full right-3 '>
                                 <span className='text-xs text-emerald-800'>{notifications?.length}</span>

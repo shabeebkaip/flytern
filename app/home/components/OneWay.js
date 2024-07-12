@@ -16,6 +16,7 @@ import Popover from '@mui/material/Popover';
 import { setFlightSearch } from '@/lib/slices/exploreSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Image from 'next/image';
+import { getFlightSearchApi } from '@/app/flights/api';
 
 
 
@@ -152,6 +153,7 @@ const OneWay = ({ flightReqBody, lang }) => {
     }
   }
   const handleSubmit = () => {
+    debugger
     let validationError = {
       departureLabel: flightSearch?.searchList?.[0]?.departureLabel ? "" : "Please Enter Departure",
       arrivalLabel: flightSearch?.searchList?.[0]?.arrivalLabel ? "" : "Please Enter Arrival",
@@ -173,11 +175,11 @@ const OneWay = ({ flightReqBody, lang }) => {
         if (location?.pathname.includes("/search")) {
           localStorage.setItem("searchData", JSON.stringify(payload));
           // TODO call the api once flight module is ready
-          // dispatch(getFlightSearchApi(payload));
+          dispatch(getFlightSearchApi(payload));
         } else {
           localStorage.setItem("searchData", JSON.stringify(payload));
           if (lang === 'ar') {
-            window.location.href = `/ar/flights/search`;
+            window.location.href = `/flights/search`;
           } else {
             window.location.href = `/flights/search`;
           }
@@ -474,7 +476,7 @@ const OneWay = ({ flightReqBody, lang }) => {
           </div>
         </div>
 
-        <button className=" h-14 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex" onClick={() => handleSubmit()}>
+        <button className=" h-14 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex relative z-[100]" onClick={() => handleSubmit()}>
           <div className="text-sm font-medium text-center text-white capitalize" >{location?.pathname === "/flights/search" ? translation?.modify_Search : translation?.search_flights}</div>
         </button>
       </div >

@@ -124,26 +124,26 @@ const HeaderChild = () => {
       style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
     >
       <div className="container flex items-center justify-between px-4 mx-auto ">
-        <div onClick={() => window.location.href = "/"} className="cursor-pointer">
+        <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/"}}} className="cursor-pointer">
           <Image src={isHome ? "/header/logo-green.svg" : "/header/logo-white.svg"} alt="logo" width={150} height={50} />
         </div>
         <div className="items-center hidden md:flex gap-9"  >
-          <div  onClick={() => window.location.href = "/"} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
+          <div  onClick={() => { if (typeof window !== "undefined") {window.location.href = "/"}}} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
             <div className="flex items-center gap-4 cursor-pointer">
               {translation?.home}
             </div>
           </div>
-          <div onClick={() => window.location.href = "/my-bookings"} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+          <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/my-bookings"}}} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
             {selectedLanguageAndCountry?.language?.code === "ar" ? 'حجوزاتي' : 'My Bookings'}
           </div>
-          <div onClick={() => window.location.href = "/help-center"} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+          <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/help-center"}}} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
             {selectedLanguageAndCountry?.language?.code === "ar" ? 'مركز المساعدة' : 'Help Center'}
           </div>
-          <div onClick={() => window.location.href = "/contact-us"} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+          <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/contact-us"}}} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
             {selectedLanguageAndCountry?.language?.code === "ar" ? 'اتصال' : 'Contact'}
           </div>
           <HeaderMore isHome={isHome}/>
-          <div onClick={() => window.location.href = "/settings"}>
+          <div onClick={() =>  { if (typeof window !== "undefined") {window.location.href = "/settings"}}}>
             <div className="flex items-center gap-2 cursor-pointer">
               {
                 selectedLanguageAndCountry?.country?.flag && (

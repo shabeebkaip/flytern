@@ -108,7 +108,7 @@ const LoginView = () => {
           {error?.password && <p className="text-xs text-red-500">{error.password}</p>}
         </div>
 
-        <div onClick={() => window.location.href="/forgot-password"} class=" text-orange-400 text-xs sm:text-sm font-medium  capitalize">
+        <div onClick={() =>{ if (typeof window !== "undefined") {window.location.href="/forgot-password"}}} class=" text-orange-400 text-xs sm:text-sm font-medium  capitalize">
           {translation?.forgot_password}
         </div>
         <button className='w-full h-12 mt-3 text-base font-medium text-white rounded-md bg-emerald-800  xl:max-w-[420px] 2xl:max-w-[450px]' onClick={onLogin}>
@@ -117,7 +117,7 @@ const LoginView = () => {
         <div className="text-center flex justify-center w-full lg:max-w-[450px] gap-1">
           <span className="text-xs font-normal text-black sm:text-sm ">{translation?.dont_have_account} {" "}</span>
           <span className="text-xs font-normal text-black sm:text-sm ">{" "} </span>
-          <div onClick={() => window.location.href = "/register"} className="text-xs font-semibold text-orange-400 cursor-pointer sm:text-sm " >{translation?.sign_up}</div>
+          <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/register"}}} className="text-xs font-semibold text-orange-400 cursor-pointer sm:text-sm " >{translation?.sign_up}</div>
         </div>
         <div class=" h-[19px]  items-center gap-1.5 lg:inline-flex flex justify-center w-full lg:max-w-[450px]">
           <div class="w-full h-[0px] opacity-10 border border-neutral-400"></div>
@@ -126,7 +126,7 @@ const LoginView = () => {
         </div>
         <div class="text-center flex gap-2 justify-center items-center w-full lg:max-w-[450px]">
           <span className="text-xs font-normal text-black sm:text-sm ">{translation?.continue_as_a} </span>
-          <div onClick={() => window.location.href = "/"} className="text-xs font-medium text-orange-400 sm:text-sm ">{translation?.guest_user}  </div></div>
+          <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/"}}} className="text-xs font-medium text-orange-400 sm:text-sm ">{translation?.guest_user}  </div></div>
       </div>
     </div>
   )

@@ -35,10 +35,13 @@ const HelpCenterFor = () => {
         postQueryApi(payload)
             .then(response => {
                 if (checkApiStatus(response)) {
+                    if (typeof window !== "undefined") {
+
                     enqueueSnackbar(response.data.data, { variant: 'success', autoHideDuration: 4000, anchorOrigin: { vertical: 'top', horizontal: 'right' } });
                     setTimeout(() => {
-                        // navigate('/'); // Replace '/home' with the actual path to your home page
+                        window.location.href='/'; // Replace '/home' with the actual path to your home page
                     }, 1000);
+                }
                 } else {
                     enqueueSnackbar('Something went wrong', { variant: 'error', autoHideDuration: 2000, anchorOrigin: { vertical: 'top', horizontal: 'right' } });
                 }
