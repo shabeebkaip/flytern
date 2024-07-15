@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { useAppSelector } from '@/lib/hooks'
 
 const FooterChild = () => {
+    const location = typeof window !== "undefined" ? window.location?.pathname : '';
     const { genericLoader } = useSelector(state => state.flightState)
     const { saveTravellerLoader } = useSelector(state => state.insuranceState)
     const { paymentWaitLoader } = useSelector(state => state.paymentState)
@@ -32,6 +33,14 @@ const FooterChild = () => {
     const linikedin = terms?.linkedIn
     const { translation } = useSelector((state) => state.sharedState)
     const { loading } = useAppSelector((state) => state.exploreState);
+
+    const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"];
+    const isAuth = authPaths.includes(location);
+
+    if (isAuth) {
+        return null; // Hide the component for auth paths
+    }
+
 
     return (
         <div>
