@@ -1,13 +1,14 @@
 "use client"
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import StoreProvider from '@/app/StoreProvider'
-import { useAppSelector } from '@/lib/hooks'
 import Layout from '@/hoc/Layout'
 import SuspenseLoader from '@/app/shared/components/SuspenseLoader'
+import StoreProvider from '@/app/StoreProvider'
+import { useAppSelector } from '@/lib/hooks'
 import { useDispatch } from 'react-redux'
 import { exploresSuccess } from '@/lib/slices/exploreSlice'
 import { getGlobalCookie } from '@/lib/utils'
+
 const SubHeader = dynamic(() => import('@/app/home/components/SubHeader'))
 const Hero = dynamic(() => import('@/app/home/components/Hero'))
 const Recommended = dynamic(() => import('@/app/home/components/Recommended'))
@@ -25,7 +26,7 @@ const HomeChild = ({ service, data }) => {
     if (data) {
       dispatch(exploresSuccess(data))
     }
-  }, []);
+  }, [data, dispatch]);
   return (
     <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" || location.includes("/ar") ? 'rtl font-arabic' : 'font-inter'}`}>
       <SubHeader />

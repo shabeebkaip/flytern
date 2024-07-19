@@ -18,6 +18,7 @@ const HeaderProfile = () => {
                 .then((response) => {
                     setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken), 1);
                     setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken), 1);
+                    setGlobalCookie('isUserLoggedIn', response.data.data.isLoggedIn, 1);
                     setTimeout(() => {
                         if (typeof window !== "undefined") {
                             window.location.reload(false);

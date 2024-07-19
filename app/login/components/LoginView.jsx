@@ -37,9 +37,11 @@ const LoginView = () => {
         .then(response => {
           setLoader(false)
           if (checkApiStatus(response)) {
+            debugger
             enqueueSnackbar('Login Successfully', { variant: 'success', autoHideDuration: 2000, anchorOrigin: { vertical: 'top', horizontal: 'right' } })
             setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken), 1)
             setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken), 1)
+            setGlobalCookie('isUserLoggedIn', response.data.data.isLoggedIn, 1)
             if (typeof window !== 'undefined') {
               if (redirectPath) {
                 window.location.href = redirectPath

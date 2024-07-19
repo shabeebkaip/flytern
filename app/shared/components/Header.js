@@ -28,23 +28,6 @@ const HeaderChild = ({ selectedLanguageAndCountry }) => {
   const { profile, mobileCountryList, contactDc } = useAppSelector(state => state.sharedState)
   const { translation } = useAppSelector((state) => state.sharedState)
   let defaultCountry = mobileCountryList?.find(item => item.isDefault === 1)
-  let accessToken = getGlobalCookie('accessToken');
-  const handleToken = useCallback(() => {
-    if (!accessToken) {
-      authApiService()
-        .then((response) => {
-          setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken), 1);
-          setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken), 1);
-        })
-        .catch((error) => {
-          console.log('error', error);
-        });
-    }
-  }, [accessToken]);
-
-  // useEffect(() => {
-  //   handleToken()
-  // }, [handleToken]);
   useEffect(() => {
     if (Object.keys(selectedLanguageAndCountry).length) {
       dispatch(setLanguageAndCountry(selectedLanguageAndCountry))
