@@ -24,7 +24,7 @@ const SubHeaderChild = ({ }) => {
               {translation?.hotels}
             </p>
           </Link>
-          <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/packages" } }} >
+          <Link href="/packages" >
             <div
               className="flex items-center gap-3 cursor-pointer"
             //  onClick={() => lang ? navigate(`/${lang}/packages`) : navigate("/packages")}
@@ -34,12 +34,9 @@ const SubHeaderChild = ({ }) => {
                 {translation?.packages}
               </p>
             </div>
-          </div>
+          </Link>
           <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/insurance" } }}>
-            <div
-              className="flex items-center gap-3 cursor-pointer"
-            // onClick={() => lang ? navigate(`/${lang}/insurance`) : navigate("/insurance")}
-            >
+            <div className="flex items-center gap-3 cursor-pointer">
               <Image width={20} height={20} src={"/icons/Heart Pulse.svg"} alt="flight" className="insurance" />
               <p className="cursor-pointer">
                 {translation?.travel_insurance}

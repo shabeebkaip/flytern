@@ -3,20 +3,21 @@ import StoreProvider from '@/app/StoreProvider'
 import Image from 'next/image'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { usePathname } from 'next/navigation'
 
+const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
 const FooterTopChild = () => {
-    const location = typeof window !== "undefined" ? window.location?.pathname : '';
+    const pathname = usePathname();
     const { translation } = useSelector(state => state.sharedState)
     const { genericLoader } = useSelector(state => state.flightState)
     const { saveTravellerLoader } = useSelector(state => state.insuranceState)
     const { paymentWaitLoader } = useSelector(state => state.paymentState)
     const { loading } = useSelector((state) => state.exploreState);
 
-    const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"];
-    const isAuth = authPaths.includes(location);
+    const isAuth = authPaths.includes(pathname);
 
     if (isAuth) {
-        return null; // Hide the component for auth paths
+        return null;
     }
 
     return (
@@ -24,7 +25,7 @@ const FooterTopChild = () => {
             {
                 loading || genericLoader || saveTravellerLoader || paymentWaitLoader ?
                     null :
-                    <div className=' bg-black lg:grid grid-cols-10 h-[356px] hidden '>
+                    <div className=' bg-black lg:grid grid-cols-10 h-[356px] hidden ' >
                         <div className='relative col-span-4 '>
                             <Image className='w-full h-60' src='/footerone.png' alt="" srcSet="" width={1000} height={1000} />
                             <Image className='h-80 w-72 absolute  left-[30%] bottom-0' src='/footerphone.png' alt="" width={500} height={500} />

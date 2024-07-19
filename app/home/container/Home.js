@@ -7,8 +7,6 @@ import Layout from '@/hoc/Layout'
 import SuspenseLoader from '@/app/shared/components/SuspenseLoader'
 import { useDispatch } from 'react-redux'
 import {  exploresSuccess } from '@/lib/slices/exploreSlice'
-
-
 const SubHeader = dynamic(() => import('@/app/home/components/SubHeader'))
 const Hero = dynamic(() => import('@/app/home/components/Hero'))
 const Recommended = dynamic(() => import('@/app/home/components/Recommended'))

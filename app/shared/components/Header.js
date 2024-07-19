@@ -13,12 +13,13 @@ import HeaderMore from "@/app/shared/components/HeaderMore";
 import HeaderProfile from "@/app/shared/components/HeaderProfile";
 import { getExploresApi } from "@/app/home/api";
 import HeaderNotifiction from "./HeaderNotification";
+import { usePathname } from "next/navigation";
 
-
-
+const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
+const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
 
 const HeaderChild = () => {
-  const location = typeof window !== "undefined" ? window.location?.pathname : '';
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
   const isArabic = getGlobalCookie('language');
   const [isHome, setIsHome] = useState(false);
@@ -46,7 +47,7 @@ const HeaderChild = () => {
   }, [handleToken]);
   useEffect(() => {
     dispatch(getFetchLanguageApi)
-    // dispatch(getExploresApi())
+    dispatch(getExploresApi())
   }, [])
   const handleContactDc = useCallback(() => {
     if (profile && Object.keys(profile).length) {
@@ -103,25 +104,10 @@ const HeaderChild = () => {
     }
   }, []);
 
-  // const { genericLoader } = useSelector(state => state.flightState)
-  // const { saveTravellerLoader } = useSelector(state => state.insuranceState)
-  // const { paymentWaitLoader } = useSelector(state => state.paymentState)
-  // const isTabletAndMobile = useIsTabletAndMobile()
-  // useEffect(() => {
-  //   dispatch(getProfileDetailApi);
-  //   dispatch(getlanguageSwitchApi);
-  // }, []);
-
-  // const location = useLocation();
-
-  const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
-
-  const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
   useEffect(() => {
-    setIsHome(validPaths.some(path => location.endsWith(path)));
-  }, [location]);
-  const isAuth = authPaths.includes(location);
-
+    setIsHome(validPaths.some(path => pathname.endsWith(path)));
+  }, [pathname]);
+  const isAuth = authPaths.includes(pathname);
   return (
     <div
       className={`${isAuth ? 'hidden' : 'flex'} box-border items-center justify-between w-full h-20 border-b`}

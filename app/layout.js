@@ -16,11 +16,17 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <MobileNavigator  />
-        {children}
-        <FooterTop/>
-        <Footer/>
+        <header>
+          <Header />
+        </header>
+        <main>
+          {children}
+        </main>
+        <footer>
+          <MobileNavigator />
+          <FooterTop />
+          <Footer />
+        </footer>
       </body>
     </html >
   );
