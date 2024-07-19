@@ -37,6 +37,51 @@ export const getFetchLanguagesApi = async (token) => {
   }
 }
 
+export const fetchProfileDetailApi = async (token) => {
+  try {
+    const response = await axios.get(`${process.env.BASE_URL}/api/Users/GetUserProfile`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    if (checkApiStatus(response)) {
+      return response.data.data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const fetchInitialInfoApi = async (token) => {
+  try {
+    const response = await axios.get(`${process.env.BASE_URL}/api/Supports/GetInitalInfo`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    if (checkApiStatus(response)) {
+      return response.data.data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const fetchCountryApi = async (token) => {
+  try {
+    const response = await axios.get(`${process.env.BASE_URL}/api/Users/PreRegister`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    if (checkApiStatus(response)) {
+      return response.data.data.country
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 // Client APIS
 export const getProfileDetailApi = async (dispatch) => {

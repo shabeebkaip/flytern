@@ -1,39 +1,60 @@
 "use client"
 import Image from 'next/image';
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import StoreProvider from "@/app/StoreProvider";
-import { useCallback, useEffect, useState } from "react";
-import { authApiService } from "@/lib/authApi";
-import { checkApiStatus, getGlobalCookie, setGlobalCookie } from "@/lib/utils";
-import { getCountryApi, getFetchLanguageApi, getIntialInfoApi, getProfileDetailApi, getlanguageSwitchApi, saveDeviceLanguage } from "../api";
-import { setContactDetails, setLanguageAndCountry, setTranslation } from "@/lib/slices/sharedSlice";
-import { countryAndLanguageSuccess } from "@/lib/slices/genaralSlice";
 import translations from "@/lib/translations.json";
 import HeaderMore from "@/app/shared/components/HeaderMore";
 import HeaderProfile from "@/app/shared/components/HeaderProfile";
-import { getExploresApi } from "@/app/home/api";
 import HeaderNotifiction from "./HeaderNotification";
+import StoreProvider from "@/app/StoreProvider";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useCallback, useEffect, useState } from "react";
+import { checkApiStatus, getGlobalCookie } from "@/lib/utils";
+import { getCountryApi, getIntialInfoApi, getProfileDetailApi, getlanguageSwitchApi, saveDeviceLanguage } from "../api";
+import { setContactDetails, setLanguageAndCountry, setTranslation, sharedProfileSuccess, switchLanguageSucces } from "@/lib/slices/sharedSlice";
+import { countryAndLanguageSuccess, initialInfoSucces } from "@/lib/slices/genaralSlice";
 import { usePathname } from "next/navigation";
+import { exploresSuccess } from '@/lib/slices/exploreSlice';
 
 const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
 const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
 
-const HeaderChild = ({ selectedLanguageAndCountry }) => {
+const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, initialInfo }) => {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
-  const isArabic = getGlobalCookie('language');
+  const isArabic = pathname.includes("/ar") ? true : false;
   const [isHome, setIsHome] = useState(false);
-  const language = isArabic === "ar" ? 'ar' : 'en';
+  const language = isArabic ? 'ar' : 'en';
   const notificationToken = isArabic ? 'ar' : 'en';
   const { profile, mobileCountryList, contactDc } = useAppSelector(state => state.sharedState)
   const { translation } = useAppSelector((state) => state.sharedState)
   let defaultCountry = mobileCountryList?.find(item => item.isDefault === 1)
+
+  const saveLanguageAndDispatch = useCallback(async (language, notificationToken) => {
+    const response = await saveDeviceLanguage({
+      countryCode: 'KW',
+      language,
+      notificationEnabled: false,
+      notificationToken
+    });
+
+    if (checkApiStatus(response)) {
+      dispatch(countryAndLanguageSuccess({
+        countryCode: 'KW',
+        language,
+        notificationEnabled: false,
+        notificationToken
+      }));
+      const index = language === 'ar' ? 1 : 0;
+      dispatch(setTranslation(translations[index].texts));
+    }
+  }, [dispatch]);
+
+
   useEffect(() => {
     if (Object.keys(selectedLanguageAndCountry).length) {
       dispatch(setLanguageAndCountry(selectedLanguageAndCountry))
     }
-    dispatch(getExploresApi())
-  }, [selectedLanguageAndCountry, dispatch])
+    dispatch(exploresSuccess(exploresData))
+  }, [selectedLanguageAndCountry, dispatch, exploresData])
   const handleContactDc = useCallback(() => {
     if (profile && Object.keys(profile).length) {
       dispatch(
@@ -55,39 +76,27 @@ const HeaderChild = ({ selectedLanguageAndCountry }) => {
       }
     }
   }, [profile]);
+
+
   useEffect(() => {
-    // Assuming notificationToken is based on language
     saveLanguageAndDispatch(language, notificationToken);
-  }, []);
+  }, [language, notificationToken, saveLanguageAndDispatch]);
+
   useEffect(() => {
-    dispatch(getProfileDetailApi);
-    dispatch(getlanguageSwitchApi);
-  }, []);
+    dispatch(sharedProfileSuccess(profileData));
+    dispatch(switchLanguageSucces(initialInfo));
+  }, [profileData, dispatch, initialInfo]);
+
+
+  useEffect(() => {
+    dispatch(getCountryApi)
+    dispatch(initialInfoSucces(initialInfo))
+  }, [initialInfo, dispatch])
+
   useEffect(() => {
     handleContactDc()
-    dispatch(getCountryApi)
-    dispatch(getIntialInfoApi)
   }, [handleContactDc])
 
-  const saveLanguageAndDispatch = useCallback(async (language, notificationToken) => {
-    const response = await saveDeviceLanguage({
-      countryCode: 'KW',
-      language,
-      notificationEnabled: false,
-      notificationToken
-    });
-
-    if (checkApiStatus(response)) {
-      dispatch(countryAndLanguageSuccess({
-        countryCode: 'KW',
-        language,
-        notificationEnabled: false,
-        notificationToken
-      }));
-      const index = language === 'ar' ? 1 : 0;
-      dispatch(setTranslation(translations[index].texts));
-    }
-  }, []);
 
   useEffect(() => {
     setIsHome(validPaths.some(path => pathname.endsWith(path)));
@@ -142,10 +151,16 @@ const HeaderChild = ({ selectedLanguageAndCountry }) => {
     </div>
   );
 };
-const Header = ({ selectedLanguageAndCountry }) => {
+const Header = ({ selectedLanguageAndCountry, exploresData, profile, initialInfo, countries }) => {
   return (
     <StoreProvider>
-      <HeaderChild selectedLanguageAndCountry={selectedLanguageAndCountry} />
+      <HeaderChild
+        selectedLanguageAndCountry={selectedLanguageAndCountry}
+        exploresData={exploresData}
+        profileData={profile}
+        initialInfo={initialInfo}
+        countries={countries}
+      />
     </StoreProvider>
   )
 }
