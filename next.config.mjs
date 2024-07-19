@@ -38,14 +38,7 @@ const nextConfig = {
         source: '/flights',
         destination: '/home'
       },
-      {
-        source: '/ar/hotels',
-        destination: '/home'
-      },
-      {
-        source: '/hotels',
-        destination: '/home'
-      },
+      
 
     ];
   },

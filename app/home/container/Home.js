@@ -2,12 +2,11 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import StoreProvider from '@/app/StoreProvider'
-import { getExploresApi } from '../api'
-import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import { useAppSelector } from '@/lib/hooks'
 import Layout from '@/hoc/Layout'
 import SuspenseLoader from '@/app/shared/components/SuspenseLoader'
-import { useDispatch, useSelector } from 'react-redux'
-import { exploresRequest } from '@/lib/slices/exploreSlice'
+import { useDispatch } from 'react-redux'
+import {  exploresSuccess } from '@/lib/slices/exploreSlice'
 
 
 const SubHeader = dynamic(() => import('@/app/home/components/SubHeader'))
@@ -16,30 +15,25 @@ const Recommended = dynamic(() => import('@/app/home/components/Recommended'))
 const TravelStories = dynamic(() => import('@/app/home/components/TravelStories'))
 const PopularDestination = dynamic(() => import('@/app/home/components/PopularDestination'))
 
-const HomeChild = () => {
+const HomeChild = ({ service, data }) => {
   const location = typeof window !== "undefined" ? window.location?.pathname : '';
   const { selectedLanguageAndCountry } = useAppSelector((state) => state.sharedState);
-  const { data, loading } = useAppSelector((state) => state.exploreState);
+  const { loading } = useAppSelector((state) => state.exploreState);
   const dispatch = useDispatch();
   const flightBgUrl = data?.bgGrounds?.length && data?.bgGrounds[0]['flightBgURL']
   const hotelBgUrl = data?.bgGrounds?.length && data?.bgGrounds[0]['hotelBgURL']
-  console.log(data, "data")
-  console.log(loading, "loading")
-
   useEffect(() => {
-      if (typeof window !== "undefined") {
-        window.scrollTo(0, 0);
-        dispatch(exploresRequest());
-      }
-    }, []);
-
+    if (data) {
+      dispatch(exploresSuccess(data))
+    }
+  }, []);
   return (
     <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" || location.includes("/ar") ? 'rtl font-arabic' : 'font-inter'}`}>
       <SubHeader />
       {
         loading ? <SuspenseLoader /> :
           <>
-            <Hero backgroundImage={['/', '/ar', '/ar/flights', '/flights'].includes(location) ? flightBgUrl : hotelBgUrl} />
+            <Hero backgroundImage={service === "flight" ? flightBgUrl : hotelBgUrl} service={service} />
             <Layout>
               <div className='flex flex-col gap-5 my-5 ' >
                 <Recommended />
@@ -53,10 +47,11 @@ const HomeChild = () => {
     </div>
   )
 }
-const Home = () => {
+const Home = ({ service, data }) => {
+  console.log('data', data)
   return (
     <StoreProvider>
-      <HomeChild />
+      <HomeChild service={service} data={data} />
     </StoreProvider>
   )
 }

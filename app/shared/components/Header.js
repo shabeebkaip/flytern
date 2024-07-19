@@ -1,5 +1,4 @@
 "use client"
-import Link from "next/link";
 import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import StoreProvider from "@/app/StoreProvider";
@@ -14,6 +13,8 @@ import HeaderMore from "@/app/shared/components/HeaderMore";
 import HeaderProfile from "@/app/shared/components/HeaderProfile";
 import { getExploresApi } from "@/app/home/api";
 import HeaderNotifiction from "./HeaderNotification";
+
+
 
 
 const HeaderChild = () => {
@@ -45,7 +46,7 @@ const HeaderChild = () => {
   }, [handleToken]);
   useEffect(() => {
     dispatch(getFetchLanguageApi)
-    dispatch(getExploresApi())
+    // dispatch(getExploresApi())
   }, [])
   const handleContactDc = useCallback(() => {
     if (profile && Object.keys(profile).length) {

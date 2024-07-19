@@ -2,6 +2,23 @@ import { globalGetService, globalPostService } from "@/lib/globalApiServices"
 import { initialInfoSucces, loadingOff, loadingOn } from "@/lib/slices/genaralSlice";
 import { getCountrySuccess, loaderRequest, setLanguageAndCountry, setNotifications, sharedProfileSuccess, switchLanguageSucces, } from '@/lib/slices/sharedSlice';
 import { checkApiStatus } from "@/lib/utils";
+import axios from "axios";
+
+
+export const fetchExploresApi = async (token) => {
+  try {
+    const response = await axios.get(`${process.env.BASE_URL}/api/Explores/GetExplores`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    if (checkApiStatus(response)) {
+      return response.data.data
+    }
+  } catch (error) {
+    return error
+  }
+}
 
 export const getProfileDetailApi = async (dispatch) => {
   try {
@@ -95,7 +112,7 @@ export const getFetchLanguageApi = async (dispatch) => {
   }
   catch (error) {
   }
-} 
+}
 export const getIntialInfoApi = async (dispatch) => {
   try {
     dispatch(loadingOn())

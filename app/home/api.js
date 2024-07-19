@@ -2,6 +2,7 @@
 import { checkApiStatus } from "@/lib/utils";
 import { globalGetService } from "@/lib/globalApiServices"
 import { exploresFail, exploresRequest, exploresSuccess, setHotelQuickSearch } from "@/lib/slices/exploreSlice"
+import axios from "axios";
 
 export const getExploresApi = () => {
   return async (dispatch) => {
@@ -17,6 +18,21 @@ export const getExploresApi = () => {
       return error
     }
 
+  }
+}
+
+export const fetchExploresApi = async (token) => {
+  try {
+    const response = await axios.get(`${process.env.BASE_URL}/api/Explores/GetExplores`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    if (checkApiStatus(response)) {
+      return response.data.data
+    }
+  } catch (error) {
+    return error
   }
 }
 

@@ -1,13 +1,12 @@
-
+import React from 'react'
 import dynamic from 'next/dynamic'
 import { cookies } from 'next/headers';
 import { fetchExploresApi } from '@/app/shared/api';
 import { Suspense } from 'react';
-const Home = dynamic(() => import('@/app/home/container/Home'))
 
+const HotelHome = dynamic(() => import('@/app/home/container/Home'))
 
-
-const MainHome = async () => {
+const page = async () => {
   const cookieStore = cookies();
   const accessTokenCookie = cookieStore.get('accessToken');
   if (!accessTokenCookie) {
@@ -16,12 +15,8 @@ const MainHome = async () => {
   const myCookie = accessTokenCookie.value.replace(/(^")|("$)/g, '');
   const data = await fetchExploresApi(myCookie);
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div>
-        <Home service={"flight"} data={data} />
-      </div>
-    </Suspense>
+    <div><HotelHome service="hotel" data={data} /></div>
   )
 }
 
-export default MainHome
+export default page

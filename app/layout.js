@@ -12,10 +12,6 @@ export const metadata = {
   description: "Flights, hotels, and more",
 };
 
-const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
-
-
-
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
