@@ -3,11 +3,11 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSocialApi } from '../api'
 import { socialsuccess } from '@/lib/slices/sharedSlice'
+import { useAppSelector } from '@/lib/hooks'
+import { usePathname } from 'next/navigation';
 import StoreProvider from '@/app/StoreProvider'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useAppSelector } from '@/lib/hooks'
-import { usePathname } from 'next/navigation';
 const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"];
 const FooterChild = () => {
     const pathname = usePathname();
@@ -51,12 +51,12 @@ const FooterChild = () => {
                                         <h3 className='text-lg font-bold text-black '>{translation?.explore}</h3>
                                     </div>
                                     <div className='flex flex-col gap-4 text-sm font-normal cursor-pointer text-neutral-400'>
-                                        <a className='hover:text-emerald-800' href="/" ><h6>{translation?.home}</h6></a>
-                                        <a className='hover:text-emerald-800' href='/?service=flight' >{translation?.flights}</a>
-                                        <a className='hover:text-emerald-800' href='/hotels'>{translation?.hotels}</a>
-                                        <a className='hover:text-emerald-800' href="/packages"> {translation?.packages}</a>
-                                        <a className='hover:text-emerald-800' href="/insurance">{translation?.travel_insurance}</a>
-                                        <a className='hover:text-emerald-800' href="/activityCities" >{translation?.activities}</a>
+                                        <Link className='hover:text-emerald-800' href="/" ><h6>{translation?.home}</h6></Link>
+                                        <Link className='hover:text-emerald-800' href='/flights' >{translation?.flights}</Link>
+                                        <Link className='hover:text-emerald-800' href='/hotels'>{translation?.hotels}</Link>
+                                        <Link className='hover:text-emerald-800' href="/packages"> {translation?.packages}</Link>
+                                        <Link className='hover:text-emerald-800' href="/insurance">{translation?.travel_insurance}</Link>
+                                        <Link className='hover:text-emerald-800' href="/activityCities" >{translation?.activities}</Link>
                                     </div>
 
                                 </div>
@@ -65,9 +65,9 @@ const FooterChild = () => {
                                         <h3 className='text-lg font-bold text-black '>{translation?.about}</h3>
                                     </div>
                                     <div className='flex flex-col gap-4 text-sm font-normal cursor-pointer text-neutral-400'>
-                                        <a className='hover:text-emerald-800' href="/aboutus"><h6>{translation?.about_us}</h6></a>
-                                        <a className='hover:text-emerald-800' href="/terms-conditions"><h6>{translation?.terms_n_conditions}</h6></a>
-                                        <a className='hover:text-emerald-800' href="/privacy-policy"><h6>{translation?.privacy_policy}</h6></a>
+                                        <Link className='hover:text-emerald-800' href="/aboutus"><h6>{translation?.about_us}</h6></Link>
+                                        <Link className='hover:text-emerald-800' href="/terms-conditions"><h6>{translation?.terms_n_conditions}</h6></Link>
+                                        <Link className='hover:text-emerald-800' href="/privacy-policy"><h6>{translation?.privacy_policy}</h6></Link>
                                     </div>
 
                                 </div>
@@ -76,9 +76,9 @@ const FooterChild = () => {
                                         <h3 className='text-lg font-bold text-black'>{translation?.for_users}</h3>
                                     </div>
                                     <div className='flex flex-col gap-4 text-sm font-normal text-neutral-400'>
-                                        <a className='hover:text-emerald-800' href="/login"><h6>{translation?.login}</h6></a>
-                                        <a className='hover:text-emerald-800' href="/register"><h6>{translation?.register}</h6></a>
-                                        <a className='hover:text-emerald-800' href='/settings'>{translation?.settings}</a>
+                                        <Link className='hover:text-emerald-800' href="/login"><h6>{translation?.login}</h6></Link>
+                                        <Link className='hover:text-emerald-800' href="/register"><h6>{translation?.register}</h6></Link>
+                                        <Link className='hover:text-emerald-800' href='/settings'>{translation?.settings}</Link>
                                     </div>
 
                                 </div>
