@@ -22,7 +22,6 @@ const AboutUs = () => {
     const terms = useAppSelector(
       (item) => item?.generalState?.aboutus?.information?.[0]?.content
     );
-    console.log(terms,"y")
   return (
     <div>
         <About terms={terms}/>

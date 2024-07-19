@@ -16,8 +16,8 @@ const HeaderProfile = () => {
         setTimeout(() => {
             authApiService()
                 .then((response) => {
-                    setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken));
-                    setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken));
+                    setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken), 1);
+                    setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken), 1);
                     setTimeout(() => {
                         if (typeof window !== "undefined") {
                             window.location.reload(false);

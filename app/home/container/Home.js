@@ -6,7 +6,8 @@ import { useAppSelector } from '@/lib/hooks'
 import Layout from '@/hoc/Layout'
 import SuspenseLoader from '@/app/shared/components/SuspenseLoader'
 import { useDispatch } from 'react-redux'
-import {  exploresSuccess } from '@/lib/slices/exploreSlice'
+import { exploresSuccess } from '@/lib/slices/exploreSlice'
+import { getGlobalCookie } from '@/lib/utils'
 const SubHeader = dynamic(() => import('@/app/home/components/SubHeader'))
 const Hero = dynamic(() => import('@/app/home/components/Hero'))
 const Recommended = dynamic(() => import('@/app/home/components/Recommended'))
@@ -46,10 +47,13 @@ const HomeChild = ({ service, data }) => {
   )
 }
 const Home = ({ service, data }) => {
-  console.log('data', data)
+  const loading = getGlobalCookie('loading')
   return (
     <StoreProvider>
-      <HomeChild service={service} data={data} />
+      {loading ?
+        <SuspenseLoader /> :
+        <HomeChild service={service} data={data} />
+      }
     </StoreProvider>
   )
 }

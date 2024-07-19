@@ -25,7 +25,6 @@ const page = async ({ searchParams,params }) => {
                 }
             )
             bookingRef = response.data.data.bookingRef 
-            console.log(response.data.data);
             if (response.data.data) {
                 const response = await axios.post(`https://flytern.com/coreapi/api/Payments/Confirmation`, { bookingRef: bookingRef },
                     {
@@ -35,7 +34,6 @@ const page = async ({ searchParams,params }) => {
                     }
                 );
                 paymentSummary = response.data.data
-                console.log(paymentSummary);
               } else {
                 console.log("error");
                 // window.location.href = `${window.location.origin}/payment-method/?ref=${extractedRef}`

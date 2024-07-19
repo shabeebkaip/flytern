@@ -1,9 +1,11 @@
+import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./shared/components/Header";
-import MobileNavigator from "@/app/shared/components/MobileNavigator";
-import FooterTop from "./shared/components/FooterTop";
-import Footer from "./shared/components/Footer";
+
+const HeaderParent = dynamic(() => import("@/app/shared/components/HeaderParent"));
+const MobileNavigator = dynamic(() => import("@/app/shared/components/MobileNavigator"));
+const FooterTop = dynamic(() => import("@/app/shared/components/FooterTop"));
+const Footer = dynamic(() => import("@/app/shared/components/Footer"));
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +19,9 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <header>
-          <Header />
+          <HeaderParent />
         </header>
-        <main>
+        <main className="min-h-screen">
           {children}
         </main>
         <footer>

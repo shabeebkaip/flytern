@@ -32,7 +32,7 @@ const Settings = () => {
 
   const changeLanguage = (language) => {
     setSelectedLangauages(language)
-    setGlobalCookie('language', JSON.stringify(language.code))
+    setGlobalCookie('language', JSON.stringify(language.code), 1)
   };
 
   const addLanguage = () => {
@@ -42,8 +42,8 @@ const Settings = () => {
       notificationEnabled: false,
       notificationToken: selectedLanguages?.code || '',
     };
-    setGlobalCookie('selectedCountryName', JSON.stringify(selectedCountry?.countryName));
-    setGlobalCookie('selectedLanguage', JSON.stringify(selectedLanguages?.name));
+    setGlobalCookie('selectedCountryName', JSON.stringify(selectedCountry?.countryName), 1);
+    setGlobalCookie('selectedLanguage', JSON.stringify(selectedLanguages?.name), 1);
     saveDeviceLanguage(payload)
       .then(response => {
         if (checkApiStatus(response)) {

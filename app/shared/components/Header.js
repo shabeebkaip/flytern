@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { authApiService } from "@/lib/authApi";
 import { checkApiStatus, getGlobalCookie, setGlobalCookie } from "@/lib/utils";
 import { getCountryApi, getFetchLanguageApi, getIntialInfoApi, getProfileDetailApi, getlanguageSwitchApi, saveDeviceLanguage } from "../api";
-import { setContactDetails, setTranslation } from "@/lib/slices/sharedSlice";
+import { setContactDetails, setLanguageAndCountry, setTranslation } from "@/lib/slices/sharedSlice";
 import { countryAndLanguageSuccess } from "@/lib/slices/genaralSlice";
 import translations from "@/lib/translations.json";
 import HeaderMore from "@/app/shared/components/HeaderMore";
@@ -18,14 +18,14 @@ import { usePathname } from "next/navigation";
 const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
 const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
 
-const HeaderChild = () => {
+const HeaderChild = ({ selectedLanguageAndCountry }) => {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const isArabic = getGlobalCookie('language');
   const [isHome, setIsHome] = useState(false);
   const language = isArabic === "ar" ? 'ar' : 'en';
   const notificationToken = isArabic ? 'ar' : 'en';
-  const { profile, mobileCountryList, contactDc, selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
+  const { profile, mobileCountryList, contactDc } = useAppSelector(state => state.sharedState)
   const { translation } = useAppSelector((state) => state.sharedState)
   let defaultCountry = mobileCountryList?.find(item => item.isDefault === 1)
   let accessToken = getGlobalCookie('accessToken');
@@ -33,8 +33,8 @@ const HeaderChild = () => {
     if (!accessToken) {
       authApiService()
         .then((response) => {
-          setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken));
-          setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken));
+          setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken), 1);
+          setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken), 1);
         })
         .catch((error) => {
           console.log('error', error);
@@ -42,13 +42,15 @@ const HeaderChild = () => {
     }
   }, [accessToken]);
 
+  // useEffect(() => {
+  //   handleToken()
+  // }, [handleToken]);
   useEffect(() => {
-    handleToken()
-  }, [handleToken]);
-  useEffect(() => {
-    dispatch(getFetchLanguageApi)
+    if (Object.keys(selectedLanguageAndCountry).length) {
+      dispatch(setLanguageAndCountry(selectedLanguageAndCountry))
+    }
     dispatch(getExploresApi())
-  }, [])
+  }, [selectedLanguageAndCountry, dispatch])
   const handleContactDc = useCallback(() => {
     if (profile && Object.keys(profile).length) {
       dispatch(
@@ -108,6 +110,10 @@ const HeaderChild = () => {
     setIsHome(validPaths.some(path => pathname.endsWith(path)));
   }, [pathname]);
   const isAuth = authPaths.includes(pathname);
+
+  if (isAuth) {
+    return null;
+  }
   return (
     <div
       className={`${isAuth ? 'hidden' : 'flex'} box-border items-center justify-between w-full h-20 border-b`}
@@ -153,10 +159,10 @@ const HeaderChild = () => {
     </div>
   );
 };
-const Header = () => {
+const Header = ({ selectedLanguageAndCountry }) => {
   return (
     <StoreProvider>
-      <HeaderChild />
+      <HeaderChild selectedLanguageAndCountry={selectedLanguageAndCountry} />
     </StoreProvider>
   )
 }

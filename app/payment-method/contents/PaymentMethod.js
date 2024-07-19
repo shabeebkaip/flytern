@@ -36,7 +36,6 @@ const PaymentMethodChild = ({gatewayList,refrence}) => {
 
  
   const { paymentLoader } = useAppSelector(state => state.paymentState)
-  console.log(paymentLoader,"paymentLoader");
   const flightSegments = gatewayList?._flightservice?._flightDetail?.flightSegments;
   const isRefund = gatewayList?._flightservice?._flightDetail?.isRefund;
   const paymentWaitLoader = useAppSelector(state => state.paymentState.paymentWaitLoader)

@@ -4,7 +4,7 @@ import { getCountrySuccess, loaderRequest, setLanguageAndCountry, setNotificatio
 import { checkApiStatus } from "@/lib/utils";
 import axios from "axios";
 
-
+// SSR APIS
 export const fetchExploresApi = async (token) => {
   try {
     const response = await axios.get(`${process.env.BASE_URL}/api/Explores/GetExplores`, {
@@ -20,6 +20,25 @@ export const fetchExploresApi = async (token) => {
   }
 }
 
+export const getFetchLanguagesApi = async (token) => {
+  try {
+    const response = await axios.get(`${process.env.BASE_URL}/api/Supports/FetchAppSettings`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    let data = {
+      language: response?.data?.data?.languages?.find((item) => item.default),
+      country: response?.data?.data?.countries?.find((item) => item.isDefault === 1)
+    }
+    return data
+  }
+  catch (error) {
+  }
+}
+
+
+// Client APIS
 export const getProfileDetailApi = async (dispatch) => {
   try {
     dispatch(loaderRequest());
@@ -113,6 +132,8 @@ export const getFetchLanguageApi = async (dispatch) => {
   catch (error) {
   }
 }
+
+
 export const getIntialInfoApi = async (dispatch) => {
   try {
     dispatch(loadingOn())

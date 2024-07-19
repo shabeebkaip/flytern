@@ -18,12 +18,6 @@ const HotelUserDetails = (props) => {
   const [adultErrors, setAdultErrors] = useState([]);
   const [childErrors, setChildErrors] = useState([]);
   const { translation } = useSelector((state) => state.sharedState);
-
-  useEffect(() => {
-    console.log('Adult Errors:', adultErrors);
-    console.log('Child Errors:', childErrors);
-  }, [adultErrors, childErrors]);
-
   const submitTvellersDetails = () => {
     dispatch(hotelButtonLoaderOn());
     let payload = {};

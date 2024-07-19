@@ -6,26 +6,24 @@ import { Termssuccess } from '@/lib/slices/genaralSlice'
 
 const TermsConditions = () => {
 
-    const dispatch  = useDispatch()
-    
+  const dispatch = useDispatch()
 
-   
-    useEffect(()=>{
-      const getTerms=async()=>{
-          const data = await getTermsApi()
-          if(data){
-              dispatch(Termssuccess(data))
-          }
+
+
+  useEffect(() => {
+    const getTerms = async () => {
+      const data = await getTermsApi()
+      if (data) {
+        dispatch(Termssuccess(data))
       }
-     getTerms()
-    },[]) 
-    const terms = useSelector((item)=>item?.generalState?.Terms?.information?.[0]?.content)
-
-    console.log(terms,"r")
+    }
+    getTerms()
+  }, [])
+  const terms = useSelector((item) => item?.generalState?.Terms?.information?.[0]?.content)
   return (
-    
+
     <div>
-      <TermsAndCoditions terms={terms}/>
+      <TermsAndCoditions terms={terms} />
     </div>
   )
 }

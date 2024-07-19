@@ -13,8 +13,6 @@ const CoPax = () => {
     const array = [1, 1, 1, 1, 1]
     const { coPax } = useAppSelector(state => state.profileState);
     const { loading } = useSelector((state) => state.profileState || {});
-    console.log(loading, "loading");
-
     // If the profile route is active, limit the number of displayed Co-Pax to 4
     const maxCoPaxCount = typeof window !== 'undefined' && window.location?.pathname.includes('/profile/co-pax') ? (coPax && coPax.length) : 4;
 

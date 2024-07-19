@@ -59,9 +59,6 @@ const OtpView = () => {
       })
   }
   const { translation } = useSelector((state) => state.sharedState)
-
-
-  console.log(modifiedStr, 'translation')
   return (
     <div className='flex flex-col items-start justify-center w-screen h-full bg-white lg:items-start sm:items-center lg:w-full'>
       <div className='container flex flex-col gap-6 px-5 mx-auto md:px-32 sm:px-20' >

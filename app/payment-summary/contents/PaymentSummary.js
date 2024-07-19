@@ -25,8 +25,6 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
   const _paymentInfo = paymentStatus?._paymentInfo;
   const alertMsg = paymentStatus?.alertMsg;
   const servicetype = paymentStatus?.servicetype
-  
-  console.log(_paymentInfo)
   useEffect(() => {
     if (!_paymentInfo || _paymentInfo.length === 0) {
       if (typeof window !== 'undefined') {

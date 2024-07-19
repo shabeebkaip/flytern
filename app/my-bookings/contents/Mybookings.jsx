@@ -19,8 +19,6 @@ import Link from 'next/link';
 const Mybookings = () => {
     const isTabletAndMobile = useMediaQuery({ maxWidth: '1024px' })
     const { bookings: { _MyFlightBookingResponse, _MyHotelBookingResponse, _MyPackageBookingResponse, _MyInsuranceBookingResponse, _MyActivityBookingResponse = [] }, loading } = useAppSelector(state => state.profileState)
-    console.log(_MyInsuranceBookingResponse,"_MyInsuranceBookingResponse")
-    console.log(_MyPackageBookingResponse,"_MyPackageBookingResponse")
     const [tabIndex, setTabIndex] = useState(0)
     const dispatch = useAppDispatch()
     const { profile } = useAppSelector(state => state.sharedState)

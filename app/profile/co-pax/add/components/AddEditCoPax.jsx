@@ -33,9 +33,6 @@ const AddEditCoPax = () => {
     passportExp: format(new Date(), 'dd-MM-yyyy'),
 
   })
-
-  console.log(data,"data")
-
   useEffect(() => {
     dispatch(getProfileDetailApi)
   }, [dispatch]);
