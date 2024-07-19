@@ -3,16 +3,16 @@ import Image from 'next/image';
 import translations from "@/lib/translations.json";
 import HeaderMore from "@/app/shared/components/HeaderMore";
 import HeaderProfile from "@/app/shared/components/HeaderProfile";
-import HeaderNotifiction from "./HeaderNotification";
 import StoreProvider from "@/app/StoreProvider";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useEffect, useState } from "react";
-import { checkApiStatus, getGlobalCookie } from "@/lib/utils";
-import { getCountryApi, getIntialInfoApi, getProfileDetailApi, getlanguageSwitchApi, saveDeviceLanguage } from "../api";
+import { checkApiStatus, } from "@/lib/utils";
+import { getCountryApi, saveDeviceLanguage } from "../api";
 import { setContactDetails, setLanguageAndCountry, setTranslation, sharedProfileSuccess, switchLanguageSucces } from "@/lib/slices/sharedSlice";
 import { countryAndLanguageSuccess, initialInfoSucces } from "@/lib/slices/genaralSlice";
 import { usePathname } from "next/navigation";
 import { exploresSuccess } from '@/lib/slices/exploreSlice';
+import Link from 'next/link';
 
 const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
 const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
@@ -112,41 +112,40 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
       style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
     >
       <div className="container flex items-center justify-between px-4 mx-auto ">
-        <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }} className="cursor-pointer">
+        <Link href="/" className="cursor-pointer">
           <Image src={isHome ? "/header/logo-green.svg" : "/header/logo-white.svg"} alt="logo" width={150} height={50} />
+        </Link>
+        <div className="items-center hidden md:flex gap-9"  >
+          <Link href={"/"} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
+            <div className="flex items-center gap-4 cursor-pointer">
+              {translation?.home}
+            </div>
+          </Link>
+          <Link href={"/my-bookings"} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+            {selectedLanguageAndCountry?.language?.code === "ar" ? 'حجوزاتي' : 'My Bookings'}
+          </Link>
+          <Link href={"/help-center"} onClick={() => { if (typeof window !== "undefined") { window.location.href = "/help-center" } }} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+            {selectedLanguageAndCountry?.language?.code === "ar" ? 'مركز المساعدة' : 'Help Center'}
+          </Link>
+          <Link href="/contact-us" className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
+            {selectedLanguageAndCountry?.language?.code === "ar" ? 'اتصال' : 'Contact'}
+          </Link>
+          <HeaderMore isHome={isHome} />
+          <Link href={"/settings"} >
+            <div className="flex items-center gap-2 cursor-pointer">
+              {
+                selectedLanguageAndCountry?.country?.flag && (
+                  <Image src={selectedLanguageAndCountry.country.flag} width={20} height={20} className="w-5 h-5" alt="Country flag" />
+                )
+              }
+              <h3 className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"
+                }`}>{selectedLanguageAndCountry?.language?.name ? selectedLanguageAndCountry?.language?.name : "English"} / {selectedLanguageAndCountry?.country?.countryName_Ar}</h3>
+            </div>
+          </Link>
+          {/* <HeaderNotifiction /> */}
+          <HeaderProfile />
         </div>
-        {!isAuth && (
-          <div className="items-center hidden md:flex gap-9"  >
-            <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
-              <div className="flex items-center gap-4 cursor-pointer">
-                {translation?.home}
-              </div>
-            </div>
-            <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/my-bookings" } }} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
-              {selectedLanguageAndCountry?.language?.code === "ar" ? 'حجوزاتي' : 'My Bookings'}
-            </div>
-            <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/help-center" } }} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
-              {selectedLanguageAndCountry?.language?.code === "ar" ? 'مركز المساعدة' : 'Help Center'}
-            </div>
-            <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/contact-us" } }} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
-              {selectedLanguageAndCountry?.language?.code === "ar" ? 'اتصال' : 'Contact'}
-            </div>
-            <HeaderMore isHome={isHome} />
-            <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/settings" } }}>
-              <div className="flex items-center gap-2 cursor-pointer">
-                {
-                  selectedLanguageAndCountry?.country?.flag && (
-                    <Image src={selectedLanguageAndCountry.country.flag} width={20} height={20} className="w-5 h-5" alt="Country flag" />
-                  )
-                }
-                <h3 className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"
-                  }`}>{selectedLanguageAndCountry?.language?.name ? selectedLanguageAndCountry?.language?.name : "English"} / {selectedLanguageAndCountry?.country?.countryName_Ar}</h3>
-              </div>
-            </div>
-            <HeaderNotifiction />
-            <HeaderProfile />
-          </div>
-        )}
+
       </div>
     </div>
   );
