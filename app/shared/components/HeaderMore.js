@@ -47,7 +47,7 @@ const HeaderMore = ({ isHome }) => {
                 <PopoverContent className="z-10 flex flex-col items-center mt-6 border-none w-72">
                     <div className="flex items-center justify-between w-full h-12 gap-4 pb-4 mb-4 border-b border-blue-gray-50">
                         <div className='p-4'>
-                            <p className={`text-sm font-normal text-center ${isHome ? 'text-black' : 'text-white'}`}>
+                            <p className={`text-sm font-normal text-center  text-black`}>
                                 {translation?.more}
                             </p>
                         </div>
