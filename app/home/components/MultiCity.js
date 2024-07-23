@@ -248,8 +248,6 @@ const MultiCity = ({ flightReqBody }) => {
     };
     setGlobalCookie('searchData', JSON.stringify(payload), 1);
     router.push('/flights/search');
-
-
   };
 
   const checkValidationErrors = (validationData, setData) => {
