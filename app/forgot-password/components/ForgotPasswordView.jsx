@@ -23,6 +23,14 @@ const ForgotPasswordView = () => {
 
 
   const onSave = () => {
+    if (!data.mobile) {
+      enqueueSnackbar("Phone number is required", {
+        variant: 'error',
+        autoHideDuration: 2000,
+        anchorOrigin: { vertical: 'top', horizontal: 'right' },
+      });
+      return;
+    }
     forgotPasswordApi(data)
       .then((response) => {
         if (response.data.statusCode === 100) {
