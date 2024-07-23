@@ -24,9 +24,9 @@ const CoPax = () => {
                     <CoPaxIconSvg color='#066651' />
                     <h3 className='text-base font-semibold text-black sm:text-lg '>{translation?.copax} </h3>
                 </div>
-                <div>
+                {/* <div>
                     <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/profile/co-pax"}}} className='flex items-center gap-2 font-normal text-blue-400' ><span> {translation?.see_all}</span> <SeeAllIconSvg /></div>
-                </div>
+                </div> */}
             </div>
             <HeaderBorder />
             {
@@ -69,7 +69,7 @@ const CoPax = () => {
                         }) :
                             <div className='flex flex-col items-center justify-center col-span-2 gap-5'>
                                 <h3 className='text-base font-semibold text-black sm:text-lg '>{translation?.no_copax_added}</h3>
-                                <button className='p-2 sm:w-[160px] sm:h-[46px] rounded-md border border-emerald-800 text-center text-emerald-800 text-sm font-medium' onClick={() => navigate('/profile/co-pax/add')}>{translation?.add_copax}</button>
+                                {/* <button className='p-2 sm:w-[160px] sm:h-[46px] rounded-md border border-emerald-800 text-center text-emerald-800 text-sm font-medium' onClick={() => navigate('/profile/co-pax/add')}>{translation?.add_copax}</button> */}
                             </div>
                         }
                     </div>

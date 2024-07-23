@@ -206,7 +206,7 @@ const UserDetails = () => {
                                     <CustomTextField
                                         styles={'w-full'}
                                         type='text'
-                                        placeholder={selectedLanguageAndCountry?.language?.code === 'ar' ? arabic_translation.enter_id : 'Enter ID'}
+                                        placeholder={selectedLanguageAndCountry?.language?.code === 'ar' ? arabic_translation.enter_id : 'Enter Civil ID'}
                                         value={item.civilID}
                                         className=' bg-stone-50'
                                         onChange={(e) => updateDataAndSetMainData('civilID', e.target.value, index)}

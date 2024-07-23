@@ -168,7 +168,7 @@ const PaymentMethodChild = ({gatewayList,refrence}) => {
                       className="w-full h-full bg-stone-50"
                       height={300}
                     /> :
-                    _hotelservice?._lstRooms ?
+                    _hotelservice?._lstRooms.length ?
                       _hotelservice?._lstRooms.map((item, index) => (
                         <TitleCard title={""} key={index}>
                           <div className='mt-4'>
@@ -201,7 +201,7 @@ const PaymentMethodChild = ({gatewayList,refrence}) => {
                       height={300}
                     /> :
 
-                    _hotelservice?._lstamenitys ?
+                    _hotelservice?._lstamenitys.length ?
                       <TitleCard  >
                         <Amenities amenities={_hotelservice?._lstamenitys} />
                       </TitleCard> : null
@@ -214,7 +214,7 @@ const PaymentMethodChild = ({gatewayList,refrence}) => {
                       className="w-full h-full bg-stone-50"
                       height={300}
                     /> :
-                    _hotelservice?.roomRateConditions ?
+                    _hotelservice?.roomRateConditions.length ?
                       <RoomRateConditions data={_hotelservice?.roomRateConditions} /> : null
                 }
 

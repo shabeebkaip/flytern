@@ -55,10 +55,12 @@ const HeaderProfile = () => {
 
     const handleSignInClick = () => {
         if (typeof window !== "undefined") {
-            localStorage.setItem('redirectPath', JSON.stringify(`${window.location?.pathname}#contact_details`));
+            const currentUrl = window.location.href;
+            localStorage.setItem('redirectPath', JSON.stringify(`${currentUrl}#contact_details`));
             window.location.href = '/login';
         }
     };
+    
 
     return (
         <div className="flex items-center cursor-pointer" {...triggers}>
