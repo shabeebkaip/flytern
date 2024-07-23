@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 
 const HeaderParent = dynamic(() => import("@/app/shared/components/HeaderParent"));
 const MobileNavigator = dynamic(() => import("@/app/shared/components/MobileNavigator"));
@@ -12,8 +13,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Flytern NEXT",
   description: "Flights, hotels, and more",
-  icons:{
-    icon:'/header/logo-green.svg'
+  icons: {
+    icon: '/header/logo-green.svg'
   }
 };
 
@@ -24,9 +25,11 @@ export default async function RootLayout({ children }) {
         <header>
           <HeaderParent />
         </header>
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <Suspense fallback={<div>Loading...</div>} >
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </Suspense> 
         <footer>
           <MobileNavigator />
           <FooterTop />
