@@ -3,6 +3,7 @@ import Slider from "@mui/material/Slider";
 import { Box, Checkbox, Skeleton } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 function valuetext(value) {
   return `${value}°C`;
@@ -100,9 +101,9 @@ const Filter = (props) => {
                 className="w-2/4 h-full mt-2 "
 
               /> : <div className="flex gap-1 cursor-pointer">
-                <h6 className="text-xs font-normal cursor-pointer xl:text-sm text-font-gray" onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }}>
+                <Link className="text-xs font-normal cursor-pointer xl:text-sm text-font-gray" href="/">
                   {translation?.home}
-                </h6>
+                </Link>
                 <h6 className="text-xs font-normal xl:text-sm text-font-gray">
                   /
                 </h6>

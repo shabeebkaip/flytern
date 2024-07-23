@@ -1,31 +1,33 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import Popover from "@mui/material/Popover";
 import { Checkbox, } from "@mui/material";
-import { debounce } from "@/lib/utils";
+import { debounce, setGlobalCookie } from "@/lib/utils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import { format, parse } from "date-fns";
+import { setFlightSearch } from "@/lib/slices/exploreSlice";
+import { getDestinationAutoSearchApi } from "../api";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import Popover from "@mui/material/Popover";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import FlightLandIcon from "@mui/icons-material/FlightLand";
-import { format, parse } from "date-fns";
 import PassengerAndCabin from "./PassengerAndCabin";
-import { setFlightSearch } from "@/lib/slices/exploreSlice";
 import FlightInput from "./FlightInput";
 import FlightDateInput from "./FlightDateInput";
-import { getDestinationAutoSearchApi } from "../api";
 import Image from "next/image";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 
 
 const MultiCity = ({ flightReqBody }) => {
+  const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
-  const { flightSearch } = useAppSelector(state => state.exploreState);
-  const { translation } = useAppSelector(state => state.sharedState);
-  // const navigate = useNavigate();
-  // const location = useLocation();
   const divRef = useRef(null);
   const divRefTwo = useRef(null)
+  const { flightSearch } = useAppSelector(state => state.exploreState);
+  const { translation } = useAppSelector(state => state.sharedState);
   const [error, setError] = useState([]);
   const [promoError, setPromoError] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -101,7 +103,7 @@ const MultiCity = ({ flightReqBody }) => {
   }, [divRef, divRefTwo]);
 
   useEffect(() => {
-    if (location?.pathname.includes('/search')) {
+    if (pathname.includes('/search')) {
       if (Object.keys(flightReqBody).length) {
         dispatch(setFlightSearch(flightReqBody))
       }
@@ -130,7 +132,7 @@ const MultiCity = ({ flightReqBody }) => {
       setPromoError('Please Enter Only alphanumeric characters');
     }
   };
-  const pagecheck = location?.pathname === "/flights/search"
+  const pagecheck = pathname === "/flights/search"
   const onFieldChange = (field, value, index) => {
     dispatch(setFlightSearch({
       ...flightSearch,
@@ -244,10 +246,10 @@ const MultiCity = ({ flightReqBody }) => {
       ...payload,
       searchList: payload?.searchList.map((search) => ({ ...search, departureAnchorEl: null, returnAnchorEl: null })),
     };
-    if (typeof window !== 'undefined') {
-      localStorage.setItem("searchData", JSON.stringify(payload));
-      window.location.href = "/flights/search";
-    }
+    setGlobalCookie('searchData', JSON.stringify(payload), 1);
+    router.push('/flights/search');
+
+
   };
 
   const checkValidationErrors = (validationData, setData) => {
@@ -570,7 +572,7 @@ const MultiCity = ({ flightReqBody }) => {
           onClick={() => handleSubmit()}
         >
           <div className="text-sm font-medium text-center text-white capitalize ">
-            {selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.search_flights : location?.pathname === "/flights/search" ? 'Modify Search' : 'Search Flights'}
+            {selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.search_flights : pathname === "/flights/search" ? 'Modify Search' : 'Search Flights'}
           </div>
         </button>
       </div>

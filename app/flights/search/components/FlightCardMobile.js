@@ -1,14 +1,15 @@
 import React from 'react'
-
-import { connect, useDispatch, useSelector } from 'react-redux'
+import Image from 'next/image';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { getMoreOptionsApi } from '@/app/flights/api';
 import Moreoptiontab from '@/app/flights/search/components/MoreOptionTab';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { getMoreOptionsApi } from '@/app/flights/api';
 
 
 const FlightCardMobile = ({ flight, index, flightIndex, flightResults, lang }) => {
+    const router = useRouter();
     const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     const [more, setMore] = React.useState(false)
     const dispatch = useDispatch();
@@ -95,12 +96,10 @@ const FlightCardMobile = ({ flight, index, flightIndex, flightResults, lang }) =
                 <div className='flex flex-col gap-3'>
                     <button
                         onClick={() => {
-                            if (typeof window !== "undefined") {
-                                const url = lang === "ar"
-                                    ? `/${lang}/flights/details?objId=${flight.objectId}&ind=${flight.index}`
-                                    : `/flights/details?objId=${flight.objectId}&ind=${flight.index}`;
-                                window.location.href = url;
-                            }
+                            const url = lang === "ar"
+                                ? `/${lang}/flights/details?objId=${flight.objectId}&ind=${flight.index}`
+                                : `/flights/details?objId=${flight.objectId}&ind=${flight.index}`;
+                            router.push(url);
                         }}
                         className='h-10 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex text-center text-white text-sm font-medium'
                     >

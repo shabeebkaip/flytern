@@ -1,8 +1,10 @@
 "use client"
 import moment from 'moment/moment';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const CalenderTab = ({ onDateSelect, flightReqBody }) => {
+    const router = useRouter();
     const [tabIndex, setTabIndex] = useState(0); // State to track the active tab
     const [tabs, setTabs] = useState([]); // State to store the tabs
     useEffect(() => {
@@ -43,7 +45,7 @@ const CalenderTab = ({ onDateSelect, flightReqBody }) => {
             ]
         }
         localStorage.setItem('searchData', JSON.stringify(requestBody))
-        window.location.reload(false)
+        router.refresh()
         // dispatch(getFlightSearchApi(requestBody))
     };
 

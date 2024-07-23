@@ -1,45 +1,44 @@
 import React, { useState, useEffect, useCallback } from "react";
-import FlightInput from "@/app/home/components/FlightInput";
-import FlightDateInput from "@/app/home/components/FlightDateInput";
 import { format, parse } from "date-fns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { getDestinationAutoSearchApi } from "@/app/home/api";
-import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
-import FlightLandIcon from "@mui/icons-material/FlightLand";
-import { debounce } from "@/lib/utils";
+import { debounce, setGlobalCookie } from "@/lib/utils";
 import { Checkbox, Popover, } from "@mui/material";
-// import { getFlightSearchApi } from "../../flight/apiServices";
 import { setFlightRequest } from "@/lib/slices/flightSlice";
-import moment from "moment";
-import PassengerAndCabin from "./PassengerAndCabin";
 import { setFlightSearch } from "@/lib/slices/exploreSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import Image from "next/image";
 import { getFlightSearchApi } from "@/app/flights/api";
+import FlightInput from "@/app/home/components/FlightInput";
+import FlightDateInput from "@/app/home/components/FlightDateInput";
+import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
+import FlightLandIcon from "@mui/icons-material/FlightLand";
+import moment from "moment";
+import PassengerAndCabin from "./PassengerAndCabin";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 
 
 const RoundTrip = ({ flightReqBody, lang }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const dispatch = useAppDispatch();
   const { flightSearch } = useAppSelector((state) => state.exploreState);
   const { translation } = useAppSelector((state) => state.sharedState);
   const [destinationList, setDestinationList] = useState([]);
   const [destinationList1, setDestinationList1] = useState([]);
   const [error, setError] = useState({});
   const [errorPromo, setErrorPromo] = useState("");
-  const dispatch = useAppDispatch();
-  const location = typeof window !== "undefined" ? window.location : null;
   const [anchorElPassenger, setAnchorElPassenger] = useState(null);
   const cabinList = useAppSelector((data) => data?.exploreState?.data?.cabinClass);
   const defaultCabin = cabinList?.filter((data) => data?.isDefault === true);
 
-
-
   const handlePassengerClick = (event) => {
     setAnchorElPassenger(event.currentTarget);
   };
-
 
   const handleClosePassenger = () => {
     setAnchorElPassenger(null);
@@ -47,19 +46,19 @@ const RoundTrip = ({ flightReqBody, lang }) => {
   const openPassengerPopover = Boolean(anchorElPassenger);
   const idPassengerPopover = openPassengerPopover ? 'passenger-popover' : undefined;
   useEffect(() => {
-    if (location?.pathname.includes("/search")) {
+    if (pathname.includes("/search")) {
       if (Object.keys(flightReqBody)?.length) {
         dispatch(setFlightSearch(flightReqBody));
       }
     }
-  }, [flightReqBody, location?.pathname]);
+  }, [flightReqBody, pathname]);
   useEffect(() => {
     dispatch(setFlightSearch({
       ...flightSearch,
       allowedCabins: defaultCabin
     }));
   }, []);
-  const pagecheck = location?.pathname === "/flights/search"
+  const pagecheck = pathname === "/flights/search"
   const handleFromOpen = (index, id) => {
     dispatch(setFlightSearch({
       ...flightSearch,
@@ -85,8 +84,6 @@ const RoundTrip = ({ flightReqBody, lang }) => {
     }))
   }
 
-
-
   const onFieldChange = (field, value, index) => {
     dispatch(setFlightSearch({
       ...flightSearch,
@@ -95,8 +92,6 @@ const RoundTrip = ({ flightReqBody, lang }) => {
       )
     }));
   };
-
-
   const onFieldSearchListChange = async (field, value, index) => {
     dispatch(setFlightSearch({
       ...flightSearch,
@@ -173,13 +168,6 @@ const RoundTrip = ({ flightReqBody, lang }) => {
       searchList: updatedSearchList
     }));
   };
-
-
-
-
-
-
-
   const debouncedHandleSearch = useCallback(
     debounce((key, value, index) => {
       if (key === "departureLabel") {
@@ -207,20 +195,19 @@ const RoundTrip = ({ flightReqBody, lang }) => {
         ...payload,
         searchList: flightSearch?.searchList.map((search) => ({ ...search, departureAnchorEl: null, returnAnchorEl: null })),
       }
-      if (typeof window !== 'undefined') {
-        if (location?.pathname.includes("/search")) {
-          localStorage.setItem("searchData", JSON.stringify(payload));
-          dispatch(getFlightSearchApi(payload));
+      if (pathname.includes("/search")) {
+        setGlobalCookie("searchData", JSON.stringify(payload));
+        dispatch(getFlightSearchApi(payload));
+      } else {
+        dispatch(setFlightRequest(payload))
+        setGlobalCookie("searchData", JSON.stringify(payload));
+        if (lang === 'ar') {
+          router.push("/ar/flights/search");
         } else {
-          dispatch(setFlightRequest(payload))
-          localStorage.setItem("searchData", JSON.stringify(payload));
-          if (lang === 'ar') {
-            window.location.href = "/ar/flights/search";
-          } else {
-            window.location.href = "/flights/search";
-          }
+          router.push("/flights/search");
         }
       }
+
     } else {
       setError(validationError)
     }
@@ -257,12 +244,8 @@ const RoundTrip = ({ flightReqBody, lang }) => {
   const handleSearch = (key, value) => {
     handleSearchValidation(key, value);
   };
-
   return (
-    <div
-      className={`grid relative gap-4 duration-300 ease-in-out md:grid-cols-2 ${location?.pathname.includes("/search") ? "mt-2" : "mt-7"
-        }`}
-    >
+    <div className={`grid relative gap-4 duration-300 ease-in-out md:grid-cols-2 ${pathname.includes("/search") ? "mt-2" : "mt-7"}`}>
       {flightSearch?.searchList && flightSearch?.searchList?.length
         ? flightSearch?.searchList.map((search, index) => (
           <>
@@ -583,8 +566,6 @@ const RoundTrip = ({ flightReqBody, lang }) => {
             </div>
           </div>
         </div>
-
-
         <Popover
           id={idPassengerPopover}
           open={openPassengerPopover}
@@ -628,10 +609,7 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                         onChange={handlePromoCodeChange}
                         value={flightSearch.promoCode}
                       />
-
                     </div>
-
-
                   </div>
                 </div>
               </div>
@@ -664,7 +642,7 @@ const RoundTrip = ({ flightReqBody, lang }) => {
           onClick={() => handleSubmit()}
         >
           <div className="text-sm font-medium text-center text-white capitalize">
-            {location?.pathname === "/flights/search" ? translation?.modify_search : translation?.search_flights}
+            {pathname === "/flights/search" ? translation?.modify_search : translation?.search_flights}
           </div>
         </button>
       </div>

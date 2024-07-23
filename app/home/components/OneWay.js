@@ -1,41 +1,42 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { getFlightSearchApi } from '@/app/flights/api';
+import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
+import { Checkbox, } from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { format, parse } from "date-fns";
+import { debounce, setGlobalCookie } from '@/lib/utils';
+import { getDestinationAutoSearchApi } from "@/app/home/api";
+import { setFlightSearch } from '@/lib/slices/exploreSlice';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { userRouter } from "next/navigation"
+import { usePathname } from 'next/navigation';
 import FlightInput from '@/app/home/components/FlightInput';
 import FlightDateInput from '@/app/home/components/FlightDateInput'
-import { Checkbox, } from '@mui/material';
-import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { debounce } from '@/lib/utils';
-import { format, parse } from "date-fns";
-import { getDestinationAutoSearchApi } from "@/app/home/api";
-// TODO import api once flight module is ready
-// import { getFlightSearchApi } from '../../flight/apiServices';
 import FlightLandIcon from "@mui/icons-material/FlightLand";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import PassengerAndCabin from '@/app/home/components/PassengerAndCabin';
 import Popover from '@mui/material/Popover';
-import { setFlightSearch } from '@/lib/slices/exploreSlice';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Image from 'next/image';
-import { getFlightSearchApi } from '@/app/flights/api';
 
 
 
 const OneWay = ({ flightReqBody, lang }) => {
   const dispatch = useAppDispatch()
+  const router = useRouter()
+  const pathname = usePathname();
   const { flightSearch } = useAppSelector(state => state.exploreState);
   const { translation } = useAppSelector(state => state.sharedState)
   const [error, setError] = useState({});
   const [destinationList, setDestinationList] = useState([]);
   const [destinationList1, setDestinationList1] = useState([]);
-  const location = typeof window !== "undefined" ? window.location : null;
-  const cabinList = useAppSelector((data) => data?.exploreState?.data?.cabinClass)
-  const defaultCabin = cabinList?.filter((data) => data.isDefault === true)
   const [anchorElDate, setAnchorElDate] = useState(null);
   const [anchorElPassenger, setAnchorElPassenger] = useState(null);
   const [datePopoverOpen, setDatePopoverOpen] = useState(false);
+  const cabinList = useAppSelector((data) => data?.exploreState?.data?.cabinClass)
+  const defaultCabin = cabinList?.filter((data) => data.isDefault === true)
 
   useEffect(() => {
-    if (location?.pathname?.includes('/search')) {
+    if (pathname?.includes('/search')) {
       if (Object.keys(flightReqBody)?.length) {
         dispatch(setFlightSearch(flightReqBody))
       }
@@ -101,7 +102,7 @@ const OneWay = ({ flightReqBody, lang }) => {
       })
     }
   };
-  const pagecheck = location?.pathname === "/flights/search"
+  const pagecheck = pathname === "/flights/search"
   const onFieldChange = (field, value, index) => {
     dispatch(setFlightSearch({
       ...flightSearch,
@@ -171,20 +172,18 @@ const OneWay = ({ flightReqBody, lang }) => {
         ...payload,
         searchList: flightSearch?.searchList?.map((search) => ({ ...search, departureAnchorEl: null, returnAnchorEl: null })),
       }
-      if (typeof window !== 'undefined') {
-        if (location?.pathname.includes("/search")) {
-          localStorage.setItem("searchData", JSON.stringify(payload));
-          // TODO call the api once flight module is ready
-          dispatch(getFlightSearchApi(payload));
+      if (pathname.includes("/search")) {
+        setGlobalCookie("searchData", JSON.stringify(payload));
+        dispatch(getFlightSearchApi(payload));
+      } else {
+        setGlobalCookie("searchData", JSON.stringify(payload));
+        if (lang === 'ar') {
+          router.push("/ar/flights/search");
         } else {
-          localStorage.setItem("searchData", JSON.stringify(payload));
-          if (lang === 'ar') {
-            window.location.href = `/flights/search`;
-          } else {
-            window.location.href = `/flights/search`;
-          }
+          router.push("/flights/search");
         }
       }
+
     } else {
       setError(validationError)
     }
@@ -477,7 +476,7 @@ const OneWay = ({ flightReqBody, lang }) => {
         </div>
 
         <button className=" h-14 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex relative z-[100]" onClick={() => handleSubmit()}>
-          <div className="text-sm font-medium text-center text-white capitalize" >{location?.pathname === "/flights/search" ? translation?.modify_Search : translation?.search_flights}</div>
+          <div className="text-sm font-medium text-center text-white capitalize" >{pathname === "/flights/search" ? translation?.modify_Search : translation?.search_flights}</div>
         </button>
       </div >
     </>

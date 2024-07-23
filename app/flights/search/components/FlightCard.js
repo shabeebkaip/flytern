@@ -6,11 +6,13 @@ import FlightMoreOptions from "@/app/flights/search/components/FlightMoreOptions
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 
 
 const FlightCard = ({ flight, flightIndex, flightResults, lang }) => {
   const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
+  const router = useRouter();
   const [more, setMore] = React.useState(false)
   const dispatch = useDispatch();
 
@@ -117,12 +119,9 @@ const FlightCard = ({ flight, flightIndex, flightResults, lang }) => {
               <button
                 className='w-32 h-10 text-white rounded-md bg-dark-green'
                 onClick={() => {
-                  if (typeof window !== "undefined") {
-                    const url = lang === "ar"
-                      ? `/${lang}/flights/details?objId=${flight.objectId}&ind=${flight.index}`
-                      : `/flights/details?objId=${flight.objectId}&ind=${flight.index}`;
-                    window.location.href = url;
-                  }
+                  const url = lang === "ar" ? `/${lang}/flights/details?objId=${flight.objectId}&ind=${flight.index}`
+                    : `/flights/details?objId=${flight.objectId}&ind=${flight.index}`;
+                  router.push(url)
                 }}
               >
                 {translation?.select}

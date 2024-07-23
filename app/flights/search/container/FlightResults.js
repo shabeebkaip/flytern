@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { getFlightSearchApi, getFlightFilterApi } from "@/app/flights/api";
-import { getLocalStorageInfo } from "@/lib/utils";
+import { getGlobalCookie, getLocalStorageInfo } from "@/lib/utils";
 import { Skeleton } from "@mui/material";
 import { flightResultSuccess } from "@/lib/slices/flightSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -28,12 +28,11 @@ const FlightResultsChild = (props) => {
   const { flightResults, flightLoader } = useAppSelector(state => state.flightState);
   const { searchResponses } = flightResults;
   const objectId = useAppSelector(state => state.flightState?.flightResults?.objectID);
-  console
   const translation = useAppSelector(state => state.sharedState?.translation);
   const [showSearchCard, setShowSearchCard] = useState(false);
   const [sortItem, setSortItem] = useState();
   const [page, setPage] = useState(null)
-  const request = getLocalStorageInfo("searchData");
+  const request = getGlobalCookie("searchData");
   const initialSearchData = {
     pageId: null,
     objectId: null,
@@ -52,14 +51,11 @@ const FlightResultsChild = (props) => {
     }
 
   }, [flightResults, page])
-  
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.scrollTo(0, 0);
-    }
     dispatch(getFlightSearchApi(request));
   }, []);
-  
+
   useEffect(() => {
     if (flightLoader) {
       document.body.style.cursor = 'wait';
@@ -116,7 +112,7 @@ const FlightResultsChild = (props) => {
     setSelectedDate(date);
   };
   return (
-    <div  className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} container mx-auto px-4`}>
+    <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} container mx-auto px-4`}>
       <div className="grid grid-cols-10 gap-6 ">
         <div className="hidden col-span-3 mb-12 lg:block ">
           <Filter
@@ -175,7 +171,6 @@ const FlightResultsChild = (props) => {
                   searchResponses?.length ?
                     <h3 className='text-base font-medium text-black '>{translation?.available_flights}</h3> : null
                 }
-
                 <SortSection
                   setShowSearchCard={setShowSearchCard}
                   sort={sortItem}
@@ -226,10 +221,10 @@ const FlightResultsChild = (props) => {
               <div className="flex items-center justify-center w-full h-96">
                 {
                   flightLoader ?
-                  flightResults.alertMsg ?
-                    <AlertMessage message={flightResults.alertMsg} /> :
-                    <h1 className="text-2xl font-semibold text-center text-stone-500">Uh-oh! No Flights Found</h1>
-                    :null
+                    flightResults.alertMsg ?
+                      <AlertMessage message={flightResults.alertMsg} /> :
+                      <h1 className="text-2xl font-semibold text-center text-stone-500">Uh-oh! No Flights Found</h1>
+                    : null
                 }
 
               </div>

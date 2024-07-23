@@ -1,11 +1,12 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import Image from 'next/image';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import Image from 'next/image';
-
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 const FlightMoreOptions = ({ flight, lang }) => {
+  const router = useRouter();
   const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
   const { translation } = useSelector((state) => state.sharedState)
   return (
@@ -106,12 +107,10 @@ const FlightMoreOptions = ({ flight, lang }) => {
             <button
               className='w-32 h-10 text-white rounded-md bg-dark-green'
               onClick={() => {
-                if (typeof window !== "undefined") {
-                  const url = lang === "ar"
-                    ? `/${lang}/flights/details?objId=${flight.objectId}&ind=${flight.index}`
-                    : `/flights/details?objId=${flight.objectId}&ind=${flight.index}`;
-                  window.location.href = url;
-                }
+                const url = lang === "ar"
+                  ? `/${lang}/flights/details?objId=${flight.objectId}&ind=${flight.index}`
+                  : `/flights/details?objId=${flight.objectId}&ind=${flight.index}`;
+                router.push(url);
               }}
             >
               {translation?.select}

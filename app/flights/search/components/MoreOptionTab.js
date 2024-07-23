@@ -1,11 +1,12 @@
 import React from 'react'
+import Image from 'next/image';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import Image from 'next/image';
 import { useAppSelector } from '@/lib/hooks';
-
+import { useRouter } from 'next/navigation';
 
 const Moreoptiontab = ({ flight, lang }) => {
+    const router = useRouter();
     const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
     const { translation } = useAppSelector((state) => state.sharedState)
     return (
@@ -83,12 +84,10 @@ const Moreoptiontab = ({ flight, lang }) => {
                 <div className='flex flex-col'>
                     <button
                         onClick={() => {
-                            if (typeof window !== "undefined") {
-                                const url = lang === "ar"
-                                    ? `/${lang}/flights/details?objId=${flight.objectId}&ind=${flight.index}`
-                                    : `/flights/details?objId=${flight.objectId}&ind=${flight.index}`;
-                                window.location.href = url;
-                            }
+                            const url = lang === "ar"
+                                ? `/${lang}/flights/details?objId=${flight.objectId}&ind=${flight.index}`
+                                : `/flights/details?objId=${flight.objectId}&ind=${flight.index}`;
+                            router.push(url)
                         }}
                         className='h-10 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex text-center text-white text-sm font-medium'
                     >

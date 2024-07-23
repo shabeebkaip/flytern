@@ -1,8 +1,9 @@
 import { globalGetService, globalPostService } from "@/lib/globalApiServices";
-import {  addSaveTravellerSuccess, flightDetailSuccess, flightLoaderOff, flightLoaderOn, flightPriceOptionSucess, flightResultSuccess, getExtraLuggageInformationSuccess, getMealsInformationSuccess, getSeatInformationSuccess, preTravellerSuccess, setBookingRef, setButtonLoader, setGenericLoader, setPostSaveBaggageInformation, setPostSaveMealsInformation, setPostSaveSeatInformation } from "@/lib/slices/flightSlice";
+import { addSaveTravellerSuccess, flightDetailSuccess, flightLoaderOff, flightLoaderOn, flightPriceOptionSucess, flightResultSuccess, getExtraLuggageInformationSuccess, getMealsInformationSuccess, getSeatInformationSuccess, preTravellerSuccess, setBookingRef, setButtonLoader, setGenericLoader, setPostSaveBaggageInformation, setPostSaveMealsInformation, setPostSaveSeatInformation } from "@/lib/slices/flightSlice";
 import { loaderOff, loaderOn } from "@/lib/slices/sharedSlice";
 import { checkApiStatus, encryptUrl } from "@/lib/utils";
 
+// CLIENT APIS
 export const getFlightSearchApi = (payload) => {
   return async (dispatch) => {
     try {
@@ -48,7 +49,6 @@ export const getMoreOptionsApi = (objectID, index, flightIndex, flightResponse) 
 }
 
 export const getFlightFilterApi = (payload, previousState) => {
-  debugger
   return async (dispatch) => {
     try {
       const response = await globalPostService("/api/Flights/FilterFlights", payload)
@@ -102,7 +102,7 @@ export const getFlightDetailsApi = (payload) => {
   };
 };
 export const getPreTravellerApi = (detailId) => {
- 
+
   return async (dispatch) => {
     try {
       dispatch(loaderOn());
@@ -159,7 +159,7 @@ export const getPreTravellerApi = (detailId) => {
       }
       dispatch(addSaveTravellerSuccess(saveTravellerAppend));
     } catch (error) {
-        console.log(error)
+      console.log(error)
     }
   };
 };
