@@ -32,7 +32,7 @@ const FlightInput = ({ label, defaultValue, image, ulta, value, onFieldChange, i
   };
 
   return (
-    <div className='relative cursor-pointer'>
+    <div className='relative cursor-pointer flex items-center'>
       {/* <label className="absolute text-sm top-2 left-8 text-zinc-600 font-normal font-['Inter'] focus:outline-none">{label}</label> */}
       <label className={`absolute text-sm top-2 ${selectedLanguageAndCountry?.language?.code === "ar" ? 'right-8' : 'left-8'}  text-zinc-600 font-normal font-['Inter'] focus:outline-none`}>{label}</label>
       <input
@@ -55,7 +55,7 @@ const FlightInput = ({ label, defaultValue, image, ulta, value, onFieldChange, i
         </InputAdornment>
       )}
       <div className={`absolute flex ${ulta ? 'flex-col-reverse' : 'flex-col'} ${selectedLanguageAndCountry?.language?.code === 'ar' ? 'right-2 top-2' : 'left-2 top-2'}  items-center gap-3 `}>
-        {/* <Image width={24} height={24} src={image} alt='' /> */}
+        <Image width={24} height={24} src={image} alt='' className=' h-7 w-5' />
         <Image width={2} height={12} className='w-1 h-2' src={"/misc/dottedLine.png"} alt='' />
       </div>
     </div>

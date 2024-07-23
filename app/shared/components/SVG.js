@@ -27,8 +27,8 @@ export const FlyternLogo = ({ color, width, height }) => {
 export const RoundTripSvg = ({ color, width, height }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
-      <path d="M21.0371 9.47262L4.2012 9.47263L7.98928 5.68455" stroke={"#000"} stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M4.2012 14.5273L21.0371 14.5273L17.249 18.3154" stroke={"#000"} stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M21.0371 9.47262L4.2012 9.47263L7.98928 5.68455" stroke={color} stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M4.2012 14.5273L21.0371 14.5273L17.249 18.3154" stroke={color} stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
   )
 }

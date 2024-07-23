@@ -12,6 +12,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Flytern NEXT",
   description: "Flights, hotels, and more",
+  icons:{
+    icon:'/header/logo-green.svg'
+  }
 };
 
 export default async function RootLayout({ children }) {

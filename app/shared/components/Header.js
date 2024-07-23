@@ -111,7 +111,7 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
       className={`${isAuth ? 'hidden' : 'flex'} box-border items-center justify-between w-full h-20 border-b`}
       style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
     >
-      <div className="container flex items-center justify-between px-4 mx-auto ">
+      <div className="container flex items-center justify-between px-4 mx-auto font-inter ">
         <Link href="/" className="cursor-pointer">
           <Image src={isHome ? "/header/logo-green.svg" : "/header/logo-white.svg"} alt="logo" width={150} height={50} />
         </Link>
@@ -127,8 +127,8 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
           <Link href={"/help-center"} onClick={() => { if (typeof window !== "undefined") { window.location.href = "/help-center" } }} className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
             {selectedLanguageAndCountry?.language?.code === "ar" ? 'مركز المساعدة' : 'Help Center'}
           </Link>
-          <Link href="/contact-us" className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400 `} >
-            {selectedLanguageAndCountry?.language?.code === "ar" ? 'اتصال' : 'Contact'}
+          <Link href="/contact-us" className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"} hover:text-orange-400  `} >
+            {selectedLanguageAndCountry?.language?.code === "ar" ? 'اتصال' : 'Contact Us'}
           </Link>
           <HeaderMore isHome={isHome} />
           <Link href={"/settings"} >
@@ -145,7 +145,6 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
           {/* <HeaderNotifiction /> */}
           <HeaderProfile />
         </div>
-
       </div>
     </div>
   );

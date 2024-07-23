@@ -255,7 +255,7 @@ const RegisterView = () => {
         </div>
         <div class="text-center flex gap-2 justify-center items-center w-full lg:max-w-[450px]">
           <span className="text-xs font-normal text-black sm:text-sm ">{translation?.continue_as_a} </span>
-          <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/"}}} className="text-xs font-medium text-orange-400 sm:text-sm ">{translation?.guest_user}</div></div>
+          <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/"}}} className="text-xs font-medium text-orange-400 sm:text-sm cursor-pointer pb-10 ">{translation?.guest_user}</div></div>
       </div>
     </div>
   )

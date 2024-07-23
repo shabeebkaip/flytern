@@ -37,9 +37,9 @@ const FooterTopChild = () => {
                                 <h6 className='text-orange-400 text-[15px] font-normal uppercase'>{translation?.for_free}</h6>
                             </div>
                             <div className='flex gap-5 cursor-pointer'>
-                                <a href='https://play.google.com/store/apps/details?id=com.oneglobal.flytern' target='_blank' rel="noreferrer"><Image className='w-[184px] h-[50px] rounded-md' src='/googleicon.png' alt="" width={100} height={100} /></a>
+                                <a href='https://play.google.com/store/apps/details?id=com.oneglobal.flytern' target='_blank' rel="noreferrer"><Image className='w-[184px] h-[50px] rounded-md' src='/googleicon.png' alt="" width={1000} height={1000} /></a>
                                 <a href='https://apps.apple.com/us/app/flytern-flights-hotels/id6469104609' target='_blank' rel="noreferrer" >
-                                    <Image className='w-[184px] h-[50px] rounded-md ' src='/appleicon.png' alt="" width={100} height={100} />
+                                    <Image className='w-[184px] h-[50px] rounded-md ' src='/appleicon.png' alt="" width={1000} height={1000} />
                                 </a>
                             </div>
                         </div>

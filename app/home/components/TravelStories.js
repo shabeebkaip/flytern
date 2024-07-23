@@ -20,7 +20,7 @@ const TravelStories = () => {
         <>
           <div className='flex items-center justify-between'>
             <h4 className='text-xs font-bold sm:text-2xl'>{translation?.travel_stories}</h4>
-            <div onClick={() => { if (typeof window !== "undefined") {window.location.href="/travel-stories"}}} className='flex items-center gap-2 font-normal text-blue-400'><span className='flex items-center gap-2 text-xs sm:text-lg'>{translation?.see_all} <SeeAllIconSvg /> </span> </div>
+            <div onClick={() => { if (typeof window !== "undefined") {window.location.href="/travel-stories"}}} className='flex items-center gap-2 font-normal text-blue-400'><span className='flex items-center gap-2 text-xs sm:text-lg cursor-pointer'>{translation?.see_all} <SeeAllIconSvg /> </span> </div>
           </div>
         </>
       } >

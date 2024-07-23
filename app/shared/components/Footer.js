@@ -43,7 +43,7 @@ const FooterChild = () => {
             {
                 loading || genericLoader || saveTravellerLoader || paymentWaitLoader || buttonLoader ?
                     null :
-                    <div className='container mx-auto'>
+                    <div className='container mx-auto px-5'>
                         <div className='grid lg:grid-cols-10'>
                             <div className='grid grid-cols-2 gap-10 w-full lg:grid-cols-5  lg:col-span-10  items-baseline pt-[50px] '>
                                 <div className='flex flex-col gap-3 cursor-pointer'>
@@ -56,7 +56,6 @@ const FooterChild = () => {
                                         <Link className='hover:text-emerald-800' href='/hotels'>{translation?.hotels}</Link>
                                         <Link className='hover:text-emerald-800' href="/packages"> {translation?.packages}</Link>
                                         <Link className='hover:text-emerald-800' href="/insurance">{translation?.travel_insurance}</Link>
-                                        <Link className='hover:text-emerald-800' href="/activityCities" >{translation?.activities}</Link>
                                     </div>
 
                                 </div>
@@ -108,19 +107,20 @@ const FooterChild = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='flex items-baseline justify-between gap-5 mt-6 md:hidden'>
-                                    <div className='flex flex-col items-center justify-center gap-2'>
-                                        <Image src='/license/Emblem_of_Kuwait.png' alt="" className='object-contain w-12 ' width={100} height={100} />
-                                        <p className='text-sm text-font-gray'>2012/2323/M</p>
-                                    </div>
-                                    <div className='flex flex-col items-center justify-center gap-2'>
-                                        <Image src='/license/DGCA_Kuwait.png' alt="" className='object-contain w-16 ' width={100} height={100} />
-                                        <p className='text-sm text-font-gray'>13384/42</p>
-                                    </div>
-                                    <div className='flex flex-col items-center justify-center gap-2'>
-                                        <Image src='/license/iatalogo.png' alt="" className='object-contain w-16 h-16' width={100} height={100} />
-                                        <p className='text-sm text-font-gray'>42212332</p>
-                                    </div>
+
+                            </div>
+                            <div className='flex items-baseline justify-center gap-5 mt-6 md:hidden'>
+                                <div className='flex flex-col items-center justify-center gap-2'>
+                                    <Image src='/license/Emblem_of_Kuwait.png' alt="" className='object-contain w-12 ' width={100} height={100} />
+                                    <p className='text-sm text-font-gray'>2012/2323/M</p>
+                                </div>
+                                <div className='flex flex-col items-center justify-center gap-2'>
+                                    <Image src='/license/DGCA_Kuwait.png' alt="" className='object-contain w-16 ' width={100} height={100} />
+                                    <p className='text-sm text-font-gray'>13384/42</p>
+                                </div>
+                                <div className='flex flex-col items-center justify-center gap-2'>
+                                    <Image src='/license/iatalogo.png' alt="" className='object-contain w-16 h-16' width={100} height={100} />
+                                    <p className='text-sm text-font-gray'>42212332</p>
                                 </div>
                             </div>
                         </div>
