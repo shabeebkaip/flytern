@@ -15,16 +15,12 @@ const TravelStoriesList = ({ type }) => {
 
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (type === 'profile') {
-      getMyTravelStoriesApi(setData, setLoader);
-    } else {
-      setData(travelStories);
-      setLoader(false);
-    }
-  }, [dispatch, type, travelStories]);
+  // useEffect(() => {
+  //     setData(travelStories);
+  //     setLoader(false);
+    
+  // }, [type, travelStories]);
 
   const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
   const  { translation} = useAppSelector((state) =>  state.sharedState)
@@ -52,7 +48,7 @@ const TravelStoriesList = ({ type }) => {
               {data & data?.length === 0 ? (
                 <p>No items to display</p>
               ) : (
-                data?.map((story, index) => (
+                travelStories?.map((story, index) => (
                   <div className='flex flex-col justify-start gap-3' key={index}>
                     {type === 'profile' ? (
                       <div className='w-[300px] h-[300px]'>

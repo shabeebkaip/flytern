@@ -15,13 +15,13 @@ import { useAppSelector } from "@/lib/hooks";
 // import { getCountryApi,getIntialInfoApi } from "@/app/shared/api";
 
 
-const PackageDetails = ({id}) => {
-  const { profile,contactDc,mobileCountryList } = useSelector(state => state.sharedState)
+const PackageDetails = ({ id }) => {
+  const { profile, contactDc, mobileCountryList } = useSelector(state => state.sharedState)
   const { selectedLanguageAndCountry } = useAppSelector((state) => state.sharedState);
   const packageLoader = useSelector(state => state.packageState.packageLoader)
   const [isOpen, setOpen] = useState(false);
   const [bookingData, setBookingData] = useState(null)
-  const { packageDetails: { apiFlightDtail = {}, } } = useSelector((state) => state.packageState);
+  const { packageDetails: { apiFlightDtail = {}, packagesDtl = [] } } = useSelector((state) => state.packageState);
   const dispatch = useDispatch();
 
 
@@ -65,7 +65,7 @@ const PackageDetails = ({id}) => {
 
 
   return (
-    <div  className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} mt-12 px-3 md:px-0 mb-20 container mx-auto`}>
+    <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} mt-12 px-3 md:px-0 mb-20 container mx-auto`}>
       <div>
         {
           packageLoader ?
@@ -88,10 +88,10 @@ const PackageDetails = ({id}) => {
               height={30}
             /> :
             <div className="flex gap-1 mt-1 text-sm font-normal text-neutral-400">
-              <div  onClick={() => { if (typeof window !== "undefined") {window.location.href="/packages"}}}>
-              <h3 className='cursor-pointer'  >
-                {translation?.packages}
-              </h3>
+              <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/packages" } }}>
+                <h3 className='cursor-pointer'  >
+                  {translation?.packages}
+                </h3>
               </div>
               <h3>/</h3>
               <h3 className="font-medium text-black">
@@ -133,7 +133,7 @@ const PackageDetails = ({id}) => {
                 /> :
                 <Insurance />
             } */}
-          
+
             {
               packageLoader ?
                 <Skeleton
@@ -142,7 +142,11 @@ const PackageDetails = ({id}) => {
                   className="w-full h-full mt-3 bg-stone-50"
                   height={300}
                 /> :
-                <Inclusion />
+
+                packagesDtl[0]?.inclusion ?
+                  <Inclusion />
+                  : null
+
             }
             {
               packageLoader ?
@@ -152,7 +156,9 @@ const PackageDetails = ({id}) => {
                   className="w-full h-full mt-3 bg-stone-50"
                   height={300}
                 /> :
+                packagesDtl[0]?.notIncluded ?
                 <Exclusion />
+                :null
             }
 
             {/* {
@@ -165,7 +171,7 @@ const PackageDetails = ({id}) => {
                 /> :
                 <TermsAndCondition />
             } */}
-            
+
             {
               packageLoader ?
                 <Skeleton

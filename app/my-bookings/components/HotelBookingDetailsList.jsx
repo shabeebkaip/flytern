@@ -29,6 +29,9 @@ const HotelBookingDetailsList = ({ hotel }) => {
                 <div className='w-full '>
                     <h4 className=' md:text-end text-[10px] md:text-xl font-semibold text-tag-color-two'><span className='text-[9px] md:text-sm font-medium'>{hotel.currency} </span>{parseFloat(hotel.paidAmount).toFixed(3)}</h4>
                 </div>
+                <div>
+                    <h4 className='font-medium text-sm  '>Booking ID :<span className='text-xl text-tag-color-two font-semibold'>{hotel.bookingRef} </span></h4>
+                </div>
                 <div className='flex flex-col items-end justify-end w-full'>
                     <button
                         className='flex items-center justify-center px-4 py-2 text-xs text-white rounded-md md:w-32 md:p-0 md:h-10 bg-dark-green'

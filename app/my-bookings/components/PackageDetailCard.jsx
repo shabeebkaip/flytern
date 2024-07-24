@@ -53,7 +53,7 @@ const PackageDetailCard = ({ item }) => {
                         <div>
                             <button className='h-10 px-4 text-white rounded-md md:w-32 md:p-0 bg-dark-green' onClick={() => {
                                 if (typeof window !== 'undefined') {
-                                    window.location.href = `/packages/details/${item.refID}`
+                                    window.location.href = `/packages/${item.refID}`
                                 }
                             }} >  {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Bookings"}</button>
                             {/* <h5 className='text-red-500 underline cursor-pointer text-end'>Cancel</h5> */}
