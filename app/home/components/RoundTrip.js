@@ -153,10 +153,14 @@ const RoundTrip = ({ flightReqBody, lang }) => {
   };
   const onSearchDateFieldChange = (field, value, index) => {
     let returnDate = moment(value).add(1, 'days').format('YYYY-MM-DD');
-
+  
     const updatedSearchList = flightSearch?.searchList.map((search, i) => {
       if (index === i) {
         if (field === "departureDate") {
+          // Close the departure date picker on mobile
+          if (window.innerWidth <= 768) {  // Adjust this breakpoint as needed
+            return { ...search, [field]: value, returnDate, openDeparture: false };
+          }
           return { ...search, [field]: value, returnDate };
         } else if (field === "returnDate") {
           return { ...search, openReturn: false, openDeparture: false, [field]: value };
@@ -167,7 +171,7 @@ const RoundTrip = ({ flightReqBody, lang }) => {
         return search;
       }
     });
-
+  
     dispatch(setFlightSearch({
       ...flightSearch,
       searchList: updatedSearchList
@@ -520,7 +524,6 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                             />
                           </LocalizationProvider>
                         </div>
-
                         <div className="flex flex-col items-start justify-start ">
                           <h4 className="pl-5 mt-2 font-semibold">
                             {translation?.return_date}

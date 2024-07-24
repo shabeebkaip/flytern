@@ -21,7 +21,14 @@ const HeaderProfile = () => {
                     setGlobalCookie('isUserLoggedIn', response.data.data.isLoggedIn, 1);
                     setTimeout(() => {
                         if (typeof window !== "undefined") {
-                            window.location.reload(false);
+                            // Check if the current path is '/profile/change-password'
+                            if (window.location.pathname === '/profile/change-password') {
+                                // Redirect to home page
+                                window.location.href = '/';
+                            } else {
+                                // Reload the current page
+                                window.location.reload(false);
+                            }
                         }
                     }, 1000);
                 })
