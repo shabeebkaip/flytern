@@ -7,7 +7,7 @@ import { format, parse } from 'date-fns';
 import { useAppSelector } from '@/lib/hooks';
 
 const AddTraveller = (props) => {
-  const { coPax, index, appendTraveller, preTraveller, removeErrorFields, errors, setErrors, filteredTitleList, item, handleTravellerOnChange, filteredGenderList, frequentFlyerNoError, type, title , dobMinDate, dobMaxDate } = props
+  const { coPax, index, appendTraveller, preTraveller, removeErrorFields, errors, setErrors, filteredTitleList, item, handleTravellerOnChange, filteredGenderList, frequentFlyerNoError, type, title, dobMinDate, dobMaxDate } = props
   const { translation } = useAppSelector(state => state.sharedState)
 
   return (
@@ -49,7 +49,7 @@ const AddTraveller = (props) => {
               placeholder={translation?.prefix}
               getOptionLabel={(option) => option}
               value={item.title}
-              onChange={(event, value) => { handleTravellerOnChange('title', value, index , type) }}
+              onChange={(event, value) => { handleTravellerOnChange('title', value, index, type) }}
               onFocus={() => removeErrorFields("Title", index, setErrors)}
               clearIcon={null}
               autoComplete="off"
@@ -161,8 +161,8 @@ const AddTraveller = (props) => {
               id={`combo-box`}
               options={preTraveller?.countriesList}
               getOptionLabel={(option) => option.countryName}
-              value={preTraveller?.countriesList.find(country => country.countryISOCode === item.nationalityCode)}
-              onChange={(event, value) => { handleTravellerOnChange('nationalityCode', value.countryISOCode, index, type) }}
+              value={preTraveller?.countriesList.find(country => country.countryISOCode === item.nationalityCode) || null}
+              onChange={(event, value) => { handleTravellerOnChange('nationalityCode', value?.countryISOCode, index, type) }}
               autoComplete="off"
               clearIcon={null}
               onFocus={() => removeErrorFields('NationalityCode', index, setErrors)}
@@ -236,8 +236,8 @@ const AddTraveller = (props) => {
               id={`combo-box`}
               options={preTraveller?.countriesList}
               getOptionLabel={(option) => option.countryName}
-              value={preTraveller?.countriesList.find(country => item.passportIssuedCountryCode === country.countryISOCode)}
-              onChange={(event, value) => { handleTravellerOnChange('passportIssuedCountryCode', value.countryISOCode, index, type) }}
+              value={preTraveller?.countriesList.find(country => country.countryISOCode === item.passportIssuedCountryCode) || null}
+              onChange={(event, value) => { handleTravellerOnChange('passportIssuedCountryCode', value?.countryISOCode, index, type) }}
               autoComplete="off"
               clearIcon={null}
               onFocus={() => removeErrorFields('PassportIssuedCountryCode', index, setErrors)}
