@@ -110,9 +110,9 @@ const HeaderProfile = () => {
                                 className='flex items-center h-16 gap-5 p-1 text-sm font-normal border-b rounded-md cursor-pointer w-60 hover:bg-stone-50'
                                 onClick={userLogout}
                             >
-                                <div className=''>
+                             
                                     <Image width={24} height={24} className='w-6 h-6' src="/logout.png" alt="" />
-                                </div>
+                             
                                 {selectedLanguageAndCountry?.language?.code === "ar" ? 'تسجيل خروج' : 'Logout'}
                             </div>
                         </ul>
