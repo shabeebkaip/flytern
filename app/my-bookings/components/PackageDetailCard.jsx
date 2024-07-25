@@ -55,15 +55,13 @@ const PackageDetailCard = ({ item }) => {
                             </span>
                         </h3>
 
-                        <h4 className='font-medium text-sm  '>Enquiry Date :<br/><span className='text-xl text-tag-color-two font-semibold'>
+                        <h4 className='font-medium text-sm  '>Enquired Date :<br/><span className='text-xl text-tag-color-two font-semibold'>
                             {item?.enquiredOn
                                 ? moment(item?.enquiredOn).format(
                                     displayDateFormatShort
                                 )
                                 : "--"}
                                 </span></h4>
-
-
                     </div>
                 </div>
 

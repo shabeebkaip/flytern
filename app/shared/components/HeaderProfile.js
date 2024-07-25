@@ -109,7 +109,7 @@ const HeaderProfile = () => {
                                 onClick={userLogout}
                             >
                                 <div className=''>
-                                    <Image width={24} height={24} className='w-6 h-6' src={"/icons/logout.png"} alt="" />
+                                    <Image width={24} height={24} className='w-6 h-6' src="/icons/logout.png" alt="" />
                                 </div>
                                 {selectedLanguageAndCountry?.language?.code === "ar" ? 'تسجيل خروج' : 'Logout'}
                             </div>
