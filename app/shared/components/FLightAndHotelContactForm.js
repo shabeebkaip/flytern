@@ -24,15 +24,17 @@ const FLightAndHotelContactForm = ({ countryCode, profile, contactDc, hideButton
 
 
     const handleSignInClick = () => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('redirectPath', JSON.stringify(`${window.location?.pathname}#contact_details`));
+        if (typeof window !== "undefined") {
+            const currentUrl = window.location.href;
+            localStorage.setItem('redirectPath', JSON.stringify(`${currentUrl}#contact_details`));
             window.location.href = '/login';
         }
     };
 
     const handleSignUpClick = () => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('redirectPath', JSON.stringify(`${window.location?.pathname}#contact_details`));
+        if (typeof window !== "undefined") {
+            const currentUrl = window.location.href;
+            localStorage.setItem('redirectPath', JSON.stringify(`${currentUrl}#contact_details`));
             window.location.href = '/register';
         }
     };
