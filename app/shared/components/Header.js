@@ -114,16 +114,18 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
       style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
     >
       <div className="container flex items-center justify-between px-4 mx-auto font-inter ">
-      <div className="md:hidden ">
-      <MobileHeaderMenu />
-      </div>
-        <Link href="/" className="cursor-pointer">
-          <Image src={isHome ? "/header/logo-green.svg" : "/header/logo-white.svg"} alt="logo" width={150} height={50} />
-        </Link>
-        {/* <div md:hidden>
-        <HeaderNotifiction />
-        </div> */}
-        <div className="items-center hidden md:flex gap-9"  >
+        <div className=' flex items-center gap-4 '>
+          <div className="lg:hidden ">
+            <MobileHeaderMenu />
+          </div>
+          <Link href="/" className="cursor-pointer">
+            <Image src={isHome ? "/header/logo-green.svg" : "/header/logo-white.svg"} alt="logo" width={150} height={50} />
+          </Link>
+        </div>
+        <div>
+          <HeaderNotifiction />
+        </div>
+        <div className="items-center hidden lg:flex gap-9"  >
           <Link href={"/"} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
             <div className="flex items-center gap-4 cursor-pointer">
               {translation?.home}
