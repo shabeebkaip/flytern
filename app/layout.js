@@ -21,6 +21,8 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+      <link rel="icon" href="/header/logo-green.svg" sizes="16x16 32x32 48x48 64x64" />
       <body className={inter.className}>
         <header>
           <HeaderParent />
@@ -36,6 +38,7 @@ export default async function RootLayout({ children }) {
           <Footer />
         </footer>
       </body>
+      </head>
     </html >
   );
 }

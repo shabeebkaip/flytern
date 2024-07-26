@@ -165,7 +165,7 @@ const HotelDetails = (props) => {
                               <FLightAndHotelContactForm />
                             </div>
                             {
-                              profile && Object.keys(profile).length ? <HotelUserDetails objectID={objId} id={ind} /> :
+                              // profile && Object.keys(profile).length ? <HotelUserDetails objectID={objId} id={ind} /> :
                                 showUserDetails ?
                                   <HotelUserDetails objectID={objId} id={ind} /> : null
 

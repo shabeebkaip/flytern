@@ -1,10 +1,14 @@
+import { displayDateFormatShort } from '@/lib/constants'
 import { Rating } from '@mui/material'
+import moment from 'moment'
 import Image from 'next/image'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
 const PackageDetailCard = ({ item }) => {
     const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
+
+    console.log(item);
     return (
         <div>
             <div className='container flex items-center p-4 mx-auto overflow-hidden bg-white rounded-md'>
@@ -50,15 +54,14 @@ const PackageDetailCard = ({ item }) => {
                                 {item.price}
                             </span>
                         </h3>
-                        <div>
-                            <button className='h-10 px-4 text-white rounded-md md:w-32 md:p-0 bg-dark-green' onClick={() => {
-                                if (typeof window !== 'undefined') {
-                                    window.location.href = `/packages/details/${item.refID}`
-                                }
-                            }} >  {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Bookings"}</button>
-                            {/* <h5 className='text-red-500 underline cursor-pointer text-end'>Cancel</h5> */}
-                        </div>
 
+                        <h4 className='font-medium text-sm  '>Enquired Date :<br/><span className='text-xl text-tag-color-two font-semibold'>
+                            {item?.enquiredOn
+                                ? moment(item?.enquiredOn).format(
+                                    displayDateFormatShort
+                                )
+                                : "--"}
+                                </span></h4>
                     </div>
                 </div>
 
