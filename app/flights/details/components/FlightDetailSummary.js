@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 
 const FlightDetailSummary = ({ item, isRefund }) => {
   const { translation } = useSelector(state => state.sharedState)
+
+  //flight
   return (
     <div className='flex flex-wrap gap-2 flex-start '>
       <div className="flex items-center justify-center px-2 text-xs font-medium rounded-md h-7 bg-tag-color text-tag-color">
@@ -14,7 +16,8 @@ const FlightDetailSummary = ({ item, isRefund }) => {
         <span>
           <AccessTimeIcon style={{ color: '#066651' }} fontSize="small" /> {" "}
         </span>
-        <span>
+        <span> 
+
           {item.travelTime}
         </span>
       </div>

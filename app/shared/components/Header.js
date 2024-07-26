@@ -13,6 +13,8 @@ import { countryAndLanguageSuccess, initialInfoSucces } from "@/lib/slices/genar
 import { usePathname } from "next/navigation";
 import { exploresSuccess } from '@/lib/slices/exploreSlice';
 import Link from 'next/link';
+import HeaderNotifiction from './HeaderNotification';
+import MobileHeaderMenu from './MobileHeaderMenu';
 
 const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
 const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
@@ -112,9 +114,15 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
       style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
     >
       <div className="container flex items-center justify-between px-4 mx-auto font-inter ">
+      <div className="md:hidden ">
+      <MobileHeaderMenu />
+      </div>
         <Link href="/" className="cursor-pointer">
           <Image src={isHome ? "/header/logo-green.svg" : "/header/logo-white.svg"} alt="logo" width={150} height={50} />
         </Link>
+        {/* <div md:hidden>
+        <HeaderNotifiction />
+        </div> */}
         <div className="items-center hidden md:flex gap-9"  >
           <Link href={"/"} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
             <div className="flex items-center gap-4 cursor-pointer">
@@ -142,7 +150,7 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
                 }`}>{selectedLanguageAndCountry?.language?.name ? selectedLanguageAndCountry?.language?.name : "English"} / {selectedLanguageAndCountry?.country?.countryName_Ar}</h3>
             </div>
           </Link>
-          {/* <HeaderNotifiction /> */}
+          <HeaderNotifiction />
           <HeaderProfile />
         </div>
       </div>
