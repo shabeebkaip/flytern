@@ -21,9 +21,11 @@ const HeaderProfile = () => {
                     setGlobalCookie('isUserLoggedIn', response.data.data.isLoggedIn, 1);
                     setTimeout(() => {
                         if (typeof window !== "undefined") {
-                            // Check if the current path is '/profile/change-password'
-                            if (window.location.pathname === '/profile/change-password') {
-                                // Redirect to home page
+                            const currentPath = window.location.pathname;
+                            if (currentPath === '/profile' || 
+                                currentPath === '/profile/change-password' || 
+                                currentPath === '/profile/travel-stories') {
+                               
                                 window.location.href = '/';
                             } else {
                                 // Reload the current page
