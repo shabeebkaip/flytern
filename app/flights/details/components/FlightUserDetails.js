@@ -22,27 +22,7 @@ const FlightUserDetails = (props) => {
     _Travellerinfo: [],
     _CntDc: {},
   };
-    // Filter adult data from coPax
-    // const adultCoPax = coPax.filter(traveler => {
-    //   const dob = new Date(traveler.dateofBirth.split('-').reverse().join('-'));
-    //   const adultMinDate = new Date(preTraveller.adultMinDOB.split('-').reverse().join('-'));
-    //   const adultMaxDate = new Date(preTraveller.adultMaxDOB.split('-').reverse().join('-'));
-    //   return dob >= adultMinDate && dob <= adultMaxDate;
-    // });
-    
-    // const childCoPax = coPax.filter(traveler => {
-    //   const dob = new Date(traveler.dateofBirth.split('-').reverse().join('-'));
-    //   const childMinDate = new Date(preTraveller.childMinDOB.split('-').reverse().join('-'));
-    //   const childMaxDate = new Date(preTraveller.childMaxDOB.split('-').reverse().join('-'));
-    //   return dob >= childMinDate && dob <= childMaxDate;
-    // });
-    
-    // const infantCoPax = coPax.filter(traveler => {
-    //   const dob = new Date(traveler.dateofBirth.split('-').reverse().join('-'));
-    //   const infantMinDate = new Date(preTraveller.infantMinDOB.split('-').reverse().join('-'));
-    //   const infantMaxDate = new Date(preTraveller.infantMaxDOB.split('-').reverse().join('-'));
-    //   return dob >= infantMinDate && dob <= infantMaxDate;
-    // });
+ 
     const adultCoPax = coPax.filter(traveler => {
       const dob = new Date(traveler.dateofBirth.split('-').reverse().join('-'));
       const adultMinDate = new Date(preTraveller.adultMinDOB.split('-').reverse().join('-'));
