@@ -114,7 +114,7 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
       style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
     >
       <div className="container flex items-center justify-between px-4 mx-auto font-inter ">
-        <div className=' flex items-center gap-4 '>
+        <div className='flex items-center gap-4 '>
           <div className="lg:hidden ">
             <MobileHeaderMenu />
           </div>
@@ -123,7 +123,7 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
           </Link>
         </div>
         <div>
-          <HeaderNotifiction />
+          {/* <HeaderNotifiction /> */}
         </div>
         <div className="items-center hidden lg:flex gap-9"  >
           <Link href={"/"} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
@@ -152,7 +152,7 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
                 }`}>{selectedLanguageAndCountry?.language?.name ? selectedLanguageAndCountry?.language?.name : "English"} / {selectedLanguageAndCountry?.country?.countryName_Ar}</h3>
             </div>
           </Link>
-          <HeaderNotifiction />
+          {/* <HeaderNotifiction /> */}
           <HeaderProfile />
         </div>
       </div>
