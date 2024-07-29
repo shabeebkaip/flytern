@@ -10,7 +10,7 @@ const Footer = dynamic(() => import("@/app/shared/components/Footer"));
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Flytern NEXT",
+  title: "Flytern",
   description: "Flights, hotels, and more",
   icons:{
     icon:'/header/logo-green.svg'
