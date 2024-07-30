@@ -33,17 +33,32 @@ const HotelBookingDetailsList = ({ hotel }) => {
                     <h4 className='font-medium text-sm  '>Booking ID :<span className='text-xl text-tag-color-two font-semibold'>{hotel.bookingRef} </span></h4>
                 </div>
                 <div className='flex flex-col items-end justify-end w-full'>
-                    <button
-                        className='flex items-center justify-center px-4 py-2 text-xs text-white rounded-md md:w-32 md:p-0 md:h-10 bg-dark-green'
-                        onClick={() => {
-                            if (typeof window !== 'undefined') {
-                                window.location.href = `/payment-summary/?ref=${hotel.bookingRef}`;
-                            }
-                        }}
-                    >
-                   {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Booking"}
+                    {
+                        hotel.status === "ISSUED" ?
+                            <button
+                                className='w-32 h-10 text-white rounded-md bg-dark-green'
+                                onClick={() => {
+                                    if (typeof window !== 'undefined') {
+                                        window.location.href = `/payment-summary/?ref=${hotel.bookingRef}`;
+                                    }
+                                }}
+                            >
+                                {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Booking"}
+                            </button>
+                            : hotel.status === "PENDING" ?
+                                <button
+                                    className='w-32 h-10 text-white rounded-md bg-dark-green'
+                                    onClick={() => {
+                                        if (typeof window !== 'undefined') {
+                                            window.location.href = `/payment-method/?ref=${hotel?.bookingRef}`;
+                                        }
+                                    }}
+                                >
+                                    {selectedLanguageAndCountry?.language?.code === "ar" ? "ادفع الآن" : "Pay Now"}
+                                </button>
+                                : null
+                    }
 
-                    </button>
                     {/* <h5 className='text-red-500 underline '>Cancel</h5> */}
                 </div>
             </div>

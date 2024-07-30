@@ -10,6 +10,8 @@ const AddTraveller = (props) => {
   const { coPax, index, appendTraveller, preTraveller, removeErrorFields, errors, setErrors, filteredTitleList, item, handleTravellerOnChange, filteredGenderList, frequentFlyerNoError, type, title, dobMinDate, dobMaxDate } = props
   const { translation } = useAppSelector(state => state.sharedState)
 
+
+
   return (
     <div>
       <h4 className="mb-8 font-semibold text-green-800"> {title} {index + 1}</h4>

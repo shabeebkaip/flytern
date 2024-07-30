@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import StoreProvider from '@/app/StoreProvider'
 import Link from 'next/link'
 import Image from 'next/image'
-const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"];
+const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp","/forgot-password/otp"];
 const FooterChild = () => {
     const pathname = usePathname();
     const { genericLoader } = useSelector(state => state.flightState)

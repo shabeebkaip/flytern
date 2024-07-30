@@ -16,7 +16,7 @@ import Link from 'next/link';
 import HeaderNotifiction from './HeaderNotification';
 import MobileHeaderMenu from './MobileHeaderMenu';
 
-const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
+const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp","/forgot-password/otp"]
 const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels"];
 
 const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, initialInfo }) => {

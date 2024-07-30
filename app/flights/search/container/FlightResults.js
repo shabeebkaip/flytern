@@ -46,6 +46,8 @@ const FlightResultsChild = (props) => {
   };
   const [searchData, setSearchData] = useState(initialSearchData);
 
+  console.log(showSearchCard);
+
   useEffect(() => {
     if (!page) {
       setPage(flightResults?.currentPage)
