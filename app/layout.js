@@ -22,6 +22,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <head>
       <link rel="icon" href="/header/logo-green.svg" sizes="16x16 32x32 48x48 64x64" />
+      <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
       <body className={inter.className}>
         <header>
           <HeaderParent />
