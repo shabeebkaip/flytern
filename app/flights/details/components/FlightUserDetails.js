@@ -22,6 +22,32 @@ const FlightUserDetails = (props) => {
     _Travellerinfo: [],
     _CntDc: {},
   };
+ 
+    const adultCoPax = coPax.filter(traveler => {
+      const dob = new Date(traveler.dateofBirth.split('-').reverse().join('-'));
+      const adultMinDate = new Date(preTraveller.adultMinDOB.split('-').reverse().join('-'));
+      const adultMaxDate = new Date(preTraveller.adultMaxDOB.split('-').reverse().join('-'));
+      return dob >= adultMinDate && dob <= adultMaxDate;
+    });
+    
+    const childCoPax = coPax.filter(traveler => {
+      const dob = new Date(traveler.dateofBirth.split('-').reverse().join('-'));
+      const childMinDate = new Date(preTraveller.childMinDOB.split('-').reverse().join('-'));
+      const childMaxDate = new Date(preTraveller.childMaxDOB.split('-').reverse().join('-'));
+      return dob >= childMinDate && dob <= childMaxDate;
+    });
+    
+    const infantCoPax = coPax.filter(traveler => {
+      const dob = new Date(traveler.dateofBirth.split('-').reverse().join('-'));
+      const infantMinDate = new Date(preTraveller.infantMinDOB.split('-').reverse().join('-'));
+      const infantMaxDate = new Date(preTraveller.infantMaxDOB.split('-').reverse().join('-'));
+      return dob >= infantMinDate && dob <= infantMaxDate;
+    });
+    console.log(childCoPax);
+    console.log(infantCoPax);
+    console.log(adultCoPax,"h");
+  console.log(preTraveller,"p");
+  console.log(coPax);
   const submitTvellersDetails = () => {
     // adult validation errors
     let adultValidationErrors = saveTraveller.adultTraveller.map(item => ({
@@ -262,7 +288,8 @@ const FlightUserDetails = (props) => {
           saveTraveller?.adultTraveller?.length ?
             saveTraveller?.adultTraveller?.map((item, index) => (
               <AddTraveller
-                coPax={coPax}
+                // coPax={coPax}
+                coPax={adultCoPax}
                 index={index}
                 appendTraveller={appendTraveller}
                 preTraveller={preTraveller}
@@ -286,7 +313,7 @@ const FlightUserDetails = (props) => {
           saveTraveller?.childTraveller?.length ?
             saveTraveller?.childTraveller?.map((item, index) => (
               <AddTraveller
-                coPax={coPax}
+                coPax={childCoPax}
                 index={index}
                 appendTraveller={appendTraveller}
                 preTraveller={preTraveller}
@@ -311,7 +338,7 @@ const FlightUserDetails = (props) => {
           saveTraveller?.infantTraveller?.length ?
             saveTraveller?.infantTraveller?.map((item, index) => (
               <AddTraveller
-                coPax={coPax}
+                coPax={infantCoPax}
                 index={index}
                 appendTraveller={appendTraveller}
                 preTraveller={preTraveller}
