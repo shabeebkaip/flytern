@@ -5,7 +5,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { usePathname } from 'next/navigation'
 
-const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
+const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp","/forgot-password/otp"]
 const FooterTopChild = () => {
     const pathname = usePathname();
     const { translation } = useSelector(state => state.sharedState)

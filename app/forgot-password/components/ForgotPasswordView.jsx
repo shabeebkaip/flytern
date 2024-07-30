@@ -40,7 +40,7 @@ const ForgotPasswordView = () => {
             anchorOrigin: { vertical: 'top', horizontal: 'right' },
           });
           if (typeof window !== "undefined") {
-            window.location.href = `/otp?${response.data.data.userID}?${response.data.data.otpTo}`;
+            window.location.href = `forgot-password/otp?${response.data.data.userID}?${response.data.data.otpTo}`;
           }
         }
 

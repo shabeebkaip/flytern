@@ -19,8 +19,8 @@ const ResetView = () => {
           <h4 class="text-black text-lg sm:text-2xl font-bold">{translation?.reset_password}</h4>
         </div>
         <p class="w-full lg:w-[350px] text-stone-500 text-xs sm:text-sm font-normal leading-[200%]">{translation?.reset_content}</p>
-        <TextField label='password' placeholder={translation?.ener_new_password} type="password" styles={"border-zinc-100 bg-stone-50 w-full lg:max-w-[350px] "} />
-        <TextField label='password' placeholder={translation?.confirm_new_password} type="password" styles={"border-zinc-100 bg-stone-50 w-full lg:max-w-[350px] "} />
+        <TextField label={translation?.enter_new_password} placeholder={translation?.enter_new_password} type="password" styles={"border-zinc-100 bg-stone-50 w-full lg:max-[350px] "} />
+        <TextField label={translation?.re_enter_new_password} placeholder={translation?.re_enter_new_password} type="password" styles={"border-zinc-100 bg-stone-50w-full lg:max-[350px] "} />
         <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/login"}}}><button class="w-full lg:max-w-[350px] h-12 mt-3 text-base font-medium text-white rounded-md bg-emerald-800 " >{translation?.reset_password}</button></div>
       </div>
     </div>

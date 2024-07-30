@@ -3,6 +3,8 @@ import { EditIconSvg } from '@/app/shared/components/SVG'
 import { Tooltip } from '@mui/material'
 
 const ModifySearch = ({ setShowSearchCard, showSearchCard }) => {
+  console.log(setShowSearchCard);
+  console.log(showSearchCard);
   return (
     <>
       <Tooltip  title="Modify Search" arrow>
