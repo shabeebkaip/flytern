@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import axios from 'axios';
-import { decryptUrl } from '@/lib/utils';
+import { decrypt } from '@/lib/utils';
 import PaymentMethod from './contents/PaymentMethod';
 
 
@@ -10,7 +10,9 @@ const page = async ({ searchParams }) => {
     if (!refrence) {
       throw new Error('Missing ref parameter');
     }
-    const decryptedRef = decryptUrl(refrence);
+    const decryptedRef = decrypt(refrence);
+
+    console.log(decryptedRef);
     const cookieStore = cookies();
     const accessTokenCookie = cookieStore.get('accessToken');
     if (!accessTokenCookie) {

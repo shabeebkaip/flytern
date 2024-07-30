@@ -1,7 +1,7 @@
 import { globalGetService, globalPostService } from "@/lib/globalApiServices";
 import {  addSaveTravellerSuccess, flightDetailSuccess, flightLoaderOff, flightLoaderOn, flightPriceOptionSucess, flightResultSuccess, getExtraLuggageInformationSuccess, getMealsInformationSuccess, getSeatInformationSuccess, preTravellerSuccess, setBookingRef, setButtonLoader, setGenericLoader, setPostSaveBaggageInformation, setPostSaveMealsInformation, setPostSaveSeatInformation } from "@/lib/slices/flightSlice";
 import { loaderOff, loaderOn } from "@/lib/slices/sharedSlice";
-import { checkApiStatus, encryptUrl } from "@/lib/utils";
+import { checkApiStatus, encrypt, encryptUrl } from "@/lib/utils";
 
 export const getFlightSearchApi = (payload) => {
   return async (dispatch) => {
@@ -174,10 +174,10 @@ export const postTravellersDetailsApi = (payload, enqueueSnackbar) => {
         // dispatch(getSaveResponseSuccess(responseData));
         dispatch(flightLoaderOn());
         const bookingReference = responseData.bookingRef;
-        // const encryptedBookingReference = encryptUrl(responseData.bookingRef);
+        const encryptedBookingReference = encrypt(responseData.bookingRef);
 
         if (typeof window !== "undefined") {
-          window.location.href = `/payment-method/?ref=${bookingReference}`;
+          window.location.href = `/payment-method/?ref=${encryptedBookingReference}`;
           window.scrollTo({
             top: 0,
             behavior: 'smooth'

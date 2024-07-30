@@ -1,9 +1,16 @@
+import { encrypt } from '@/lib/utils'
 import Image from 'next/image'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
 
 const HotelBookingDetailsList = ({ hotel }) => {
+
+    const encryptedBookingRef = encrypt(hotel?.bookingRef)
+
+    console.log(encryptedBookingRef);
+
+
     const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     return (
         <div className="container grid items-center justify-between w-full grid-cols-12 gap-2 px-4 py-5 mx-auto bg-white rounded-md md:items-center sm:items-start md:gap-7">
@@ -39,7 +46,7 @@ const HotelBookingDetailsList = ({ hotel }) => {
                                 className='w-32 h-10 text-white rounded-md bg-dark-green'
                                 onClick={() => {
                                     if (typeof window !== 'undefined') {
-                                        window.location.href = `/payment-summary/?ref=${hotel.bookingRef}`;
+                                        window.location.href = `/payment-summary/?ref=${encryptedBookingRef}`;
                                     }
                                 }}
                             >
@@ -50,7 +57,7 @@ const HotelBookingDetailsList = ({ hotel }) => {
                                     className='w-32 h-10 text-white rounded-md bg-dark-green'
                                     onClick={() => {
                                         if (typeof window !== 'undefined') {
-                                            window.location.href = `/payment-method/?ref=${hotel?.bookingRef}`;
+                                            window.location.href = `/payment-method/?ref=${encryptedBookingRef}`;
                                         }
                                     }}
                                 >

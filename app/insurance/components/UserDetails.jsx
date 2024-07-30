@@ -6,7 +6,7 @@ import { Autocomplete } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { enqueueSnackbar } from 'notistack';
 import { insuranceReviewDetailsSuccess, setSaveTravellerLoader } from '@/lib/slices/insuranceSlice';
-import { checkApiStatus, encryptUrl } from '@/lib/utils';
+import { checkApiStatus, encrypt, encryptUrl } from '@/lib/utils';
 import TitleCard from '@/app/shared/components/TitleCard';
 import { ProfileIconSvg } from '@/app/shared/components/SVG';
 import { CustomDatePicker, CustomTextField } from '@/app/shared/components/CustomTextField';
@@ -100,10 +100,12 @@ const UserDetails = () => {
         addInsuranceUserDetailsApi(travellerData)
             .then(response => {
                 if (checkApiStatus(response)) {
+                    const encryptedBookingRef = encrypt(response.data.data.bookingRef);
+
                     enqueueSnackbar('Insurance Details Added Successfully', { variant: 'success' });
                     if (typeof window !== "undefined") {
                         setTimeout(() => {
-                            window.location.href = `/payment-method/?ref=${response.data.data.bookingRef}`
+                            window.location.href = `/payment-method/?ref=${encryptedBookingRef}`
                         }, 1000);
                     }
                 } else {

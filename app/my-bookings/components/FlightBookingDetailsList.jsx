@@ -1,4 +1,4 @@
-import { encryptUrl } from '@/lib/utils'
+import { encrypt, encryptUrl } from '@/lib/utils'
 import Image from 'next/image'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -7,7 +7,9 @@ import { useSelector } from 'react-redux'
 
 
 const FlightBookingDetailsList = ({ flight }) => {
-    const encryptedBookingRef = encryptUrl(flight.bookingRef)
+    const encryptedBookingRef = encrypt(flight?.bookingRef)
+
+    console.log(encryptedBookingRef);
     const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     return (
         <div className="container grid items-center justify-between w-full grid-cols-12 p-4 mx-auto overflow-hidden bg-white rounded-md ">
@@ -49,7 +51,7 @@ const FlightBookingDetailsList = ({ flight }) => {
                                 className='w-32 h-10 text-white rounded-md bg-dark-green'
                                 onClick={() => {
                                     if (typeof window !== 'undefined') {
-                                        window.location.href = `/payment-summary/?ref=${flight?.bookingRef}`;
+                                        window.location.href = `/payment-summary/?ref=${encryptedBookingRef}`;
                                     }
                                 }}
                             >
@@ -60,7 +62,7 @@ const FlightBookingDetailsList = ({ flight }) => {
                                     className='w-32 h-10 text-white rounded-md bg-dark-green'
                                     onClick={() => {
                                         if (typeof window !== 'undefined') {
-                                            window.location.href = `/payment-method/?ref=${flight?.bookingRef}`;
+                                            window.location.href = `/payment-method/?ref=${encryptedBookingRef}`;
                                         }
                                     }}
                                 >

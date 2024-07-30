@@ -2,9 +2,14 @@ import React from 'react'
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import PaymentSummary from './contents/PaymentSummary';
+import { decrypt } from '@/lib/utils';
 
 const page = async ({ searchParams,params }) => {
     const { ref } = searchParams;
+    const decryptedRef = decrypt(searchParams.ref);
+
+    console.log(decryptedRef);
+
     const [extractedRef, bookingNumber] = ref ? ref.split('/') : [null, null];
     const cookieStore = cookies();
     const accessTokenCookie = cookieStore.get('accessToken');
@@ -40,7 +45,7 @@ const page = async ({ searchParams,params }) => {
               }
 
         } else {
-            const response = await axios.post(`https://flytern.com/coreapi/api/Payments/Confirmation`, { bookingRef: extractedRef },
+            const response = await axios.post(`https://flytern.com/coreapi/api/Payments/Confirmation`, { bookingRef: decryptedRef },
                 {
                     headers: {
                         Authorization: `Bearer ${myCookie}`,
