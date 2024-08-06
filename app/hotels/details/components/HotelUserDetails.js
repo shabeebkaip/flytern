@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TitleCard from "@/app/shared/components/TitleCard";
 import { ProfileIconSvg } from "@/app/shared/components/SVG";
-import { checkApiStatus, encryptUrl } from "@/lib/utils";
+import { checkApiStatus, encryptId, encryptUrl } from "@/lib/utils";
 import { Autocomplete, CircularProgress, Radio } from "@mui/material";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { postHotelTravellerApi } from "@/app/hotels/api";
@@ -73,10 +73,10 @@ const HotelUserDetails = (props) => {
             variant: 'success',
             anchorOrigin: { vertical: 'top', horizontal: 'right' },
           });
-          const encryptedBookingRef = encryptUrl(response.data.data.bookingRef);
+          const encryptedBookingRef = encryptId(response.data.data.bookingRef);
           setTimeout(() => {
             if (typeof window !== 'undefined') {
-              window.location.href = `/payment-method/?ref=${response.data.data.bookingRef}`;
+              window.location.href = `/payment-method/?ref=${encryptedBookingRef}`;
             }
           }, 1000);
         } else {

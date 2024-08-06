@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSnackbar } from "notistack";
 import TitleCard from "@/app/shared/components/TitleCard";
 import InputField from "@/app/shared/components/InputField";
-import { encryptUrl } from "@/lib/utils";
+import { encryptId, encryptUrl } from "@/lib/utils";
 import { useAppSelector } from "@/lib/hooks";
 import { postSmartPaymentApi } from "../api";
 
@@ -30,9 +30,9 @@ const SmartPaymentForm = () => {
   const handleSubmit = () => {
     postSmartPaymentApi(value).then((response) => {
       if (response.data.statusCode === 200) {
-        const encryptedBookingRef = encryptUrl(value.bookingRef);
+        const encryptedBookingRef = encryptId(value.bookingRef);
         if (typeof window !== 'undefined') {
-          window.location.href = `/payment-method/?ref=${value.bookingRef}`;
+          window.location.href = `/payment-method/?ref=${encryptedBookingRef}`;
         }
       } else if (response.data.statusCode === 204) {
         enqueueSnackbar(response.data.data, {

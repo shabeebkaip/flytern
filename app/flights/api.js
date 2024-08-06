@@ -1,7 +1,7 @@
 import { globalGetService, globalPostService } from "@/lib/globalApiServices";
 import {  addSaveTravellerSuccess, flightDetailSuccess, flightLoaderOff, flightLoaderOn, flightPriceOptionSucess, flightResultSuccess, getExtraLuggageInformationSuccess, getMealsInformationSuccess, getSeatInformationSuccess, preTravellerSuccess, setBookingRef, setButtonLoader, setGenericLoader, setPostSaveBaggageInformation, setPostSaveMealsInformation, setPostSaveSeatInformation } from "@/lib/slices/flightSlice";
 import { loaderOff, loaderOn } from "@/lib/slices/sharedSlice";
-import { checkApiStatus, encryptUrl } from "@/lib/utils";
+import { checkApiStatus, encryptId, encryptUrl } from "@/lib/utils";
 
 export const getFlightSearchApi = (payload) => {
   return async (dispatch) => {
@@ -174,10 +174,10 @@ export const postTravellersDetailsApi = (payload, enqueueSnackbar) => {
         // dispatch(getSaveResponseSuccess(responseData));
         dispatch(flightLoaderOn());
         const bookingReference = responseData.bookingRef;
-        // const encryptedBookingReference = encryptUrl(responseData.bookingRef);
+        const encryptedBookingReference = encryptId(responseData.bookingRef);
 
         if (typeof window !== "undefined") {
-          window.location.href = `/payment-method/?ref=${bookingReference}`;
+          window.location.href = `/payment-method/?ref=${encryptedBookingReference}`;
           window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -197,12 +197,12 @@ export const postTravellersDetailsApi = (payload, enqueueSnackbar) => {
           _listOfSelection: []
         }))
         //seat
-        const seatInformationResponse = await globalGetService(`/api/AddOns/GetSeats?bookingref=${bookingReference}`);
+        const seatInformationResponse = await globalGetService(`/api/AddOns/GetSeats?bookingref=${encryptedBookingReference}`);
         //meals
-        const mealsInformationResponse = await globalGetService(`/api/AddOns/GetMeals?bookingref=${bookingReference}`);
+        const mealsInformationResponse = await globalGetService(`/api/AddOns/GetMeals?bookingref=${encryptedBookingReference}`);
         //lagguage
 
-        const extraLuggageInformationresponse = await globalGetService(`/api/AddOns/GetExtraLuaggage?bookingref=${bookingReference}`);
+        const extraLuggageInformationresponse = await globalGetService(`/api/AddOns/GetExtraLuaggage?bookingref=${encryptedBookingReference}`);
 
         if (checkApiStatus(seatInformationResponse)) {
           const seatInformation = seatInformationResponse.data.data;

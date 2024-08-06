@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import axios from 'axios';
-import { decryptUrl } from '@/lib/utils';
+import { decryptId } from '@/lib/utils';
 import PaymentMethod from './contents/PaymentMethod';
 
 
@@ -10,7 +10,9 @@ const page = async ({ searchParams }) => {
     if (!refrence) {
       throw new Error('Missing ref parameter');
     }
-    const decryptedRef = decryptUrl(refrence);
+    const decryptedRef = decryptId(refrence);
+    console.log(decryptedRef,'kk');
+    
     const cookieStore = cookies();
     const accessTokenCookie = cookieStore.get('accessToken');
     if (!accessTokenCookie) {
@@ -21,7 +23,7 @@ const page = async ({ searchParams }) => {
     try {
       
 
-      const response = await axios.post(`https://flytern.com/coreapi/api/Payments/GetGateways`, { bookingRef: refrence },
+      const response = await axios.post(`https://flytern.com/coreapi/api/Payments/GetGateways`, { bookingRef: decryptedRef },
         {
           headers: {
             Authorization: `Bearer ${myCookie}`,
@@ -38,7 +40,7 @@ const page = async ({ searchParams }) => {
 
     return (
       <div className=' container mx-auto'>
-        <PaymentMethod gatewayList={gatewayList} refrence={refrence}  />
+        <PaymentMethod gatewayList={gatewayList} refrence={decryptedRef}  />
       </div>
     );
   } catch (error) {
