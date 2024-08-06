@@ -234,12 +234,12 @@ const HotelBookingCard = () => {
             className={` h-10 sm:h-14  px-3 sm:px-6 py-1.5  bg-emerald-800   rounded-md justify-center items-center gap-1 inline-flex w-full`}
             onClick={handleSubmit}
           >
-            <div className="text-center text-white text-[10px] md:text-xs xl:text-sm  font-medium capitalize">
+            <span className="text-center text-white text-[10px] md:text-xs xl:text-sm  font-medium capitalize">
               {
                 location?.pathname === '/hotel/search' ? translation?.modify_search : translation?.search
               } {" "}
               ({translation.with}  {totalNights} {totalNights > 1 ? translation?.nights : translation?.nights})
-            </div>
+            </span>
           </button>
         </div>
       </div>

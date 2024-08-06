@@ -19,7 +19,7 @@ const FlightDetailsCard = (props) => {
     const { translation } = useSelector((state) => state.sharedState)
     return (
         <div className="container flex flex-col w-full gap-3 p-5 mx-auto bg-white rounded-lg group ">
-            <button
+            <div
                 onClick={toggleDetailsAccordion}
                 className="flex items-center justify-between w-full bg-white"
             >
@@ -46,7 +46,7 @@ const FlightDetailsCard = (props) => {
                         d="M19 9l-7 7-7-7"
                     />
                 </svg>
-            </button>
+            </div>
             <div>
                 {details ?
                     (<>

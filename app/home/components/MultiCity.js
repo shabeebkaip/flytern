@@ -569,9 +569,9 @@ const MultiCity = ({ flightReqBody }) => {
           className=" h-14 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex"
           onClick={() => handleSubmit()}
         >
-          <div className="text-sm font-medium text-center text-white capitalize ">
+          <span className="text-sm font-medium text-center text-white capitalize ">
             {selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.search_flights : location?.pathname === "/flights/search" ? 'Modify Search' : 'Search Flights'}
-          </div>
+          </span>
         </button>
       </div>
     </div>

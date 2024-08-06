@@ -666,9 +666,9 @@ const RoundTrip = ({ flightReqBody, lang }) => {
           className=" h-14 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex"
           onClick={() => handleSubmit()}
         >
-          <div className="text-sm font-medium text-center text-white capitalize">
+          <span className="text-sm font-medium text-center text-white capitalize">
             {location?.pathname === "/flights/search" ? translation?.modify_search : translation?.search_flights}
-          </div>
+          </span>
         </button>
       </div>
     </div >
