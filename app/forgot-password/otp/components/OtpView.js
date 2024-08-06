@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useSnackbar } from 'notistack';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { checkApiStatus } from '@/lib/utils';
+import { checkApiStatus, setGlobalCookie } from '@/lib/utils';
 import Image from 'next/image';
 import { resendOTPApi, userVerifyOtpApi } from '@/app/otp/api';
 // import { resendOTPApi, userVerifyOtpApi } from '../api';
@@ -38,6 +38,8 @@ const OtpView = () => {
       .then(response => {
         if (checkApiStatus(response)) {
           enqueueSnackbar('OTP Verified Successfully', { variant: 'success', autoHideDuration: 2000, anchorOrigin: { vertical: 'top', horizontal: 'right' } })
+          setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken), 1)
+          setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken), 1)
           setTimeout(() => {
             if (typeof window !== 'undefined') {
               window.location.href = '/reset-password'

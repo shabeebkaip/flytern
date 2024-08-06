@@ -3,15 +3,8 @@ import axios from 'axios';
 import { cookies } from 'next/headers';
 import PaymentSummary from './contents/PaymentSummary';
 
-
-
-
 const page = async ({ searchParams, params }) => {
     const { ref } = searchParams;
-
-    const secretKey = 'crypto@123#';
-
- 
     const [extractedRef, bookingNumber] = ref ? ref.split('/') : [null, null];
     const cookieStore = cookies();
     const accessTokenCookie = cookieStore.get('accessToken');
