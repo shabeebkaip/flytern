@@ -11,7 +11,6 @@ const MobileNavigator = () => {
   const isHotelPage = ["/", "/flights", "/ar/flights"].includes(location?.pathname)
   const isFlightPage = location?.pathname === '/'
   const isAuth = authPaths.includes(pathname);
-  console.log(location.pathname,"location");
 
   if (isAuth) {
     return null;

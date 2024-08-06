@@ -11,7 +11,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import { useSelector } from 'react-redux';
 // import { authApiService } from '../../utils/authApi';
 import FlightIcon from '@mui/icons-material/Flight';
-import { getGlobalCookie } from '@/lib/utils';
+import { getGlobalCookie, setGlobalCookie } from '@/lib/utils';
 
 
 const MobileHeaderMenu = () => {
@@ -23,12 +23,14 @@ const MobileHeaderMenu = () => {
         setIsNavOpen(!isNavOpen);
     };
 
-    
+
     const handleListItemClick = (path) => {
-        window.location.href = path;
+        if (typeof window !== "undefined") {
+            window.location.href = path;
+        }
         closeNav();
     };
-    
+
     const closeNav = () => {
         setIsNavOpen(false);
     };
@@ -42,7 +44,9 @@ const MobileHeaderMenu = () => {
                     setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken));
                     setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken));
                     setTimeout(() => {
-                        window.location.reload(false);
+                        if (typeof window !== "undefined") {
+                            window.location.reload(false);
+                        }
                     }, 1000);
                 })
                 .catch((error) => {
@@ -124,10 +128,10 @@ const MobileHeaderMenu = () => {
                             </div>
                             :
                             <div className='flex gap-4 p-4 '>
-                                <button className='text-center text-white text-base font-normal px-2 py-1.5 bg-orange-400 rounded-md justify-center items-center h-12 w-full'  onClick={() => handleListItemClick('/login')}>
+                                <button className='text-center text-white text-base font-normal px-2 py-1.5 bg-orange-400 rounded-md justify-center items-center h-12 w-full' onClick={() => handleListItemClick('/login')}>
                                     {translation?.sign_in}
                                 </button>
-                                <button className='text-center text-white text-normal font-medium px-2 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full'  onClick={() => handleListItemClick('/register')}>
+                                <button className='text-center text-white text-normal font-medium px-2 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full' onClick={() => handleListItemClick('/register')}>
                                     {translation?.create_account}
                                 </button>
                             </div>
