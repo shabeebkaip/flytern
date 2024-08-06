@@ -33,7 +33,7 @@ const MobileHeaderMenu = () => {
         setIsNavOpen(false);
     };
     const location = typeof window !== "undefined" ? window.location : null;
-    const isHome = location.pathname === "/";
+    const isHome = location?.pathname === "/";
     const userLogout = () => {
         clearAllCookies();
         setTimeout(() => {

@@ -25,7 +25,7 @@ const MobileNavigator = () => {
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/flights')}
           >
-            <NavigatorFlightSvg color={location?.pathname.endsWith('/flights') ? "#FFA726" : '#ffffff'}  />
+            <NavigatorFlightSvg color={location?.pathname?.endsWith('/flights') ? "#FFA726" : '#ffffff'}  />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
@@ -37,19 +37,19 @@ const MobileNavigator = () => {
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/packages')}
           >
-            <NavigatorPackageSvg color={location?.pathname.endsWith('/packages') ? "#FFA726" : '#ffffff'} />
+            <NavigatorPackageSvg color={location?.pathname?.endsWith('/packages') ? "#FFA726" : '#ffffff'} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => window.location.href = "/insurance"}
           >
-            <NavigatorInsuranceSvg color={location?.pathname.endsWith('/insurance') ? "#FFA726" : '#ffffff'} />
+            <NavigatorInsuranceSvg color={location?.pathname?.endsWith('/insurance') ? "#FFA726" : '#ffffff'} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/profile')}
           >
-            <NavigatorProfileSvg color={location?.pathname.endsWith('/profile') ? "#FFA726" : '#ffffff'} />
+            <NavigatorProfileSvg color={location?.pathname?.endsWith('/profile') ? "#FFA726" : '#ffffff'} />
           </div>
         </div>
       </div>
