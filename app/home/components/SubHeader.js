@@ -9,7 +9,7 @@ import Link from 'next/link';
 const SubHeaderChild = ({ }) => {
   const { translation } = useAppSelector((state) => state.sharedState)
   return (
-    <div className="w-full h-[55px] bg-emerald-800 shadow border-b border-neutral-200 text-white hidden md:block">
+    <div className="w-full h-[55px] bg-emerald-800 shadow border-b border-neutral-200 text-white hidden lg:block">
       <div className="container flex items-center justify-between h-full px-4 mx-auto">
         <div className="flex items-center justify-between gap-10">
           <Link href="/flights" className="flex items-center gap-3 cursor-pointer">
