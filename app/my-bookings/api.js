@@ -1,6 +1,6 @@
 import { globalGetService, globalPostService } from "@/lib/globalApiServices";
 import { loaderRequest, myBookingsSuccess } from "@/lib/slices/profileSlice";
-import { checkApiStatus } from "@/lib/utils";
+import { checkApiStatus, encryptId } from "@/lib/utils";
 
 
 export const getMyBookingsApi = (pageId, serviceType) => {
@@ -17,12 +17,13 @@ export const getMyBookingsApi = (pageId, serviceType) => {
     }
   }
 
-  export const getGuestBookingsApi = async (payload, navigate) => {
+  export const getGuestBookingsApi = async (payload) => {
     try {
       const response = await globalPostService(`/api/Payments/ViewBooking`, payload)
       const responseStatus = await checkApiStatus(response)
       if (responseStatus) {
-        navigate(`/payment-summary?ref=${response.data.data.bookingRef}`)
+        const encripted = encryptId(response.data.data.bookingRef)
+        window.location.href=`/payment-summary?ref=${encripted}`
       }
     }
     catch (error) {

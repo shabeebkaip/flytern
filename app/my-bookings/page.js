@@ -2,13 +2,16 @@
 import React from 'react'
 import StoreProvider from '../StoreProvider'
 import Mybookings from './contents/Mybookings'
+import { SnackbarProvider } from 'notistack'
 
 const page = () => {
     return (
-        <div className='container px-4 mx-auto md:px-0'>
-            <StoreProvider>
-                <Mybookings />
-            </StoreProvider>
+        <div className=' container mx-auto px-4 mx-auto md:px-0'>
+            <SnackbarProvider>
+                <StoreProvider>
+                    <Mybookings />
+                </StoreProvider>
+            </SnackbarProvider>
         </div>
     )
 }

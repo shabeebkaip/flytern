@@ -19,7 +19,7 @@ const MyBookingGuest = () => {
       email: guestBookingData.email ? "" : "Please enter email"
     }
     if (Object.values(validateInput).every(x => x === "")) {
-      getGuestBookingsApi(guestBookingData, navigate)
+      getGuestBookingsApi(guestBookingData)
     } else {
       setError(validateInput)
     }
