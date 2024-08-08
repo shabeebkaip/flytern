@@ -130,7 +130,7 @@ const FlightResultsChild = (props) => {
           />
         </div>
         <div className="flex flex-col col-span-10 gap-5 mt-12 mb-4 lg:col-span-7">
-          <div className="flex items-center justify-between">
+          <div className="flex justify-between gap-5 md:items-center lg:gap-0">
             <FlightSummary
               request={request}
               flightLoader={flightLoader}
@@ -175,7 +175,7 @@ const FlightResultsChild = (props) => {
               <div className='flex items-center justify-between mt-4'>
                 {
                   searchResponses?.length ?
-                    <h3 className='text-base font-medium text-black '>{translation?.available_flights}</h3> : null
+                    <h3 className='text-base font-bold text-black '>{translation?.available_flights}</h3> : null
                 }
 
                 <SortSection

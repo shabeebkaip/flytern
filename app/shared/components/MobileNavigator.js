@@ -37,31 +37,31 @@ const MobileNavigator = () => {
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/flights')}
           >
-            <NavigatorFlightSvg color={pathname.endsWith('/flights') || pathname.endsWith('/') ? '#FFA726' : '#fff'} />
+            <NavigatorFlightSvg color={pathname.includes('/flights') || pathname.endsWith('/') ? '#FFA726' : '#fff'} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/hotels')}
           >
-            <NavigatorHotelSvg color={`${pathname.endsWith('/hotels') ? '#FFA726' : '#fff' }`} />
+            <NavigatorHotelSvg color={`${pathname.includes('/hotels') ? '#FFA726' : '#fff' }`} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/packages')}
           >
-            <NavigatorPackageSvg color={`${pathname.endsWith('/packages') ? '#FFA726' : '#fff' }`} />
+            <NavigatorPackageSvg color={`${pathname.includes('/packages') ? '#FFA726' : '#fff' }`} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => window.location.href = "/insurance"}
           >
-            <NavigatorInsuranceSvg color={`${pathname.endsWith('/insurance') ? '#FFA726' : '#fff' }`} />
+            <NavigatorInsuranceSvg color={`${pathname.includes('/insurance') ? '#FFA726' : '#fff' }`} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/profile')}
           >
-            <NavigatorProfileSvg color={`${pathname.endsWith('/profile') ? '#FFA726' : '#fff' }`} />
+            <NavigatorProfileSvg color={`${pathname.includes('/profile') ? '#FFA726' : '#fff' }`} />
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@ const TravelStories = () => {
         <>
           <div className='flex items-center justify-between'>
             <h4 className='text-xs font-bold sm:text-2xl'>{translation?.travel_stories}</h4>
-            <div onClick={() => { if (typeof window !== "undefined") {window.location.href="/travel-stories"}}} className='flex items-center gap-2 font-normal text-blue-400'><span className='flex items-center gap-2 text-xs sm:text-lg cursor-pointer'>{translation?.see_all} <SeeAllIconSvg /> </span> </div>
+            <div onClick={() => { if (typeof window !== "undefined") {window.location.href="/travel-stories"}}} className='flex items-center gap-2 font-normal text-blue-400'><span className='flex items-center gap-2 text-xs cursor-pointer sm:text-lg'>{translation?.see_all} <SeeAllIconSvg /> </span> </div>
           </div>
         </>
       } >
@@ -62,7 +62,7 @@ const TravelStories = () => {
                   <div className='flex flex-col justify-between gap-2 mt-3 md:flex-row md:items-center'>
                     <div className='flex items-center gap-3 '>
                       <Image width={500} height={500} src={story.profileUrl} alt='' className='w-6 h-6 rounded-full' />
-                      <p className="text-black text-[8px] sm:text-xs font-medium ">{story.name}</p>
+                      <p className="text-black text-[10px] sm:text-sm font-medium ">{story.name}</p>
                     </div>
                     <div>
                       {/*   <p className="text-stone-500 text-[7px] sm:text-xs font-normal tracking-tight m-0 p-0">January 24, 2023 1:17 PM </p> */}

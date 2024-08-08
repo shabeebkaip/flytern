@@ -26,7 +26,7 @@ const SideBar = ({ sideBarList }) => {
 
   }
   return (
-    <div className='container flex-col hidden px-8 mx-auto overflow-hidden bg-white rounded-lg lg:flex '>
+    <div className='container flex-col hidden px-3 mx-auto overflow-hidden bg-white rounded-lg xl:px-8 lg:flex '>
       {
         data.map((item, index) => {
           return (
