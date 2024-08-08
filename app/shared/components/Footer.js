@@ -43,7 +43,7 @@ const FooterChild = () => {
             {
                 loading || genericLoader || saveTravellerLoader || paymentWaitLoader || buttonLoader ?
                     null :
-                    <div className='container mx-auto px-5'>
+                    <div className='container px-4 mx-auto'>
                         <div className='grid lg:grid-cols-10'>
                             <div className='grid grid-cols-2 gap-10 w-full lg:grid-cols-5  lg:col-span-10  items-baseline pt-[50px] '>
                                 <div className='flex flex-col gap-3 cursor-pointer'>
