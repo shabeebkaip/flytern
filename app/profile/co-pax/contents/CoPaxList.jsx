@@ -27,7 +27,7 @@ const CoPaxList = () => {
                     <h3 className=' text-black sm:text-[13px] font-medium  cursor-pointer'>{translation?.copax}</h3>
                 </div>
                 <div>
-                    <button className='sm:w-40 sm:h-10 px-2.5 bg-white rounded-sm border border-orange-400 text-orange-400 text-sm  font-medium ' onClick={() =>typeof window !== 'undefined' && (window.location.href = '/profile/co-pax/add')} >{translation?.add_copax}</button>
+                    <button className='sm:w-40 sm:h-10 p-3 sm:p-0 px-2.5 bg-white rounded-sm border border-orange-400 text-orange-400 text-sm  font-medium ' onClick={() =>typeof window !== 'undefined' && (window.location.href = '/profile/co-pax/add')} >{translation?.add_copax}</button>
                 </div>
             </div>
             <div className='container px-4 pb-4 mx-auto mt-8 mb-10 overflow-hidden bg-white rounded-md'>

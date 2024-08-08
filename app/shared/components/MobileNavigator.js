@@ -1,20 +1,33 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavigatorFlightSvg, NavigatorHotelSvg, NavigatorInsuranceSvg, NavigatorPackageSvg, NavigatorProfileSvg } from '@/app/shared/components/SVG';
 import { usePathname } from 'next/navigation';
 
 const authPaths = ["/login", "/register", "/forgot-password", "/reset-password", "/otp"]
+// const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotels","/packages", "/profile", "/insurance"];
+const validPaths = [''];
+
 
 const MobileNavigator = () => {
+  // const [isHome, setIsHome] = useState(false);
   const pathname = usePathname();
   const location = typeof window !== "undefined" ? window.location : null;
-  const isHotelPage = ["/", "/flights", "/ar/flights"].includes(location?.pathname)
-  const isFlightPage = location?.pathname === '/'
+  // const isHotelPage = ["/", "/flights", "/ar/flights"].includes(location?.pathname)
+  // const isFlightPage = location?.pathname === '/'
   const isAuth = authPaths.includes(pathname);
+
+  // useEffect(() => {
+  //   setIsHome(validPaths.some(path => pathname.endsWith(path)));
+  // }, [pathname]);
+
+  const isHome = validPaths.some(path => pathname.endsWith(path))
 
   if (isAuth) {
     return null;
   }
+
+  console.log(isHome,"isHome")
+  console.log(pathname,"isHome")
  
   return (
     <div className="w-full h-[55px] md:h-[90px] bg-emerald-800 shadow border-b border-neutral-200 text-white  bottom-0 z-10 fixed lg:hidden">
@@ -24,31 +37,31 @@ const MobileNavigator = () => {
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/flights')}
           >
-            <NavigatorFlightSvg color={location?.pathname?.endsWith('/flights') ? "#FFA726" : '#ffffff'}  />
+            <NavigatorFlightSvg color={pathname.endsWith('/flights') || pathname.endsWith('/') ? '#FFA726' : '#fff'} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/hotels')}
           >
-            <NavigatorHotelSvg color={location?.pathname.endsWith('/hotels') ? "#FFA726" : '#ffffff'} />
+            <NavigatorHotelSvg color={`${pathname.endsWith('/hotels') ? '#FFA726' : '#fff' }`} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/packages')}
           >
-            <NavigatorPackageSvg color={location?.pathname?.endsWith('/packages') ? "#FFA726" : '#ffffff'} />
+            <NavigatorPackageSvg color={`${pathname.endsWith('/packages') ? '#FFA726' : '#fff' }`} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => window.location.href = "/insurance"}
           >
-            <NavigatorInsuranceSvg color={location?.pathname?.endsWith('/insurance') ? "#FFA726" : '#ffffff'} />
+            <NavigatorInsuranceSvg color={`${pathname.endsWith('/insurance') ? '#FFA726' : '#fff' }`} />
           </div>
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => typeof window !== 'undefined' && (window.location.href = '/profile')}
           >
-            <NavigatorProfileSvg color={location?.pathname?.endsWith('/profile') ? "#FFA726" : '#ffffff'} />
+            <NavigatorProfileSvg color={`${pathname.endsWith('/profile') ? '#FFA726' : '#fff' }`} />
           </div>
         </div>
       </div>

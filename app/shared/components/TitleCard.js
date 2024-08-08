@@ -2,7 +2,7 @@
 import Subtitle from "@/app/shared/components/Subtitle";
 function TitleCard({ title, children, topMargin, TopSideButtons, target = "" }) {
   return (
-    <div className={"card relative w-full p-6 bg-base-100 bg-white rounded-lg cursor-pointer" + (topMargin || "mt-6")} id={target} >
+    <div className={"card relative w-full sm:p-6 p-4 bg-base-100 bg-white rounded-lg cursor-pointer" + (topMargin || "mt-6")} id={target} >
       {/* Title for Card */}
       <Subtitle styleClass={TopSideButtons ? "inline-block" : ""}>
         {title}
