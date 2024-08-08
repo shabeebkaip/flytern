@@ -107,7 +107,7 @@ const HelpCenterFor = () => {
     const { translation } = useSelector((state) => state.sharedState)
     return (
         <TitleCard title={translation?.help_center}>
-            <div className='grid grid-cols-5 gap-4 mt-5'>
+            <div className='flex flex-col grid-cols-5 gap-4 mt-5 md:grid'>
                 <Autocomplete
                     disablePortal
                     id="combo-box-demo"
@@ -144,7 +144,7 @@ const HelpCenterFor = () => {
                     onFocus={() => setErrors({ ...errors, mobile: '' })}
                 />
             </div>
-            <div className='grid grid-cols-5 gap-4 mt-4'>
+            <div className='flex flex-col grid-cols-5 gap-4 mt-4 md:grid'>
                 <CustomTextField
                     label={translation?.email}
                     value={data.email}
@@ -167,7 +167,7 @@ const HelpCenterFor = () => {
 
                 />
             </div>
-            <div className='grid grid-cols-5 gap-4 mt-4'>
+            <div className='flex flex-col grid-cols-5 gap-4 mt-4 md:grid'>
                 <div className='col-span-4  p-2.5 bg-orange-400 bg-opacity-10 rounded-[10px] justify-start items-center gap-2.5 '>
                     <p className='text-orange-400 text-[11px] sm:text-sm font-medium '>{translation?.please_share}</p>
                 </div>
