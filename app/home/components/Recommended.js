@@ -43,7 +43,7 @@ const Recommended = ({ recommends }) => {
           {data && data.recommends && data.recommends.map((item, index) => (
             <SwiperSlide key={index} onClick={() => {
               if (typeof window !== 'undefined') {
-                window.location.href = `/packages/details/${item.refID}`;
+                window.location.href = `/packages/${item.refID}`;
               }
             }}>
               <div className="inline-flex flex-col items-start justify-start w-full gap-4">
