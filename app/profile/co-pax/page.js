@@ -5,7 +5,7 @@ import StoreProvider from '@/app/StoreProvider'
 
 const page = () => {
     return (
-        <div className=' container mx-auto'>
+        <div className='container px-4 mx-auto  sm:px-0'>
             <StoreProvider>
                 <CoPaxList />
             </StoreProvider>

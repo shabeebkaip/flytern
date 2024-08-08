@@ -151,7 +151,7 @@ const HotelSearch = (props) => {
               : "lg:col-span-10"
             }`}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-5 lg:gap-0">
             <HotelSummary />
             {hotelLoader ? null : (
               <ModifySearch

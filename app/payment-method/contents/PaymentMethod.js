@@ -102,7 +102,7 @@ const PaymentMethodChild = ({gatewayList,refrence}) => {
                 }
               </div>
             </div>
-            <div className='grid grid-cols-10 gap-10 '>
+            <div className='gap-10 md:grid md:grid-cols-10 '>
               <div className='flex flex-col col-span-10 gap-5 sm:col-span-10 sm:gap-10 lg:col-span-7'>
 
                 {

@@ -200,7 +200,7 @@ const ProfileInputs = () => {
                 />
             </div>
             <div className='flex flex-col gap-4 pb-10 mt-8'>
-                <div className='flex flex-col grid-cols-2 gap-2 lg:gap-4 sm:grid'>
+                <div className='flex flex-col grid-cols-2 gap-5 sm:grid'>
                     <CustomTextField
                         label={translation?.first_name}
                         value={editProfile.firstName}
@@ -361,7 +361,7 @@ const ProfileInputs = () => {
                     </div>
                 </div>
             </div>
-            <button className='h-12 mt-3 text-base font-medium text-white rounded-md sm:w-64 bg-emerald-800' onClick={onSubmit}>{translation?.add}</button>
+            <button className='w-40 h-12 mt-3 text-base font-medium text-white rounded-md sm:w-64 bg-emerald-800' onClick={onSubmit}>{translation?.add}</button>
             <OtpModal isOtpModalOpen={isOtpModalOpen} handleClose={() => setIsOtpModalOpen(false)}
                 verifyOtpFn={(data) => onOtpVerification({ otp: data, userID: userId })}
             />

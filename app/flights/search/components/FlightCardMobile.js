@@ -21,18 +21,18 @@ const FlightCardMobile = ({ flight, index, flightIndex, flightResults, lang }) =
     return (
         <div className='flex flex-col gap-5 p-5 bg-white rounded-lg '>
 
-            <div className="flex flex-col   gap-4 pb-4 border-b">
+            <div className="flex flex-col gap-4 pb-4 border-b">
                 {flight && flight.dTOSegments && flight.dTOSegments.length
                     ? flight.dTOSegments.map((item, index) => (
                         <div className='' key={index}>
-                            <div className=' flex justify-start '>
-                                <Image w={64} height={40} className='object-contain w-16 h-10' src={item.airlineimgurl} alt="" />
+                            <div className='flex justify-start '>
+                                <Image width={64} height={40} className='object-contain w-16 h-10' src={item.airlineimgurl} alt="" />
                             </div>
 
-                            <div className="flex md:items-center items-start justify-between w-full ">
+                            <div className="flex items-start justify-between w-full md:items-center ">
                                 <div className='w-[25%] flex flex-col items-start'>
-                                    <div className='flex flex-col sm:flex-row items-center gap-2'>
-                                        <h3 className="text-sm text-emerald-800 font-semibold ">
+                                    <div className='flex flex-col items-center gap-2 sm:flex-row'>
+                                        <h3 className="text-sm font-semibold text-emerald-800 ">
                                             {item.from}
                                         </h3>
                                         <h3 className="text-[9px] sm:text-sm font-normal  text-font-gray">{item.fromCountry}{" "} </h3>
@@ -42,7 +42,7 @@ const FlightCardMobile = ({ flight, index, flightIndex, flightResults, lang }) =
                                 </div>
                                 <div className="flex flex-col items-center justify-center h-full col-span-4 gap-2 w-[50%]">
 
-                                    <div className="flex justify-center items-center w-full">
+                                    <div className="flex items-center justify-center w-full">
                                         {selectedLanguageAndCountry?.language?.code === "ar" ? (
                                             <>
                                                 <Image width={40} height={40} className="w-[70%] " src={"/misc/track2.svg"} alt="" />
@@ -61,15 +61,15 @@ const FlightCardMobile = ({ flight, index, flightIndex, flightResults, lang }) =
                                             </>
                                         )}
                                     </div>
-                                    <div className="flex flex-col sm:flex-row justify-center items-center gap-3 ">
+                                    <div className="flex flex-col items-center justify-center gap-3 sm:flex-row ">
                                         <div className="flex items-center justify-center px-2 py-1 text-xs font-medium rounded-md font-inter bg-tag-color text-tag-color"><AccessTimeIcon fontSize="small" /> : {item.travelTime}</div>
                                         {
                                             item.baggageDisplay ? <div className="flex items-center justify-center px-2 py-1 text-xs font-medium rounded-md font-inter bg-tag-color text-tag-color"><BusinessCenterIcon fontSize="small" /> : {item.baggageDisplay.replace(/,/g, '')}</div> : null}
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-end  w-[25%]">
-                                    <div className='flex flex-col sm:flex-row items-center gap-2'>
-                                        <h3 className="text-sm  text-emerald-800 font-semibold">
+                                    <div className='flex flex-col items-center gap-2 sm:flex-row'>
+                                        <h3 className="text-sm font-semibold text-emerald-800">
                                             {item.to}
                                         </h3>
                                         <h3 className="text-[9px] sm:text-sm font-normal  text-font-gray"> {item.toCountry}</h3>
@@ -109,7 +109,7 @@ const FlightCardMobile = ({ flight, index, flightIndex, flightResults, lang }) =
 
                     {
                         flight.moreOptioncount ?
-                            <span className="xl:text-sm text-xs text-right cursor-pointer text-emerald-800" onClick={handleMoreOptionsClick}>
+                            <span className="text-xs text-right cursor-pointer xl:text-sm text-emerald-800" onClick={handleMoreOptionsClick}>
                                 {flight.moreOptioncount} {translation?.more_options_available}
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className={`inline-block w-4 h-4 ml-1 ${more ? 'transform rotate-180' : ''}`}>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
