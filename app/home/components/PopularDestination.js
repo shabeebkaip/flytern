@@ -45,7 +45,7 @@ const PopularDestination = () => {
             <SwiperSlide key={index}
               onClick={() => {
                 if (typeof window !== 'undefined') {
-                  window.location.href = `/packages/details/${data.refID}`;
+                  window.location.href = `/packages/${data.refID}`;
                 }
               }}
             >
