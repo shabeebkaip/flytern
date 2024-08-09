@@ -30,10 +30,10 @@ const GuestDetails = () => {
                     <PhoneIconSvg color={'#066651'} />
                     <h4 className='text-base font-medium text-black md:text-lg '>{selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.insurance_summary : 'Contact Details'}</h4>
                 </div>
-                <div className='flex  items-center gap-4 sm::gap-7 text-stone-500  text-[8px] sm:text-xs md:text-sm font-medium'>
+                <div className='flex  items-center gap-4 sm::gap-7 text-stone-500  text-[14px] sm:text-[14px] md:text-sm font-medium'>
                     <h6>{contactDc.email}</h6>
                 </div>
-                <div className='flex  items-center gap-4 sm::gap-7 text-stone-500  text-[8px] sm:text-xs md:text-sm font-medium'>
+                <div className='flex  items-center gap-4 sm::gap-7 text-stone-500  text-[14px] sm:text-[14px] md:text-sm font-medium'>
                     <h6>{contactDc.countryCode}</h6>
                     <h6>{contactDc.mobileNumber}</h6>
                 </div>
@@ -41,7 +41,7 @@ const GuestDetails = () => {
             </div>
             <div className='flex items-center gap-1 cursor-pointer' onClick={handleEditClick}>
                 <EditIconSvg color='#519CEC' />
-                <h3 className='text-blue-400 text-[10px] sm:text-xs md:text-sm font-bold '>{selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.edit : 'Edit'}</h3>
+                <h3 className='text-blue-400 text-[14px] sm:text-xs md:text-[14px] font-bold '>{selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.edit : 'Edit'}</h3>
             </div>
 
         </div>

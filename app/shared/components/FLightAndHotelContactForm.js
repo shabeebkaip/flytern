@@ -39,6 +39,7 @@ const FLightAndHotelContactForm = ({ countryCode, profile, contactDc, hideButton
         }
     };
     const handleGuestUser = () => {
+        debugger
         let validationError = {
             email: contactDc?.email ? isValidEmail(contactDc?.email) ? '' : 'Please enter a valid email address' : 'Please enter email',
             mobileNumber: contactDc?.mobileNumber ? '' : 'Please enter mobile number',

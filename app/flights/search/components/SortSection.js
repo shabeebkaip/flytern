@@ -44,7 +44,7 @@ const SortSection = (props) => {
     <div className="flex flex-col justify-between gap-10 lg:justify-end md:flex-row md:items-center 2xl:gap-0">
 
       <div>
-        <div className="flex justify-between gap-2 mt-4 md:flex-col lg:hidden md:justify-start md:mt-0">
+        <div className="flex flex-col justify-between gap-2 mt-4 lg:hidden md:justify-start md:mt-0">
           <div className="flex justify-center gap-1">
             <div
               className="flex items-center justify-center w-8 h-8 bg-white rounded-md cursor-pointer sm:h-10 sm:w-10"
@@ -64,7 +64,7 @@ const SortSection = (props) => {
           <div className="">
             <Popover placement="bottom-end" open={mobileSort} handler={setMobileSort}>
               <PopoverHandler>
-                <div className="flex items-center justify-between h-8 px-3 bg-white rounded-md sm:h-10">
+                <div className="flex items-center justify-between h-10 px-3 bg-white rounded-md sm:h-10">
                   <div className="flex items-center gap-2">
                     <Image
                       width={24}

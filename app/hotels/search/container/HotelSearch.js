@@ -167,7 +167,7 @@ const HotelSearch = (props) => {
           )}
           <div className="flex items-center justify-between mt-4">
             {hotelLoader ? null : hotelsList?.length ? (
-              <h3 className="hidden text-base font-medium text-black md:flex ">
+              <h3 className="flex text-base font-bold text-black ">
                 {translation?.available_hotel}
               </h3>
             ) : null}
