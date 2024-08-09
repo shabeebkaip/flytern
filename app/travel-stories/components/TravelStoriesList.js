@@ -29,7 +29,12 @@ const TravelStoriesList = ({ type }) => {
       {loader ? (
         <SuspenseLoader />
       ) : (
-        <TitleCard topMargin='0' title={<h4>{translation?.travel_stories}</h4>}>
+        
+        // Usage in a component
+<TitleCard
+  topMargin='0'
+  title={<h4 className="font-inter text-18px font-medium leading-21.78 text-left">{translation?.travel_stories}</h4>}>
+
           {loading ?
             <div className='grid gap-10 mt-5 sm:grid-cols-2'>
               {
@@ -52,7 +57,7 @@ const TravelStoriesList = ({ type }) => {
                   <div className='flex flex-col justify-start gap-3' key={index}>
                     {type === 'profile' ? (
                       <div className='w-[300px] h-[300px]'>
-                        <Image src={story?.fileUrl} alt='image' className='w-full h-full rounded-md object-cover' width={1000} height={1000}  />
+                        <Image src={story?.fileUrl} alt='image' className='object-cover w-full h-full rounded-md' width={1000} height={1000}  />
                       </div>
                     ) : story.urlType === 'VIDEO' ? (
                       <ReactPlayer url={story?.url} width='100%' height='100%' controls />
