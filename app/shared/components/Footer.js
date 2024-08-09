@@ -43,14 +43,14 @@ const FooterChild = () => {
             {
                 loading || genericLoader || saveTravellerLoader || paymentWaitLoader || buttonLoader ?
                     null :
-                    <div className='container mx-auto px-5'>
+                    <div className='container px-5 mx-auto'>
                         <div className='grid lg:grid-cols-10'>
                             <div className='grid grid-cols-2 gap-10 w-full lg:grid-cols-5  lg:col-span-10  items-baseline pt-[50px] '>
                                 <div className='flex flex-col gap-3 cursor-pointer'>
                                     <div>
                                         <h3 className='text-lg font-bold text-black '>{translation?.explore}</h3>
                                     </div>
-                                    <div className='flex flex-col gap-4 text-sm font-normal cursor-pointer text-neutral-400'>
+                                    <div className='flex flex-col gap-4 text-sm font-normal cursor-pointer text-[#9C9C9C]'>
                                         <Link className='hover:text-emerald-800' href="/" ><h6>{translation?.home}</h6></Link>
                                         <Link className='hover:text-emerald-800' href='/flights' >{translation?.flights}</Link>
                                         <Link className='hover:text-emerald-800' href='/hotels'>{translation?.hotels}</Link>
@@ -63,7 +63,7 @@ const FooterChild = () => {
                                     <div>
                                         <h3 className='text-lg font-bold text-black '>{translation?.about}</h3>
                                     </div>
-                                    <div className='flex flex-col gap-4 text-sm font-normal cursor-pointer text-neutral-400'>
+                                    <div className='flex flex-col gap-4 text-sm font-normal cursor-pointer text-[#9C9C9C]'>
                                         <Link className='hover:text-emerald-800' href="/aboutus"><h6>{translation?.about_us}</h6></Link>
                                         <Link className='hover:text-emerald-800' href="/terms-conditions"><h6>{translation?.terms_n_conditions}</h6></Link>
                                         <Link className='hover:text-emerald-800' href="/privacy-policy"><h6>{translation?.privacy_policy}</h6></Link>
@@ -74,7 +74,7 @@ const FooterChild = () => {
                                     <div>
                                         <h3 className='text-lg font-bold text-black'>{translation?.for_users}</h3>
                                     </div>
-                                    <div className='flex flex-col gap-4 text-sm font-normal text-neutral-400'>
+                                    <div className='flex flex-col gap-4 text-sm font-normal text-[#9C9C9C]'>
                                         <Link className='hover:text-emerald-800' href="/login"><h6>{translation?.login}</h6></Link>
                                         <Link className='hover:text-emerald-800' href="/register"><h6>{translation?.register}</h6></Link>
                                         <Link className='hover:text-emerald-800' href='/settings'>{translation?.settings}</Link>

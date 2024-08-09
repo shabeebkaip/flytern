@@ -73,8 +73,8 @@ const LoginView = () => {
   const { translation } = useSelector((state) => state.sharedState)
   return (
     <div className='flex flex-col items-center justify-center h-full pt-8 pb-8 bg-white md:items-start md:pb-0 md:pt-0'>
-      <div className='container flex flex-col items-center gap-6 px-10 mx-auto md:items-start lg:px-32'>
-        <div className="flex flex-col gap-[15px]  md:items-start">
+      <div className='container flex flex-col items-start gap-6 px-10 mx-auto lg:px-32'>
+        <div className="flex flex-col gap-[15px] items-start">
           <h4 className="text-xl font-bold text-black sm:text-2xl ">{translation?.sign_in}</h4>
           <h6 className="text-base font-bold text-black sm:text-lg ">{translation?.welcome_flyturn}</h6>
           <p className="text-stone-500  text-xs sm:text-lg font-normal  leading-[18px]">{translation?.login_head_content}</p>
@@ -128,7 +128,7 @@ const LoginView = () => {
         </div>
         <div class="text-center flex gap-2 justify-center items-center w-full lg:max-w-[450px]">
           <span className="text-xs font-normal text-black sm:text-sm ">{translation?.continue_as_a} </span>
-          <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }} className="text-xs font-medium text-orange-400 sm:text-sm cursor-pointer ">{translation?.guest_user}  </div></div>
+          <div onClick={() => { if (typeof window !== "undefined") { window.location.href = "/" } }} className="text-xs font-medium text-orange-400 cursor-pointer sm:text-sm ">{translation?.guest_user}  </div></div>
       </div>
     </div>
   )
