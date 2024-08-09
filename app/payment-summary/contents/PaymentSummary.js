@@ -14,12 +14,12 @@ import PaymentSuccess from '../components/PaymentSuccess';
 import StoreProvider from '@/app/StoreProvider';
 import { useEffect } from 'react';
 
-const PaymentSummaryChild = ({ paymentStatus }) => {
+const PaymentSummaryChild = ({ paymentStatus,redirection }) => {
   const { selectedLanguageAndCountry } = useAppSelector((state) => state.sharedState);
 
 
   const _flightservice = paymentStatus?._flightservice;
-  const _hotelservice = paymentStatus._hotelservice;
+  const _hotelservice = paymentStatus?._hotelservice;
   const _bookingInfo = paymentStatus?._bookingInfo;
   const isIssued = paymentStatus?.isIssued;
   const _paymentInfo = paymentStatus?._paymentInfo;
@@ -37,6 +37,13 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
   const isRefund = paymentStatus?._flightservice?._flightDetail?.isRefund;
 
   const { translation } = useAppSelector((state) => state.sharedState)
+
+  useEffect(() => {
+    console.log(redirection); 
+    if (redirection) {
+      window.location.href = redirection;
+    }
+  }, [redirection]);
   return (
     <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} container mx-auto px-4`}>
       {
@@ -146,10 +153,10 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
   )
 }
 
-const PaymentSummary = ({ paymentStatus }) => {
+const PaymentSummary = ({ paymentStatus, redirection }) => {
   return (
     <StoreProvider>
-      <PaymentSummaryChild paymentStatus={paymentStatus} />
+      <PaymentSummaryChild paymentStatus={paymentStatus} redirection={redirection} />
     </StoreProvider>
   )
 }

@@ -9,6 +9,7 @@ const page = async ({ searchParams, params }) => {
     const [extractedRef, bookingNumber] = ref ? ref.split('/') : [null, null];
     const decryptedRef = decryptId(ref);
     console.log(decryptedRef,'ll');
+   
     
     
     const cookieStore = cookies();
@@ -20,8 +21,12 @@ const page = async ({ searchParams, params }) => {
 
     let paymentSummary;
     let bookingRef;
+    let redirection = null;
+
     try {
         if (bookingNumber) {
+            console.log(bookingNumber);
+            
             const response = await axios.post(`https://flytern.com/coreapi/api/Payments/CheckGatewayStatus`, { bookingRef: bookingNumber },
                 {
                     headers: {
@@ -30,7 +35,9 @@ const page = async ({ searchParams, params }) => {
                 }
             )
             bookingRef = response.data.data.bookingRef
-            if (response.data.data) {
+            console.log(response.data.data);
+            
+            if (response.data.data.isSuccess) {
                 const response = await axios.post(`https://flytern.com/coreapi/api/Payments/Confirmation`, { bookingRef: bookingRef },
                     {
                         headers: {
@@ -39,9 +46,15 @@ const page = async ({ searchParams, params }) => {
                     }
                 );
                 paymentSummary = response.data.data
+                console.log(paymentSummary);
+                
             } else {
                 console.log("error");
-                // window.location.href = `${window.location.origin}/payment-method/?ref=${extractedRef}`
+                const decryptedRefs = decryptId(bookingRef);
+                console.log(decryptedRefs);
+                
+                redirection=`/payment-method/?ref=${decryptedRefs}`;
+                
             }
 
         } else {
@@ -60,7 +73,7 @@ const page = async ({ searchParams, params }) => {
     }
     return (
         <div className=' container mx-auto'>
-            <PaymentSummary paymentStatus={paymentSummary} />
+            <PaymentSummary paymentStatus={paymentSummary} redirection={redirection} />
         </div>
     )
 }

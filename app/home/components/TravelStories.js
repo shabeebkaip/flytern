@@ -55,13 +55,13 @@ const TravelStories = () => {
                   />
                 ) : (
                   <div className='md:h-96'>
-                    <Image width={500} height={500} src={story.url} alt='' className='object-cover w-full h-40 rounded-md sm:h-48 md:h-full' />
+                    <Image width={1000} height={1000} src={story.url} alt='' className='object-cover w-full h-40 rounded-md sm:h-48 md:h-full' />
                   </div>
                 )}
                 <div className='flex flex-col gap-5'>
                   <div className='flex flex-col justify-between gap-2 mt-3 md:flex-row md:items-center'>
                     <div className='flex items-center gap-3 '>
-                      <Image width={500} height={500} src={story.profileUrl} alt='' className='w-6 h-6 rounded-full' />
+                      <Image width={1000} height={1000} src={story.profileUrl} alt='' className='w-6 h-6 rounded-full' />
                       <p className="text-black text-[8px] sm:text-xs font-medium ">{story.name}</p>
                     </div>
                     <div>
