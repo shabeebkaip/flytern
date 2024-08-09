@@ -122,9 +122,9 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
             <Image src={isHome ? "/header/logo-green.svg" : "/header/logo-white.svg"} alt="logo" width={150} height={50} />
           </Link>
         </div>
-        <div>
+        {/* <div className='md:hidden'>
           <HeaderNotifiction />
-        </div>
+        </div> */}
         <div className="items-center hidden lg:flex gap-9"  >
           <Link href={"/"} className={`text-sm font-normal text-center cursor-pointer hover:text-orange-400  ${isHome ? "text-black" : "text-white"}`}>
             <div className="flex items-center gap-4 cursor-pointer">

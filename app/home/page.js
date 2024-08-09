@@ -8,6 +8,9 @@ const Home = dynamic(() => import('@/app/home/container/Home'))
 
 const MainHome = async () => {
   const myCookie = getCookie('accessToken');
+  if (!myCookie) {
+    return null
+  }
   const data = await fetchExploresApi(myCookie);
   return (
     <div>

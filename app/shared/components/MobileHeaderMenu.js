@@ -6,12 +6,12 @@ import ShareIcon from '@mui/icons-material/Share';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HelpIcon from '@mui/icons-material/Help';
 import PhoneIcon from '@mui/icons-material/Phone';
-// import { clearAllCookies, setGlobalCookie } from '../../utils';
 import { useSelector } from 'react-redux';
-// import { authApiService } from '../../utils/authApi';
 import FlightIcon from '@mui/icons-material/Flight';
+import { usePathname } from 'next/navigation';
 
 const MobileHeaderMenu = () => {
+    const pathname = usePathname();
     const [isNavOpen, setIsNavOpen] = useState(false);
     const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     const { loading, profile } = useSelector(state => state.profileState)
@@ -28,8 +28,7 @@ const MobileHeaderMenu = () => {
     const closeNav = () => {
         setIsNavOpen(false);
     };
-    const location = typeof window !== "undefined" ? window.location : null;
-    const isHome = location.pathname === "/";
+    const isHome = pathname === "/";
     const userLogout = () => {
         clearAllCookies();
         setTimeout(() => {
@@ -45,7 +44,7 @@ const MobileHeaderMenu = () => {
                 });
         }, 1000);
     }
-    const  { translation} = useSelector((state) =>  state.sharedState)
+    const { translation } = useSelector((state) => state.sharedState)
     return (
         <div className="w-[30px]">
             <div className='w-full'>
@@ -110,22 +109,22 @@ const MobileHeaderMenu = () => {
 
                     {
                         (profile && Object.keys(profile).length)
-                        ?
-                        <div className='flex p-4 item-center'>
-                            <button className='text-center text-white text-base font-normal px-2 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full' onClick={() => userLogout()}>
-                            {translation?.logout}
-                            </button>
-                        </div>
-                        :
-                        <div className='flex gap-4 p-4 '>
-                        <button className='text-center text-white text-base font-normal px-2 py-1.5 bg-orange-400 rounded-md justify-center items-center h-12 w-full' onClick={() => navigate(`/login`)}>
-                            {translation?.sign_in}
-                        </button>
-                        <button className='text-center text-white text-normal font-medium px-2 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full' onClick={() => navigate(`/register`)}>
-                            {translation?.create_account}
-                        </button>
-                        </div>
-                        
+                            ?
+                            <div className='flex p-4 item-center'>
+                                <button className='text-center text-white text-base font-normal px-2 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full' onClick={() => userLogout()}>
+                                    {translation?.logout}
+                                </button>
+                            </div>
+                            :
+                            <div className='flex gap-4 p-4 '>
+                                <button className='text-center text-white text-base font-normal px-2 py-1.5 bg-orange-400 rounded-md justify-center items-center h-12 w-full' onClick={() => navigate(`/login`)}>
+                                    {translation?.sign_in}
+                                </button>
+                                <button className='text-center text-white text-normal font-medium px-2 py-1.5 bg-emerald-800 rounded-md justify-center items-center h-12 w-full' onClick={() => navigate(`/register`)}>
+                                    {translation?.create_account}
+                                </button>
+                            </div>
+
                     }
                 </div>
             </Drawer>
