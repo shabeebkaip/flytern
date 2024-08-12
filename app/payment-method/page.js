@@ -20,6 +20,8 @@ const page = async ({ searchParams }) => {
     }
     const myCookie = accessTokenCookie.value.replace(/(^")|("$)/g, '');
     let gatewayList;
+    console.log(decryptedRef,'ll');
+    
     try {
       
 
@@ -32,6 +34,8 @@ const page = async ({ searchParams }) => {
 
 
       gatewayList = response.data.data;
+      console.log(gatewayList);
+      
     } catch (error) {
       console.error('Error calling getgatewayApi:', error);
       gatewayList = []; // or handle the error as appropriate

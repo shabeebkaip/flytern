@@ -19,7 +19,8 @@ const page = async ({ searchParams, params }) => {
     const myCookie = accessTokenCookie.value.replace(/(^")|("$)/g, '');
 
     let paymentSummary;
-    let bookingRef;
+    let bookingRef = bookingNumber ? extractedRef : decryptedRef;
+    let isSuccess;
     try {
         if (bookingNumber) {
             const response = await axios.post(`https://flytern.com/coreapi/api/Payments/CheckGatewayStatus`, { bookingRef: bookingNumber },
@@ -30,7 +31,8 @@ const page = async ({ searchParams, params }) => {
                 }
             )
             bookingRef = response.data.data.bookingRef
-            if (response.data.data) {
+            isSuccess=response.data.data.isSuccess
+            if (response.data.data.isSuccess) {
                 const response = await axios.post(`https://flytern.com/coreapi/api/Payments/Confirmation`, { bookingRef: bookingRef },
                     {
                         headers: {
@@ -60,7 +62,7 @@ const page = async ({ searchParams, params }) => {
     }
     return (
         <div className=' container mx-auto'>
-            <PaymentSummary paymentStatus={paymentSummary} />
+            <PaymentSummary paymentStatus={paymentSummary} isSuccess={isSuccess} bookingRef={bookingRef}  />
         </div>
     )
 }
