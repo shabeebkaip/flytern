@@ -17,7 +17,7 @@ const BookingInfo = ({ _bookingInfo }) => {
                     null : <div className='w-full h-[1px] bg-orange-100 my-4'></div> :
                     <LabelValue label={item?.title} value={item?.information} styles={"mb-4"} pStyles='text-[12px]' />
                   :
-                  <h4 className='mb-4 font-semibold'>{item?.information}</h4>
+                  <h4 className='mb-4 font-semibold text-[16px]'>{item?.information}</h4>
               )
             })
           }
