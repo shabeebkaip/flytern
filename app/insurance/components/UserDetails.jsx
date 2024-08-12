@@ -65,6 +65,14 @@ const UserDetails = () => {
     };
 
     const addInsuranceUserDetails = (params) => {
+        let validateInput = {
+            firstName: data.firstName ? '' : 'firstName is requires',
+            lastName: data.lastName ? '' : 'lastName is requires',
+            dateOfBirth: data.dateOfBirth ? '' : 'dateOfBirth is requires',
+            nationalityCode: data.nationalityCode? '' : 'nationalityCodeis requires',
+            civilID: data.civilID? '' : 'civilID is requires',
+            nationalityCode: data.nationalityCode? '' : 'nationalityCode is requires',
+        }
         if (!validateForm()) {
             return;
         }
