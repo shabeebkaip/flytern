@@ -1,4 +1,4 @@
-import { encryptId} from '@/lib/utils'
+import { encryptId } from '@/lib/utils'
 import Image from 'next/image'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 
 const FlightBookingDetailsList = ({ flight }) => {
     const encryptedBookingRef = encryptId(flight.bookingRef)
-    
+
     const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
     return (
         <div className="container grid items-center justify-between w-full grid-cols-12 p-4 mx-auto overflow-hidden bg-white rounded-md ">
@@ -50,7 +50,7 @@ const FlightBookingDetailsList = ({ flight }) => {
                                 className='w-32 h-10 text-white rounded-md bg-dark-green relative z-10'
                                 onClick={() => {
                                     if (typeof window !== 'undefined') {
-                                        window.location.href = `/payment-summary/?ref=${encryptedBookingRef}`;
+                                        window.location.href = `/payment-summary/?mode=view&ref=${encryptedBookingRef}`;
                                     }
                                 }}
                             >

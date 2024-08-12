@@ -42,7 +42,7 @@ const HotelBookingDetailsList = ({ hotel }) => {
                                 className='w-32 h-10 text-white rounded-md bg-dark-green'
                                 onClick={() => {
                                     if (typeof window !== 'undefined') {
-                                        window.location.href = `/payment-summary/?ref=${encryptedBookingRef}`;
+                                        window.location.href = `/payment-summary/?mode=view&ref=${encryptedBookingRef}`;
                                     }
                                 }}
                             >
