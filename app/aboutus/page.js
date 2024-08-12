@@ -5,7 +5,7 @@ import StoreProvider from '../StoreProvider'
 
 const page = () => {
     return (
-        <div className='container mx-auto'>
+        <div className='container px-4 py-8 mx-auto md:px-0'>
             <StoreProvider>
                 <AboutUs />
             </StoreProvider>

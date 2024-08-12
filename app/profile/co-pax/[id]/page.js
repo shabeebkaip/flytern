@@ -6,7 +6,7 @@ import { SnackbarProvider } from 'notistack'
 
 const page = ({params}) => {
     return (
-        <div className=' container mx-auto'>
+        <div className='container px-4 mx-auto  md:px-0'>
             <SnackbarProvider>
                 <StoreProvider>
                     <CopaxEdit params={params.id} />
