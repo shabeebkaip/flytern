@@ -30,7 +30,15 @@ const page = async ({ searchParams, params }) => {
                 }
             )
             bookingRef = response.data.data.bookingRef
+<<<<<<< Updated upstream
             if (response.data.data) {
+=======
+            const decryptedRefs = decryptId(response.data.data.bookingRef);
+
+            console.log(response.data.data);
+            
+            if (response.data.data.isSuccess) {
+>>>>>>> Stashed changes
                 const response = await axios.post(`https://flytern.com/coreapi/api/Payments/Confirmation`, { bookingRef: bookingRef },
                     {
                         headers: {
@@ -41,7 +49,15 @@ const page = async ({ searchParams, params }) => {
                 paymentSummary = response.data.data
             } else {
                 console.log("error");
+<<<<<<< Updated upstream
                 // window.location.href = `${window.location.origin}/payment-method/?ref=${extractedRef}`
+=======
+                
+                console.log(decryptedRefs);
+                
+                redirection=`/payment-method/?ref=${decryptedRefs}`;
+                
+>>>>>>> Stashed changes
             }
 
         } else {
