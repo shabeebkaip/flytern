@@ -19,7 +19,8 @@ const page = async ({ searchParams, params }) => {
     const myCookie = accessTokenCookie.value.replace(/(^")|("$)/g, '');
 
     let paymentSummary;
-    let bookingRef;
+    let bookingRef = bookingNumber ? extractedRef : decryptedRef;
+    let isSuccess;
     try {
         if (bookingNumber) {
             const response = await axios.post(`https://flytern.com/coreapi/api/Payments/CheckGatewayStatus`, { bookingRef: bookingNumber },
@@ -30,15 +31,8 @@ const page = async ({ searchParams, params }) => {
                 }
             )
             bookingRef = response.data.data.bookingRef
-<<<<<<< Updated upstream
-            if (response.data.data) {
-=======
-            const decryptedRefs = decryptId(response.data.data.bookingRef);
-
-            console.log(response.data.data);
-            
+            isSuccess=response.data.data.isSuccess
             if (response.data.data.isSuccess) {
->>>>>>> Stashed changes
                 const response = await axios.post(`https://flytern.com/coreapi/api/Payments/Confirmation`, { bookingRef: bookingRef },
                     {
                         headers: {
@@ -49,15 +43,7 @@ const page = async ({ searchParams, params }) => {
                 paymentSummary = response.data.data
             } else {
                 console.log("error");
-<<<<<<< Updated upstream
                 // window.location.href = `${window.location.origin}/payment-method/?ref=${extractedRef}`
-=======
-                
-                console.log(decryptedRefs);
-                
-                redirection=`/payment-method/?ref=${decryptedRefs}`;
-                
->>>>>>> Stashed changes
             }
 
         } else {
@@ -76,7 +62,7 @@ const page = async ({ searchParams, params }) => {
     }
     return (
         <div className=' container mx-auto'>
-            <PaymentSummary paymentStatus={paymentSummary} />
+            <PaymentSummary paymentStatus={paymentSummary} isSuccess={isSuccess} bookingRef={bookingRef}  />
         </div>
     )
 }

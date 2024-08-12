@@ -13,13 +13,14 @@ import { useAppSelector } from '@/lib/hooks';
 import PaymentSuccess from '../components/PaymentSuccess';
 import StoreProvider from '@/app/StoreProvider';
 import { useEffect } from 'react';
+import { decryptId, encryptId } from '@/lib/utils';
 
 const PaymentSummaryChild = ({ paymentStatus }) => {
   const { selectedLanguageAndCountry } = useAppSelector((state) => state.sharedState);
 
 
   const _flightservice = paymentStatus?._flightservice;
-  const _hotelservice = paymentStatus._hotelservice;
+  const _hotelservice = paymentStatus?._hotelservice;
   const _bookingInfo = paymentStatus?._bookingInfo;
   const isIssued = paymentStatus?.isIssued;
   const _paymentInfo = paymentStatus?._paymentInfo;
@@ -146,7 +147,19 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
   )
 }
 
-const PaymentSummary = ({ paymentStatus }) => {
+const PaymentSummary = ({ paymentStatus,isSuccess,bookingRef}) => {
+
+  const decryptedRef = encryptId(bookingRef)
+
+ 
+  
+  
+
+ useEffect(() => {
+    if (decryptedRef && isSuccess === false) {
+      window.location.href = `/payment-method?ref=${decryptedRef}`;
+    }
+  }, [isSuccess, decryptedRef]);
   return (
     <StoreProvider>
       <PaymentSummaryChild paymentStatus={paymentStatus} />

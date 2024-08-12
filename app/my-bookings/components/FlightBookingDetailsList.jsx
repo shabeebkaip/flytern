@@ -47,7 +47,7 @@ const FlightBookingDetailsList = ({ flight }) => {
                     {
                         flight.status === "ISSUED" ?
                             <button
-                                className='w-32 h-10 text-white rounded-md bg-dark-green'
+                                className='w-32 h-10 text-white rounded-md bg-dark-green relative z-10'
                                 onClick={() => {
                                     if (typeof window !== 'undefined') {
                                         window.location.href = `/payment-summary/?ref=${encryptedBookingRef}`;
