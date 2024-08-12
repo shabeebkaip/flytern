@@ -55,7 +55,11 @@ const ChangePasswordForm = () => {
                 autoHideDuration: 2000,
                 anchorOrigin: { vertical: 'top', horizontal: 'right' },
             });
-
+            setData({
+                oldPassword: '',
+                newPassword: '',
+                reEnteredPassword: ''
+            });
         }
     }
 

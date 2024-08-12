@@ -55,7 +55,7 @@ const EditCopax = ({ coPax }) => {
   const deleteCopax = () => {
     const data = deleteCopaxApi(coPax.id);
     if (data) {
-      enqueueSnackbar("Successfull", {
+      enqueueSnackbar("Copax deleted successfully", {
         variant: "success",
         anchorOrigin: { vertical: "top", horizontal: "right" },
       });

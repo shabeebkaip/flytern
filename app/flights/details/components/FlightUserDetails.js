@@ -227,7 +227,14 @@ const FlightUserDetails = (props) => {
           return {
             ...item,
             [key]: '',
-            Gender: ''
+            Gender: '',
+            LastName:'',
+            FirstName:'',
+            DateOfBirth:'',
+            PassportNumber:'',
+            NationalityCode:'',
+            PassportExpiryDate:'',
+            PassportIssuedCountryCode:''
           }
         } else {
           return {
