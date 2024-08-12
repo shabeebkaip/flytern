@@ -3,7 +3,7 @@ import PrivacyPolicy from './contents/PrivacyPolicy'
 
 const page = () => {
   return (
-    <div>
+    <div className='px-4 py-8 md:px-0'>
       <PrivacyPolicy/>
     </div>
   )

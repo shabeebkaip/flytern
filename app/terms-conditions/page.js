@@ -5,7 +5,7 @@ import StoreProvider from '../StoreProvider'
 
 const page = () => {
   return (
-    <div>
+    <div className='px-4 py-8 md:px-0'>
          <StoreProvider>
          <TermsConditions/>
          </StoreProvider>
