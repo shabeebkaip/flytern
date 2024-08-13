@@ -15,7 +15,7 @@ const AddTraveller = (props) => {
   return (
     <div>
       <h4 className="mb-8 font-semibold text-green-800"> {title} {index + 1}</h4>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4 ">
+      <div className="grid grid-cols-1 gap-5 mb-4 md:grid-cols-2 ">
         {
           coPax?.length ?
             <Autocomplete
@@ -32,15 +32,15 @@ const AddTraveller = (props) => {
                   {...params}
                   label={translation.select_passenger}
                   InputLabelProps={{ shrink: true }}
-                  error={errors?.[index]?.Title ? true : false}
-                  helperText={errors?.[index]?.Title}
+                  // error={errors?.[index]?.Title ? true : false}
+                  // helperText={errors?.[index]?.Title}
                 />
               )}
               className=""
             /> : null
         }
       </div>
-      <div className="md:grid md:grid-cols-2 flex flex-col gap-5" >
+      <div className="flex flex-col gap-5 md:grid md:grid-cols-2" >
 
         {
           preTraveller?.titleList?.length ?
