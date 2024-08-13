@@ -36,14 +36,15 @@ const Settings = () => {
   };
 
   const addLanguage = () => {
+    debugger
     let payload = {
       countryCode: selectedCountry?.countryISOCode || '',
       language: selectedLanguages?.code || '',
       notificationEnabled: false,
       notificationToken: selectedLanguages?.code || '',
     };
-    setGlobalCookie('selectedCountryName', JSON.stringify(selectedCountry?.countryName), 1);
-    setGlobalCookie('selectedLanguage', JSON.stringify(selectedLanguages?.name), 1);
+    setGlobalCookie('selectedCountryName', JSON.stringify(selectedCountry?.countryName));
+    setGlobalCookie('selectedLanguage', JSON.stringify(selectedLanguages?.name));
     saveDeviceLanguage(payload)
       .then(response => {
         if (checkApiStatus(response)) {
@@ -52,11 +53,11 @@ const Settings = () => {
           setTimeout(() => {
             if (typeof window !== 'undefined') {
               if (payload.language === 'ar') {
-                window.location.href = '/'
-                window.location.reload();
+                window.location.href='/ar'
+                // window.location.reload();
               } else {
-                window.location.href = '/'
-                window.location.reload();
+                window.location.href='/'
+                // window.location.reload();
               }
             }
           }, 3000);
