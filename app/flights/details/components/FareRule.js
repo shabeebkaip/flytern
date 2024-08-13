@@ -15,7 +15,7 @@ const FareRule = (props) => {
         <TitleCard className='mt-4'
             title={
                 <div onClick={toggleAccordion} className="flex items-center justify-between cursor-pointer">
-                    <h3 className='font-semibold '>{selectedLanguageAndCountry?.language?.code === 'ar' ? arabic_translation.fare_rule : 'Fare Rule'}</h3>
+                    <h3 className='font-semibold '>{selectedLanguageAndCountry?.language?.code === 'ar' ? arabic_translation?.fare_rule : 'Fare Rule'}</h3>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className={`h-4 w-4 transform ${accordionOpen ? 'rotate-0' : '-rotate-180'} transition-transform duration-300`}

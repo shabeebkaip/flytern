@@ -28,8 +28,8 @@ export const getFetchLanguagesApi = async (token) => {
       }
     })
     let data = {
-      language: response?.data?.data?.languages?.find((item) => item.default),
-      country: response?.data?.data?.countries?.find((item) => item.isDefault === 1)
+      language: response?.data?.data?.languages?.find((item) => item?.default),
+      country: response?.data?.data?.countries?.find((item) => item?.isDefault === 1)
     }
     return data
   }
@@ -169,7 +169,7 @@ export const getFetchLanguageApi = async (dispatch) => {
         return response.data.data
       });
     let data = {
-      language: response?.languages?.find((item) => item.default === true),
+      language: response?.languages?.find((item) => item?.default === true),
       country: response?.countries?.find((item) => item.isDefault === 1)
     }
     dispatch(setLanguageAndCountry(data))

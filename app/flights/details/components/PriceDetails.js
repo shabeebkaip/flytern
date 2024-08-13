@@ -51,7 +51,7 @@ const PriceDetails = () => {
                             />
                             <div className="flex flex-col gap-2" >
                                 {item?.infos ? Object.values(item?.infos).map((info, index) => (
-                                    <div key={index} dangerouslySetInnerHTML={{ __html: info }} className={`${selectedClass?.class.includes(info) ? 'font-semibold' : ''}`}  ></div>
+                                    <div key={index} dangerouslySetInnerHTML={{ __html: info }} className={`${selectedClass?.class?.includes(info) ? 'font-semibold' : ''}`}  ></div>
                                 )) : null}
                             </div>
                             <div className='flex items-center w-full gap-3'>
@@ -64,7 +64,7 @@ const PriceDetails = () => {
                                 <div className='flex items-center w-full gap-3'>
                                     <Image width={200} height={200} className='w-16 h-16' src={"/misc/adult.png"} alt="" />
                                     <div className='flex flex-col w-1/2 gap-1 p-0'><h4 className='p-0 m-0 text-gray-500'>{translation?.child}</h4>
-                                        <h4 className='p-0 m-0'>{translation?.base_fare} : {parseFloat(item.childBase)?.toFixed(3)} {item?.currency}</h4>
+                                        <h4 className='p-0 m-0'>{translation?.base_fare} : {parseFloat(item?.childBase)?.toFixed(3)} {item?.currency}</h4>
                                     </div>
                                 </div>
                                 : null

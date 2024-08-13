@@ -15,6 +15,8 @@ const FooterChild = () => {
     const { saveTravellerLoader } = useSelector(state => state.insuranceState)
     const { paymentWaitLoader } = useSelector(state => state.paymentState)
     const { buttonLoader } = useSelector(state => state.hotelState)
+    const { selectedLanguageAndCountry } = useAppSelector((state) => state.sharedState);
+
     const dispatch = useDispatch()
     useEffect(() => {
         const getTerms = async () => {
@@ -43,7 +45,7 @@ const FooterChild = () => {
             {
                 loading || genericLoader || saveTravellerLoader || paymentWaitLoader || buttonLoader ?
                     null :
-                    <div className='container px-5 mx-auto'>
+                    <div className={`container px-5 mx-auto ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} `}>
                         <div className='grid lg:grid-cols-10'>
                             <div className='grid grid-cols-2 gap-10 w-full lg:grid-cols-5  lg:col-span-10  items-baseline pt-[50px] '>
                                 <div className='flex flex-col gap-3 cursor-pointer'>
