@@ -16,6 +16,8 @@ import Image from 'next/image';
 import OtpModal from '@/app/shared/components/OtpModal';
 
 
+
+
 const ProfileInputs = () => {
     const { profile } = useSelector(state => state.profileState);
     const dispatch = useDispatch();
@@ -29,6 +31,8 @@ const ProfileInputs = () => {
     const [selectedCountryCode, setSelectedCountryCode] = useState(profile.phoneCountryCode);
     const [isOtpModalOpen, setIsOtpModalOpen] = useState(false); // State variable for controlling the OTP modal
     const [userId, setUserId] = useState(null);
+    const [errors, setErrors] = useState({});
+
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -58,15 +62,18 @@ const ProfileInputs = () => {
             });
         }
     };
+    
 
-    const onChange = (field, value) => {
-        setEditProfile({
-            ...editProfile,
-            [field]: value
-        });
-    };
 
     const onMobileSubmit = () => {
+        if (!editedMobileNumber.trim() || !selectedCountryCode) {
+            enqueueSnackbar('Mobile number and country code are required', {
+                variant: 'error',
+                autoHideDuration: 2000,
+                anchorOrigin: { vertical: 'top', horizontal: 'right' }
+            });
+            return;
+        }
         const payload = {
             mobile: editedMobileNumber,
             countryCode: selectedCountryCode
@@ -105,6 +112,15 @@ const ProfileInputs = () => {
 
 
     const onEmailSubmit = () => {
+        if (!editedEmail.trim()) {
+          
+            enqueueSnackbar('Email is required', {
+                variant: 'error',
+                autoHideDuration: 2000,
+                anchorOrigin: { vertical: 'top', horizontal: 'right' }
+            });
+            return;
+        }
         updateEmailApi({ email: editedEmail })
             .then(response => {
                 if (checkApiStatus(response)) {
@@ -158,26 +174,59 @@ const ProfileInputs = () => {
             });
     }
     const onSubmit = () => {
-        let payload = new FormData();
-        payload.append('FirstName', editProfile.firstName);
-        payload.append('LastName', editProfile.lastName);
-        payload.append('dateOfBirth', editProfile.dateOfBirth);
-        payload.append('Gender', 'Male');
-        editProfile.countrySelect && payload.append('Nationality', editProfile.countrySelect.countryISOCode);
-        editProfile.passportSelect && payload.append('IssueCountry', editProfile.passportSelect.countryISOCode);
-        payload.append('phoneNumber', editProfile.phoneNumber);
-        payload.append('PassportNumber', editProfile.passportNumber);
-        payload.append('ExpiryDate', editProfile.passportExpiry);
-        payload.append('File', editProfile.File ? editProfile.File[0] : editProfile.imgUrl);
-        updateProfileApi(payload)
-            .then(response => {
-                if (checkApiStatus(response)) {
-                    enqueueSnackbar('Profile Updated Successfully', { variant: 'success', autoHideDuration: 2000, anchorOrigin: { vertical: 'top', horizontal: 'right' } });
-                } else {
-                    enqueueSnackbar('Something went wrong', { variant: 'error', autoHideDuration: 2000, anchorOrigin: { vertical: 'top', horizontal: 'right' } });
-                }
-            });
+       
+        const validationErrors = {
+            firstName: editProfile.firstName ? "" : "First name is required",
+            lastName: editProfile.lastName?.length >= 3 ? "" : "Last name must be at least 3 letters",
+            dateOfBirth: editProfile.dateOfBirth ? "" : "Date of birth is required",
+            phoneNumber: editedMobileNumber ? "" : "Phone number is required",
+            passportNumber: editProfile.passportNumber ? "" : "Passport number is required",
+            passportExpiry: editProfile.passportExpiry ? "" : "Passport expiry date is required",
+            nationalityCode: editProfile.nationalityCode ? "" : "Nationality is required",
+            passportIssuerCountryCode: editProfile.passportIssuerCountryCode ? "" : "Passport issuer country is required",
+        
+
+        };
+
+        if (Object.values(validationErrors).every(value => value === "")) {
+            let payload = new FormData();
+            payload.append('FirstName', editProfile.firstName);
+            payload.append('LastName', editProfile.lastName);
+            payload.append('dateOfBirth', editProfile.dateOfBirth);
+            payload.append('Gender', 'Male');
+            payload.append('Nationality', editProfile.nationalityCode);
+            payload.append('IssueCountry', editProfile.passportIssuerCountryCode);
+
+            // editProfile.countrySelect && payload.append('Nationality', editProfile.countrySelect.countryISOCode);
+            // editProfile.passportSelect && payload.append('IssueCountry', editProfile.passportSelect.countryISOCode);
+            payload.append('phoneNumber', editProfile.phoneNumber);
+            payload.append('PassportNumber', editProfile.passportNumber);
+            payload.append('ExpiryDate', editProfile.passportExpiry);
+            payload.append('File', editProfile.File ? editProfile.File[0] : editProfile.imgUrl);
+
+
+            updateProfileApi(payload)
+                .then(response => {
+                    if (checkApiStatus(response)) {
+                        enqueueSnackbar('Profile Updated Successfully', {
+                            variant: 'success',
+                            autoHideDuration: 2000,
+                            anchorOrigin: { vertical: 'top', horizontal: 'right' }
+                        });
+                        window.location.href = '/profile';
+                    } else {
+                        enqueueSnackbar('Something went wrong', {
+                            variant: 'error',
+                            autoHideDuration: 2000,
+                            anchorOrigin: { vertical: 'top', horizontal: 'right' }
+                        });
+                    }
+                });
+        } else {
+            setErrors(validationErrors);
+        }
     };
+
 
     const genderList = editProfile && editProfile.genderList;
     const { translation } = useSelector((state) => state.sharedState)
@@ -207,6 +256,9 @@ const ProfileInputs = () => {
                         className='bg-stone-50'
                         onChange={(e) => onFieldChange('firstName', e.target.value)}
                         autoComplete='off'
+                        error={!!errors.firstName}
+                        helperText={errors.firstName}
+                        onFocus={() => setErrors({ ...errors, firstName: '' })}
                     />
                     <CustomTextField
                         label={translation?.last_name}
@@ -214,6 +266,9 @@ const ProfileInputs = () => {
                         onChange={(e) => onFieldChange('lastName', e.target.value)}
                         className='bg-stone-50'
                         autoComplete='off'
+                        error={!!errors.lastName}
+                        helperText={errors.lastName}
+                        onFocus={() => setErrors({ ...errors, lastName: '' })}
                     />
 
                     {editProfile.genderList && editProfile.genderList.length ?
@@ -229,6 +284,10 @@ const ProfileInputs = () => {
                                     label={translation?.select_gender}
                                     value={editProfile.gender}
                                     autoComplete='off'
+                                    error={!!errors.gender}
+                                    helperText={errors.gender}
+                                    onFocus={() => setErrors({ ...errors, gender: '' })}
+
                                 />}
                             onChange={(data, value) => onFieldChange('gender', value.code)}
                             className='bg-stone-50'
@@ -241,6 +300,9 @@ const ProfileInputs = () => {
                             value={parse(editProfile.dateOfBirth, 'dd-MM-yyyy', new Date())}
                             className='bg-stone-50 '
                             onChange={(e) => onFieldChange('dateOfBirth', format(e, 'dd-MM-yyyy'))}
+                            error={!!errors.dateOfBirth}
+                            helperText={errors.dateOfBirth}
+                            onFocus={() => setErrors({ ...errors, dateOfBirth: '' })}
                             disableFuture
                             renderInput={(params) => <CustomTextField {...params} className='bg-stone-50' />}
                         />
@@ -256,6 +318,9 @@ const ProfileInputs = () => {
                             renderInput={(params) => <CustomTextField {...params} label={translation?.select_nationality} autoComplete='off' />}
                             onChange={(data, value) => onFieldChange('countrySelect', value)}
                             className=' bg-stone-50'
+                            error={!!errors.nationalityCode}
+                            helperText={errors.nationalityCode}
+                            onFocus={() => setErrors({ ...errors, nationalityCode: '' })}
                         />
                         : null
                     }
@@ -265,6 +330,9 @@ const ProfileInputs = () => {
                         className=' bg-stone-50'
                         onChange={(e) => onFieldChange('passportNumber', e.target.value)}
                         autoComplete='off'
+                        error={!!errors.passportNumber}
+                        helperText={errors.passportNumber}
+                        onFocus={() => setErrors({ ...errors, passportNumber: '' })}
                     />
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <CustomDatePicker
@@ -274,6 +342,9 @@ const ProfileInputs = () => {
                             className=' bg-stone-50'
                             disablePast
                             onChange={(e) => onFieldChange('passportExpiry', format(e, 'dd-MM-yyyy'))}
+                            error={!!errors.passportExpiry}
+                            helperText={errors.passportExpiry}
+                            onFocus={() => setErrors({ ...errors, passportExpiry: '' })}
                         />
                     </LocalizationProvider>
                     {editProfile.countriesList && editProfile.countriesList.length ?
@@ -287,6 +358,9 @@ const ProfileInputs = () => {
                             onChange={(data, value) => onFieldChange('passportSelect', value)}
                             renderInput={(params) => <CustomTextField {...params} label={translation?.passport_issuer_country} autoComplete='off' />}
                             className=' bg-stone-50'
+                            error={!!errors.passportIssuerCountryCode}
+                            helperText={errors.passportIssuerCountryCode}
+                            onFocus={() => setErrors({ ...errors, passportIssuerCountryCode: '' })}
                         />
                         : null
                     }
@@ -372,7 +446,7 @@ const ProfileInputs = () => {
         </>
     );
 
-           
+
 };
 
 export default ProfileInputs;

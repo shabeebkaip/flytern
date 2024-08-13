@@ -44,7 +44,11 @@ const AddEditCoPax = () => {
 
     if (!data.title) newErrors.title = 'Please select a title';
     if (!data.firstName.trim()) newErrors.firstName = 'Please enter a first name';
-    if (!data.lastName.trim()) newErrors.lastName = 'Please enter a last name';
+    if (!data.lastName.trim()) {
+      newErrors.lastName = 'Please enter a last name';
+    } else if (data.lastName.trim().length < 3) {
+      newErrors.lastName = 'Last name must be at least 3 characters long';
+    }
     if (!data.gender) newErrors.gender = 'Please select a gender';
     if (!data.dateOfBirth) newErrors.dateOfBirth = 'Please select a date of birth';
     if (!data.nationalityCode) newErrors.nationalityCode = 'Please select a nationality';
@@ -89,162 +93,162 @@ const AddEditCoPax = () => {
   const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
   return (
     <div className='flex flex-col gap-4 pb-10 mt-8'>
-     
-        <div className='flex flex-col grid-cols-2 gap-2 lg:gap-4 sm:grid'>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={["Mr", "Mrs", "Ms", "Miss"]}
-            getOptionLabel={(option) => option}
-            onChange={(event, value) => {
-              setData({ ...data, title: value });
-              setErrors({ ...errors, title: '' });
+
+      <div className='flex flex-col grid-cols-2 gap-2 lg:gap-4 sm:grid'>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={["Mr", "Mrs", "Ms", "Miss"]}
+          getOptionLabel={(option) => option}
+          onChange={(event, value) => {
+            setData({ ...data, title: value });
+            setErrors({ ...errors, title: '' });
+          }}
+          value={data.title}
+          autoComplete='off'
+          renderInput={(params) =>
+            <CustomTextField
+              {...params}
+              label={selectedLanguageAndCountry?.language?.code === "ar" ? 'عنوان' : '  Title'}
+              autoComplete='off'
+              error={!!errors.title}
+              helperText={errors.title}
+            />}
+          className='bg-stone-50'
+        />
+
+        <CustomTextField
+          label={selectedLanguageAndCountry?.language?.code === "ar" ? 'عنوان' : 'First Name'}
+          className='bg-stone-50'
+          value={data.firstName}
+          onChange={(event, value) => {
+            setData({ ...data, firstName: event.target.value });
+            setErrors({ ...errors, firstName: '' });
+          }}
+          autoComplete='off'
+          error={!!errors.firstName}
+          helperText={errors.firstName}
+
+        />
+        <CustomTextField
+          label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.last_name : 'Last Name'}
+          className='bg-stone-50'
+          value={data.lastName}
+          onChange={(event, value) => {
+            setData({ ...data, lastName: event.target.value });
+            setErrors({ ...errors, lastName: '' });
+          }}
+          autoComplete='off'
+          error={!!errors.lastName}
+          helperText={errors.lastName}
+
+        />
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={genderList}
+          getOptionLabel={(option) => option.name}
+          onChange={(event, value) => {
+            setData({ ...data, gender: value });
+            setErrors({ ...errors, gender: '' });
+          }}
+          autoComplete='off'
+          renderInput={(params) =>
+            <CustomTextField
+              {...params}
+              label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.gender : 'Select Gender'}
+              autoComplete='off'
+              error={!!errors.gender}
+              helperText={errors.gender}
+
+            />}
+          className='bg-stone-50'
+        />
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <CustomDatePicker
+            label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.dob : 'Date of Birth'}
+            value={parse(data.dateOfBirth, 'dd-MM-yyyy', new Date())}
+            className='bg-stone-50 '
+            onChange={(e) => {
+              setData({ ...data, dateOfBirth: format(e, 'dd-MM-yyyy') });
+              setErrors({ ...errors, dateOfBirth: '' });
             }}
-            value={data.title}
-            autoComplete='off'
-            renderInput={(params) =>
-              <CustomTextField
-                {...params}
-                label={selectedLanguageAndCountry?.language?.code === "ar" ? 'عنوان' : '  Title'}
-                autoComplete='off'
-                error={!!errors.title}
-                helperText={errors.title}
-              />}
-            className='bg-stone-50'
+            renderInput={(params) => <CustomTextField {...params} className='bg-stone-50' />}
+            maxDate={new Date()}
           />
+        </LocalizationProvider>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={countriesList}
+          onChange={(event, value) => {
+            setData({ ...data, nationalityCode: value });
+            setErrors({ ...errors, nationalityCode: '' });
+          }}
+          getOptionLabel={(option) => option.countryName}
+          autoComplete='off'
+          renderInput={(params) =>
+            <CustomTextField
+              {...params}
+              label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.Select_Nationality : 'Select Nationality'}
+              autoComplete='off'
+              error={!!errors.nationalityCode}
+              helperText={errors.nationalityCode}
+            />}
+          className=' bg-stone-50'
+        />
 
-          <CustomTextField
-            label={selectedLanguageAndCountry?.language?.code === "ar" ? 'عنوان' : 'First Name'}
-            className='bg-stone-50'
-            value={data.firstName}
-            onChange={(event, value) => {
-              setData({ ...data, firstName: event.target.value });
-              setErrors({ ...errors, firstName: '' });
+        <CustomTextField
+          label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.enter_passport_no : 'Passport Number'}
+          className=' bg-stone-50'
+          onChange={(event) => {
+            setData({ ...data, passportNumber: event.target.value });
+            setErrors({ ...errors, passportNumber: '' });
+          }}
+          error={!!errors.passportNumber}
+          helperText={errors.passportNumber}
+          autoComplete='off'
+
+        />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <CustomDatePicker
+            label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.passport_expire : 'Passport Expiry'}
+            value={parse(data.passportExp, 'dd-MM-yyyy', new Date())}
+            className='bg-stone-50 '
+            onChange={(e) => {
+              setData({ ...data, passportExp: format(e, 'dd-MM-yyyy') });
+              setErrors({ ...errors, passportExp: '' });
             }}
-            autoComplete='off'
-            error={!!errors.firstName}
-            helperText={errors.firstName}
-
+            minDate={new Date()}
           />
-          <CustomTextField
-            label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.last_name : 'Last Name'}
-            className='bg-stone-50'
-            value={data.lastName}
-            onChange={(event, value) => {
-              setData({ ...data, lastName: event.target.value });
-              setErrors({ ...errors, lastName: '' });
-            }}
-            autoComplete='off'
-            error={!!errors.lastName}
-            helperText={errors.lastName}
-
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={genderList}
-            getOptionLabel={(option) => option.name}
-            onChange={(event, value) => {
-              setData({ ...data, gender: value });
-              setErrors({ ...errors, gender: '' });
-            }}
-            autoComplete='off'
-            renderInput={(params) =>
-              <CustomTextField
-                {...params}
-                label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.gender : 'Select Gender'}
-                autoComplete='off'
-                error={!!errors.gender}
-                helperText={errors.gender}
-
-              />}
-            className='bg-stone-50'
-          />
-
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <CustomDatePicker
-              label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.dob : 'Date of Birth'}
-              value={parse(data.dateOfBirth, 'dd-MM-yyyy', new Date())}
-              className='bg-stone-50 '
-              onChange={(e) => {
-                setData({ ...data, dateOfBirth: format(e, 'dd-MM-yyyy') });
-                setErrors({ ...errors, dateOfBirth: '' });
-              }}
-              renderInput={(params) => <CustomTextField {...params} className='bg-stone-50' />}
-              maxDate={new Date()}
+        </LocalizationProvider>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={countriesList}
+          getOptionLabel={(option) => option.countryName}
+          onChange={(event, value) => {
+            setData({ ...data, passportIssuedCountryCode: value });
+            setErrors({ ...errors, passportIssuedCountryCode: '' });
+          }}
+          autoComplete='off'
+          renderInput={(params) => (
+            <CustomTextField
+              {...params}
+              label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.passport_issuer_country : 'Passport Issuer Country'}
+              autoComplete='off'
+              error={!!errors.passportIssuedCountryCode}
+              helperText={errors.passportIssuedCountryCode}
             />
-          </LocalizationProvider>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={countriesList}
-            onChange={(event, value) => {
-              setData({ ...data, nationalityCode: value });
-              setErrors({ ...errors, nationalityCode: '' });
-            }}
-            getOptionLabel={(option) => option.countryName}
-            autoComplete='off'
-            renderInput={(params) =>
-              <CustomTextField
-                {...params}
-                label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.Select_Nationality : 'Select Nationality'}
-                autoComplete='off'
-                error={!!errors.nationalityCode}
-                helperText={errors.nationalityCode}
-              />}
-            className=' bg-stone-50'
-          />
+          )}
+          className=' bg-stone-50'
+        />
 
-          <CustomTextField
-            label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.enter_passport_no : 'Passport Number'}
-            className=' bg-stone-50'
-            onChange={(event) => {
-              setData({ ...data, passportNumber: event.target.value });
-              setErrors({ ...errors, passportNumber: '' });
-            }}
-            error={!!errors.passportNumber}
-            helperText={errors.passportNumber}
-            autoComplete='off'
+      </div>
+      <button className='h-12 mt-3 text-base font-medium text-white rounded-md sm:w-64 bg-emerald-800 ' onClick={addCopax}  >{selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.add : 'Add'}
+      </button>
 
-          />
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <CustomDatePicker
-              label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.passport_expire : 'Passport Expiry'}
-              value={parse(data.passportExp, 'dd-MM-yyyy', new Date())}
-              className='bg-stone-50 '
-              onChange={(e) => {
-                setData({ ...data, passportExp: format(e, 'dd-MM-yyyy') });
-                setErrors({ ...errors, passportExp: '' });
-              }}
-              minDate={new Date()}
-            />
-          </LocalizationProvider>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={countriesList}
-            getOptionLabel={(option) => option.countryName}
-            onChange={(event, value) => {
-              setData({ ...data, passportIssuedCountryCode: value });
-              setErrors({ ...errors, passportIssuedCountryCode: '' });
-            }}
-            autoComplete='off'
-            renderInput={(params) => (
-              <CustomTextField
-                {...params}
-                label={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.passport_issuer_country : 'Passport Issuer Country'}
-                autoComplete='off'
-                error={!!errors.passportIssuedCountryCode}
-                helperText={errors.passportIssuedCountryCode}
-              />
-            )}
-            className=' bg-stone-50'
-          />
-
-        </div>
-        <button className='h-12 mt-3 text-base font-medium text-white rounded-md sm:w-64 bg-emerald-800 ' onClick={addCopax}  >{selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.add : 'Add'}
-        </button>
-    
 
 
 

@@ -37,9 +37,11 @@ const SortSection = (props) => {
     // Filter flights when searchData changes
     // filterFlights(searchData);
   }, []);
-
+   
   const matchingsortingDc = sortingDcs?.find((sortingDc) => sortingDc?.value === sort);
   const { translation } = useSelector((state) => state.sharedState)
+
+  
   return (
     <div className="flex flex-col justify-between gap-10 lg:justify-end md:flex-row md:items-center 2xl:gap-0">
 
