@@ -10,24 +10,24 @@ const FlightDetailSummary = ({ item, isRefund }) => {
   return (
     <div className='flex flex-wrap gap-2 flex-start '>
       <div className="flex items-center justify-center px-2 text-xs font-medium rounded-md h-7 bg-tag-color text-tag-color">
-        {item.stops > 1 ? `${item.stops - 1} Stops` : 'Direct'}
+        {item?.stops > 1 ? `${item?.stops - 1} Stops` : 'Direct'}
       </div>
       <div className="flex items-center justify-center gap-1 px-2 text-xs font-medium rounded-md h-7 bg-tag-color text-tag-color">
         <span>
           <AccessTimeIcon style={{ color: '#066651' }} fontSize="small" /> {" "}
         </span>
-        <span> 
+        <span>
 
-          {item.travelTime}
+          {item?.travelTime}
         </span>
       </div>
       {
-        item.baggage?.map((bag, index) =>
+        item?.baggage?.map((bag, index) =>
           <div className="flex items-center justify-center gap-1 px-2 text-xs font-medium rounded-md h-7 bg-tag-color text-tag-color" key={index}>
             <span>
               <BusinessCenterIcon style={{ color: '#066651' }} fontSize="small" /> {" "}
             </span>
-            <span >{bag.passTy}, {bag.cabin}</span>
+            <span >{bag?.passTy}, {bag?.cabin}</span>
           </div>
         )
       }

@@ -1,9 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
 import { useAppSelector } from '@/lib/hooks'
+import { encryptId } from '@/lib/utils'
 
 const MobFlightBookingCard = ({ flight }) => {
     const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
+    const encryptedBookingRef = encryptId(flight.bookingRef)
+
+    console.log(flight,'kkk');
+    
+
     return (
         <div className=''>
 
@@ -44,10 +50,32 @@ const MobFlightBookingCard = ({ flight }) => {
 
             </div>
             <div className='flex items-center justify-between'>
-                <h3 className='text-xs font-medium text-orange-400 '>AED <span className='text-xl font-semibold text-orange-400'>{parseFloat(flight.price).toFixed(3)}</span> </h3>
-                <button className='h-10 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex text-center text-white text-sm font-medium'>
-                    {selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.select : 'Select'}
-                </button>
+                <h3 className='text-xs font-medium text-orange-400 '>AED <span className='text-xl font-semibold text-orange-400'>{parseFloat(flight.paidAmount).toFixed(3)}</span> </h3>
+                {
+                        flight.status === "ISSUED" ?
+                            <button
+                                className='h-10 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex text-center text-white text-sm font-medium'
+                                onClick={() => {
+                                    if (typeof window !== 'undefined') {
+                                        window.location.href = `/payment-summary/?mode=view&ref=${encryptedBookingRef}`;
+                                    }
+                                }}
+                            >
+                                {selectedLanguageAndCountry?.language?.code === "ar" ? "عرض الحجز" : "View Booking"}
+                            </button>
+                            : flight.status === "PENDING" ?
+                                <button
+                                    className='h-10 px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center gap-1 inline-flex text-center text-white text-sm font-medium'
+                                    onClick={() => {
+                                        if (typeof window !== 'undefined') {
+                                            window.location.href = `/payment-method/?ref=${encryptedBookingRef}`;
+                                        }
+                                    }}
+                                >
+                                    {selectedLanguageAndCountry?.language?.code === "ar" ? "ادفع الآن" : "Pay Now"}
+                                </button>
+                                : null
+                    }
             </div>
         </div>
         </div>

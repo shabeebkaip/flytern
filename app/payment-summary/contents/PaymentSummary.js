@@ -53,7 +53,7 @@ const PaymentSummaryChild = ({ paymentStatus }) => {
                 </div>
               </div>
             </div>
-            <div className='grid grid-cols-12 gap-10'>
+            <div className='gap-10 md:grid-cols-12 md:grid'>
               <div className='flex flex-col col-span-11 gap-10 mt-5 md:col-span-12 lg:col-span-8'>
 
                 {

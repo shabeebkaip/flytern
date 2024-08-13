@@ -50,44 +50,44 @@ const FlightDetailsCard = (props) => {
             <div>
                 {details ?
                     (<>
-                        {flightSegments && flightSegments.length ? flightSegments.map((item, parentIndex) => (
+                        {flightSegments && flightSegments?.length ? flightSegments?.map((item, parentIndex) => (
                             <div className='mt-4' key={parentIndex}>
                                 <div className='flex flex-col gap-2'>
                                     {isMobile ?
                                         <div className='flex flex-col gap-2 '>
                                             <div className="flex gap-2">
                                                 <FlightTakeoffIcon style={{ color: 'orange' }} fontSize='small' />
-                                                <h3 className='text-sm font-medium text-black md:text-md '>{item.departure}</h3>
+                                                <h3 className='text-sm font-medium text-black md:text-md '>{item?.departure}</h3>
                                             </div>
                                             <div className="flex gap-2">
                                                 <FlightLandIcon style={{ color: 'orange' }} fontSize='small' />
-                                                <h3 className='text-sm font-medium text-black md:text-md '>{item.arrival}</h3>
+                                                <h3 className='text-sm font-medium text-black md:text-md '>{item?.arrival}</h3>
                                             </div>
 
                                         </div> :
                                         <div className='flex items-center gap-5'>
-                                            <h3 className='text-base font-medium text-black md:text-md '>{item.departure}</h3>
+                                            <h3 className='text-base font-medium text-black md:text-md '>{item?.departure}</h3>
                                             <ArrowIconSvg color={'black'} />
-                                            <h3 className='text-base font-medium text-black md:text-md '>{item.arrival}</h3>
+                                            <h3 className='text-base font-medium text-black md:text-md '>{item?.arrival}</h3>
                                         </div>
                                     }
                                     <FlightDetailSummary item={item} isRefund={isRefund} />
                                 </div>
-                                {item.flightSegmentDetails.map((segment, childIndex) => (
+                                {item?.flightSegmentDetails?.map((segment, childIndex) => (
                                     <div key={childIndex}>
                                         <div className={`flex flex-col flex-wrap md:items-center justify-between mt-4 sm:flex-row gap-[10px] md:gap-0`}>
                                             {
                                                 isMobile ?
                                                     <div className='flex flex-wrap items-center gap-4 flex-start'>
-                                                        <Image width={200} height={200} className='object-contain w-10 ' src={segment.carrierImageUrl} alt="" />
+                                                        <Image width={200} height={200} className='object-contain w-10 ' src={segment?.carrierImageUrl} alt="" />
                                                         <div className="flex items-center gap-5 p-2 rounded-md bg-tag-color h-7">
-                                                            <h3 className='text-tag-color font-medium text-[9px]'>{segment.flightName}</h3>
+                                                            <h3 className='text-tag-color font-medium text-[9px]'>{segment?.flightName}</h3>
                                                         </div>
                                                         <div className='flex items-center gap-5 p-2 rounded-md bg-tag-color h-7'>
-                                                            <h3 className='text-tag-color font-medium text-[9px]'>{segment.flightNumber}</h3>
+                                                            <h3 className='text-tag-color font-medium text-[9px]'>{segment?.flightNumber}</h3>
                                                         </div>
                                                         <div className='flex items-center gap-5 p-2 rounded-md bg-tag-color h-7'>
-                                                            <h3 className='text-tag-color font-medium text-[9px]'>{segment.cabin}</h3>
+                                                            <h3 className='text-tag-color font-medium text-[9px]'>{segment?.cabin}</h3>
                                                         </div>
 
                                                     </div>
@@ -96,7 +96,7 @@ const FlightDetailsCard = (props) => {
                                             }
 
                                         </div>
-                                        <FlightsStopDetails segment={segment} baggageDetails={item.baggage} />
+                                        <FlightsStopDetails segment={segment} baggageDetails={item?.baggage} />
                                     </div>
                                 ))}
 

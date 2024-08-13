@@ -15,18 +15,18 @@ const FlightPaymentSummary = () => {
                             selectedPriceOption?.adultBase ?
                                 <div className='flex justify-between col-span-3'>
                                     <h3 className='text-xs font-normal text-zinc-600 md:text-base'>{translation?.adult_base_fare}</h3>
-                                    <h4 className='text-xs font-medium text-center text-gray-950 md:text-base'>{selectedPriceOption?.currency} {selectedPriceOption?.adultBase.toFixed(3)}</h4>
+                                    <h4 className='text-xs font-medium text-center text-gray-950 md:text-base'>{selectedPriceOption?.currency} {selectedPriceOption?.adultBase?.toFixed(3)}</h4>
                                 </div> : null
                         }
                         {
-                            selectedPriceOption.childBase ?
+                            selectedPriceOption?.childBase ?
                                 <div className='flex justify-between col-span-3'>
                                     <h3 className='text-xs font-normal text-zinc-600 md:text-base'>{translation?.child_base_fare}</h3>
-                                    <h4 className='text-xs font-medium text-center text-gray-950 md:text-base'>{selectedPriceOption?.currency} {selectedPriceOption?.childBase.toFixed(3)}</h4>
+                                    <h4 className='text-xs font-medium text-center text-gray-950 md:text-base'>{selectedPriceOption?.currency} {selectedPriceOption?.childBase?.toFixed(3)}</h4>
                                 </div> : null
                         }
                         {
-                            selectedPriceOption.infantBase ?
+                            selectedPriceOption?.infantBase ?
                                 <div className='flex justify-between col-span-3'>
                                     <h3 className='text-xs font-normal text-zinc-600 md:text-base'>{translation?.infant_base_fare}</h3>
                                     <h4 className='text-xs font-medium text-center text-gray-950 md:text-base'>{selectedPriceOption?.currency} {selectedPriceOption?.infantBase?.toFixed(3)}</h4>
@@ -36,7 +36,7 @@ const FlightPaymentSummary = () => {
                             selectedPriceOption?.totalTax ?
                                 <div className='flex justify-between col-span-3'>
                                     <h3 className='text-xs font-normal text-zinc-600 md:text-base'>{translation?.tax_fare}</h3>
-                                    <h4 className='text-xs font-medium text-center text-gray-950 md:text-base '>{selectedPriceOption?.currency} {selectedPriceOption?.totalTax.toFixed(3)}</h4>
+                                    <h4 className='text-xs font-medium text-center text-gray-950 md:text-base '>{selectedPriceOption?.currency} {selectedPriceOption?.totalTax?.toFixed(3)}</h4>
                                 </div> : null
                         }
                         {

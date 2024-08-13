@@ -52,11 +52,11 @@ const Settings = () => {
           setTimeout(() => {
             if (typeof window !== 'undefined') {
               if (payload.language === 'ar') {
-                window.location.href = '/'
-                window.location.reload();
+                window.location.href = '/ar'
+                // window.location.reload();
               } else {
                 window.location.href = '/'
-                window.location.reload();
+                // window.location.reload();
               }
             }
           }, 3000);

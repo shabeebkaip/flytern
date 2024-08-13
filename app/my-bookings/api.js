@@ -23,7 +23,7 @@ export const getMyBookingsApi = (pageId, serviceType) => {
       const responseStatus = await checkApiStatus(response)
       if (responseStatus) {
         const encripted = encryptId(response.data.data.bookingRef)
-        window.location.href=`/payment-summary?ref=${encripted}`
+        window.location.href=`/payment-summary?mode=view&ref=${encripted}`
       }
     }
     catch (error) {
