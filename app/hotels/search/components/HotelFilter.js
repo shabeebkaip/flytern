@@ -90,7 +90,7 @@ const HotelFilter = (props) => {
                     /> :
                     hotelsList?.length || objectID ?
                         <div className="flex items-center justify-between mb-3">
-                            <h4 className="text-base font-bold text-black font-">
+                            <h4 className="text-sm font-bold text-black sm:text-base">
                                 {translation?.filter_by}
                             </h4>
                             {

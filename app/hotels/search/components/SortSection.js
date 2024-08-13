@@ -61,10 +61,10 @@ const SortSection = (props) => {
                                 <div className=''>
                                     <Popover placement="bottom-end" open={open} handler={setOpen}>
                                         <PopoverHandler>
-                                            <div className='flex items-center justify-between w-full h-12 px-3  bg-white rounded-md'>
+                                            <div className='flex items-center justify-between w-full h-12 px-3 bg-white rounded-md'>
                                                 <div className='flex items-center w-full gap-2 py-2'>
                                                     <Image className='w-6 h-6' src='/sort.png' alt="" width={100} height={100} />
-                                                    <h3>{translation?.sort_by} {matchingsortingDc?.name}</h3>
+                                                    <h3 className='text-sm sm:text-base'>{translation?.sort_by} {matchingsortingDc?.name}</h3>
 
                                                 </div>
                                                 <div>

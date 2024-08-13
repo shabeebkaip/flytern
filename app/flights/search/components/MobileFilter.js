@@ -63,8 +63,8 @@ const MobileFilter = (props) => {
         <div>
             <Popover placement="bottom-end">
                 <PopoverHandler>
-                    <div className="flex items-center justify-between w-24 h-8 px-3 bg-white rounded-md sm:h-10 sm:w-36">
-                        <p>Filter</p>
+                    <div className="flex items-center justify-between w-[76px] h-8 px-3 bg-white rounded-md sm:h-10 sm:w-36">
+                        <p className='text-sm sm:text-base'>Filter</p>
                         <Image width={16} height={24} className='w-4 h-4 sm:h-6 sm:w-6' src={"/icons/filter.png"} alt="" />
                     </div>
                 </PopoverHandler>

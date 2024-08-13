@@ -556,35 +556,35 @@ const handleFieldChange = (field) => (e) => {
                 ) : null}
             </div>
 
-            <div className="grid w-full grid-cols-10 gap-2 ">
-                <Autocomplete
-                    disablePortal
-                    id="combo-box-country-code"
-                    options={countryCode}
-                    getOptionLabel={(option) => option}
-                    value={selectedCountryCode}
-                    disabled={!isMobileEditable}
-                    onChange={(event, value) => handleFieldChange("countryCode")(event, value)}
-                    renderInput={(params) => (
-                        <CustomTextField
-                            {...params}
-                            label={translation?.country_code}
-                            error={!!errors.phoneNumber}
-                            helperText={errors.phoneNumber}
-                        />
-                    )}
-                    className="col-span-3 bg-stone-50"
-                />
-                <CustomTextField
-                    label={translation?.mobile}
-                    className="col-span-7 bg-stone-50"
-                    value={editedMobileNumber}
-                    disabled={!isMobileEditable}
-                    onChange={(e) => setEditedMobileNumber(e.target.value)}
-                    error={!!errors.phoneNumber}
-                    helperText={errors.phoneNumber}
-                />
-            </div>
+            <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-10">
+  <Autocomplete
+    disablePortal
+    id="combo-box-country-code"
+    options={countryCode}
+    getOptionLabel={(option) => option}
+    value={selectedCountryCode}
+    disabled={!isMobileEditable}
+    onChange={(event, value) => handleFieldChange("countryCode")(event, value)}
+    renderInput={(params) => (
+      <CustomTextField
+        {...params}
+        label={translation?.country_code}
+        error={!!errors.phoneNumber}
+        helperText={errors.phoneNumber}
+      />
+    )}
+    className="w-full sm:col-span-1 lg:col-span-4 bg-stone-50"
+  />
+  <CustomTextField
+    label={translation?.mobile}
+    className="w-full sm:col-span-1 lg:col-span-6 bg-stone-50"
+    value={editedMobileNumber}
+    disabled={!isMobileEditable}
+    onChange={(e) => setEditedMobileNumber(e.target.value)}
+    error={!!errors.phoneNumber}
+    helperText={errors.phoneNumber}
+  />
+</div>
         </div>
     </div>
 </div>

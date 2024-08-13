@@ -86,7 +86,7 @@ const ChangePasswordForm = () => {
                         <label>{selectedLanguageAndCountry?.language?.code === "ar" ? "كلمة المرور الجديدة" : "New password"}</label>
                         <div className="relative">
                             <InputField styles={'w-full '} type={`${showPassword.stateTwo ? "text" : "password"}`} placeholder={translation?.enter_new_password} value={data.newPassword} onChange={(e) => { seterror({ ...noError }); setData({ ...data, newPassword: e.target.value }) }} />
-                            {error.repeatingPassword && <p className='text-red-800 cursor-pointer'> {error.repeatingPassword}</p>}
+                            {error.repeatingPassword && <p className='text-red-500 cursor-pointer'> {error.repeatingPassword}</p>}
                             <RemoveRedEyeIcon
                                 className={`absolute z-40 top-[12px] ${selectedLanguageAndCountry?.language?.code === "ar" ? 'left-4' : 'right-4'} text-slate-500`}
                                 onClick={() => setShowPassword({ ...showPassword, stateTwo: !showPassword.stateTwo })}
@@ -99,8 +99,8 @@ const ChangePasswordForm = () => {
                         <label>{translation?.re_enter_new_password}</label>
                         <div className="relative">
                             <InputField styles={'w-full'} type={`${showPassword.stateThree ? "text" : "password"}`} placeholder={translation?.re_enter_new_password} value={data.reEnteredPassword} onChange={(e) => { seterror({ ...noError }); setData({ ...data, reEnteredPassword: e.target.value }) }} />
-                            {error.doesntMatch && <p className='text-red-800 cursor-pointer'> {error.doesntMatch}</p>}
-                            {error.fieldBlank && <p className='text-red-800 cursor-pointer'> {error.fieldBlank}</p>}
+                            {error.doesntMatch && <p className='text-red-500 cursor-pointer'> {error.doesntMatch}</p>}
+                            {error.fieldBlank && <p className='text-red-500 cursor-pointer'> {error.fieldBlank}</p>}
                             <RemoveRedEyeIcon
                                 className={`absolute z-40 top-[12px] ${selectedLanguageAndCountry?.language?.code === "ar" ? 'left-4' : 'right-4'} text-slate-500`}
                                 onClick={() => setShowPassword({ ...showPassword, stateThree: !showPassword.stateThree })}
