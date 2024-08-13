@@ -8,6 +8,7 @@ import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import { SnackbarProvider } from 'notistack'
 
 const page = () => {
 
@@ -30,13 +31,15 @@ const page = () => {
 
     return (
         <div className='container px-4 mx-auto md:px-0'>
-            <StoreProvider>
-                <CacheProvider value={cacheRtl}>
-                    <ThemeProvider theme={theme}>
-                        <Settings />
-                    </ThemeProvider>
-                </CacheProvider>
-            </StoreProvider>
+            <SnackbarProvider>
+                <StoreProvider>
+                    <CacheProvider value={cacheRtl}>
+                        <ThemeProvider theme={theme}>
+                            <Settings />
+                        </ThemeProvider>
+                    </CacheProvider>
+                </StoreProvider>
+            </SnackbarProvider>
         </div>
     )
 }

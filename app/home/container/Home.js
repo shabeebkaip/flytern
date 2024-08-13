@@ -28,7 +28,7 @@ const HomeChild = ({ service, data }) => {
     }
   }, [data, dispatch]);
   return (
-    <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" || location.includes("/ar") ? 'rtl font-arabic' : 'font-inter'}`}>
+    <div className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'}`}>
       <SubHeader />
       {
         loading ? <SuspenseLoader /> :

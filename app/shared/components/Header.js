@@ -6,7 +6,7 @@ import HeaderProfile from "@/app/shared/components/HeaderProfile";
 import StoreProvider from "@/app/StoreProvider";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useEffect, useState } from "react";
-import { checkApiStatus, } from "@/lib/utils";
+import { checkApiStatus, getGlobalCookie, } from "@/lib/utils";
 import { getCountryApi, saveDeviceLanguage } from "../api";
 import { setContactDetails, setLanguageAndCountry, setTranslation, sharedProfileSuccess, switchLanguageSucces } from "@/lib/slices/sharedSlice";
 import { countryAndLanguageSuccess, initialInfoSucces } from "@/lib/slices/genaralSlice";
@@ -22,9 +22,9 @@ const validPaths = ["/", "/ar", "/flights", "/hotels", "/ar/flights", "/ar/hotel
 const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, initialInfo }) => {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
-  const isArabic = pathname.includes("/ar") ? true : false;
   const [isHome, setIsHome] = useState(false);
-  const language = isArabic ? 'ar' : 'en';
+  const isArabic = getGlobalCookie('language');
+  const language = isArabic === "ar" ? 'ar' : 'en';
   const notificationToken = isArabic ? 'ar' : 'en';
   const { profile, mobileCountryList, contactDc } = useAppSelector(state => state.sharedState)
   const { translation } = useAppSelector((state) => state.sharedState)
@@ -110,7 +110,7 @@ const HeaderChild = ({ selectedLanguageAndCountry, exploresData, profileData, in
   }
   return (
     <div
-      className={`${isAuth ? 'hidden' : 'flex'} box-border items-center justify-between w-full h-20 border-b`}
+      className={`${isAuth ? 'hidden' : 'flex'} ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'}  box-border items-center justify-between w-full h-20 border-b`}
       style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
     >
       <div className="container flex items-center justify-between px-4 mx-auto font-inter ">
