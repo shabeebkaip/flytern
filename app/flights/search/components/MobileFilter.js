@@ -1,10 +1,12 @@
-import { Popover, PopoverContent, PopoverHandler } from '@material-tailwind/react';
+import { Popover, PopoverContent, PopoverHandler, Slider } from '@material-tailwind/react';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Checkbox, Radio } from '@mui/material';
+import { Box, Checkbox, Radio } from '@mui/material';
 import Image from 'next/image';
 
-
+function valuetext(value) {
+    return `${value}°C`;
+}
 const MobileFilter = (props) => {
     const { setSearchData, searchData, filterFlights, flightResults } = props;
     const dispatch = useDispatch();
@@ -14,6 +16,8 @@ const MobileFilter = (props) => {
     const [arrivalTimeOpen, setArrivalTimeOpen] = useState(true);
     const [stopsOpen, setStopsOpen] = useState(true);
     const [otherOpen, setOtherOpen] = useState(true);
+    const [value, setValue] = useState([0, 400])
+
 
     const togglePriceAccordion = () => {
         setPriceOpen(!priceOpen);
@@ -41,23 +45,28 @@ const MobileFilter = (props) => {
 
     const handleChange = (event, newValue) => {
         let _searchData = { ...searchData };
-        _searchData.priceMinMaxDc = newValue;
+        setValue(newValue)
+        _searchData.priceMinMaxDc = newValue.join();
         setSearchData(_searchData);
-        filterFlights(_searchData);
-    };
-
-    const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
-
-    const onChange = (event) => {
+    
+        filterFlights(_searchData, "njjj");
+      };
+    
+      const onChange = (event) => {
         let _searchData = { ...searchData };
         if (searchData[event.target.name] == event.target.value) {
-            _searchData[event.target.name] = null;
+          _searchData[event.target.name] = null;
         } else {
-            _searchData[event.target.name] = event.target.value;
+          _searchData[event.target.name] = event.target.value;
         }
         setSearchData(_searchData);
         filterFlights(_searchData);
-    };
+      };
+ 
+
+    const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
+
+    
     const { translation } = useSelector((state) => state.sharedState)
     return (
         <div>
@@ -101,8 +110,7 @@ const MobileFilter = (props) => {
                                                 </span>
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
-                                                    className={`h-4 w-4 transform ${priceOpen ? "rotate-0" : "-rotate-180"
-                                                        } transition-transform duration-300`}
+                                                    className={`h-4 w-4 transform ${priceOpen ? "rotate-0" : "-rotate-180"} transition-transform duration-300`}
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
@@ -115,46 +123,31 @@ const MobileFilter = (props) => {
                                                     />
                                                 </svg>
                                             </button>
-                                            {/* {priceOpen && (
-                  <div className="flex flex-col items-center bg-white">
-                    <div className="flex w-full ">
-                      <span className="text-xs font-normal xl:text-sm text-font-gray">
-                        AED{" "}
-                        {flightResults?.priceDcs?.length > 0 &&
-                          flightResults?.priceDcs[0].min}
-                      </span>
-                      <span className="pl-2 text-xs font-normal xl:text-sm text-font-gray">
-                        {" "}
-                        -
-                      </span>
-                      <span className="pl-2 text-xs font-normal xl:text-sm text-font-gray">
-                        {" "}
-                        AED{" "}
-                        {flightResults?.priceDcs?.length > 0 &&
-                          flightResults?.priceDcs[0].max}
-                      </span>
-                    </div>
-                    <div className="w-full custom-slider">
-                      <Box className="w-full">
-                        <Slider
-                          getAriaLabel={() => "Temperature range"}
-                          value={searchData.priceMinMaxDc}
-                          onChange={handleChange}
-                          valueLabelDisplay="auto"
-                          getAriaValueText={valuetext}
-                          min={
-                            flightResults?.priceDcs?.length > 0 &&
-                            flightResults?.priceDcs[0].min
-                          }
-                          max={
-                            flightResults?.priceDcs?.length > 0 &&
-                            flightResults?.priceDcs[0].max
-                          }
-                        />
-                      </Box>
-                    </div>
-                  </div>
-                )} */}
+                                            {priceOpen && (
+                                                <div className="flex flex-col items-center bg-white ">
+                                                    <div className="flex justify-between w-full">
+                                                        <span className="text-xs font-normal xl:text-sm text-font-gray">
+                                                            KWD {flightResults?.priceDcs?.length > 0 && flightResults?.priceDcs[0].min}
+                                                        </span>
+                                                        <span className="pl-2 text-xs font-normal xl:text-sm text-font-gray">
+                                                            KWD {flightResults?.priceDcs?.length > 0 && flightResults?.priceDcs[0].max}
+                                                        </span>
+                                                    </div>
+                                                    <div className="w-full custom-slider">
+                                                        <Box className="w-full">
+                                                            <Slider
+                                                                getAriaLabel={() => "Temperature range"}
+                                                                value={value}
+                                                                onChange={handleChange}
+                                                                valueLabelDisplay="auto"
+                                                                getAriaValueText={valuetext}
+                                                                min={flightResults?.priceDcs?.length > 0 && flightResults?.priceDcs[0].min}
+                                                                max={flightResults?.priceDcs?.length > 0 && flightResults?.priceDcs[0].max}
+                                                            />
+                                                        </Box>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="container w-full px-2 mx-auto group">
                                             <button
