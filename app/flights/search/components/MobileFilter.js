@@ -62,7 +62,6 @@ const MobileFilter = (props) => {
         setSearchData(_searchData);
         filterFlights(_searchData);
       };
- 
 
     const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
 

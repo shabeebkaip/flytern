@@ -6,7 +6,7 @@ import { SnackbarProvider } from 'notistack'
 
 const page = () => {
     return (
-        <div className=' container mx-auto'>
+        <div className='container px-4 mx-auto'>
             <SnackbarProvider>
                 <StoreProvider>
                     <Mybookings />
