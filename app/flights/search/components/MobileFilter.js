@@ -179,7 +179,7 @@ const MobileFilter = (props) => {
                                                             return (
                                                                 <div key={index} className="flex items-center justify-between w-full h-16 gap-5 p-0 text-xs font-normal border-b xl:text-sm">
                                                                     {airline.name} ({airline.value})
-                                                                    <Radio
+                                                                    <Checkbox
                                                                         className="flex justify-end p-0"
                                                                         style={{ color: "orange", padding: 0 }}
                                                                         defaultChecked={false}

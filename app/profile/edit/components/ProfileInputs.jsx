@@ -101,7 +101,7 @@ const ProfileInputs = () => {
                     setIsOtpModalOpen(true); // Open the OTP modal here
 
                 } else {
-                    enqueueSnackbar('Something went wrong', {
+                    enqueueSnackbar('This phone number and country code are currently in use; please select a different one.', {
                         variant: 'error',
                         autoHideDuration: 2000,
                         anchorOrigin: { vertical: 'top', horizontal: 'right' }
@@ -141,7 +141,7 @@ const ProfileInputs = () => {
                     setIsOtpModalOpen(true)
                     setIsEmailEditable(false);
                 } else {
-                    enqueueSnackbar('Something went wrong', {
+                    enqueueSnackbar('This email is already in use; please choose a different one.', {
                         variant: 'error',
                         autoHideDuration: 2000,
                         anchorOrigin: { vertical: 'top', horizontal: 'right' }
