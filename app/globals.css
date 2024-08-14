@@ -41,7 +41,7 @@ body {
 
 @font-face {
   font-family: 'arabic';
-  src: url('/src/fonts/Janna\ LT\ Regular.ttf');
+  src: url('/app/fonts/Janna\ LT\ Regular.ttf');
 }
 
 body::-webkit-scrollbar {
