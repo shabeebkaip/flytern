@@ -46,10 +46,9 @@ const MobileFilter = (props) => {
     const handleChange = (event, newValue) => {
         let _searchData = { ...searchData };
         setValue(newValue)
-        _searchData.priceMinMaxDc = newValue.join();
+        _searchData.priceMinMaxDc = newValue?.join();
         setSearchData(_searchData);
-    
-        filterFlights(_searchData, "njjj");
+        filterFlights(_searchData);
       };
     
       const onChange = (event) => {
