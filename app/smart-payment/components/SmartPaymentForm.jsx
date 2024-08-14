@@ -7,27 +7,24 @@ import { useAppSelector } from "@/lib/hooks";
 import { postSmartPaymentApi } from "../api";
 
 const SmartPaymentForm = () => {
-  const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
+  const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState);
   const [value, setValue] = useState({
     bookingRef: "",
   });
-  const [aleart, setAleart] = useState({
-    open: false,
-    vertical: "top",
-    horizontal: "right",
-  });
-  const { enqueueSnackbar } = useSnackbar()
-
-  const handleClose = () => {
-    setAleart({ ...aleart, open: false });
-  };
+  const [error, setError] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleFieldChange = (key, value) => {
-    const data = { [key]: value };
-    setValue(data);
+    setValue({ [key]: value });
+    setError("");
   };
 
   const handleSubmit = () => {
+    if (value.bookingRef.trim() === "") {
+      setError("Booking Reference is required");
+      return;
+    }
+
     postSmartPaymentApi(value).then((response) => {
       if (response.data.statusCode === 200) {
         const encryptedBookingRef = encryptId(value.bookingRef);
@@ -42,31 +39,28 @@ const SmartPaymentForm = () => {
       }
     });
   };
-  const { translation } = useAppSelector((state) => state.sharedState)
+
+  const { translation } = useAppSelector((state) => state.sharedState);
+
   return (
     <TitleCard
       topMargin="0"
-      title={
-        translation?.smart_payment
-      }
+      title={translation?.smart_payment}
     >
       <div className="grid grid-cols-6 gap-4 mt-8 sm:gap-8">
         <div className="col-span-6 sm:col-span-4">
           <InputField
             styles={"w-full"}
             type="text"
-            placeholder={
-              translation?.enter_booking_id
-            }
+            placeholder={translation?.enter_booking_id}
             value={value.bookingRef}
-            onChange={(e) => {
-              handleFieldChange("bookingRef", e.target.value);
-            }}
+            onChange={(e) => handleFieldChange("bookingRef", e.target.value)}
           />
+          {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
         </div>
 
         <div className="col-span-6 sm:col-span-4">
-          <div className=" col-span-10 p-2.5 bg-orange-400 bg-opacity-10 rounded-[10px] justify-start items-center gap-2.5 ">
+          <div className="col-span-10 p-2.5 bg-orange-400 bg-opacity-10 rounded-[10px] justify-start items-center gap-2.5 ">
             <p className="text-orange-400 text-[11px] sm:text-sm font-medium ">
               {translation?.enter_booking_id_message}
             </p>
@@ -74,7 +68,7 @@ const SmartPaymentForm = () => {
         </div>
         <div className="col-span-6 sm:col-span-3 sm:mt-8">
           <button
-            className="px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center text-center w-full h-12 text-white text-base font-medium "
+            className="px-6 py-1.5 bg-emerald-800 rounded-md justify-center items-center text-center w-full h-12 text-white text-base font-medium"
             onClick={handleSubmit}
           >
             {translation?.submit}
@@ -86,3 +80,9 @@ const SmartPaymentForm = () => {
 };
 
 export default SmartPaymentForm;
+
+
+
+
+
+

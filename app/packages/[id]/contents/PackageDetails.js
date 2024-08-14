@@ -12,6 +12,7 @@ import Exclusion from "../components/Exclusion";
 import FLightAndHotelContactForm from "@/app/shared/components/FLightAndHotelContactForm";
 import Link from "next/link";
 import { useAppSelector } from "@/lib/hooks";
+import { useRouter } from "next/navigation";
 // import { getCountryApi,getIntialInfoApi } from "@/app/shared/api";
 
 
@@ -23,6 +24,8 @@ const PackageDetails = ({ id }) => {
   const [bookingData, setBookingData] = useState(null)
   const { packageDetails: { apiFlightDtail = {}, packagesDtl = [] } } = useSelector((state) => state.packageState);
   const dispatch = useDispatch();
+  const router = useRouter();
+  
 
 
   useEffect(() => {
@@ -58,9 +61,11 @@ const PackageDetails = ({ id }) => {
   };
 
   const handleClose = () => {
-    setOpen(false)
-  }
-  const { translation } = useSelector((state) => state.sharedState)
+    setOpen(false);
+    router.push('/');
+  };
+
+  const { translation } = useSelector((state) => state.sharedState);
 
 
 

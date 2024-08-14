@@ -197,9 +197,9 @@ const TestimonialForm = () => {
             }}
             onFocus={() => updateErrorField("Rating")}
           />
-          {errors.Rating && (
+          {/* {errors.Rating && (
             <p className="mt-1 text-sm text-red-500">{errors.Rating}</p>
-          )}
+          )} */}
         </div>
       </div>
       <div className="z-10 mt-8">

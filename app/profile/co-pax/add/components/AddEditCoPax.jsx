@@ -94,7 +94,7 @@ const AddEditCoPax = () => {
   return (
     <div className='flex flex-col gap-4 pb-10 mt-8'>
 
-      <div className='flex flex-col grid-cols-2 gap-2 lg:gap-4 sm:grid'>
+      <div className='flex flex-col grid-cols-2 gap-4 lg:gap-4 sm:grid'>
         <Autocomplete
           disablePortal
           id="combo-box-demo"
