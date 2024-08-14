@@ -51,9 +51,9 @@ const HeaderChild = ({
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const [isHome, setIsHome] = useState(false);
- const isArabic = getGlobalCookie('language');
-  const language = isArabic === "ar" ? 'ar' : 'en';
-  const notificationToken = isArabic ? 'ar' : 'en';
+   const isArabic = getGlobalCookie("language") === "ar";
+  const language = isArabic ? "ar" : "en";
+  const notificationToken = isArabic ? "ar" : "en";
   const { profile, mobileCountryList, contactDc } = useAppSelector(
     (state) => state.sharedState
   );
