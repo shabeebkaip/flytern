@@ -1,52 +1,54 @@
-"use client"
+"use client";
 import moment from 'moment/moment';
 import React, { useState, useEffect } from 'react';
 
 const CalenderTab = ({ onDateSelect, flightReqBody }) => {
-    const [tabIndex, setTabIndex] = useState(0); // State to track the active tab
-    const [tabs, setTabs] = useState([]); // State to store the tabs
-    useEffect(() => {
-        // Function to format dates as "Wed July 5, 2023"
-        const formatDate = (date) => {
-            return moment(date).format('MMM DD, YYYY');
-        };
+    const [tabIndex, setTabIndex] = useState(0); 
+    const [tabs, setTabs] = useState([]); 
 
-        // Function to get dates for the next seven days
+    useEffect(() => {
+        const formatDate = (date) => moment(date).format('MMM DD, YYYY');
+
         const getNextSevenDays = () => {
             const today = new Date();
             const days = [];
-
             for (let i = 0; i < 7; i++) {
                 const date = new Date(today);
                 date.setDate(today.getDate() + i);
                 days.push(formatDate(date));
             }
-
             return days;
         };
 
-        // Set the tabs with the next seven days
         setTabs(getNextSevenDays());
+
+        // Retrieve the saved tab index from localStorage
+        const savedTabIndex = localStorage.getItem('selectedTabIndex');
+        if (savedTabIndex !== null) {
+            setTabIndex(Number(savedTabIndex));
+        }
     }, []);
 
     const handleTabClick = (index) => {
         setTabIndex(index);
-        // Pass the selected date to the parent component
         onDateSelect(tabs[index]);
+
         let requestBody = {
             ...flightReqBody,
             searchList: [
                 {
                     ...flightReqBody.searchList[0],
-                    departureDate: moment(tabs[index]).format('YYYY-MM-DD')
-                }
-            ]
-        }
-        localStorage.setItem('searchData', JSON.stringify(requestBody))
-        window.location.reload(false)
-        // dispatch(getFlightSearchApi(requestBody))
-    };
+                    departureDate: moment(tabs[index]).format('YYYY-MM-DD'),
+                },
+            ],
+        };
 
+        // Save the selected tab index to localStorage
+        localStorage.setItem('selectedTabIndex', index);
+
+        localStorage.setItem('searchData', JSON.stringify(requestBody));
+        window.location.reload(false);
+    };
 
     return (
         <div>

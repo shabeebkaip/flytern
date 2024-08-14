@@ -171,7 +171,7 @@ const HotelSearch = (props) => {
                 {translation?.available_hotel}
               </h3>
             ) : null}
-            {hotelLoader ? null : hotelsList?.length ? (
+            {hotelLoader ? null :  (
               <SortSection
                 setSearchData={setSearchData}
                 searchData={searchData}
@@ -181,7 +181,7 @@ const HotelSearch = (props) => {
                 hotelLoader={hotelLoader}
                 hotelsList={hotelsList}
               />
-            ) : null}
+            )}
           </div>
           {hotelLoader ? null : (
             <SelectedFilter searchData={searchData} hotel={hotels} />
