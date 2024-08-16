@@ -26,7 +26,7 @@ const BookingTab = ({ tabIndex, setTabIndex }) => {
             <TitleCard topMargin='mt-0'
                 title={selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.flight_booking : 'My Bookings'} >
                 <div className='mt-10 '>
-                    <ul className='absolute bottom-0 '>
+                    <ul className='bottom-0 md:absolute'>
                     <Swiper
                         spaceBetween={8}
                         className="flex justify-start lg:hidden"
