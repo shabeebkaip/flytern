@@ -30,7 +30,7 @@ const MobileNavigator = () => {
   console.log(pathname,"isHome")
  
   return (
-    <div className="w-full h-[55px] md:h-[90px] bg-emerald-800 shadow border-b border-neutral-200 text-white  bottom-0 z-[1000] fixed lg:hidden">
+    <div className="w-full h-[55px] md:h-[90px] bg-emerald-800 shadow border-b border-neutral-200 text-white  bottom-0 z-[9999] fixed lg:hidden">
       <div className="flex items-center justify-around h-full ">
         <div className="flex items-center justify-between w-full gap-10 px-5 md:gap-28">
           <div
