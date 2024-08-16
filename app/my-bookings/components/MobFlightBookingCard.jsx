@@ -8,7 +8,7 @@ const MobFlightBookingCard = ({ flight }) => {
         <div className='flex flex-col gap-5 p-5 bg-white rounded-lg '>
             <div className='flex items-center justify-between gap-3 '>
                 <div>
-                    <Image className='h-5 ' src={flight.airlineImgUrl} alt="" width={300} height={300} />
+                    <Image className='w-full h-5' src={flight.airlineImgUrl} alt="" width={300} height={300} />
                 </div>
                 <div className='flex items-center gap-2'>
                     <div className={`px-2 h-7 text-[10px]  ${flight.refund_status ? 'bg-tag-color text-tag-color' : 'bg-red-600 bg-opacity-20 text-red-600'} rounded-md  font-medium flex justify-center items-center`}>
