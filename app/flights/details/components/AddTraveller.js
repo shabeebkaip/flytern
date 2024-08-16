@@ -23,10 +23,14 @@ const AddTraveller = (props) => {
               id={`combo-box`}
               options={coPax}
               getOptionLabel={(option) => ` ${option.firstName} ${option.lastName}`}
-              onChange={(event, value) => { appendTraveller(value, index, type) }}
-              onFocus={() => { removeErrorFields("Title", index, setErrors); removeErrorFields('Gender', index, setErrors) }}
-              clearIcon={null}
-              error={errors?.[index]?.Title ? true : false}
+              onChange={(event, value) => {
+                appendTraveller(value, index, type);
+                removeErrorFields("SelectPassanger", index, setErrors);
+                removeErrorFields('Gender', index, setErrors);
+              }}
+              onClear={() => {
+                appendTraveller(null, index, type);
+              }}
               renderInput={(params) => (
                 <CustomTextField
                   {...params}
@@ -50,7 +54,7 @@ const AddTraveller = (props) => {
               options={filteredTitleList}
               placeholder={translation?.prefix}
               getOptionLabel={(option) => option}
-              value={item.title}
+              value={item?.title}
               onChange={(event, value) => { handleTravellerOnChange('title', value, index, type) }}
               onFocus={() => removeErrorFields("Title", index, setErrors)}
               clearIcon={null}
@@ -76,7 +80,7 @@ const AddTraveller = (props) => {
               id={`combo-box`}
               options={filteredGenderList}
               getOptionLabel={(option) => option}
-              value={item.gender}
+              value={item?.gender}
               autoComplete="off"
               onChange={(event, value) => { handleTravellerOnChange("gender", value, index, type) }}
               onFocus={() => removeErrorFields('Gender', index, setErrors)}
@@ -97,7 +101,7 @@ const AddTraveller = (props) => {
         <CustomTextField
           type="text"
           placeholder={translation?.first_name}
-          value={item.firstName}
+          value={item?.firstName}
           className=""
           label={translation?.first_name}
           onChange={(e) => { handleTravellerOnChange('firstName', e.target.value, index, type) }}
@@ -110,7 +114,7 @@ const AddTraveller = (props) => {
         <CustomTextField
           type="text"
           placeholder={translation?.last_name}
-          value={item.lastName}
+          value={item?.lastName}
           className=""
           label={translation?.last_name}
           onChange={(e) => { handleTravellerOnChange('lastName', e.target.value, index, type) }}
@@ -133,7 +137,7 @@ const AddTraveller = (props) => {
 
               },
             }}
-            value={item.dateOfBirth ? parse(item.dateOfBirth, 'dd-MM-yyyy', new Date()) : null}
+            value={item?.dateOfBirth ? parse(item.dateOfBirth, 'dd-MM-yyyy', new Date()) : null}
             minDate={dobMinDate ? parse(dobMinDate, 'dd-MM-yyyy', new Date()) : new Date()}
             maxDate={dobMaxDate ? parse(dobMaxDate, 'dd-MM-yyyy', new Date()) : new Date()}
             className=' text-emerald-400'
@@ -163,7 +167,7 @@ const AddTraveller = (props) => {
               id={`combo-box`}
               options={preTraveller?.countriesList}
               getOptionLabel={(option) => option.countryName}
-              value={preTraveller?.countriesList.find(country => country.countryISOCode === item.nationalityCode) || null}
+              value={preTraveller?.countriesList.find(country => country?.countryISOCode === item?.nationalityCode) || null}
               onChange={(event, value) => { handleTravellerOnChange('nationalityCode', value?.countryISOCode, index, type) }}
               autoComplete="off"
               clearIcon={null}
@@ -176,7 +180,7 @@ const AddTraveller = (props) => {
                   error={errors?.[index]?.NationalityCode ? true : false}
                   helperText={errors?.[index]?.NationalityCode}
                   autoComplete="off"
-                  value={item.nationalityCode}
+                  value={item?.nationalityCode || ''}
                 />
               )}
               className=""
@@ -186,7 +190,7 @@ const AddTraveller = (props) => {
           <CustomTextField
             type="text"
             placeholder={translation?.passport_number}
-            value={item.passportNumber}
+            value={item?.passportNumber}
             className="w-full "
             label={translation?.passport_number}
             onChange={(e) => e.target.value.length <= 15 ? handleTravellerOnChange('passportNumber', e.target.value, index, type) : e.preventDefault}
@@ -201,7 +205,7 @@ const AddTraveller = (props) => {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <CustomDatePicker
             label={translation?.passport_expiry_date}
-            value={item.passportExpiryDate ? parse(item.passportExpiryDate, 'dd-MM-yyyy', new Date()) : null}
+            value={item?.passportExpiryDate ? parse(item.passportExpiryDate, 'dd-MM-yyyy', new Date()) : null}
             minDate={preTraveller?.infantMaxDOB ? parse(preTraveller?.infantMaxDOB, 'dd-MM-yyyy', new Date()) : new Date()}
             className='relative bottom-0'
             slotProps={{
@@ -238,7 +242,7 @@ const AddTraveller = (props) => {
               id={`combo-box`}
               options={preTraveller?.countriesList}
               getOptionLabel={(option) => option.countryName}
-              value={preTraveller?.countriesList.find(country => country.countryISOCode === item.passportIssuedCountryCode) || null}
+              value={preTraveller?.countriesList.find(country => country?.countryISOCode === item?.passportIssuedCountryCode) || null}
               onChange={(event, value) => { handleTravellerOnChange('passportIssuedCountryCode', value?.countryISOCode, index, type) }}
               autoComplete="off"
               clearIcon={null}
@@ -262,7 +266,7 @@ const AddTraveller = (props) => {
           <CustomTextField
             type="text"
             placeholder={translation?.frequent_flyer_number_optional}
-            value={item.frequentFlyerNo}
+            value={item?.frequentFlyerNo}
             className="w-full "
             label={translation?.frequent_flyer_number}
             onChange={(e) => { handleTravellerOnChange('frequentFlyerNo', e.target.value, index, type) }}
