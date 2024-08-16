@@ -215,28 +215,28 @@ const TestimonialForm = () => {
         </div>
         
         <div className="grid grid-cols-10 gap-5 mt-5">
-  <div className="col-span-10">
-    <InputField
-      type="text"
-      placeholder={
-        selectedLanguageAndCountry?.language?.code === "ar"
-          ? arabic_translation.title
-          : "Title"
-      }
-      value={data.Title}
-      onChange={(e) => {
-        setData({ ...data, Title: e.target.value });
-        updateErrorField("Title");
-      }}
-      error={errors.Title}
-      styles="w-full bg-white"
-      onFocus={() => updateErrorField("Title")}
-    />
-    {errors.Title && (
-      <p className="mt-1 text-sm text-red-500 border-red-500">{errors.Title}</p>
-    )}
-  </div>
-
+        <div className="col-span-10">
+            <InputField
+              type="text"
+              placeholder={
+                selectedLanguageAndCountry?.language?.code === "ar"
+                  ? arabic_translation.title
+                  : "Title"
+              }
+              value={data.Title}
+              onChange={(e) => {
+                setData({ ...data, Title: e.target.value });
+                updateErrorField("Title");
+              }}
+              error={errors.Title}
+              styles="w-full bg-white"
+              onFocus={() => updateErrorField("Title")}
+            />
+            {errors.Title && (
+              <p className="mt-1 text-sm text-red-500 border-red-500">{errors.Title}</p>
+            )}
+          </div>
+          
   <div className="col-span-10">
     <Textarea
       styles="w-full bg-white "

@@ -6,7 +6,7 @@ import HeaderProfile from "@/app/shared/components/HeaderProfile";
 import StoreProvider from "@/app/StoreProvider";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useEffect, useState } from "react";
-import { checkApiStatus, getGlobalCookie, } from "@/lib/utils";
+import { checkApiStatus } from "@/lib/utils";
 import { getCountryApi, saveDeviceLanguage } from "../api";
 import {
   setContactDetails,
@@ -50,10 +50,10 @@ const HeaderChild = ({
 }) => {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
+  const isArabic = pathname.includes("/ar") ? true : false;
   const [isHome, setIsHome] = useState(false);
- const isArabic = getGlobalCookie('language');
-  const language = isArabic === "ar" ? 'ar' : 'en';
-  const notificationToken = isArabic ? 'ar' : 'en';
+  const language = isArabic ? "ar" : "en";
+  const notificationToken = isArabic ? "ar" : "en";
   const { profile, mobileCountryList, contactDc } = useAppSelector(
     (state) => state.sharedState
   );
@@ -139,9 +139,15 @@ const HeaderChild = ({
   if (isAuth) {
     return null;
   }
+
+  console.log(pathname,"pathname");
+  console.log(pathname.endsWith("/help-center"),"pathname");
+  
   return (
     <div
-      className={`${isAuth ? 'hidden' : 'flex'} ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'}  box-border items-center justify-between w-full h-20 border-b`}
+      className={`${
+        isAuth ? "hidden" : "flex"
+      } box-border items-center justify-between w-full h-20 border-b`}
       style={{ backgroundColor: isHome ? "#fff " : "#065f46" }}
     >
       <div className="container flex items-center justify-between px-4 mx-auto font-inter ">
@@ -168,7 +174,7 @@ const HeaderChild = ({
               }
             }}
             className={`text-sm font-normal text-center cursor-pointer 
-    ${isHome ? "text-black" : "text-white"} 
+   
     hover:text-orange-400 
     ${
       pathname.endsWith("/")
@@ -191,7 +197,7 @@ const HeaderChild = ({
               }
             }}
             className={`text-sm font-normal text-center cursor-pointer 
-    ${isHome ? "text-black" : "text-white"} 
+    
     hover:text-orange-400 
     ${
       pathname.endsWith("/my-bookings")
@@ -214,7 +220,7 @@ const HeaderChild = ({
               }
             }}
             className={`text-sm font-normal text-center cursor-pointer 
-    ${isHome ? "text-black" : "text-white"} 
+    
     hover:text-orange-400 
     ${
       pathname.endsWith("/help-center")
@@ -237,7 +243,7 @@ const HeaderChild = ({
               }
             }}
             className={`text-sm font-normal text-center cursor-pointer 
-    ${isHome ? "text-black" : "text-white"} 
+    
     hover:text-orange-400 
     ${
       pathname.endsWith("/contact-us")
@@ -302,4 +308,4 @@ const Header = ({
     </StoreProvider>
   );
 };
-export default Header;
+export default Header;

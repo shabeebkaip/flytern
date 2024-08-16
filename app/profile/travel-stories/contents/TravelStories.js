@@ -34,7 +34,7 @@ const TravelStories = () => {
         <div className='hidden col-span-2 lg:block '>
           <SideBar sideBarList={type === "general" ? generalSidebarData : profileSidebarData} />
         </div>
-        <div className='col-span-10 lg:col-span-8'>
+        <div className='col-span-6 lg:col-span-8'>
           <TravelStoriesList type={type} />
         </div>
       </div>
