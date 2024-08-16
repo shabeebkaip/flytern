@@ -84,7 +84,7 @@ const Packages = () => {
                             className="h-full col-span-3 bg-stone-50"
                             height={60}
                         /> :
-                        <div className='col-span-10 md:col-span-3'>
+                        <div className='col-span-10 sm:col-span-3'>
                             <Autocomplete
                                 style={{ fontFamily: 'font-arabic' }}
                                 disablePortal
