@@ -435,7 +435,7 @@ const ProfileInputs = () => {
                     </div>
                 </div>
             </div>
-            <button className='h-12 mt-3 text-base font-medium text-white rounded-md sm:w-64 bg-emerald-800' onClick={onSubmit}>{translation?.add}</button>
+            <button className='h-12 mt-3 text-base font-medium text-white rounded-md sm:w-64 bg-emerald-800 w-60' onClick={onSubmit}>{translation?.add}</button>
             <OtpModal isOtpModalOpen={isOtpModalOpen} handleClose={() => setIsOtpModalOpen(false)}
                 verifyOtpFn={(data) => onOtpVerification({ otp: data, userID: userId })}
             />
