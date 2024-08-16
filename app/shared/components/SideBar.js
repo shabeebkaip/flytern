@@ -12,7 +12,7 @@ const SideBar = ({ sideBarList }) => {
   }, [pathname])
   const activeColor = 'rgba(255, 145, 44, 1)'
   return (
-    <div className='container flex-col hidden px-8 mx-auto overflow-hidden bg-white rounded-lg lg:flex'>
+    <div className='container flex-col hidden px-4 mx-auto overflow-hidden bg-white rounded-lg 2xl:px-8 lg:flex'>
       {sideBarList.map((item, index) => {
         const isActive = item.route.toLowerCase() === activeRoute.toLowerCase()
         return (
