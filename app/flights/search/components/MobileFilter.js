@@ -1,5 +1,6 @@
-import { Popover, PopoverContent, PopoverHandler, Slider } from '@material-tailwind/react';
+import { Popover, PopoverContent, PopoverHandler } from '@material-tailwind/react';
 import React, { useState } from 'react'
+import Slider from "@mui/material/Slider";
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Checkbox, Radio } from '@mui/material';
 import Image from 'next/image';
@@ -44,6 +45,11 @@ const MobileFilter = (props) => {
     };
 
     const handleChange = (event, newValue) => {
+        if (!newValue) {
+            console.error("newValue is undefined");
+            return;
+          }
+          
         let _searchData = { ...searchData };
         setValue(newValue)
         _searchData.priceMinMaxDc = newValue?.join();
