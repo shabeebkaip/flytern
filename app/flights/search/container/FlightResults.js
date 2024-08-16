@@ -140,11 +140,11 @@ const FlightResultsChild = (props) => {
               flightLoader={flightLoader}
               flightResults={flightResults}
             />
-            {
-              searchResponses?.length ?
+            {/* {
+              searchResponses?.length ? */}
                 <ModifySearch setShowSearchCard={setShowSearchCard} showSearchCard={showSearchCard} />
-                : null
-            }
+                {/* : null
+            } */}
           </div>
           {
             showSearchCard ?
@@ -230,13 +230,18 @@ const FlightResultsChild = (props) => {
                 })}
               </InfiniteScroll> :
               <div className="flex items-center justify-center w-full h-96">
-                {
+                {/* {
                   flightLoader ?
                   flightResults.alertMsg ?
                     <AlertMessage message={flightResults.alertMsg} /> :
                     <h1 className="text-2xl font-semibold text-center text-stone-500">Uh-oh! No Flights Found</h1>
                     :null
-                }
+                } */}
+                  {flightLoader?.alertMsg ? (
+                <AlertMessage message={flightResults.alertMsg} />
+              ) : (
+                <AlertMessage message={"Uh-oh! No Flights Found"} />
+              )}
 
               </div>
           }
