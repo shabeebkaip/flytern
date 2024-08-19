@@ -19,7 +19,7 @@ const TermsAndCoditions = ({ terms }) => {
                     </>
                 }
             >
-                {terms && <div className='mt-4 ' dangerouslySetInnerHTML={{ __html: terms }}></div>}
+                {terms && <div className='mt-4 break-words' dangerouslySetInnerHTML={{ __html: terms }}></div>}
 
             </TitleCard>
         </div>
