@@ -89,6 +89,13 @@ const RegularForm = ({ setMainData }) => {
                 policyperiod: _lstPolicyPeriod && _lstPolicyPeriod.length > 0 ? _lstPolicyPeriod[0] : ''
             }));
         }
+        if (data.policy_type === 2) {
+            setData(prevData => ({
+                ...prevData,
+                '000': 1,
+                '001': 1,
+            }));
+        }
     }, [data.policy_type, data.policyplan, data.policyperiod, _lstPolicyType, _lstPolicyOption, _lstPolicyPeriod]);
 
     const onFieldChange = (key, value) => {
@@ -146,10 +153,15 @@ const RegularForm = ({ setMainData }) => {
                                                         { value: 0, label: '0' },
                                                         { value: 1, label: '1' },
                                                     ]
-                                                    : Array.from({ length: 100 }, (_, index) => ({ value: index, label: index.toString() }))
+                                                    : [{ value: null, label: 'Not selected' }, ...Array.from({ length: 99 }, (_, index) => ({ value: index + 1, label: (index + 1).toString() }))]
                                                 }
                                                 getOptionLabel={option => option.label}
-                                                onChange={(event, value) => onFieldChange(item.code, value.value)}
+                                                onChange={(event, value) => onFieldChange(item.code, value ? value.value : null)}
+                                                value={
+                                                    data[item.code] === 0 || data[item.code]
+                                                        ? { value: data[item.code], label: data[item.code].toString() }
+                                                        : null
+                                                }
                                                 renderInput={params => (
                                                     <CustomTextField
                                                         {...params}
@@ -160,7 +172,6 @@ const RegularForm = ({ setMainData }) => {
                                             />
                                         ))
                                     }
-
                                 </div>
                             </div>
                         </div>
