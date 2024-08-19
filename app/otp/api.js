@@ -13,7 +13,6 @@ export const userVerifyOtpApi = (data) => {
   }
 
   export const resendOTPApi = (data) => {
-    debugger
     return new Promise((resolve, reject) => {
       globalPostService(`/api/Users/ResendOTP`, data)
         .then(response => {

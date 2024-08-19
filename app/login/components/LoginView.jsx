@@ -37,7 +37,6 @@ const LoginView = () => {
         .then(response => {
           setLoader(false)
           if (checkApiStatus(response)) {
-            debugger
             enqueueSnackbar('Login Successfully', { variant: 'success', autoHideDuration: 2000, anchorOrigin: { vertical: 'top', horizontal: 'right' } })
             setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken), 1)
             setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken), 1)

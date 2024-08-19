@@ -51,7 +51,6 @@ const ResetView = () => {
             doesntMatch: "Passwords should match"
         });
     } else if (!error.doesntMatch && !error.repeatingPassword && !error.fieldBlank) {
-      debugger
         const status = await updatePasswordApi(data);
         if (status === true) {
             enqueueSnackbar('Password changed successfully', {

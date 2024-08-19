@@ -48,7 +48,6 @@ export const getMoreOptionsApi = (objectID, index, flightIndex, flightResponse) 
 }
 
 export const getFlightFilterApi = (payload, previousState) => {
-  debugger
   return async (dispatch) => {
     try {
       const response = await globalPostService("/api/Flights/FilterFlights", payload)

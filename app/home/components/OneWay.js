@@ -153,7 +153,6 @@ const OneWay = ({ flightReqBody, lang }) => {
     }
   }
   const handleSubmit = () => {
-    debugger
     let validationError = {
       departureLabel: flightSearch?.searchList?.[0]?.departureLabel ? "" : "Please Enter Departure",
       arrivalLabel: flightSearch?.searchList?.[0]?.arrivalLabel ? "" : "Please Enter Arrival",
