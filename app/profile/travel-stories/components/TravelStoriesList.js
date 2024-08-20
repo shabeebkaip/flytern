@@ -55,13 +55,13 @@ const TravelStoriesList = ({ type }) => {
                 data?.map((story, index) => (
                   <div className='flex flex-col justify-start gap-3' key={index}>
                     {type === 'profile' ? (
-                      <div className='w-[500px] h-[400px]'>
-                        <Image src={story?.fileUrl} alt='' className='object-cover w-full h-full rounded-md' width={1000} height={1000} />
+                      <div className='object-cover w-full h-40 rounded-md sm:h-48 md:h-full '>
+                        <Image src={story?.fileUrl} alt='' className=' w-full h-full rounded-md' width={10000} height={10000} />
                       </div>
                     ) : story.urlType === 'VIDEO' ? (
                       <ReactPlayer url={story?.url} width='100%' height='100%' controls />
                     ) : (
-                      <Image src={story?.url} alt='' className='object-cover w-full h-40 rounded-md sm:h-48 md:h-full' width={100} height={100} />
+                      <Image src={story?.url} alt='' className='object-cover w-full h-40 rounded-md sm:h-48 md:h-full' width={10000} height={10000} />
                     )}
                     <div className='flex flex-col gap-5'>
                       <div className='flex flex-col gap-2 sm:flex-row sm:items-center'>
