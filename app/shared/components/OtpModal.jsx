@@ -49,7 +49,7 @@ const OtpModal = ({ isOtpModalOpen, handleClose, verifyOtpFn }) => {
             <div className="w-10 h-10 sm:w-16 sm:h-16" key={index}>
               <input
                 ref={inputRef}
-                className="flex flex-col items-center justify-center w-full h-full px-5 text-lg text-center bg-white border border-gray-200 outline-none rounded-xl focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                className="flex flex-col items-center justify-center w-full h-full text-lg text-center bg-white border border-gray-200 outline-none rounded-xl focus:bg-gray-50 focus:ring-1 ring-blue-700"
                 type="text"
                 maxLength={1}
                 onChange={(e) => handleInput(e, index)}

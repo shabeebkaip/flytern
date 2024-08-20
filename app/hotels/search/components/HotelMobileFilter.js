@@ -1,10 +1,11 @@
 import { Popover, PopoverContent, PopoverHandler } from '@material-tailwind/react'
-import { Checkbox,  Rating, Skeleton, Slider } from '@mui/material'
+import { Checkbox,  InputAdornment,  Rating, Skeleton, Slider, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { CustomTextField } from '../../../shared/components/CustomTextField'
 import { useSelector } from 'react-redux'
 import CancelIcon from '@mui/icons-material/Cancel';
 import Image from 'next/image'
+import { ClearIcon } from '@mui/x-date-pickers'
 
 
 function valuetext(value) {
@@ -72,6 +73,13 @@ const HotelMobileFilter = (props) => {
         setPopoverOpen(false); 
 
     }
+    const handleClearSarch = () => {
+        let _searchData = { ...searchData };
+        _searchData.SearchByNameDc = ""; 
+        setSearchData(_searchData); 
+        setHotel(""); 
+        filterHotels(_searchData); 
+    }
     let objectValueArr = Object.values(searchData).map((item) => item !== null)
     let check = objectValueArr.includes(true)
 
@@ -88,16 +96,27 @@ const HotelMobileFilter = (props) => {
             <div className="">
             <div className='mt-2 '>
             <div className='w-full mb-4'>
-                <CustomTextField
-                    fullWidth
-                    variant='outlined'
-                    placeholder={translation.search_by}
-                    onChange={(e) => handleHotelSearch(e.target.value)}
-                    value={hotel}
-                    className='bg-white rounded-lg'
-                    
-                />
-            </div>
+                                <TextField
+                                    fullWidth
+                                    variant='outlined'
+                                    placeholder={translation.search_by}
+                                    onChange={(e) => handleHotelSearch(e.target.value)}
+                                    value={hotel}
+                                    className='bg-white rounded-lg'
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                {hotel && (
+                                                    <div onClick={handleClearSarch} edge="end">
+                                                        <ClearIcon />
+                                                    </div>
+                                                )}
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            </div>
+
             {
                 hotelLoader ?
                     <Skeleton
@@ -106,7 +125,7 @@ const HotelMobileFilter = (props) => {
                         className="w-3/4 h-full bg-stone-50"
 
                     /> :
-                    hotelsList?.length || objectID ?
+                    hotelsList || objectID ?
                         <div className="flex items-center justify-between mb-3">
                             <h4 className="text-base font-bold text-black font-">
                                 {translation?.filter_by}
@@ -132,7 +151,7 @@ const HotelMobileFilter = (props) => {
                         height={"100vh"}
 
                     /> :
-                    hotelsList?.length || objectID ?
+                    hotelsList || objectID ?
                         <div className='container flex flex-col items-center gap-10 px-4 py-5 mx-auto mt-5 overflow-hidden bg-white rounded-lg'>
 
                             <div className="container flex flex-col w-full gap-3 px-2 mx-auto group">
