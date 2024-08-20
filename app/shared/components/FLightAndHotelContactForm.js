@@ -10,8 +10,12 @@ import { setContactDetails, setShowUserDetails } from '@/lib/slices/sharedSlice'
 import Link from 'next/link';
 import GuestDetails from './GuestDetails';
 import { arabic_translation } from '@/lib/constants'
-
-
+import { getGlobalCookie } from '@/lib/utils';
+import rtlPlugin from 'stylis-plugin-rtl';
+import { prefixer } from 'stylis';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 
@@ -22,6 +26,22 @@ const FLightAndHotelContactForm = ({ countryCode, profile, contactDc, hideButton
     const dispatch = useDispatch()
     // const isMobile = useMediaQuery({ query: "(max-width: 1023px)" });
 
+    const language = getGlobalCookie('language');
+
+    // Conditionally add rtlPlugin to stylisPlugins based on the language
+    const stylisPlugins = language === 'ar' ? [prefixer, rtlPlugin] : [prefixer];
+
+    const cacheRtl = createCache({
+        key: 'muirtl',
+        stylisPlugins: stylisPlugins,
+    });
+
+    const theme = createTheme({
+        direction: language === 'ar' ? 'rtl' : 'ltr',
+        typography: {
+            fontFamily: language === 'ar' ? 'arabic' : 'inter,sans-serif',
+        }
+    });
 
     const handleSignInClick = () => {
         if (typeof window !== "undefined") {
@@ -90,102 +110,106 @@ const FLightAndHotelContactForm = ({ countryCode, profile, contactDc, hideButton
                     }
                     target='contact_details'
                 >
-                    <div className='grid grid-cols-10 gap-3 pt-8 sm:gap-6'>
-                        <div className='col-span-10 '>
-                            <CustomTextField
-                                label={translation?.email}
-                                placeholder={translation?.email}
-                                value={contactDc?.email}
-                                onChange={(e) => {
-                                    const emailInput = e.target.value;
-                                    dispatch(setContactDetails({ ...contactDc, email: emailInput }));
-                                }}
-                                onFocus={() => setError({ ...error, email: '' })}
-                                fullWidth
-                                InputLabelProps={{ shrink: true }}
-                                error={error?.email ? true : false}
-                                helperText={error?.email ? error?.email : ''}
-                                autoComplete="off"
-                            />
-                        </div>
-                        {
-                            mobileCountryList && mobileCountryList.length ?
-                                <Autocomplete
-                                    disablePortal
-                                    id="combo-box-demo"
-                                    options={mobileCountryList}
-                                    getOptionLabel={(option) => ` ${option.code} - ${option.countryName}`}
-                                    value={mobileCountryList.find(item => item.code === contactDc?.countryCode)}
-                                    onChange={(event, value) => dispatch(setContactDetails({ ...contactDc, countryCode: value.code, mobileCntry: value.code }))}
-                                    autoComplete='off'
-                                    error={error?.countryCode ? true : false}
-                                    helperText={error?.countryCode ? error?.countryCode : ''}
-                                    onFocus={() => setError({ ...error, countryCode: '' })}
-                                    renderInput={(params) => (
-
-                                        <CustomTextField
-                                            {...params}
-                                            label={translation?.country_code}
-                                            className=''
-                                            fullWidth
-                                            InputLabelProps={{ shrink: true }}
+                    <CacheProvider value={cacheRtl}>
+                        <ThemeProvider theme={theme}>
+                            <div className={`grid grid-cols-10 gap-3 pt-8 sm:gap-6 ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'}`}>
+                                <div className='col-span-10 '>
+                                    <CustomTextField
+                                        label={translation?.email}
+                                        placeholder={translation?.email}
+                                        value={contactDc?.email}
+                                        onChange={(e) => {
+                                            const emailInput = e.target.value;
+                                            dispatch(setContactDetails({ ...contactDc, email: emailInput }));
+                                        }}
+                                        onFocus={() => setError({ ...error, email: '' })}
+                                        fullWidth
+                                        InputLabelProps={{ shrink: true }}
+                                        error={error?.email ? true : false}
+                                        helperText={error?.email ? error?.email : ''}
+                                        autoComplete="off"
+                                    />
+                                </div>
+                                {
+                                    mobileCountryList && mobileCountryList.length ?
+                                        <Autocomplete
+                                            disablePortal
+                                            id="combo-box-demo"
+                                            options={mobileCountryList}
+                                            getOptionLabel={(option) => ` ${option.code} - ${option.countryName}`}
+                                            value={mobileCountryList.find(item => item.code === contactDc?.countryCode)}
+                                            onChange={(event, value) => dispatch(setContactDetails({ ...contactDc, countryCode: value.code, mobileCntry: value.code }))}
                                             autoComplete='off'
-                                            clearIcon={null}
                                             error={error?.countryCode ? true : false}
                                             helperText={error?.countryCode ? error?.countryCode : ''}
                                             onFocus={() => setError({ ...error, countryCode: '' })}
-                                        />
-                                    )}
-                                    className='col-span-10 md:col-span-3'
-                                    clearIcon={null}
-                                /> : null
-                        }
-                        <CustomTextField
-                            label={translation?.mobile}
-                            className='col-span-10 md:col-span-7'
-                            value={contactDc?.mobileNumber}
-                            onChange={(e) => {
-                                const input = e.target.value.replace(/\D/g, '');
-                                dispatch(setContactDetails({ ...contactDc, mobileNumber: input }));
-                            }}
-                            onFocus={() => setError({ ...error, mobileNumber: '' })}
-                            error={error?.mobileNumber ? true : false}
-                            helperText={error?.mobileNumber ? error?.mobileNumber : ''}
-                            InputLabelProps={{ shrink: true }}
-                            autoComplete="off"
-                        />
+                                            renderInput={(params) => (
 
-                        {hideButton ? null :
-                            profile?.email ? <button className='w-full h-12 col-span-4 mt-3 text-base font-medium text-white rounded-md bg-emerald-800' onClick={() => handleGuestUser()}  >{translation?.continue}
-                            </button> :
-                                <button className='w-full h-12 col-span-12 mt-3 text-base font-medium text-white rounded-md md:col-span-4 bg-emerald-800' onClick={() => handleGuestUser()}  >{translation?.continue_as_guest}
-                                </button>
-                        }
-                        <div className='items-center col-span-12 md:hidden'>
-                            <div className="h-[19px] items-center gap-1.5 lg:inline-flex flex justify-center w-full lg:max-w-[450px] my-5">
-                                <div className="w-full h-[0px] opacity-10 border border-neutral-400"></div>
-                                <div className="text-base font-normal text-center text-stone-500">{translation?.or}</div>
-                                <div className="w-full h-[0px] opacity-10 border border-neutral-400"></div>
-                            </div>
+                                                <CustomTextField
+                                                    {...params}
+                                                    label={translation?.country_code}
+                                                    className=''
+                                                    fullWidth
+                                                    InputLabelProps={{ shrink: true }}
+                                                    autoComplete='off'
+                                                    clearIcon={null}
+                                                    error={error?.countryCode ? true : false}
+                                                    helperText={error?.countryCode ? error?.countryCode : ''}
+                                                    onFocus={() => setError({ ...error, countryCode: '' })}
+                                                />
+                                            )}
+                                            className='col-span-10 md:col-span-3'
+                                            clearIcon={null}
+                                        /> : null
+                                }
+                                <CustomTextField
+                                    label={translation?.mobile}
+                                    className='col-span-10 md:col-span-7'
+                                    value={contactDc?.mobileNumber}
+                                    onChange={(e) => {
+                                        const input = e.target.value.replace(/\D/g, '');
+                                        dispatch(setContactDetails({ ...contactDc, mobileNumber: input }));
+                                    }}
+                                    onFocus={() => setError({ ...error, mobileNumber: '' })}
+                                    error={error?.mobileNumber ? true : false}
+                                    helperText={error?.mobileNumber ? error?.mobileNumber : ''}
+                                    InputLabelProps={{ shrink: true }}
+                                    autoComplete="off"
+                                />
 
-                            {profile?.email ? null :
-                                <div className="flex gap-3">
-                                    <button className='px-6 sm:h-12 py-1.5 rounded-md border border-emerald-800 justify-center items-center w-full text-center text-emerald-800 text-sm font-medium capitalize' onClick={handleSignInClick}>
-                                        {translation?.sign_in}
-                                    </button>
+                                {hideButton ? null :
+                                    profile?.email ? <button className='w-full h-12 col-span-4 mt-3 text-base font-medium text-white rounded-md bg-emerald-800' onClick={() => handleGuestUser()}  >{translation?.continue}
+                                    </button> :
+                                        <button className='w-full h-12 col-span-12 mt-3 text-base font-medium text-white rounded-md md:col-span-4 bg-emerald-800' onClick={() => handleGuestUser()}  >{translation?.continue_as_guest}
+                                        </button>
+                                }
+                                <div className='items-center col-span-12 md:hidden'>
+                                    <div className="h-[19px] items-center gap-1.5 lg:inline-flex flex justify-center w-full lg:max-w-[450px] my-5">
+                                        <div className="w-full h-[0px] opacity-10 border border-neutral-400"></div>
+                                        <div className="text-base font-normal text-center text-stone-500">{translation?.or}</div>
+                                        <div className="w-full h-[0px] opacity-10 border border-neutral-400"></div>
+                                    </div>
 
-                                    <button className='ml-4 px-6 sm:h-12 py-1.5 rounded-md border border-emerald-800 justify-center items-center w-full text-center text-emerald-800 text-sm font-medium capitalize' onClick={handleSignUpClick}>
-                                        {translation?.sign_up}
-                                    </button>
+                                    {profile?.email ? null :
+                                        <div className="flex gap-3">
+                                            <button className='px-6 sm:h-12 py-1.5 rounded-md border border-emerald-800 justify-center items-center w-full text-center text-emerald-800 text-sm font-medium capitalize' onClick={handleSignInClick}>
+                                                {translation?.sign_in}
+                                            </button>
+
+                                            <button className='ml-4 px-6 sm:h-12 py-1.5 rounded-md border border-emerald-800 justify-center items-center w-full text-center text-emerald-800 text-sm font-medium capitalize' onClick={handleSignUpClick}>
+                                                {translation?.sign_up}
+                                            </button>
+                                        </div>
+                                    }
                                 </div>
-                            }
-                        </div>
-                        {showGuestDetails && <GuestDetails />}
-                        <div className=' col-span-10 p-2.5 bg-orange-400 bg-opacity-10 rounded-[10px] justify-start items-center gap-2.5'>
-                            <p className='text-orange-400 text-[11px] sm:text-sm font-medium '>{translation?.note_you_will}</p>
-                        </div>
+                                {showGuestDetails && <GuestDetails />}
+                                <div className=' col-span-10 p-2.5 bg-orange-400 bg-opacity-10 rounded-[10px] justify-start items-center gap-2.5'>
+                                    <p className='text-orange-400 text-[11px] sm:text-sm font-medium '>{translation?.note_you_will}</p>
+                                </div>
 
-                    </div>
+                            </div>
+                        </ThemeProvider>
+                    </CacheProvider>
                 </TitleCard>
             ) : (
                 <GuestDetails />
