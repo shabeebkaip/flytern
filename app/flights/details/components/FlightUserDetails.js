@@ -50,6 +50,7 @@ const FlightUserDetails = (props) => {
   console.log(preTraveller,"p");
   console.log(coPax);
   const submitTvellersDetails = () => {
+    debugger
     // adult validation errors
     let adultValidationErrors = saveTraveller.adultTraveller.map(item => ({
       Title: item?.title ? '' : 'Title is required',
@@ -59,7 +60,7 @@ const FlightUserDetails = (props) => {
     ? '' 
     : 'Last Name must be at least 3 characters long'
   : 'Last Name is required',
-      Gender: item?.gender ? '' : 'Gender is required',
+      Gender: item?.gender || item?.title ? '' : 'Gender is required',
       DateOfBirth: item?.dateOfBirth ? '' : 'Date of Birth is required',
       PassportNumber: item?.passportNumber ? regexConstants.alphanumericRegex.test(item.passportNumber) ? '' : 'Please enter a valid Passport Number' : 'Passport Number is required',
       NationalityCode: item?.nationalityCode ? '' : "Nationality is required",
@@ -241,6 +242,12 @@ const FlightUserDetails = (props) => {
             NationalityCode:'',
             PassportExpiryDate:'',
             PassportIssuedCountryCode:''
+          }
+        } else if (key === "Title") {
+          return {
+            ...item,
+            [key]: '',
+            Gender: ''
           }
         } else {
           return {
