@@ -201,10 +201,10 @@ const PackageDetails = ({ id }) => {
                 <PackagePoster />
             }
           </div>
-          <Dialog open={isOpen} >
+          <Dialog open={isOpen} className={ `${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} `}>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                <div className={ `${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} my-2 `}>
+                <div className={ `${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} my-2  flex flex-col items-start `}>
                   <p className="text-lg font-bold text-left text-black">{translation?.your_enquiry}</p>
                   <p className="text-left text-md">{translation?.our_customer}</p>
                 </div>
