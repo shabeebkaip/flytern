@@ -5,7 +5,7 @@ import StoreProvider from '@/app/StoreProvider'
 
 const page = () => {
     return (
-        <div className=' container mx-auto'>
+        <div className=' container mx-auto px-3 md:px-0'>
             <StoreProvider>
                 <TravelStories />
             </StoreProvider>
