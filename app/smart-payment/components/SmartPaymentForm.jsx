@@ -5,14 +5,26 @@ import InputField from "@/app/shared/components/InputField";
 import { encryptId, encryptUrl } from "@/lib/utils";
 import { useAppSelector } from "@/lib/hooks";
 import { postSmartPaymentApi } from "../api";
+import { CustomTextField } from "@/app/shared/components/CustomTextField";
+import { Autocomplete } from "@mui/material";
 
 const SmartPaymentForm = () => {
   const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState);
   const [value, setValue] = useState({
     bookingRef: "",
   });
-  const [error, setError] = useState("");
-  const { enqueueSnackbar } = useSnackbar();
+
+  const [aleart, setAleart] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "right",
+  });
+  const { enqueueSnackbar } = useSnackbar()
+  const [errors, setErrors] = useState({});
+  const handleClose = () => {
+    setAleart({ ...aleart, open: false });
+  };
+
 
   const handleFieldChange = (key, value) => {
     setValue({ [key]: value });
@@ -24,12 +36,17 @@ const SmartPaymentForm = () => {
       setError("Booking Reference is required");
       return;
     }
-
+  
+    let validationErrors ={
+      bookingRef: value.bookingRef ? "" : "bookingRef is required",
+    }
+    
+    if (Object.values(validationErrors).every(value => value === "")) {
     postSmartPaymentApi(value).then((response) => {
       if (response.data.statusCode === 200) {
         const encryptedBookingRef = encryptId(value.bookingRef);
         if (typeof window !== 'undefined') {
-          window.location.href = `/payment-method/?ref=${encryptedBookingRef}`;
+          window.location.href =` /payment-method/?ref=${encryptedBookingRef}`;
         }
       } else if (response.data.statusCode === 204) {
         enqueueSnackbar(response.data.data, {
@@ -38,10 +55,12 @@ const SmartPaymentForm = () => {
         });
       }
     });
-  };
-
-  const { translation } = useAppSelector((state) => state.sharedState);
-
+  }
+  else {
+    setErrors(validationErrors);
+}
+}
+  const { translation } = useAppSelector((state) => state.sharedState)
   return (
     <TitleCard
       topMargin="0"
@@ -52,11 +71,23 @@ const SmartPaymentForm = () => {
           <InputField
             styles={"w-full"}
             type="text"
-            placeholder={translation?.enter_booking_id}
+
+            placeholder={
+              translation?.enter_booking_id
+            }
+            
+            error={!!errors.bookingRef}
+            helperText={errors.bookingRef}
+            onFocus={() => setErrors({ ...errors, bookingRef: '' })}
             value={value.bookingRef}
-            onChange={(e) => handleFieldChange("bookingRef", e.target.value)}
-          />
-          {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+            onChange={(e) => {
+              handleFieldChange("bookingRef", e.target.value);
+              setErrors({ ...errors, bookingRef: "" })
+            }}
+            
+            />
+            <p className='text-xs text-red-500 '>{errors.bookingRef}</p>
+
         </div>
 
         <div className="col-span-6 sm:col-span-4">
@@ -79,10 +110,6 @@ const SmartPaymentForm = () => {
   );
 };
 
+
 export default SmartPaymentForm;
-
-
-
-
-
 

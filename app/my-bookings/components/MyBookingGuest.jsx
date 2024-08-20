@@ -11,6 +11,8 @@ const MyBookingGuest = () => {
     bookingRef: '',
     email: ''
   })
+  console.log(guestBookingData,"yy");
+  
   const [error, setError] = useState({})
   const language = getGlobalCookie('language')
   const handleGuestBooking = () => {

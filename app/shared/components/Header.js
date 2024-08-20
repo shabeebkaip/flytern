@@ -52,6 +52,7 @@ const HeaderChild = ({
   const dispatch = useAppDispatch();
   const isArabic = pathname.includes("/ar") ? true : false;
   const [isHome, setIsHome] = useState(false);
+  const isArabic = getGlobalCookie("language") === "ar";
   const language = isArabic ? "ar" : "en";
   const notificationToken = isArabic ? "ar" : "en";
   const { profile, mobileCountryList, contactDc } = useAppSelector(

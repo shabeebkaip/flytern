@@ -1,7 +1,8 @@
+"use client"
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { enqueueSnackbar } from "notistack";
-import { Dialog, DialogActions, DialogContent, DialogContentText, Skeleton } from "@mui/material";
+import { createTheme, Dialog, DialogActions, DialogContent, DialogContentText, Skeleton } from "@mui/material";
 import { format } from "date-fns";
 import TravelFlightDetails from "../components/TravelFlightDetails";
 import PackagePoster from "@/app/shared/components/PackagePoster";
@@ -12,7 +13,12 @@ import Exclusion from "../components/Exclusion";
 import FLightAndHotelContactForm from "@/app/shared/components/FLightAndHotelContactForm";
 import Link from "next/link";
 import { useAppSelector } from "@/lib/hooks";
-import { useRouter } from "next/navigation";
+
+import { getGlobalCookie } from "@/lib/utils";
+import rtlPlugin from 'stylis-plugin-rtl';
+import { prefixer } from 'stylis';
+import createCache from '@emotion/cache';
+
 // import { getCountryApi,getIntialInfoApi } from "@/app/shared/api";
 
 
@@ -28,6 +34,7 @@ const PackageDetails = ({ id }) => {
   
 
 
+  
   useEffect(() => {
     dispatch(getPackageDetailsApi(id.id));
     dispatch(getpackageCountryListApi());
@@ -162,8 +169,8 @@ const PackageDetails = ({ id }) => {
                   height={300}
                 /> :
                 packagesDtl[0]?.notIncluded ?
-                <Exclusion />
-                :null
+                  <Exclusion />
+                  : null
             }
 
             {/* {
@@ -200,10 +207,10 @@ const PackageDetails = ({ id }) => {
                 <PackagePoster />
             }
           </div>
-          <Dialog open={isOpen} >
+          <Dialog open={isOpen} className={ `${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} `}>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                <div className="my-2">
+                <div className={ `${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} my-2  flex flex-col items-start `}>
                   <p className="text-lg font-bold text-left text-black">{translation?.your_enquiry}</p>
                   <p className="text-left text-md">{translation?.our_customer}</p>
                 </div>

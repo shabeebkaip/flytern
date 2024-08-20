@@ -15,6 +15,7 @@ import FlightDateInput from "./FlightDateInput";
 import { getDestinationAutoSearchApi } from "../api";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { arabic_translation } from "@/lib/constants";
 
 
 

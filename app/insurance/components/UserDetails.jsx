@@ -6,7 +6,7 @@ import { Autocomplete } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { enqueueSnackbar } from 'notistack';
 import { insuranceReviewDetailsSuccess, setSaveTravellerLoader } from '@/lib/slices/insuranceSlice';
-import { checkApiStatus, encryptId, encryptUrl } from '@/lib/utils';
+import { checkApiStatus, encryptId } from '@/lib/utils';
 import TitleCard from '@/app/shared/components/TitleCard';
 import { ProfileIconSvg } from '@/app/shared/components/SVG';
 import { CustomDatePicker, CustomTextField } from '@/app/shared/components/CustomTextField';
@@ -15,17 +15,20 @@ import { addInsuranceUserDetailsApi } from '../api';
 
 const UserDetails = () => {
     const { insuranceFormList: { _lstPolicyNationality, _lstPolicyRelationship, minPolicyDate } = {} } = useSelector(state => state.insuranceState);
-    const { saveTraveller, } = useSelector(state => state.insuranceState);
-    const { contactDc } = useSelector(state => state.sharedState)
-    const dispatch = useDispatch()
+    const { saveTraveller } = useSelector(state => state.insuranceState);
+    const { contactDc } = useSelector(state => state.sharedState);
+    const dispatch = useDispatch();
 
     const { saveTraveller: { policyRelationshipValues } } = useSelector(state => state.insuranceState);
 
     const [data, setData] = useState([]);
     const [openIndexes, setOpenIndexes] = useState([]);
+    const [errors, setErrors] = useState({});
 
     const updateDataAndSetMainData = (key, value, index) => {
-        setData(data.map((item, i) => i === index ? { ...item, [key]: value } : item))
+        setData(data.map((item, i) => i === index ? { ...item, [key]: value } : item));
+        // Clear the error for this field when it's updated
+        setErrors(prev => ({ ...prev, [`${key}_${index}`]: '' }));
     };
 
     const handleClick = useCallback(() => {
@@ -48,38 +51,56 @@ const UserDetails = () => {
         });
         setData(generatedForms);
         setOpenIndexes(generatedForms.map(() => true));
-    }, [policyRelationshipValues, setData]);
+    }, [policyRelationshipValues]);
 
     useEffect(() => {
         handleClick();
     }, [handleClick]);
 
     const validateForm = () => {
-        for (const form of data) {
-            if (!form.firstName || !form.lastName || !form.dateOfBirth || !form.nationalityCode || !form.civilID || !form.passportNumber) {
-                enqueueSnackbar('Please fill in all fields for each form', { variant: 'error' });
-                return false;
+        let isValid = true;
+        const newErrors = {};
+
+        data.forEach((form, index) => {
+            if (!form.firstName.trim()) {
+                newErrors[`firstName_${index}`] = 'First name is required';
+                isValid = false;
             }
-        }
-        return true;
+            if (!form.lastName.trim()) {
+                newErrors[`lastName_${index}`] = 'Last name is required';
+                isValid = false;
+            }
+            if (!form.dateOfBirth) {
+                newErrors[`dateOfBirth_${index}`] = 'Date of birth is required';
+                isValid = false;
+            }
+            if (!form.nationalityCode) {
+                newErrors[`nationalityCode_${index}`] = 'Nationality is required';
+                isValid = false;
+            }
+            if (!form.civilID.trim()) {
+                newErrors[`civilID_${index}`] = 'Civil ID is required';
+                isValid = false;
+            }
+            if (!form.passportNumber.trim()) {
+                newErrors[`passportNumber_${index}`] = 'Passport number is required';
+                isValid = false;
+            }
+        });
+
+        setErrors(newErrors);
+        return isValid;
     };
 
-    const addInsuranceUserDetails = (params) => {
-        let validateInput = {
-            firstName: data.firstName ? '' : 'firstName is requires',
-            lastName: data.lastName ? '' : 'lastName is requires',
-            dateOfBirth: data.dateOfBirth ? '' : 'dateOfBirth is requires',
-            nationalityCode: data.nationalityCode? '' : 'nationalityCodeis requires',
-            civilID: data.civilID? '' : 'civilID is requires',
-            nationalityCode: data.nationalityCode? '' : 'nationalityCode is requires',
-        }
+    const addInsuranceUserDetails = () => {
         if (!validateForm()) {
+            enqueueSnackbar('Please fill in all required fields', { variant: 'error' });
             return;
         }
 
         const relationshipCodes = data.map((form) => form.relationshipCode);
         const contributorCount = relationshipCodes.filter(code => code === "000").length;
-        const spuaseCount = relationshipCodes.filter(code => code === "001").length;
+        const spouseCount = relationshipCodes.filter(code => code === "001").length;
         const sonCount = relationshipCodes.filter(code => code === "002").length;
         const daughterCount = relationshipCodes.filter(code => code === "003").length;
         const insuranceData = {
@@ -87,16 +108,16 @@ const UserDetails = () => {
             contributor: contributorCount,
             son: sonCount,
             daughter: daughterCount,
-            spouse: spuaseCount,
+            spouse: spouseCount,
             policyPlan: saveTraveller.policyplan,
             policyType: saveTraveller.policy_type,
             policyDuration: saveTraveller.policyperiod,
             policyDate: format(parse(minPolicyDate, 'dd-MM-yyyy', new Date()), 'yyyy-MM-dd'),
         };
         const contactData = {
-            email: contactDc.email && contactDc.email,
-            mobileCntry: contactDc.countryCode && contactDc.countryCode,
-            mobileNumber: contactDc.mobileNumber && contactDc.mobileNumber
+            email: contactDc.email,
+            mobileCntry: contactDc.countryCode,
+            mobileNumber: contactDc.mobileNumber
         }
         const travellerData = {
             _Travellerinfo: data,
@@ -172,6 +193,8 @@ const UserDetails = () => {
                                         onChange={(e) => updateDataAndSetMainData('firstName', e.target.value, index)}
                                         className=' bg-stone-50'
                                         autoComplete='off'
+                                        error={!!errors[`firstName_${index}`]}
+                                        helperText={errors[`firstName_${index}`]}
                                     />
 
                                     <CustomTextField
@@ -181,6 +204,8 @@ const UserDetails = () => {
                                         onChange={(e) => updateDataAndSetMainData('lastName', e.target.value, index)}
                                         className=' bg-stone-50'
                                         autoComplete='off'
+                                        error={!!errors[`lastName_${index}`]}
+                                        helperText={errors[`lastName_${index}`]}
                                     />
 
                                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -189,7 +214,14 @@ const UserDetails = () => {
                                             value={parse(item.dateOfBirth, 'dd-MM-yyyy', new Date())}
                                             className='bg-stone-50'
                                             onChange={(e) => updateDataAndSetMainData('dateOfBirth', format(e, 'dd-MM-yyyy'), index)}
-                                            renderInput={(params) => <CustomTextField {...params} className='bg-stone-50' />}
+                                            renderInput={(params) => (
+                                                <CustomTextField 
+                                                    {...params} 
+                                                    className='bg-stone-50'
+                                                    error={!!errors[`dateOfBirth_${index}`]}
+                                                    helperText={errors[`dateOfBirth_${index}`]}
+                                                />
+                                            )}
                                             maxDate={new Date()}
                                             disableFuture
                                         />
@@ -199,7 +231,7 @@ const UserDetails = () => {
                                         disablePortal
                                         id='combo-box-demo'
                                         options={_lstPolicyNationality}
-                                        onChange={(event, value) => updateDataAndSetMainData('nationalityCode', value.code, index)}
+                                        onChange={(event, value) => updateDataAndSetMainData('nationalityCode', value?.code, index)}
                                         getOptionLabel={(option) => option.information}
                                         autoComplete='off'
                                         renderInput={(params) => (
@@ -207,6 +239,8 @@ const UserDetails = () => {
                                                 {...params}
                                                 label={selectedLanguageAndCountry?.language?.code === 'ar' ? arabic_translation.Select_Nationality : 'Select Nationality'}
                                                 autoComplete='off'
+                                                error={!!errors[`nationalityCode_${index}`]}
+                                                helperText={errors[`nationalityCode_${index}`]}
                                             />
                                         )}
                                         className=' bg-stone-50'
@@ -220,6 +254,8 @@ const UserDetails = () => {
                                         className=' bg-stone-50'
                                         onChange={(e) => updateDataAndSetMainData('civilID', e.target.value, index)}
                                         autoComplete='off'
+                                        error={!!errors[`civilID_${index}`]}
+                                        helperText={errors[`civilID_${index}`]}
                                     />
 
                                     <CustomTextField
@@ -228,6 +264,8 @@ const UserDetails = () => {
                                         onChange={(event) => updateDataAndSetMainData('passportNumber', event.target.value, index)}
                                         value={item.passportNumber}
                                         autoComplete='off'
+                                        error={!!errors[`passportNumber_${index}`]}
+                                        helperText={errors[`passportNumber_${index}`]}
                                     />
                                 </div>
                             )}

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { getFlightSearchApi, getFlightFilterApi } from "@/app/flights/api";
-import { getLocalStorageInfo } from "@/lib/utils";
+import { getGlobalCookie, getLocalStorageInfo } from "@/lib/utils";
 import { Skeleton } from "@mui/material";
 import { flightResultSuccess } from "@/lib/slices/flightSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -27,8 +27,9 @@ const FlightResultsChild = (props) => {
   const { lang } = props;
   const { flightResults, flightLoader } = useAppSelector(state => state.flightState);
   const { searchResponses } = flightResults;
+
   const objectId = useAppSelector(state => state.flightState?.flightResults?.objectID);
-  console
+
   const translation = useAppSelector(state => state.sharedState?.translation);
   const [showSearchCard, setShowSearchCard] = useState(false);
   const [sortItem, setSortItem] = useState();
@@ -46,7 +47,7 @@ const FlightResultsChild = (props) => {
   };
   const [searchData, setSearchData] = useState(initialSearchData);
 
-  console.log(showSearchCard);
+
 
   useEffect(() => {
     if (!page) {
@@ -86,6 +87,9 @@ const FlightResultsChild = (props) => {
       )
     );
   };
+
+  console.log(searchData,'searchdata');
+  
 
 
   const handleNext = (_searchData) => {
@@ -136,11 +140,11 @@ const FlightResultsChild = (props) => {
               flightLoader={flightLoader}
               flightResults={flightResults}
             />
-            {
-              searchResponses?.length ?
+            {/* {
+              searchResponses?.length ? */}
                 <ModifySearch setShowSearchCard={setShowSearchCard} showSearchCard={showSearchCard} />
-                : null
-            }
+                {/* : null
+            } */}
           </div>
           {
             showSearchCard ?
@@ -226,13 +230,18 @@ const FlightResultsChild = (props) => {
                 })}
               </InfiniteScroll> :
               <div className="flex items-center justify-center w-full h-96">
-                {
+                {/* {
                   flightLoader ?
                   flightResults.alertMsg ?
                     <AlertMessage message={flightResults.alertMsg} /> :
                     <h1 className="text-2xl font-semibold text-center text-stone-500">Uh-oh! No Flights Found</h1>
                     :null
-                }
+                } */}
+                  {flightLoader?.alertMsg ? (
+                <AlertMessage message={flightResults.alertMsg} />
+              ) : (
+                <AlertMessage message={"Uh-oh! No Flights Found"} />
+              )}
 
               </div>
           }

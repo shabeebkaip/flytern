@@ -1,5 +1,6 @@
-import { Popover, PopoverContent, PopoverHandler, Slider } from '@material-tailwind/react';
+import { Popover, PopoverContent, PopoverHandler } from '@material-tailwind/react';
 import React, { useState } from 'react'
+import Slider from "@mui/material/Slider";
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Checkbox, Radio } from '@mui/material';
 import Image from 'next/image';
@@ -44,12 +45,16 @@ const MobileFilter = (props) => {
     };
 
     const handleChange = (event, newValue) => {
+        if (!newValue) {
+            console.error("newValue is undefined");
+            return;
+          }
+          
         let _searchData = { ...searchData };
         setValue(newValue)
-        _searchData.priceMinMaxDc = newValue.join();
+        _searchData.priceMinMaxDc = newValue?.join();
         setSearchData(_searchData);
-    
-        filterFlights(_searchData, "njjj");
+        filterFlights(_searchData);
       };
     
       const onChange = (event) => {
@@ -179,7 +184,7 @@ const MobileFilter = (props) => {
                                                             return (
                                                                 <div key={index} className="flex items-center justify-between w-full h-16 gap-5 p-0 text-xs font-normal border-b xl:text-sm">
                                                                     {airline.name} ({airline.value})
-                                                                    <Radio
+                                                                    <Checkbox
                                                                         className="flex justify-end p-0"
                                                                         style={{ color: "orange", padding: 0 }}
                                                                         defaultChecked={false}

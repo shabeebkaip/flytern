@@ -8,6 +8,7 @@ import { addSaveTravellerSuccess } from "@/lib/slices/flightSlice";
 import { useSnackbar } from 'notistack';
 import { regexConstants } from "@/lib/regex";
 import AddTraveller from "@/app/flights/details/components/AddTraveller";
+import { Title } from "@mui/icons-material";
 
 
 const FlightUserDetails = (props) => {
@@ -51,29 +52,33 @@ const FlightUserDetails = (props) => {
   const submitTvellersDetails = () => {
     // adult validation errors
     let adultValidationErrors = saveTraveller.adultTraveller.map(item => ({
-      Title: item.title ? '' : 'Title is required',
-      FirstName: item.firstName && item.firstName?.length >= 3 ? '' : 'Valid First Name is required',
-      LastName: item.lastName && item.lastName?.length >= 3 ? '' : 'Valid Last Name is required',
-      Gender: item.gender ? '' : 'Gender is required',
-      DateOfBirth: item.dateOfBirth ? '' : 'Date of Birth is required',
-      PassportNumber: item.passportNumber ? regexConstants.alphanumericRegex.test(item.passportNumber) ? '' : 'Please enter a valid Passport Number' : 'Passport Number is required',
-      NationalityCode: item.nationalityCode ? '' : "Nationality is required",
-      PassportIssuedCountryCode: item.passportIssuedCountryCode ? '' : 'Passport Issued Country is required',
-      PassportExpiryDate: item.passportExpiryDate ? '' : 'Passport Expiry Date is required',
+      Title: item?.title ? '' : 'Title is required',
+      FirstName: item?.firstName && item.firstName?.length >= 3 ? '' : 'Valid First Name is required',
+      LastName: item?.lastName 
+  ? item.lastName.length > 2 
+    ? '' 
+    : 'Last Name must be at least 3 characters long'
+  : 'Last Name is required',
+      Gender: item?.gender ? '' : 'Gender is required',
+      DateOfBirth: item?.dateOfBirth ? '' : 'Date of Birth is required',
+      PassportNumber: item?.passportNumber ? regexConstants.alphanumericRegex.test(item.passportNumber) ? '' : 'Please enter a valid Passport Number' : 'Passport Number is required',
+      NationalityCode: item?.nationalityCode ? '' : "Nationality is required",
+      PassportIssuedCountryCode: item?.passportIssuedCountryCode ? '' : 'Passport Issued Country is required',
+      PassportExpiryDate: item?.passportExpiryDate ? '' : 'Passport Expiry Date is required',
 
     }))
     checkValidationErrors(adultValidationErrors, setAdultErrors);
     // child validation errors
     let childValidationErrors = saveTraveller.childTraveller.map(item => ({
-      Title: item.title ? '' : 'Title is required',
-      FirstName: item.firstName && item.firstName?.length >= 3 ? '' : 'Valid First Name is required',
-      LastName: item.lastName && item.lastName?.length >= 3 ? '' : 'Valid Last Name is required',
-      Gender: item.gender ? '' : 'Gender is required',
-      DateOfBirth: item.dateOfBirth ? '' : 'Date of Birth is required',
-      PassportNumber: item.passportNumber ? regexConstants.alphanumericRegex.test(item.passportNumber) ? '' : 'Please enter a valid Passport Number' : 'Passport Number is required',
-      NationalityCode: item.nationalityCode ? '' : "Nationality is required",
-      PassportIssuedCountryCode: item.passportIssuedCountryCode ? '' : 'Passport Issued Country is required',
-      PassportExpiryDate: item.passportExpiryDate ? '' : 'Passport Expiry Date is required',
+      Title: item?.title ? '' : 'Title is required',
+      FirstName: item?.firstName && item.firstName?.length >= 3 ? '' : 'Valid First Name is required',
+      LastName: item?.lastName && item.lastName?.length >= 3 ? '' : 'Valid Last Name is required',
+      Gender: item?.gender ? '' : 'Gender is required',
+      DateOfBirth: item?.dateOfBirth ? '' : 'Date of Birth is required',
+      PassportNumber: item?.passportNumber ? regexConstants.alphanumericRegex.test(item.passportNumber) ? '' : 'Please enter a valid Passport Number' : 'Passport Number is required',
+      NationalityCode: item?.nationalityCode ? '' : "Nationality is required",
+      PassportIssuedCountryCode: item?.passportIssuedCountryCode ? '' : 'Passport Issued Country is required',
+      PassportExpiryDate: item?.passportExpiryDate ? '' : 'Passport Expiry Date is required',
     }))
     if (childValidationErrors.map(item => Object.values(item)).flat().filter(item => item !== '').length) {
       setChildErrors(childValidationErrors)
@@ -83,15 +88,15 @@ const FlightUserDetails = (props) => {
 
     // New validation errors for infants
     let infantValidationErrors = saveTraveller.infantTraveller.map(item => ({
-      Title: item.title ? '' : 'Title is required',
-      FirstName: item.firstName && item.firstName?.length >= 3 ? '' : 'Valid First Name is required',
-      LastName: item.lastName && item.lastName?.length >= 3 ? '' : 'Valid Last Name is required',
-      Gender: item.gender ? '' : 'Gender is required',
-      DateOfBirth: item.dateOfBirth ? '' : 'Date of Birth is required',
-      PassportNumber: item.passportNumber ? regexConstants.alphanumericRegex.test(item.passportNumber) ? '' : 'Please enter a valid Passport Number' : 'Passport Number is required',
-      NationalityCode: item.nationalityCode ? '' : "Nationality is required",
-      PassportIssuedCountryCode: item.passportIssuedCountryCode ? '' : 'Passport Issued Country is required',
-      PassportExpiryDate: item.passportExpiryDate ? '' : 'Passport Expiry Date is required',
+      Title: item?.title ? '' : 'Title is required',
+      FirstName: item?.firstName && item.firstName?.length >= 3 ? '' : 'Valid First Name is required',
+      LastName: item?.lastName && item.lastName?.length >= 3 ? '' : 'Valid Last Name is required',
+      Gender: item?.gender ? '' : 'Gender is required',
+      DateOfBirth: item?.dateOfBirth ? '' : 'Date of Birth is required',
+      PassportNumber: item?.passportNumber ? regexConstants.alphanumericRegex.test(item.passportNumber) ? '' : 'Please enter a valid Passport Number' : 'Passport Number is required',
+      NationalityCode: item?.nationalityCode ? '' : "Nationality is required",
+      PassportIssuedCountryCode: item?.passportIssuedCountryCode ? '' : 'Passport Issued Country is required',
+      PassportExpiryDate: item?.passportExpiryDate ? '' : 'Passport Expiry Date is required',
     }))
     if (infantValidationErrors.map(item => Object.values(item)).flat().filter(item => item !== '').length) {
       setInfantErrors(infantValidationErrors)
@@ -223,11 +228,12 @@ const FlightUserDetails = (props) => {
   const removeErrorFields = (key, index, setError) => {
     setError(prevState => prevState.map((item, i) => {
       if (i === index) {
-        if (key === "Title") {
+        if (key === "SelectPassanger") {
           return {
             ...item,
             [key]: '',
             Gender: '',
+            Title:'',
             LastName:'',
             FirstName:'',
             DateOfBirth:'',
@@ -252,25 +258,40 @@ const FlightUserDetails = (props) => {
       ...saveTraveller,
       [type]: saveTraveller?.[type]?.map((item, i) => {
         if (i === index) {
-          return {
-            title: value.title,
-            gender: value.gender,
-            firstName: value.firstName,
-            lastName: value.lastName,
-            dateOfBirth: value.dateofBirth,
-            id: value.id,
-            nationalityCode: value.nationalityCode,
-            passportNumber: value.passportNumber,
-            passportExpiryDate: value.passportExp,
-            passportIssuedCountryCode: value.passportIssuedCountryCode,
-
+          if (value) {
+            return {
+              title: value.title,
+              gender: value.gender,
+              firstName: value.firstName,
+              lastName: value.lastName,
+              dateOfBirth: value.dateofBirth,
+              id: value.id,
+              nationalityCode: value.nationalityCode,
+              passportNumber: value.passportNumber,
+              passportExpiryDate: value.passportExp,
+              passportIssuedCountryCode: value.passportIssuedCountryCode,
+            };
+          } else {
+            return {
+              ...item,
+              title: '',
+              gender: '',
+              firstName: '',
+              lastName: '',
+              dateOfBirth: '',
+              id: '',
+              nationalityCode: '',
+              passportNumber: '',
+              passportExpiryDate: '',
+              passportIssuedCountryCode: '',
+            };
           }
         } else {
-          return item
+          return item;
         }
       })
-    }))
-  }
+    }));
+  };
 
 
   const filteredTitleList = preTraveller?.titleList?.filter((item) => item.code != 0).map(item => item.code)

@@ -24,71 +24,137 @@ import Image from "next/image";
 import OtpModal from "@/app/shared/components/OtpModal";
 
 const ProfileInputs = () => {
-  const { profile } = useSelector((state) => state.profileState);
-  const dispatch = useDispatch();
-  const [editProfile, setEditProfile] = useState({});
-  const [previewImages, setPreviewImages] = useState({ File: null });
-  const [isEmailEditable, setIsEmailEditable] = useState(false);
-  const [isMobileEditable, setIsMobileEditable] = useState(false);
-  const [editedMobileNumber, setEditedMobileNumber] = useState(
-    profile.phoneNumber
-  );
-  const [countryCode, SetCountryCode] = useState(
-    profile.countriesList.map((item) => item.code)
-  );
-  const [editedEmail, setEditedEmail] = useState(profile.email);
-  const [selectedCountryCode, setSelectedCountryCode] = useState(
-    profile.phoneCountryCode
-  );
-  const [isOtpModalOpen, setIsOtpModalOpen] = useState(false); // State variable for controlling the OTP modal
-  const [userId, setUserId] = useState(null);
-  const [errors, setErrors] = useState({});
 
-  const { enqueueSnackbar } = useSnackbar();
+    const { profile } = useSelector(state => state.profileState);
+    const dispatch = useDispatch();
+    const [editProfile, setEditProfile] = useState({});
+    const [previewImages, setPreviewImages] = useState({ File: null });
+    const [isEmailEditable, setIsEmailEditable] = useState(false);
+    const [isMobileEditable, setIsMobileEditable] = useState(false);
+    const [editedMobileNumber, setEditedMobileNumber] = useState(profile.phoneNumber);
+    const [countryCode, SetCountryCode] = useState(profile.countriesList.map(item => item.code))
+    const [editedEmail, setEditedEmail] = useState(profile.email);
+    const [selectedCountryCode, setSelectedCountryCode] = useState(profile.phoneCountryCode);
+    const [isOtpModalOpen, setIsOtpModalOpen] = useState(false); // State variable for controlling the OTP modal
+    const [userId, setUserId] = useState(null);
+    const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    if (Object.keys(profile).length !== 0) {
-      setEditProfile({
-        ...profile,
-        dateOfBirth: profile.dateOfBirth ? profile.dateOfBirth : null,
-        passportExpiry: profile.passportExpiry ? profile.passportExpiry : null,
-      });
-    } else {
-      dispatch(getProfileDetailApi);
-    }
-  }, [profile, dispatch]);
 
-  const onFieldChange = (field, value) => {
-    if (field === "countrySelect" || field === "passportSelect") {
-      setEditProfile({
-        ...editProfile,
-        [field]: value,
-        [`${
-          field === "countrySelect"
-            ? "nationalityCode"
-            : "passportIssuerCountryCode"
-        }`]: value.countryISOCode,
-      });
-    } else {
-      setEditProfile({
-        ...editProfile,
-        [field]: value,
-      });
-    }
-  };
+    const { enqueueSnackbar } = useSnackbar();
 
-  const onMobileSubmit = () => {
-    if (!editedMobileNumber.trim() || !selectedCountryCode) {
-      enqueueSnackbar("Mobile number and country code are required", {
-        variant: "error",
-        autoHideDuration: 2000,
-        anchorOrigin: { vertical: "top", horizontal: "right" },
-      });
-      return;
-    }
-    const payload = {
-      mobile: editedMobileNumber,
-      countryCode: selectedCountryCode,
+    useEffect(() => {
+        if (Object.keys(profile).length !== 0) {
+            setEditProfile({
+                ...profile,
+                dateOfBirth: profile.dateOfBirth ? profile.dateOfBirth : null,
+                passportExpiry: profile.passportExpiry ? profile.passportExpiry : null
+            });
+        } else {
+            dispatch(getProfileDetailApi);
+        }
+    }, [profile, dispatch]);
+
+    const onFieldChange = (field, value) => {
+        if (field === 'countrySelect' || field === 'passportSelect') {
+            setEditProfile({
+                ...editProfile,
+                [field]: value,
+                [`${field === 'countrySelect' ? 'nationalityCode' : 'passportIssuerCountryCode'}`]: value.countryISOCode
+            });
+        } else {
+            setEditProfile({
+                ...editProfile,
+                [field]: value
+            });
+        }
+    };
+    
+
+
+    const onMobileSubmit = () => {
+        if (!editedMobileNumber.trim() || !selectedCountryCode) {
+            enqueueSnackbar('Mobile number and country code are required', {
+                variant: 'error',
+                autoHideDuration: 2000,
+                anchorOrigin: { vertical: 'top', horizontal: 'right' }
+            });
+            return;
+        }
+        const payload = {
+            mobile: editedMobileNumber,
+            countryCode: selectedCountryCode
+        };
+
+        updateMobileApi(payload)
+            .then(response => {
+                if (checkApiStatus(response)) {
+                    enqueueSnackbar('Mobile Number Updated Successfully', {
+                        variant: 'success',
+                        autoHideDuration: 2000,
+                        anchorOrigin: { vertical: 'top', horizontal: 'right' }
+                    });
+                    setIsMobileEditable(false);
+                    setIsOtpModalOpen(true); // Open the OTP modal here
+                } else if (response.data.statusCode === 100) {
+                    const updatedUserId = response.data.data.userID;
+                    setUserId(updatedUserId);
+                    enqueueSnackbar('OTP Verification Required', {
+                        variant: 'success',
+                        autoHideDuration: 2000,
+                        anchorOrigin: { vertical: 'top', horizontal: 'right' }
+                    });
+                    setIsEmailEditable(false);
+                    setIsOtpModalOpen(true); // Open the OTP modal here
+
+                } else {
+                    enqueueSnackbar('This phone number and country code are currently in use; please select a different one.', {
+                        variant: 'error',
+                        autoHideDuration: 2000,
+                        anchorOrigin: { vertical: 'top', horizontal: 'right' }
+                    });
+                }
+            });
+    };
+
+
+    const onEmailSubmit = () => {
+        if (!editedEmail.trim()) {
+          
+            enqueueSnackbar('Email is required', {
+                variant: 'error',
+                autoHideDuration: 2000,
+                anchorOrigin: { vertical: 'top', horizontal: 'right' }
+            });
+            return;
+        }
+        updateEmailApi({ email: editedEmail })
+            .then(response => {
+                if (checkApiStatus(response)) {
+                    enqueueSnackbar('Email Updated Successfully', {
+                        variant: 'success',
+                        autoHideDuration: 2000,
+                        anchorOrigin: { vertical: 'top', horizontal: 'right' }
+                    });
+                    setIsEmailEditable(false);
+                } else if (response.data.statusCode === 100) {
+                    const updatedUserId = response.data.data.userID;
+                    setUserId(updatedUserId);
+                    enqueueSnackbar('OTP Verification Required', {
+                        variant: 'success',
+                        autoHideDuration: 2000,
+                        anchorOrigin: { vertical: 'top', horizontal: 'right' }
+                    });
+                    setIsOtpModalOpen(true)
+                    setIsEmailEditable(false);
+                } else {
+                    enqueueSnackbar('This email is already in use; please choose a different one.', {
+                        variant: 'error',
+                        autoHideDuration: 2000,
+                        anchorOrigin: { vertical: 'top', horizontal: 'right' }
+                    });
+                }
+            });
+
     };
 
     updateMobileApi(payload).then((response) => {
@@ -500,6 +566,18 @@ const ProfileInputs = () => {
                 </>
               ) : null}
             </div>
+
+            <button className='h-12 mt-3 text-base font-medium text-white rounded-md sm:w-64 bg-emerald-800 w-60' onClick={onSubmit}>{translation?.add}</button>
+            <OtpModal isOtpModalOpen={isOtpModalOpen} handleClose={() => setIsOtpModalOpen(false)}
+                verifyOtpFn={(data) => onOtpVerification({ otp: data, userID: userId })}
+            />
+            {/* <OtpModal isOtpModalOpen={isOtpModalOpen} /> */}
+
+
+
+        </>
+    );
+
 
             <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-10">
               <Autocomplete
