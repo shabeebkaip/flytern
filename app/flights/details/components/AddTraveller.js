@@ -36,8 +36,8 @@ const AddTraveller = (props) => {
                   {...params}
                   label={translation.select_passenger}
                   InputLabelProps={{ shrink: true }}
-                  // error={errors?.[index]?.Title ? true : false}
-                  // helperText={errors?.[index]?.Title}
+                // error={errors?.[index]?.Title ? true : false}
+                // helperText={errors?.[index]?.Title}
                 />
               )}
               className=""
@@ -55,8 +55,10 @@ const AddTraveller = (props) => {
               placeholder={translation?.prefix}
               getOptionLabel={(option) => option}
               value={item?.title}
-              onChange={(event, value) => { handleTravellerOnChange('title', value, index, type) }}
-              onFocus={() => removeErrorFields("Title", index, setErrors)}
+              onChange={(event, value) => { 
+                handleTravellerOnChange('title', value, index, type); 
+                removeErrorFields("Title", index, setErrors);
+              }}
               clearIcon={null}
               autoComplete="off"
               error={errors?.[index]?.Title ? true : false}
