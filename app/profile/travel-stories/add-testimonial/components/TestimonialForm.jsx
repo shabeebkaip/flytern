@@ -17,7 +17,7 @@ const TestimonialForm = () => {
   const [data, setData] = useState({
     File: null,
     Title: "",
-    Rating: "",
+    Rating: 0,
     TripSummary: "",
   });
   const { enqueueSnackbar } = useSnackbar();
@@ -50,9 +50,6 @@ const TestimonialForm = () => {
       newErrors.Title = "Please enter a title for your testimonial.";
     }
 
-    if (!data.Rating) {
-      newErrors.Rating = "Please provide a star rating.";
-    }
 
     if (!data.TripSummary.trim()) {
       newErrors.TripSummary =
@@ -69,6 +66,7 @@ const TestimonialForm = () => {
     if (!validateFields()) {
       return;
     }
+
     let formData = new FormData();
     formData.append("File", data?.File[0]);
     formData.append("Title", data?.Title);
@@ -77,6 +75,7 @@ const TestimonialForm = () => {
     addTestimonialApi(formData)
       .then((res) => {
         if (checkApiStatus(res)) {
+          debugger
           enqueueSnackbar("Testimonial Added Successfully", {
             variant: "success",
             autoHideDuration: 3000,
@@ -86,7 +85,7 @@ const TestimonialForm = () => {
           setData({
             File: null,
             Title: "",
-            Rating: "",
+            Rating: 0,
             TripSummary: "",
           });
           setPreviewImage({ File: null });
@@ -122,6 +121,7 @@ const TestimonialForm = () => {
       File: null,
     });
   };
+  
 
   return (
     <TitleCard
@@ -193,13 +193,8 @@ const TestimonialForm = () => {
             value={data.Rating}
             onChange={(event, newValue) => {
               setData({ ...data, Rating: newValue });
-              updateErrorField("Rating");
             }}
-            onFocus={() => updateErrorField("Rating")}
           />
-          {errors.Rating && (
-            <p className="mt-1 text-sm text-red-500">{errors.Rating}</p>
-          )}
         </div>
       </div>
       <div className="z-10 mt-8">
@@ -215,27 +210,27 @@ const TestimonialForm = () => {
         </div>
         
         <div className="grid grid-cols-10 gap-5 mt-5">
-  <div className="col-span-10">
-    <InputField
-      type="text"
-      placeholder={
-        selectedLanguageAndCountry?.language?.code === "ar"
-          ? arabic_translation.title
-          : "Title"
-      }
-      value={data.Title}
-      onChange={(e) => {
-        setData({ ...data, Title: e.target.value });
-        updateErrorField("Title");
-      }}
-      error={errors.Title}
-      styles="w-full bg-white"
-      onFocus={() => updateErrorField("Title")}
-    />
-    {errors.Title && (
-      <p className="mt-1 text-sm text-red-500 border-red-500">{errors.Title}</p>
-    )}
-  </div>
+        <div className="col-span-10">
+            <InputField
+              type="text"
+              placeholder={
+                selectedLanguageAndCountry?.language?.code === "ar"
+                  ? arabic_translation.title
+                  : "Title"
+              }
+              value={data.Title}
+              onFocus={() => updateErrorField("Title")}
+              onChange={(e) => {
+                setData({ ...data, Title: e.target.value });
+                updateErrorField("Title");
+              }}
+              error={errors.Title}
+              styles="w-full bg-white"
+            />
+            {errors.Title && (
+              <p className="mt-1 text-sm text-red-500 border-red-500">{errors.Title}</p>
+            )}
+          </div>
 
   <div className="col-span-10">
     <Textarea
