@@ -51,7 +51,7 @@ const HeaderChild = ({
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const [isHome, setIsHome] = useState(false);
-   const isArabic = getGlobalCookie("language") === "ar";
+  const isArabic = getGlobalCookie("language") === "ar";
   const language = isArabic ? "ar" : "en";
   const notificationToken = isArabic ? "ar" : "en";
   const { profile, mobileCountryList, contactDc } = useAppSelector(
@@ -168,15 +168,13 @@ const HeaderChild = ({
               }
             }}
             className={`text-sm font-normal text-center cursor-pointer 
-    ${isHome ? "text-black" : "text-white"} 
     hover:text-orange-400 
-    ${
-      pathname.endsWith("/")
-        ? "text-[#FFA726]"
-        : isHome
-        ? "text-black"
-        : "text-[#fff]"
-    }`}
+    ${pathname.endsWith("/")
+                ? "text-[#FFA726]"
+                : isHome
+                  ? "text-black"
+                  : "text-[#fff]"
+              }`}
           >
             {selectedLanguageAndCountry?.language?.code === "ar"
               ? "بيت"
@@ -191,15 +189,13 @@ const HeaderChild = ({
               }
             }}
             className={`text-sm font-normal text-center cursor-pointer 
-    ${isHome ? "text-black" : "text-white"} 
     hover:text-orange-400 
-    ${
-      pathname.endsWith("/my-bookings")
-        ? "text-[#FFA726]"
-        : isHome
-        ? "text-black"
-        : "text-[#fff]"
-    }`}
+    ${pathname.endsWith("/my-bookings")
+                ? "text-[#FFA726]"
+                : isHome
+                  ? "text-black"
+                  : "text-[#fff]"
+              }`}
           >
             {selectedLanguageAndCountry?.language?.code === "ar"
               ? "حجوزاتي"
@@ -214,15 +210,13 @@ const HeaderChild = ({
               }
             }}
             className={`text-sm font-normal text-center cursor-pointer 
-    ${isHome ? "text-black" : "text-white"} 
     hover:text-orange-400 
-    ${
-      pathname.endsWith("/help-center")
-        ? "text-[#FFA726]"
-        : isHome
-        ? "text-black"
-        : "text-[#fff]"
-    }`}
+    ${pathname.endsWith("/help-center")
+                ? "text-[#FFA726]"
+                : isHome
+                  ? "text-black"
+                  : "text-[#fff]"
+              }`}
           >
             {selectedLanguageAndCountry?.language?.code === "ar"
               ? "مركز المساعدة"
@@ -237,15 +231,13 @@ const HeaderChild = ({
               }
             }}
             className={`text-sm font-normal text-center cursor-pointer 
-    ${isHome ? "text-black" : "text-white"} 
     hover:text-orange-400 
-    ${
-      pathname.endsWith("/contact-us")
-        ? "text-[#FFA726]"
-        : isHome
-        ? "text-black"
-        : "text-[#fff]"
-    }`}
+    ${pathname.endsWith("/contact-us")
+                ? "text-[#FFA726]"
+                : isHome
+                  ? "text-black"
+                  : "text-[#fff]"
+              }`}
           >
             {selectedLanguageAndCountry?.language?.code === "ar"
               ? "اتصال"
@@ -265,9 +257,8 @@ const HeaderChild = ({
                 />
               )}
               <h3
-                className={`text-sm font-normal text-center cursor-pointer ${
-                  isHome ? "text-black" : "text-white"
-                }`}
+                className={`text-sm font-normal text-center cursor-pointer ${isHome ? "text-black" : "text-white"
+                  }`}
               >
                 {selectedLanguageAndCountry?.language?.name
                   ? selectedLanguageAndCountry?.language?.name
