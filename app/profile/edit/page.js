@@ -24,30 +24,9 @@ const page = () => {
     const theme = createTheme({
         direction: language === 'ar' ? 'rtl' : 'ltr',
         typography: {
-          fontFamily: language === 'ar' ? 'arabic' : 'inter,sans-serif',
-        },
-        components: {
-          MuiInputLabel: {
-            styleOverrides: {
-              root: {
-                left: language === 'ar' ? 'auto' : '0',
-                right: language === 'ar' ? '0' : 'auto',
-                textAlign: language === 'ar' ? 'right' : 'left',
-              },
-            },
-          },
-          MuiOutlinedInput: {
-            styleOverrides: {
-              root: {
-                '& fieldset': {
-                  textAlign: language === 'ar' ? 'right' : 'left',
-                  direction: language === 'ar' ? 'rtl' : 'ltr',
-                },
-              },
-            },
-          },
-        },
-      });
+            fontFamily: language === 'ar' ? 'arabic' : 'inter,sans-serif',
+        }
+    });
     return (
         <div className='container px-4 mx-auto md:px-0'>
             <SnackbarProvider>
