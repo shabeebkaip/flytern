@@ -140,11 +140,7 @@ const FlightResultsChild = (props) => {
               flightLoader={flightLoader}
               flightResults={flightResults}
             />
-            {/* {
-              searchResponses?.length ? */}
-                <ModifySearch setShowSearchCard={setShowSearchCard} showSearchCard={showSearchCard} />
-                {/* : null
-            } */}
+          
           </div>
           {
             showSearchCard ?
