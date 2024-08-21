@@ -39,6 +39,18 @@ body {
   scrollbar-width: none;
 }
 
+.MuiInputLabel-root {
+  left: auto !important;
+  right: 0 !important;
+  text-align: right !important;
+}
+
+.MuiOutlinedInput-root fieldset {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+
 @font-face {
   font-family: 'arabic';
   src: url('/app/fonts/Janna\ LT\ Regular.ttf');
