@@ -85,7 +85,7 @@ const HotelMobileFilter = (props) => {
 
   return (
     <div className=''>
-    <Popover placement="bottom-end" >
+    <Popover placement="bottom-end">
         <PopoverHandler>
             <div className="flex items-center justify-between w-24 h-12 px-3 bg-white rounded-md sm:w-36">
                 <p className='text-sm sm:text-base'>Filter</p>

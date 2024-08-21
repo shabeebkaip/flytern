@@ -9,6 +9,7 @@ import { checkApiStatus, getLocalStorageInfo, setGlobalCookie } from '@/lib/util
 import { userLoginApi } from '../api'
 import InputField from '@/app/shared/components/InputField';
 import Link from 'next/link';
+import { useAppSelector } from '@/lib/hooks';
 
 
 
@@ -18,6 +19,8 @@ const LoginView = () => {
   const [error, setError] = useState({ email: '', password: '' })
   const { enqueueSnackbar } = useSnackbar()
   const redirectPath = getLocalStorageInfo('redirectPath')
+  const { selectedLanguageAndCountry } = useAppSelector((state) => state.sharedState);
+
 
   const [showPassword, setShowPassword] = useState({
     stateOne: false,
@@ -71,7 +74,7 @@ const LoginView = () => {
   }
   const { translation } = useSelector((state) => state.sharedState)
   return (
-    <div className='flex flex-col items-center justify-center h-full pt-8 pb-8 bg-white md:items-start md:pb-0 md:pt-0'>
+    <div className={`flex flex-col items-center justify-center h-full pt-8 pb-8 bg-white md:items-start md:pb-0 md:pt-0 `}>
       <div className='container flex flex-col items-start gap-6 px-10 mx-auto lg:px-32'>
         <div className="flex flex-col gap-[15px] items-start">
           <h4 className="text-xl font-bold text-black sm:text-2xl ">{translation?.sign_in}</h4>
@@ -99,11 +102,11 @@ const LoginView = () => {
             onChange={(e) => { setData({ ...data, password: e.target.value }); updateErrorFields('password', "") }}
           />
           <RemoveRedEyeIcon
-            className='absolute z-40 top-[12px] right-4  text-slate-500'
+            className={`absolute z-40 top-[12px]  ${selectedLanguageAndCountry?.language?.code === "ar" ? 'left-4' : 'right-4'}  text-slate-500`}
             onClick={() => setShowPassword({ ...showPassword, stateTwo: !showPassword.stateTwo })}
           />
           {showPassword.stateTwo && <VisibilityOffIcon
-            className='absolute z-40 top-[12px] right-4  text-slate-500'
+            className={`absolute z-40 top-[12px] ${selectedLanguageAndCountry?.language?.code === "ar" ? 'left-4' : 'right-4'}  text-slate-500`}
             onClick={() => setShowPassword({ ...showPassword, stateTwo: !showPassword.stateTwo })}
           />}
           {error?.password && <p className="text-xs text-red-500">{error.password}</p>}

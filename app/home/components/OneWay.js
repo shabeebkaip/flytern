@@ -175,6 +175,8 @@ const OneWay = ({ flightReqBody, lang }) => {
           localStorage.setItem("searchData", JSON.stringify(payload));
           // TODO call the api once flight module is ready
           dispatch(getFlightSearchApi(payload));
+          
+
         } else {
           localStorage.setItem("searchData", JSON.stringify(payload));
           if (lang === 'ar') {

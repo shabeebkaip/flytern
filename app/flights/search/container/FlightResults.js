@@ -55,14 +55,14 @@ const FlightResultsChild = (props) => {
     }
 
   }, [flightResults, page])
-  
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
     }
     dispatch(getFlightSearchApi(request));
   }, []);
-  
+
   useEffect(() => {
     if (flightLoader) {
       document.body.style.cursor = 'wait';
@@ -88,8 +88,8 @@ const FlightResultsChild = (props) => {
     );
   };
 
-  console.log(searchData,'searchdata');
-  
+  console.log(searchData, 'searchdata');
+
 
 
   const handleNext = (_searchData) => {
@@ -122,7 +122,7 @@ const FlightResultsChild = (props) => {
     setSelectedDate(date);
   };
   return (
-    <div  className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'} container mx-auto px-4`}>
+    <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} container mx-auto px-4`}>
       <div className="grid grid-cols-10 gap-6 ">
         <div className="hidden col-span-3 mb-12 lg:block ">
           <Filter
@@ -139,8 +139,8 @@ const FlightResultsChild = (props) => {
               request={request}
               flightLoader={flightLoader}
               flightResults={flightResults}
-            />
-          
+            />          
+
           </div>
           {
             showSearchCard ?
@@ -177,18 +177,21 @@ const FlightResultsChild = (props) => {
                   searchResponses?.length ?
                     <h3 className='sm:text-base text-[13px] font-medium text-black '>{translation?.available_flights}</h3> : null
                 }
-
-                <SortSection
-                  setShowSearchCard={setShowSearchCard}
-                  sort={sortItem}
-                  searchData={searchData}
-                  showSearchCard={showSearchCard}
-                  setSort={setSortItem}
-                  setSearchData={setSearchData}
-                  filterFlights={(data) => filterFlights(data)}
-                  request={request}
-                  flightResults={flightResults}
-                />
+                {
+                  searchResponses?.length ?
+                    <SortSection
+                      setShowSearchCard={setShowSearchCard}
+                      sort={sortItem}
+                      searchData={searchData}
+                      showSearchCard={showSearchCard}
+                      setSort={setSortItem}
+                      setSearchData={setSearchData}
+                      filterFlights={(data) => filterFlights(data)}
+                      request={request}
+                      flightResults={flightResults}
+                    />
+                    : null
+                }
               </div>
           }
           {
@@ -233,11 +236,11 @@ const FlightResultsChild = (props) => {
                     <h1 className="text-2xl font-semibold text-center text-stone-500">Uh-oh! No Flights Found</h1>
                     :null
                 } */}
-                  {flightLoader?.alertMsg ? (
-                <AlertMessage message={flightResults.alertMsg} />
-              ) : (
-                <AlertMessage message={"Uh-oh! No Flights Found"} />
-              )}
+                {flightLoader?.alertMsg ? (
+                  <AlertMessage message={flightResults.alertMsg} />
+                ) : (
+                  <AlertMessage message={"Uh-oh! No Flights Found"} />
+                )}
 
               </div>
           }
