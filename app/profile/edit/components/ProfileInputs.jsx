@@ -14,6 +14,7 @@ import { updateEmailApi, updateMobileApi, updateOtpApi, updateProfileApi } from 
 import { CustomDatePicker, CustomTextField } from '@/app/shared/components/CustomTextField';
 import Image from 'next/image';
 import OtpModal from '@/app/shared/components/OtpModal';
+import { useAppSelector } from '@/lib/hooks';
 
 
 
@@ -32,6 +33,8 @@ const ProfileInputs = () => {
     const [isOtpModalOpen, setIsOtpModalOpen] = useState(false); // State variable for controlling the OTP modal
     const [userId, setUserId] = useState(null);
     const [errors, setErrors] = useState({});
+    const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
+
 
 
     const { enqueueSnackbar } = useSnackbar();
@@ -236,7 +239,7 @@ const ProfileInputs = () => {
                 {editProfile.imgUrl ? (
                     <>
                         {previewImages.File ? <Image className='w-[104px] h-[104px]' src={previewImages.File} alt="" width={100} height={100} /> : <Image className='w-[104px] h-[104px]' src={editProfile.imgUrl} alt="" width={100} height={100} />}
-                        <Image className='absolute bottom-0 w-6 h-6 left-20' src="/misc/camera.png" alt="" width={100} height={100} />
+                        <Image className={`absolute bottom-0 w-6 h-6 left-20 ${selectedLanguageAndCountry?.language?.code === "ar"  ? ' right-20' : 'left-20'}`} src="/misc/camera.png" alt="" width={100} height={100} />
                     </>
                 ) : (
                     <Image className='w-[104px] h-[104px]' src="/misc/profile.png" alt="" width={100} height={100} />

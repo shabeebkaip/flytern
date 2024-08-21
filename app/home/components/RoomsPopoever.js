@@ -17,7 +17,7 @@ const RoomsPopoever = ({ open, anchorEl, closePopover, rooms, setRooms, addRoom,
       }}
       fullWidth={true}
     >
-      <div className="grid w-full grid-cols-1 gap-5 p-2" >
+      <div className="grid w-full grid-cols-1 gap-5 p-2 " >
         {rooms.map((room, index) => (
           <div className="flex flex-col justify-start gap-5" key={index}>
             <div className="flex items-center justify-between w-full">
@@ -73,7 +73,9 @@ const RoomsPopoever = ({ open, anchorEl, closePopover, rooms, setRooms, addRoom,
           + {translation.add_room}
         </div>
         <div >
-          <button onClick={closePopover} className="inline-flex items-center justify-center w-full gap-1 px-3 py-1.5 text-white rounded-md font-inter sm:px-6 bg-emerald-800">{translation.apply}</button>
+          <button onClick={closePopover} className={`inline-flex items-center justify-center w-full gap-1 px-3 py-1.5 text-white rounded-md font-inter sm:px-6 bg-emerald-800 ${
+              rooms.length > 1 ? 'mb-10' : ''
+            } md:mb-0`}>{translation.apply}</button>
         </div>
       </div>
     </Popover>

@@ -30,7 +30,7 @@ const PackageDetails = ({ id }) => {
   const dispatch = useDispatch();
 
 
-  
+
   useEffect(() => {
     dispatch(getPackageDetailsApi(id.id));
     dispatch(getpackageCountryListApi());
@@ -65,6 +65,9 @@ const PackageDetails = ({ id }) => {
 
   const handleClose = () => {
     setOpen(false)
+    if (typeof window !== "undefined") {
+      window.location.href = '/'
+    }
   }
   const { translation } = useSelector((state) => state.sharedState)
 
@@ -201,10 +204,10 @@ const PackageDetails = ({ id }) => {
                 <PackagePoster />
             }
           </div>
-          <Dialog open={isOpen} className={ `${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} `}>
+          <Dialog open={isOpen} className={`${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} `}>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                <div className={ `${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} my-2  flex flex-col items-start `}>
+                <div className={`${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'} my-2  flex flex-col items-start `}>
                   <p className="text-lg font-bold text-left text-black">{translation?.your_enquiry}</p>
                   <p className="text-left text-md">{translation?.our_customer}</p>
                 </div>
