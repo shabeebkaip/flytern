@@ -11,7 +11,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import { useSelector } from 'react-redux';
 // import { authApiService } from '../../utils/authApi';
 import FlightIcon from '@mui/icons-material/Flight';
-import { getGlobalCookie, setGlobalCookie } from '@/lib/utils';
+import { clearAllCookies, getGlobalCookie, setGlobalCookie } from '@/lib/utils';
+import { authApiService } from '@/lib/authApi';
 
 
 const MobileHeaderMenu = () => {
@@ -39,20 +40,31 @@ const MobileHeaderMenu = () => {
     const userLogout = () => {
         clearAllCookies();
         setTimeout(() => {
-            authApiService('/api/Auths/Token', { "DeviceID": "00700834" })
+            authApiService()
                 .then((response) => {
-                    setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken));
-                    setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken));
+                    setGlobalCookie('accessToken', JSON.stringify(response.data.data.accessToken), 1);
+                    setGlobalCookie('refreshToken', JSON.stringify(response.data.data.refreshToken), 1);
+                    setGlobalCookie('isUserLoggedIn', response.data.data.isLoggedIn, 1);
                     setTimeout(() => {
                         if (typeof window !== "undefined") {
-                            window.location.reload(false);
+                            const currentPath = window.location.pathname;
+                            if (currentPath === '/profile' || 
+                                currentPath === '/profile/change-password' || 
+                                currentPath === '/profile/travel-stories') {
+                               
+                                window.location.href = '/';
+                            } else {
+                                // Reload the current page
+                                window.location.reload(false);
+                            }
                         }
                     }, 1000);
                 })
                 .catch((error) => {
+                    console.log('error', error);
                 });
         }, 1000);
-    }
+    };
     const { translation } = useSelector((state) => state.sharedState)
     const isUserLoggedIn = getGlobalCookie('isUserLoggedIn')
     console.log(isUserLoggedIn);
@@ -65,7 +77,7 @@ const MobileHeaderMenu = () => {
             </div>
 
             <Drawer anchor="left" open={isNavOpen} onClose={closeNav} variant="temporary"  >
-                <div className='w-[85vw] h-full flex flex-col justify-between'>
+                <div className='w-[85vw] h-full flex flex-col justify-between pb-[13%]'>
                     <List>
                         <ListItem button onClick={() => handleListItemClick('/smart-payment')}>
                             <ListItemIcon>

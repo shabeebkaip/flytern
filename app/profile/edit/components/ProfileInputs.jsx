@@ -252,7 +252,7 @@ const ProfileInputs = () => {
                 />
             </div>
             <div className='flex flex-col gap-4 pb-10 mt-8'>
-                <div className='flex flex-col grid-cols-2 gap-2 lg:gap-4 sm:grid'>
+                <div className='flex flex-col grid-cols-2 gap-2 lg:gap-4 lg:grid'>
                     <CustomTextField
                         label={translation?.first_name}
                         value={editProfile.firstName}
@@ -409,7 +409,7 @@ const ProfileInputs = () => {
                             ) : null}
                         </div>
 
-                        <div className='grid w-full grid-cols-10 gap-2 '>
+                        <div className='flex flex-col w-full gap-2 sm:grid-cols-10 sm:grid '>
                             <Autocomplete
                                 disablePortal
                                 id="combo-box-demo"
