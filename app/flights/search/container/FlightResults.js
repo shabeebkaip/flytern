@@ -179,7 +179,7 @@ const FlightResultsChild = (props) => {
               <div className='flex items-center justify-between mt-4'>
                 {
                   searchResponses?.length ?
-                    <h3 className='text-base font-medium text-black '>{translation?.available_flights}</h3> : null
+                    <h3 className='sm:text-base text-[13px] font-medium text-black '>{translation?.available_flights}</h3> : null
                 }
 
                 <SortSection

@@ -43,7 +43,7 @@ const SortSection = (props) => {
 
   
   return (
-    <div className="flex flex-col justify-between gap-10 lg:justify-end md:flex-row md:items-center 2xl:gap-0">
+    <div className="flex flex-col items-center justify-between gap-10 lg:justify-end md:flex-row 2xl:gap-0">
 
       <div>
         <div className="flex justify-between gap-2 mt-4 md:flex-col lg:hidden md:justify-start md:mt-0">
