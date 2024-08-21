@@ -235,7 +235,7 @@ const ProfileInputs = () => {
     const { translation } = useSelector((state) => state.sharedState)
     return (
         <>
-            <div className='relative '>
+            <div className={`${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'}  relative`}>
                 {editProfile.imgUrl ? (
                     <>
                         {previewImages.File ? <Image className='w-[104px] h-[104px]' src={previewImages.File} alt="" width={100} height={100} /> : <Image className='w-[104px] h-[104px]' src={editProfile.imgUrl} alt="" width={100} height={100} />}
