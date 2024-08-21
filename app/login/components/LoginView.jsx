@@ -106,7 +106,7 @@ const LoginView = () => {
             onClick={() => setShowPassword({ ...showPassword, stateTwo: !showPassword.stateTwo })}
           />
           {showPassword.stateTwo && <VisibilityOffIcon
-            className='absolute z-40 top-[12px] right-4  text-slate-500'
+            className={`absolute z-40 top-[12px] ${selectedLanguageAndCountry?.language?.code === "ar" ? 'left-4' : 'right-4'}  text-slate-500`}
             onClick={() => setShowPassword({ ...showPassword, stateTwo: !showPassword.stateTwo })}
           />}
           {error?.password && <p className="text-xs text-red-500">{error.password}</p>}
