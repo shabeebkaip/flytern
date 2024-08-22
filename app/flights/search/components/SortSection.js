@@ -48,12 +48,12 @@ const SortSection = (props) => {
       <div>
         <div className="flex justify-between gap-2 mt-4 md:flex-col lg:hidden md:justify-start md:mt-0">
           <div className="flex justify-center gap-1">
-            <div
+            {/* <div
               className="flex items-center justify-center w-8 h-8 bg-white rounded-md cursor-pointer sm:h-10 sm:w-10"
               onClick={() => setShowSearchCard(!showSearchCard)}
             >
               <EditIconSvg color="black" />
-            </div>
+            </div> */}
             <div className="lg:hidden">
               <MobileFilter
                 setSearchData={setSearchData}
