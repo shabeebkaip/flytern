@@ -14,12 +14,12 @@ const Video = () => {
     <FlyternLogo color={"#066651"} width={'141px'} height={"33px"} />
     <div className="absolute left-0 right-0 flex flex-col items-start justify-start lg:px-32 px-10 md:px-20 xl:top-[360px] top-[300px] 2xl:top-[550px]">
       <div>
-        <span className="text-white text-[30px] md:text-[24px] lg:text-[40px] font-bold">Explore, Plan, &<br />Discover with</span>
-        <span className="text-orange-400 text-[30px] md:text-[24px] lg:text-[40px] font-bold"> Ease!</span>
+        <span className="text-white text-[30px] md:text-[24px] lg:text-[40px] font-bold">{translation.Explore_Plan}<br />{translation.Discover_with}</span>
+        <span className="text-orange-400 text-[30px] md:text-[24px] lg:text-[40px] font-bold">{translation.Ease}</span>
       </div>
       <div className='grid justify-center grid-cols-1 text-left md:grid-cols-10'>
         <div className="col-span-1 font-normal leading-7 md:col-span-6 text-zinc-300 md:text-base lg:text-lg">
-          Unleash your wanderlust with our intuitive trip planner app. Organize trips, uncover hidden gems, and create lasting memories effortlessly.
+        {translation.login_dis} 
         </div>
       </div>
     </div>

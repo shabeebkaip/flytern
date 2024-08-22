@@ -442,7 +442,11 @@
             "flight_search_loading": "Searching for the best prices…",
             "hotel_search_loading": "Searching for the best hotel deals…",
             "hotel_detail_payment": "Taking you to the payment to finalize your booking…",
-            "send_verifcation":"Send Verification Code"
+            "send_verifcation":"Send Verification Code",
+            "Explore_Plan":"Explore, Plan, &",
+            "Discover_with":"Discover with",
+            "Ease!":"Ease!",
+            "login_dis":" Unleash your wanderlust with our intuitive trip planner app. Organize trips, uncover hidden gems, and create lasting memories effortlessly."
         }
     },
     {
@@ -887,7 +891,11 @@
             "flight_search_loading": "بحث عن أفضل الأسعار…",
             "hotel_search_loading": "نبحث عن أفضل عروض الفنادق…",
             "hotel_detail_payment": "سنوجهك إلى الدفع لإكمال حجزك…",
-            "send_verifcation": "إرسال رمز التحقق"
+            "send_verifcation": "إرسال رمز التحقق",
+            "Explore_Plan":"استكشاف وتخطيط و",
+            "Discover_with":"اكتشف مع",
+            "Ease":"يُسَهّل!",
+            "login_dis":"أطلق العنان لحب التجوال من خلال تطبيق مخطط الرحلات البديهي. قم بتنظيم الرحلات واكتشف الجواهر المخفية واصنع ذكريات دائمة دون عناء."
         }
     }
 ]
