@@ -27,22 +27,8 @@ const CovidForm = ({ setMainData, mode }) => {
         policyDate: format(new Date(), 'dd-MM-yyyy')  // This field is included in the data object
     });
 
-    const policyType = data.policy_type;
-if (typeof policyType === 'string') {
-  // Policy type is a string (unexpected in this case)
-  console.log("Policy type is a string:", policyType);
-} else if (typeof policyType === 'number') {
-  // Policy type is a number (expected behavior)
-  console.log("Policy type is a number:", policyType);
-} else {
-  // Policy type is an unexpected type
-  console.log("Unexpected policy type:", policyType);
-}
-
     useEffect(() => {
-        console.log("saveTraveller:", saveTraveller);
         if (saveTraveller && mode === "edit") {
-            console.log("Updating data in edit mode");
             setData(prevData => {
                 const newData = {
                     ...prevData,
@@ -51,15 +37,10 @@ if (typeof policyType === 'string') {
                     policyperiod: _lstPolicyPeriod.find(p => p.periodCode === saveTraveller.policyperiod) || '',
                     policy_type: Number(saveTraveller.policy_type)
                 };
-                console.log("New data set:", newData);
                 return newData;
             });
         }
     }, [mode, saveTraveller]);
-
-    // Add this log after the useEffect
-    console.log("Current data state:", data);
-
 
 
     const addInsurance = () => {
