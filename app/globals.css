@@ -55,6 +55,20 @@ body::-webkit-scrollbar {
   direction: rtl;
 }
 
+/* rtl.css */
+.rtl .MuiInputLabel-root {
+  left: auto !important;
+  right: 0 !important;
+  text-align: right !important;
+}
+
+.rtl .MuiOutlinedInput-root fieldset {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+
+
 /* Add this to your CSS file or style component */
 .swiper-pagination-bullet {
   background-color: white;
