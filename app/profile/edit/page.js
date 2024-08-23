@@ -22,6 +22,7 @@ const page = () => {
     });
 
     const theme = createTheme({
+        
         direction: language === 'ar' ? 'rtl' : 'ltr',
         typography: {
             fontFamily: language === 'ar' ? 'arabic' : 'inter,sans-serif',
