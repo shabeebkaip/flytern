@@ -27,11 +27,40 @@ const CovidForm = ({ setMainData, mode }) => {
         policyDate: format(new Date(), 'dd-MM-yyyy')  // This field is included in the data object
     });
 
+    const policyType = data.policy_type;
+if (typeof policyType === 'string') {
+  // Policy type is a string (unexpected in this case)
+  console.log("Policy type is a string:", policyType);
+} else if (typeof policyType === 'number') {
+  // Policy type is a number (expected behavior)
+  console.log("Policy type is a number:", policyType);
+} else {
+  // Policy type is an unexpected type
+  console.log("Unexpected policy type:", policyType);
+}
+
     useEffect(() => {
-        if (mode === "edit") {
-            setData(saveTraveller)
+        console.log("saveTraveller:", saveTraveller);
+        if (saveTraveller && mode === "edit") {
+            console.log("Updating data in edit mode");
+            setData(prevData => {
+                const newData = {
+                    ...prevData,
+                    ...saveTraveller,
+                    policyperiod: saveTraveller.policyperiod,
+                    policyperiod: _lstPolicyPeriod.find(p => p.periodCode === saveTraveller.policyperiod) || '',
+                    policy_type: Number(saveTraveller.policy_type)
+                };
+                console.log("New data set:", newData);
+                return newData;
+            });
         }
-    }, [])
+    }, [mode, saveTraveller]);
+
+    // Add this log after the useEffect
+    console.log("Current data state:", data);
+
+
 
     const addInsurance = () => {
         const policyRelationshipValues = data.policy_type === 1
@@ -71,32 +100,34 @@ const CovidForm = ({ setMainData, mode }) => {
     };
 
     useEffect(() => {
-        if (!data.policy_type && _lstPolicyType && _lstPolicyType.length > 0) {
-            setData(prevData => ({
-                ...prevData,
-                policy_type: _lstPolicyType[0].typeCode
-            }));
-        }
+        if (mode !== 'edit') {
+            if (!data.policy_type && _lstPolicyType && _lstPolicyType.length > 0) {
+                setData(prevData => ({
+                    ...prevData,
+                    policy_type: _lstPolicyType[0].typeCode
+                }));
+            }
 
-        if (!data.policyplan && _lstPolicyOption && _lstPolicyOption.length > 0) {
-            setData(prevData => ({
-                ...prevData,
-                policyplan: _lstPolicyOption[0].optionCode
-            }));
-        }
+            if (!data.policyplan && _lstPolicyOption && _lstPolicyOption.length > 0) {
+                setData(prevData => ({
+                    ...prevData,
+                    policyplan: _lstPolicyOption[0].optionCode
+                }));
+            }
 
-        if (!data.policyperiod && _lstPolicyPeriod && _lstPolicyPeriod.length > 0) {
-            setData(prevData => ({
-                ...prevData,
-                policyperiod: _lstPolicyPeriod && _lstPolicyPeriod.length > 0 ? _lstPolicyPeriod[0] : ''
-            }));
-        }
-        if (data.policy_type === 2) {
-            setData(prevData => ({
-                ...prevData,
-                '000': 1,
-                '001': 1,
-            }));
+            if (!data.policyperiod && _lstPolicyPeriod && _lstPolicyPeriod.length > 0) {
+                setData(prevData => ({
+                    ...prevData,
+                    policyperiod: _lstPolicyPeriod && _lstPolicyPeriod.length > 0 ? _lstPolicyPeriod[0] : ''
+                }));
+            }
+            if (data.policy_type === 2) {
+                setData(prevData => ({
+                    ...prevData,
+                    '000': 1,
+                    '001': 1,
+                }));
+            }
         }
 
     }, [data.policy_type, data.policyplan, data.policyperiod, _lstPolicyType, _lstPolicyOption, _lstPolicyPeriod]);
@@ -189,8 +220,10 @@ const CovidForm = ({ setMainData, mode }) => {
                                 <div className='flex gap-5 sm:gap-12' key={index}>
                                     <Radio
                                         style={{ color: 'orange', padding: 0 }}
-                                        onChange={() => onFieldChange('policyplan', item.optionCode)}
-                                        checked={item.optionCode === data.policyplan}
+                                        onChange={() => {
+                                            onFieldChange('policyplan', String(item.optionCode));
+                                        }}
+                                        checked={String(item.optionCode) === String(data.policyplan)}
                                     />
                                     <h3 className='text-base font-normal text-black'>{item.information}</h3>
                                 </div>
