@@ -20,7 +20,7 @@ const page = async ({ searchParams, params }) => {
     let paymentSummary;
     let bookingRef = bookingNumber ? extractedRef : decryptedRef;
     let isSuccess;
-    console.log(bookingNumber);
+  
 
 
     try {
@@ -44,9 +44,6 @@ const page = async ({ searchParams, params }) => {
                 )
                 bookingRef = response.data.data.bookingRef
                 isSuccess = response.data.data.isSuccess
-                console.log(response.data.data.isSuccess, "sucess check");
-                console.log(response.data, "data")
-                console.log(bookingRef, "bookingRef")
                 if (response.data.data.isSuccess) {
                     const response = await axios.post(`https://flytern.com/coreapi/api/Payments/Confirmation`, { bookingRef: bookingRef },
                         {
@@ -56,7 +53,7 @@ const page = async ({ searchParams, params }) => {
                         }
                     );
                     paymentSummary =  response.data.data
-                    console.log(paymentSummary);
+                  
 
                 } else {
                     console.log("error");

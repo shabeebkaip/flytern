@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Video = () => {
   const { translation } = useAppSelector((state) => state.sharedState);
-  console.log(translation?.explore_plan, "translation?.explore_plan");
+
   
   return (
     <div className='hidden lg:relative lg:object-center lg:bg-blend-dark lg:block'>

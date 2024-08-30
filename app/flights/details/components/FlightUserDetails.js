@@ -44,11 +44,7 @@ const FlightUserDetails = (props) => {
       const infantMaxDate = new Date(preTraveller.infantMaxDOB.split('-').reverse().join('-'));
       return dob >= infantMinDate && dob <= infantMaxDate;
     });
-    console.log(childCoPax);
-    console.log(infantCoPax);
-    console.log(adultCoPax,"h");
-  console.log(preTraveller,"p");
-  console.log(coPax);
+
   const submitTvellersDetails = () => {
     debugger
     // adult validation errors

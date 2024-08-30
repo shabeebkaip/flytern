@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 const PackageDetailCard = ({ item }) => {
     const { selectedLanguageAndCountry } = useSelector(state => state.sharedState)
 
-    console.log(item);
     return (
         <div>
             <div className='container flex items-center p-4 mx-auto overflow-hidden bg-white rounded-md'>

@@ -7,7 +7,6 @@ const MobFlightBookingCard = ({ flight }) => {
     const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
     const encryptedBookingRef = encryptId(flight.bookingRef)
 
-    console.log(flight,'kkk');
     
 
     return (

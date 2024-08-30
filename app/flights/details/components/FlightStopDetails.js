@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 const FlightStopDetails = ({ segment }) => {
     const { translation } = useSelector((state) => state.sharedState)
-    console.log(segment.carrierImageUrl,'klkl');
+
     
     return (
         <div className='flex flex-col gap-6 pb-5 '>

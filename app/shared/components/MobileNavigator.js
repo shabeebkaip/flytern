@@ -26,8 +26,6 @@ const MobileNavigator = () => {
     return null;
   }
 
-  console.log(isHome,"isHome")
-  console.log(pathname,"isHome")
  
   return (
     <div className="w-full h-[55px] md:h-[90px] bg-emerald-800 shadow border-b border-neutral-200 text-white  bottom-0 z-[9999] fixed lg:hidden">

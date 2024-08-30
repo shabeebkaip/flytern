@@ -13,7 +13,7 @@ const EditCopax = ({ coPax }) => {
   const [data, setData] = useState({ ...coPax });
   const [errors, setErrors] = useState({});
   const { enqueueSnackbar } = useSnackbar();
-console.log(data.dateofBirth,"u");
+
 
   const validate = () => {
     let tempErrors = {};

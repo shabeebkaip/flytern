@@ -88,9 +88,6 @@ const FlightResultsChild = (props) => {
     );
   };
 
-  console.log(searchData, 'searchdata');
-
-
 
   const handleNext = (_searchData) => {
     var pa = flightResults?.currentPage + 1

@@ -67,7 +67,7 @@ const MobileHeaderMenu = () => {
     };
     const { translation } = useSelector((state) => state.sharedState)
     const isUserLoggedIn = getGlobalCookie('isUserLoggedIn')
-    console.log(isUserLoggedIn);
+  
     return (
         <div className="w-[30px]">
             <div className='w-full'>

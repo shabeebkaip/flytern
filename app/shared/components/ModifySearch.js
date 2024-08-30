@@ -8,8 +8,7 @@ import { getLocalStorageInfo } from '@/lib/utils'
 const ModifySearch = ({ setShowSearchCard, showSearchCard, searchDatas }) => {
   const dispatch = useAppDispatch()
   const requestBody = getLocalStorageInfo("searchData")
-  console.log(setShowSearchCard);
-  console.log(showSearchCard);
+
   const handleModifySearch = () => {
     setShowSearchCard(!showSearchCard)
     dispatch(setFlightSearch(requestBody))

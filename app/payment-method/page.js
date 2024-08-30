@@ -5,13 +5,12 @@ import PaymentMethod from './contents/PaymentMethod';
 
 
 const page = async ({ searchParams }) => {
+  const refrence  = searchParams?.ref;
   try {
-    const refrence  = searchParams?.ref;
     if (!refrence) {
       throw new Error('Missing ref parameter');
     }
     const decryptedRef = decryptId(refrence);
-    console.log(decryptedRef,'kk');
     
     const cookieStore = cookies();
     const accessTokenCookie = cookieStore.get('accessToken');
@@ -20,7 +19,7 @@ const page = async ({ searchParams }) => {
     }
     const myCookie = accessTokenCookie.value.replace(/(^")|("$)/g, '');
     let gatewayList;
-    console.log(decryptedRef,'ll');
+ 
     
     try {
       
@@ -34,7 +33,7 @@ const page = async ({ searchParams }) => {
 
 
       gatewayList = response.data.data;
-      console.log(gatewayList);
+  
       
     } catch (error) {
       console.error('Error calling getgatewayApi:', error);
