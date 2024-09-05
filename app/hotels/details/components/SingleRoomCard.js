@@ -13,7 +13,7 @@ const SingleRoomCard = ({ item, handleSelectedRoom, expand, handlExpandCard, ind
   const { saveTravellerData } = useSelector(state => state.hotelState)
   const location = typeof window !== "undefined" ? window.location : null;
   const { translation } = useSelector((state) => state.sharedState)
-  
+
   return (
     <div
       className={`p-2 transition-all cursor-pointer shadow-md duration-300 ${location?.pathname.includes("payment") ? 'bg-white' : expand === index ? ' border-emerald-800 bg-[#f8f8f8] rounded-md' : ''}`}
@@ -40,72 +40,66 @@ const SingleRoomCard = ({ item, handleSelectedRoom, expand, handlExpandCard, ind
         </div>
 
         <div className='grid w-full grid-cols-1 gap-3 lg:grid-cols-1 lg:row-span-2'>
-  {item?.imageURLs?.length ? (
-    <div className='w-full p-4'>
-      {expand === index ? (
-        <Swiper
-          spaceBetween={30}
-          slidesPerView={1}
-          modules={[Autoplay]}
-          autoplay={{
-            delay: 1000,
-            disableOnInteraction: false,
-          }}
-          pagination={{ clickable: true }}
-          loop={true}
-          breakpoints={{
-            320: {
-              slidesPerView: 1.2,
-              spaceBetween: 10,
-              grid: {
-                rows: 2, 
-              },
-            },
-            500: {
-              slidesPerView: 1.5,
-              spaceBetween: 20,
-              grid: {
-                rows: 1, 
-              },
-            },
-            640: {
-              slidesPerView: 1.8,
-              grid: {
-                rows: 1,
-              },
-            },
-          }}
-        >
-          {item?.imageURLs.map((image, index) => (
-            <SwiperSlide key={index}>
-              <Image
-                width={160}
-                height={160}
-                className='object-cover w-full h-20 rounded-lg sm:h-40'
-                src={image}
-                alt=""
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      ) : (
-        <div className='flex gap-5 overflow-hidden'>
-          {item?.imageURLs.slice(0, 2).map((image, index) => (
-            <div key={index}>
-              <Image
-                width={160}
-                height={160}
-                className='object-cover rounded-lg h-28 sm:h-40'
-                src={image}
-                alt=""
-              />
+          {item?.imageURLs?.length ? (
+            <div className='w-full p-4'>
+              {expand === index ? (
+                <Swiper
+                  className='flex flex-wrap items-center w-full'
+                  spaceBetween={20}
+                  modules={[Autoplay]}
+                  autoplay={{
+                    delay: 1000,
+                    disableOnInteraction: false,
+                  }}
+                  breakpoints={{
+                    320: {
+                      slidesPerView: 1.5,
+                      spaceBetween: 10,
+                    },
+                    500: {
+                      slidesPerView: 2.5,
+                      spaceBetween: 15,
+                    },
+                    640: {
+                      slidesPerView: 3,
+                      spaceBetween: 20,
+                    },
+                    768: {
+                      slidesPerView: 4,
+                      spaceBetween: 20,
+                    },
+                  }}
+                >
+                  {item?.imageURLs.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <Image
+                        width={160}
+                        height={160}
+                        className='object-cover w-full h-20 rounded-lg sm:h-40'
+                        src={image}
+                        alt=""
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                <div className='flex gap-5 overflow-hidden'>
+                  {item?.imageURLs.slice(0, 2).map((image, index) => (
+                    <div key={index}>
+                      <Image
+                        width={160}
+                        height={160}
+                        className='object-cover rounded-lg h-28 sm:h-40'
+                        src={image}
+                        alt=""
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          ))}
+          ) : null}
         </div>
-      )}
-    </div>
-  ) : null}
-</div>
       </div>
 
       <div className='grid grid-cols-1 gap-3 overflow-hidden transition-all duration-300 sm:grid-cols-2'>

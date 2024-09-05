@@ -28,10 +28,20 @@ const CovidForm = ({ setMainData, mode }) => {
     });
 
     useEffect(() => {
-        if (mode === "edit") {
-            setData(saveTraveller)
+        if (saveTraveller && mode === "edit") {
+            setData(prevData => {
+                const newData = {
+                    ...prevData,
+                    ...saveTraveller,
+                    policyperiod: saveTraveller.policyperiod,
+                    policyperiod: _lstPolicyPeriod.find(p => p.periodCode === saveTraveller.policyperiod) || '',
+                    policy_type: Number(saveTraveller.policy_type)
+                };
+                return newData;
+            });
         }
-    }, [])
+    }, [mode, saveTraveller]);
+
 
     const addInsurance = () => {
         const policyRelationshipValues = data.policy_type === 1
@@ -71,32 +81,34 @@ const CovidForm = ({ setMainData, mode }) => {
     };
 
     useEffect(() => {
-        if (!data.policy_type && _lstPolicyType && _lstPolicyType.length > 0) {
-            setData(prevData => ({
-                ...prevData,
-                policy_type: _lstPolicyType[0].typeCode
-            }));
-        }
+        if (mode !== 'edit') {
+            if (!data.policy_type && _lstPolicyType && _lstPolicyType.length > 0) {
+                setData(prevData => ({
+                    ...prevData,
+                    policy_type: _lstPolicyType[0].typeCode
+                }));
+            }
 
-        if (!data.policyplan && _lstPolicyOption && _lstPolicyOption.length > 0) {
-            setData(prevData => ({
-                ...prevData,
-                policyplan: _lstPolicyOption[0].optionCode
-            }));
-        }
+            if (!data.policyplan && _lstPolicyOption && _lstPolicyOption.length > 0) {
+                setData(prevData => ({
+                    ...prevData,
+                    policyplan: _lstPolicyOption[0].optionCode
+                }));
+            }
 
-        if (!data.policyperiod && _lstPolicyPeriod && _lstPolicyPeriod.length > 0) {
-            setData(prevData => ({
-                ...prevData,
-                policyperiod: _lstPolicyPeriod && _lstPolicyPeriod.length > 0 ? _lstPolicyPeriod[0] : ''
-            }));
-        }
-        if (data.policy_type === 2) {
-            setData(prevData => ({
-                ...prevData,
-                '000': 1,
-                '001': 1,
-            }));
+            if (!data.policyperiod && _lstPolicyPeriod && _lstPolicyPeriod.length > 0) {
+                setData(prevData => ({
+                    ...prevData,
+                    policyperiod: _lstPolicyPeriod && _lstPolicyPeriod.length > 0 ? _lstPolicyPeriod[0] : ''
+                }));
+            }
+            if (data.policy_type === 2) {
+                setData(prevData => ({
+                    ...prevData,
+                    '000': 1,
+                    '001': 1,
+                }));
+            }
         }
 
     }, [data.policy_type, data.policyplan, data.policyperiod, _lstPolicyType, _lstPolicyOption, _lstPolicyPeriod]);
@@ -189,8 +201,10 @@ const CovidForm = ({ setMainData, mode }) => {
                                 <div className='flex gap-5 sm:gap-12' key={index}>
                                     <Radio
                                         style={{ color: 'orange', padding: 0 }}
-                                        onChange={() => onFieldChange('policyplan', item.optionCode)}
-                                        checked={item.optionCode === data.policyplan}
+                                        onChange={() => {
+                                            onFieldChange('policyplan', String(item.optionCode));
+                                        }}
+                                        checked={String(item.optionCode) === String(data.policyplan)}
                                     />
                                     <h3 className='text-base font-normal text-black'>{item.information}</h3>
                                 </div>
