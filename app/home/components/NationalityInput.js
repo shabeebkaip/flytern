@@ -46,7 +46,7 @@ const NationalityInput = ({ data, handleRoomPopoever, onNatinalChange, setData }
                 className="text-black text-[10px] md:text-xs xl:text-sm  w-full font-medium focus:outline-none"
                 placeholder={translation?.enter_nationality}
                 onChange={(e) => handleInputChange(e.target.value)}
-                value={data.countryName}
+                value={data?.countryName}
               />
 
 
@@ -54,9 +54,9 @@ const NationalityInput = ({ data, handleRoomPopoever, onNatinalChange, setData }
           </div>
 
         </div>
-        {openList && filteredCountries.length
+        {openList && filteredCountries?.length
           ? <div className="absolute z-20 flex flex-col  h-40 gap-3 w-[28%] overflow-y-auto bg-white rounded-md shadow-md top-[200px]  ">
-            {filteredCountries.map((country, index) =>
+            {filteredCountries?.map((country, index) =>
               <div
                 className="flex items-center justify-between w-full p-4 cursor-pointer hover:bg-stone-50"
                 onClick={() => handleSelectNationality(country)}
@@ -65,11 +65,11 @@ const NationalityInput = ({ data, handleRoomPopoever, onNatinalChange, setData }
                 <div className="flex items-start justify-start w-full gap-2">
                   <div className="flex items-start justify-start w-full gap-2">
                     <div className="flex flex-col gap-1">
-                      <p>{country.countryName}</p>
+                      <p>{country?.countryName}</p>
                     </div>
                   </div>
                 </div>
-                <Image className="w-6" src={country.flag} alt="" width={50} height={50} />
+                <Image className="w-6" src={country?.flag} alt="" width={50} height={50} />
               </div>
             )}
           </div>

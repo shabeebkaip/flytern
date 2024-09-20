@@ -41,22 +41,22 @@ const PopularDestination = () => {
           className='grid grid-cols-3 mt-5 cursor-pointer'
 
         >
-          {data && data.popularDestinations && data.popularDestinations.map((data, index) => (
+          {data && data?.popularDestinations && data?.popularDestinations.map((data, index) => (
             <SwiperSlide key={index}
               onClick={() => {
                 if (typeof window !== 'undefined') {
-                  window.location.href = `/packages/${data.refID}`;
+                  window.location.href = `/packages/${data?.refID}`;
                 }
               }}
             >
               <div className="inline-flex flex-col items-start justify-start w-full gap-4">
-                <Image width={500} height={500} className="w-full rounded-md" src={data.url} alt='' />
+                <Image width={500} height={500} className="w-full rounded-md" src={data?.url} alt='' />
                 <div className="flex flex-col self-stretch sm:flex-row sm:items-center sm:justify-between">
-                  <div className="text-black text-[10px] sm:text-sm font-medium">{data.name}</div>
+                  <div className="text-black text-[10px] sm:text-sm font-medium">{data?.name}</div>
                   <div className="justify-start items-center gap-[3px] flex">
                     <div className="text-black text-[8px] sm:text-sm font-medium flex items-center gap-1">
                       <Image width={50} height={50} className='w-3 h-3 sm:h-6 sm:w-6' src={"/icons/star.svg"} alt="" />
-                      <span className='text-[8px] sm:text-sm'>{data.ratings}</span>
+                      <span className='text-[8px] sm:text-sm'>{data?.ratings}</span>
                     </div>
                   </div>
                 </div>

@@ -23,7 +23,7 @@ const HotelSearchField = ({ data, destinationList, onSearchChange, setData, setD
                 placeholder={translation?.select_destination}
                 onChange={e => onSearchChange(e.target.value)}
                 onFocus={()=> setDestinationError(false)}
-                value={data.destination ? data.destination : data.destinationLabel}
+                value={data?.destination ? data?.destination : data?.destinationLabel}
               />
             </div>
 
@@ -39,21 +39,21 @@ const HotelSearchField = ({ data, destinationList, onSearchChange, setData, setD
           </div>
         </div>
 
-        {data.destinationLabel && openSearch
+        {data?.destinationLabel && openSearch
           ? <div className="absolute z-20 flex flex-col w-full h-40 gap-3 overflow-y-auto bg-white rounded-md shadow-md top-20 ">
             {destinationLoader ? <div className="flex items-center justify-center w-full h-full">
               <div className="w-10 h-10 border-t-2 border-b-2 border-orange-400 rounded-full animate-spin"></div>
             </div> :
-              destinationList.map((destination, index) =>
+              destinationList?.map((destination, index) =>
                 <div
                   className="flex items-center justify-between w-full p-4 cursor-pointer hover:bg-stone-50"
                   onClick={() => {
                     setData({
                       ...data,
                       destinationLabel: '',
-                      destination: destination.uniqueCombination,
-                      HotelCode: destination.hotelCode,
-                      CityCode: destination.cityCode
+                      destination: destination?.uniqueCombination,
+                      HotelCode: destination?.hotelCode,
+                      CityCode: destination?.cityCode
                     });
                     setDestinationList([]);
                     setOpenSearch(false);
@@ -63,11 +63,11 @@ const HotelSearchField = ({ data, destinationList, onSearchChange, setData, setD
                   <div className="flex items-start justify-start w-full gap-2">
                     <div className="flex flex-col gap-1">
                       <p>
-                        {destination.uniqueCombination}
+                        {destination?.uniqueCombination}
                       </p>
                     </div>
                   </div>
-                  <Image className="w-6" src={destination.flag} alt="" width={50} height={50} />
+                  <Image className="w-6" src={destination?.flag} alt="" width={50} height={50} />
                 </div>
               )
             }

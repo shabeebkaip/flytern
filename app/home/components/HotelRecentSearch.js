@@ -30,7 +30,7 @@ const HotelRecentSeach = (props) => {
               {
                 hotelRecentSearch?.map((item, index) => (
                   <div key={index} onClick={() => searchRecent(item)} className='flex-wrap px-2 py-1 transition-all duration-300 border border-orange-400 cursor-pointer rounded-xl hover:bg-orange-400 hover:text-white'>
-                    {item.destination}
+                    {item?.destination}
                   </div>
                 ))
               }

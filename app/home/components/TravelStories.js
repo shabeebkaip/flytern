@@ -70,11 +70,11 @@ const TravelStories = () => {
                   </div>
                   <div className='flex flex-col gap-3'>
                     {isTabletAndMobile ? (
-                      <Rating style={{ fontSize: '16px' }} name="read-only" value={parseFloat(story.ratings)} readOnly precision={0.5} />
+                      <Rating style={{ fontSize: '16px' }} name="read-only" value={parseFloat(story?.ratings)} readOnly precision={0.5} />
                     ) : (
-                      <Rating name="read-only" value={parseFloat(story.ratings)} readOnly precision={0.5} />
+                      <Rating name="read-only" value={parseFloat(story?.ratings)} readOnly precision={0.5} />
                     )}
-                    <div className=" text-stone-500 text-[11px] sm:text-[13px] font-normal  leading-tight tracking-tight">{story.shortDesc}</div>
+                    <div className=" text-stone-500 text-[11px] sm:text-[13px] font-normal  leading-tight tracking-tight">{story?.shortDesc}</div>
                   </div>
                 </div>
               </SwiperSlide>

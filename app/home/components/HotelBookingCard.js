@@ -105,7 +105,7 @@ const HotelBookingCard = () => {
     };
   
     if (typeof window !== "undefined") {
-      if (location?.pathname.includes("/search")) {
+      if (location?.pathname?.includes("/search")) {
         localStorage.setItem("hotelSearch", JSON.stringify(payload));
         window.location.reload(false);
       } else {
@@ -129,7 +129,7 @@ const HotelBookingCard = () => {
 
   const removeRoom = (indexToRemove) => {
     // Implement the logic to remove the room at the specified index
-    setRooms((prevRooms) => prevRooms.filter((room, index) => index !== indexToRemove));
+    setRooms((prevRooms) => prevRooms?.filter((room, index) => index !== indexToRemove));
   };
 
   const open = Boolean(anchorEl);
@@ -146,7 +146,7 @@ const HotelBookingCard = () => {
         anchorEl={anchorEl}
         closePopover={() => setAnchorEl(null)}
         rooms={rooms}
-        setRooms={(key, value, index) => setRooms(rooms.map((room, i) => i === index ? { ...room, [key]: value } : room))}
+        setRooms={(key, value, index) => setRooms(rooms?.map((room, i) => i === index ? { ...room, [key]: value } : room))}
         addRoom={() => setRooms([...rooms, { adults: 1, children: 0, childAges: [] }])}
         updateChildAge={updateChildAge}
         addChildren={addChildren}
@@ -239,7 +239,7 @@ const HotelBookingCard = () => {
               {
                 location?.pathname === '/hotels/search' ? translation?.modify_search : translation?.search
               } {" "}
-              ({translation.with}  {totalNights} {totalNights > 1 ? translation?.nights : translation?.nights})
+              ({translation?.with}  {totalNights} {totalNights > 1 ? translation?.nights : translation?.nights})
             </div>
           </button>
         </div>

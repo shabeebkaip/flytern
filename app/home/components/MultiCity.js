@@ -30,7 +30,7 @@ const MultiCity = ({ flightReqBody }) => {
   const [error, setError] = useState([]);
   const [promoError, setPromoError] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
-  const { selectedLanguageAndCountry } = useAppSelector(state => state.sharedState)
+  const { selectedLanguageAndCountry } = useAppSelector(state => state?.sharedState)
   const [destinationList, setDestinationList] = useState([]);
   const [destinationList1, setDestinationList1] = useState([]);
   const [handletravellerOpen, setHandletravellerOpen] = useState(false);
@@ -42,7 +42,7 @@ const MultiCity = ({ flightReqBody }) => {
   const id = open ? "simple-popover" : undefined;
   const [anchorElPassenger, setAnchorElPassenger] = useState(null);
   const cabinList = useAppSelector((data) => data?.exploreState?.data?.cabinClass);
-  const defaultCabin = cabinList?.filter((data) => data.isDefault === true);
+  const defaultCabin = cabinList?.filter((data) => data?.isDefault === true);
   const handlePassengerClick = (event) => {
     setAnchorElPassenger(event.currentTarget);
   };
@@ -165,12 +165,12 @@ const MultiCity = ({ flightReqBody }) => {
     if (key === "departure") {
       dispatch(setFlightSearch({
         ...flightSearch,
-        searchList: flightSearch.searchList.map((search, i) =>
+        searchList: flightSearch?.searchList.map((search, i) =>
           index === i
             ? {
               ...search,
-              departure: destination.airportCode,
-              departureLabel: destination.uniqueCombination,
+              departure: destination?.airportCode,
+              departureLabel: destination?.uniqueCombination,
             }
             : search
         )
@@ -178,12 +178,12 @@ const MultiCity = ({ flightReqBody }) => {
     } else if (key === "arrival") {
       dispatch(setFlightSearch({
         ...flightSearch,
-        searchList: flightSearch.searchList.map((search, i) =>
+        searchList: flightSearch?.searchList.map((search, i) =>
           index === i
             ? {
               ...search,
-              arrival: destination.airportCode,
-              arrivalLabel: destination.uniqueCombination,
+              arrival: destination?.airportCode,
+              arrivalLabel: destination?.uniqueCombination,
             }
             : search
         )
@@ -209,11 +209,11 @@ const MultiCity = ({ flightReqBody }) => {
     if (index === 0) {
       // For the first city, set min date to today
       minDate = new Date();
-      maxDate = new Date(flightSearch.searchList[index + 1]?.departureDate);
+      maxDate = new Date(flightSearch?.searchList[index + 1]?.departureDate);
 
     } else {
-      minDate = new Date(flightSearch.searchList[index - 1]?.departureDate);
-      maxDate = new Date(flightSearch.searchList[index + 1]?.departureDate);
+      minDate = new Date(flightSearch?.searchList[index - 1]?.departureDate);
+      maxDate = new Date(flightSearch?.searchList[index + 1]?.departureDate);
     }
     if (index === flightSearch.searchList.length - 1) {
       // If the last city is selected, set max date to null
@@ -235,8 +235,8 @@ const MultiCity = ({ flightReqBody }) => {
   };
   const handleSubmit = () => {
     let validationError = flightSearch?.searchList?.map(search => ({
-      departureLabel: search.departureLabel ? '' : 'Please Enter Departure',
-      arrivalLabel: search.arrivalLabel ? '' : 'Please Enter Arrival',
+      departureLabel: search?.departureLabel ? '' : 'Please Enter Departure',
+      arrivalLabel: search?.arrivalLabel ? '' : 'Please Enter Arrival',
     }))
     checkValidationErrors(validationError, setError);
     if (error.length) return;
@@ -247,7 +247,7 @@ const MultiCity = ({ flightReqBody }) => {
     };
     if (typeof window !== 'undefined') {
       localStorage.setItem("searchData", JSON.stringify(payload));
-      window.location.href = "/flights/search";
+      window?.location?.href = "/flights/search";
     }
   };
 
@@ -256,13 +256,13 @@ const MultiCity = ({ flightReqBody }) => {
     setData(errorsExist ? validationData : []);
   };
   const handleSwap = (index) => {
-    const newarrival = flightSearch.searchList.map((search, i) => (
+    const newarrival = flightSearch?.searchList.map((search, i) => (
       index === i ? {
         ...search,
-        departure: search.arrival,
-        departureLabel: search.arrivalLabel,
-        arrival: search.departure,
-        arrivalLabel: search.departureLabel
+        departure: search?.arrival,
+        departureLabel: search?.arrivalLabel,
+        arrival: search?.departure,
+        arrivalLabel: search?.departureLabel
       } : search))
     dispatch(setFlightSearch({
       ...flightSearch,
@@ -272,7 +272,7 @@ const MultiCity = ({ flightReqBody }) => {
   const handleRemove = () => {
     dispatch(setFlightSearch({
       ...flightSearch,
-      searchList: flightSearch.searchList.slice(0, -1)
+      searchList: flightSearch?.searchList?.slice(0, -1)
     }))
   };
 
@@ -295,22 +295,22 @@ const MultiCity = ({ flightReqBody }) => {
             <div className="relative flex flex-col gap-3">
               <FlightInput
                 label={translation?.from}
-                value={search.departureLabel}
+                value={search?.departureLabel}
                 onFieldChange={(value) => {
                   handleSearch("departureLabel", value, index, "fromOpen");
                   debouncedHandleSearch("departureLabel", value, index);
                 }}
                 image={"/icons/airport-plane.svg"}
               />
-              {destinationList.length && search.fromOpen ? (
+              {destinationList?.length && search?.fromOpen ? (
                 <div className="absolute z-20 flex flex-col w-full h-40 gap-3 overflow-y-auto bg-white rounded-md shadow-md top-20 ">
-                  {destinationList.map((destination, filterIndex) => (
+                  {destinationList?.map((destination, filterIndex) => (
                     <div
                       className="flex items-center justify-between p-4 cursor-pointer hover:bg-stone-50"
                       onClick={() => {
                         onFieldSearchListChange(
                           "departure",
-                          destination.airportCode,
+                          destination?.airportCode,
                           index,
                           "fromOpen"
                         );
@@ -327,7 +327,7 @@ const MultiCity = ({ flightReqBody }) => {
                         </div>
                       </div>
                       <p className="text-font-gray">
-                        {destination.airportCode}
+                        {destination?.airportCode}
                       </p>
                     </div>
                   ))}
@@ -357,20 +357,20 @@ const MultiCity = ({ flightReqBody }) => {
                   handleSearch("arrivalLabel", value, index, "toOpen");
                   debouncedHandleSearch("arrivalLabel", value, index);
                 }}
-                value={search.arrivalLabel}
+                value={search?.arrivalLabel}
                 id={"arrival"}
                 image={"/misc/To.svg"}
                 ulta
               />
-              {destinationList1.length && search.toOpen ? (
+              {destinationList1?.length && search?.toOpen ? (
                 <div className="absolute z-20 flex flex-col w-full h-40 gap-3 overflow-y-auto bg-white rounded-md shadow-md top-20 ">
-                  {destinationList1.map((destination, filterindex) => (
+                  {destinationList1?.map((destination, filterindex) => (
                     <div
                       className="flex items-center justify-between p-4 cursor-pointer hover:bg-stone-50"
                       onClick={() => {
                         onFieldChange(
                           "arrivalLabel",
-                          destination.airportCode,
+                          destination?.airportCode,
                           index,
                           "toOpen"
                         );
@@ -382,11 +382,11 @@ const MultiCity = ({ flightReqBody }) => {
                       <div className="flex items-start justify-start gap-2">
                         <FlightLandIcon style={{ color: "orange" }} />
                         <div className="flex flex-col gap-1">
-                          <p>{destination.uniqueCombination}</p>
+                          <p>{destination?.uniqueCombination}</p>
                         </div>
                       </div>
                       <p className="text-font-gray">
-                        {destination.airportCode}
+                        {destination?.airportCode}
                       </p>
                     </div>
                   ))}
@@ -397,12 +397,12 @@ const MultiCity = ({ flightReqBody }) => {
               <FlightDateInput
                 label={
                   selectedLanguageAndCountry?.language?.code === "ar"
-                    ? arabic_translation.travel_date
+                    ? arabic_translation?.travel_date
                     : "Travel Date"
                 }
                 value={
-                  search.departureDate
-                    ? format(new Date(search.departureDate), "dd MMM yyyy")
+                  search?.departureDate
+                    ? format(new Date(search?.departureDate), "dd MMM yyyy")
                     : null
                 }
                 openCalendar={(e) => handleClick(e, index)}
@@ -427,9 +427,9 @@ const MultiCity = ({ flightReqBody }) => {
                           index
                         );
                       }}
-                      value={parse(search.departureDate, "yyyy-MM-dd", new Date())}
-                      minDate={anchorEl.minDate}
-                      maxDate={anchorEl.maxDate} />
+                      value={parse(search?.departureDate, "yyyy-MM-dd", new Date())}
+                      minDate={anchorEl?.minDate}
+                      maxDate={anchorEl?.maxDate} />
                   </LocalizationProvider>
                 )}
               </Popover>
@@ -440,19 +440,19 @@ const MultiCity = ({ flightReqBody }) => {
 
               >
                 {
-                  flightSearch?.searchList.length < 5 &&
-                  <div className="flex items-center gap-2 flex-start" onClick={() => lastElement.departure && lastElement.arrival && lastElement.departureDate ? handleAddCity() : null}>
+                  flightSearch?.searchList?.length < 5 &&
+                  <div className="flex items-center gap-2 flex-start" onClick={() => lastElement?.departure && lastElement?.arrival && lastElement?.departureDate ? handleAddCity() : null}>
                     <Image src="/misc/plus.svg" alt="" width={50} height={50} />
-                    <p class={`text-center ${lastElement.departure && lastElement.arrival && lastElement.departureDate ? 'text-orange-400' : 'text-font-gray'} text-xs md:text-sm font-medium  capitalize`}>
+                    <p class={`text-center ${lastElement?.departure && lastElement?.arrival && lastElement?.departureDate ? 'text-orange-400' : 'text-font-gray'} text-xs md:text-sm font-medium  capitalize`}>
                       {selectedLanguageAndCountry?.language?.code === "ar"
-                        ? arabic_translation.add_another_city
+                        ? arabic_translation?.add_another_city
                         : "Add another City"}
                     </p>
                   </div>
                 }
 
                 {
-                  flightSearch?.searchList.length > 1 && (
+                  flightSearch?.searchList?.length > 1 && (
                     <div onClick={() => handleRemove()}>
                       <p class={`text-center text-red-500 text-[8px] md:text-sm font-medium  capitalize`}>
                         Remove City
@@ -479,7 +479,7 @@ const MultiCity = ({ flightReqBody }) => {
               <div className="flex-col justify-start items-start gap-1.5 inline-flex">
                 <div className="text-gray-500 text-[10px] md:text-sm font-normal cursor-pointer">
                   {selectedLanguageAndCountry?.language?.code === "ar"
-                    ? arabic_translation.passangers
+                    ? arabic_translation?.passangers
                     : "Passengers And Cabin"}
                 </div>
                 <div className="text-black text-[10px] md:text-sm font-medium cursor-pointer ">
@@ -524,7 +524,7 @@ const MultiCity = ({ flightReqBody }) => {
                   <div class="flex-col justify-start items-start gap-1.5 inline-flex">
                     <div class="text-gray-500 text-xs md:text-sm font-normal ">
                       {selectedLanguageAndCountry?.language?.code === "ar"
-                        ? arabic_translation.promo_code
+                        ? arabic_translation?.promo_code
                         : "Promo Code"}
                     </div>
 
@@ -562,7 +562,7 @@ const MultiCity = ({ flightReqBody }) => {
           />
           <label class="text-center text-zinc-900 text-xs md:text-sm font-normal ">
             {selectedLanguageAndCountry?.language?.code === "ar"
-              ? arabic_translation.direct_flight
+              ? arabic_translation?.direct_flight
               : "Direct Flight"}
           </label>
         </div>
@@ -571,7 +571,7 @@ const MultiCity = ({ flightReqBody }) => {
           onClick={() => handleSubmit()}
         >
           <div className="text-sm font-medium text-center text-white capitalize ">
-            {selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation.search_flights : location?.pathname === "/flights/search" ? 'Modify Search' : 'Search Flights'}
+            {selectedLanguageAndCountry?.language?.code === "ar" ? arabic_translation?.search_flights : location?.pathname === "/flights/search" ? 'Modify Search' : 'Search Flights'}
           </div>
         </button>
       </div>
