@@ -1,21 +1,15 @@
 import { TermsAndConditionIconSvg } from '@/app/shared/components/SVG'
 import TitleCard from '@/app/shared/components/TitleCard'
-import { Aboutsuccess } from '@/lib/slices/genaralSlice';
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { getAboutApi } from '../api';
 import { useAppSelector } from '@/lib/hooks';
 
 
 
-const About = ({terms}) => {
+const About = ({ terms }) => {
     const { selectedLanguageAndCountry } = useAppSelector((state) => state.sharedState);
     const { translation } = useAppSelector((state) => state.sharedState)
-
-
-  
     return (
-        <div className={` ${selectedLanguageAndCountry?.language?.code === "ar"  ? 'rtl font-arabic' : 'font-inter'}`}>
+        <div className={` ${selectedLanguageAndCountry?.language?.code === "ar" ? 'rtl font-arabic' : 'font-inter'}`}>
             <TitleCard
                 title={
                     <>
@@ -27,11 +21,13 @@ const About = ({terms}) => {
                 }
             >
                 {terms && (
-        <div
-          className="mt-4 "
-          dangerouslySetInnerHTML={{ __html: terms }}
-        ></div>
-      )}
+                    <div
+                        className="mt-4 "
+                        dangerouslySetInnerHTML={{ __html: terms }}
+                    >
+
+                    </div>
+                )}
             </TitleCard>
         </div>
     )

@@ -77,10 +77,10 @@ const MyBookingGuest = () => {
             <button className='h-12 col-span-2 mt-3 text-base font-medium text-white rounded-md lg:w-full sm:w-64 bg-emerald-800' onClick={() => { handleGuestBooking() }} >{translation?.submit}</button>
 
 
-            <div class=" h-[19px]  items-center gap-1.5 lg:inline-flex flex justify-center w-full ">
-              <div class="w-full h-[0px] opacity-10 border border-neutral-400"></div>
-              <div class="text-center text-stone-500 text-base font-normal ">{translation?.or}</div>
-              <div class="w-full h-[0px] opacity-10 border border-neutral-400"></div>
+            <div className=" h-[19px]  items-center gap-1.5 lg:inline-flex flex justify-center w-full ">
+              <div className="w-full h-[0px] opacity-10 border border-neutral-400"></div>
+              <div className="text-center text-stone-500 text-base font-normal ">{translation?.or}</div>
+              <div className="w-full h-[0px] opacity-10 border border-neutral-400"></div>
             </div>
             <div onClick={() => { if (typeof window !== "undefined") {window.location.href = "/login"}}}>
               <button

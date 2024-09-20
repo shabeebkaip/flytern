@@ -105,7 +105,7 @@ const HotelBookingCard = () => {
     };
   
     if (typeof window !== "undefined") {
-      if (location?.pathname?.includes("/search")) {
+      if (location?.pathname.includes("/search")) {
         localStorage.setItem("hotelSearch", JSON.stringify(payload));
         window.location.reload(false);
       } else {
@@ -129,7 +129,7 @@ const HotelBookingCard = () => {
 
   const removeRoom = (indexToRemove) => {
     // Implement the logic to remove the room at the specified index
-    setRooms((prevRooms) => prevRooms?.filter((room, index) => index !== indexToRemove));
+    setRooms((prevRooms) => prevRooms.filter((room, index) => index !== indexToRemove));
   };
 
   const open = Boolean(anchorEl);
@@ -146,7 +146,7 @@ const HotelBookingCard = () => {
         anchorEl={anchorEl}
         closePopover={() => setAnchorEl(null)}
         rooms={rooms}
-        setRooms={(key, value, index) => setRooms(rooms?.map((room, i) => i === index ? { ...room, [key]: value } : room))}
+        setRooms={(key, value, index) => setRooms(rooms.map((room, i) => i === index ? { ...room, [key]: value } : room))}
         addRoom={() => setRooms([...rooms, { adults: 1, children: 0, childAges: [] }])}
         updateChildAge={updateChildAge}
         addChildren={addChildren}
@@ -169,17 +169,17 @@ const HotelBookingCard = () => {
         />
       </div>
       <div className="grid gap-5 p-2 sm:grid-cols-2 " id="users">
-        <div class=" p-2 bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex cursor-pointer" onClick={() => handleRoomPopoever("users")}>
-          <div class="grow shrink basis-0 flex-col justify-start items-start gap-[7px] inline-flex">
-            <div class="justify-start items-center gap-2.5 inline-flex">
-              <div class="w-5 h-5 relative">
+        <div className=" p-2 bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex cursor-pointer" onClick={() => handleRoomPopoever("users")}>
+          <div className="grow shrink basis-0 flex-col justify-start items-start gap-[7px] inline-flex">
+            <div className="justify-start items-center gap-2.5 inline-flex">
+              <div className="w-5 h-5 relative">
                 <Image width={50} height={50} src={"/icons/User Rounded.svg"} alt="" />
               </div>
-              <div class="flex-col justify-start items-start gap-1.5 inline-flex">
-                <div class="text-gray-500 text-[10px] md:text-xs xl:text-sm  font-normal">
+              <div className="flex-col justify-start items-start gap-1.5 inline-flex">
+                <div className="text-gray-500 text-[10px] md:text-xs xl:text-sm  font-normal">
                   {translation?.rooms_guests}
                 </div>
-                <div class="text-black text-[10px] md:text-xs xl:text-sm  font-medium">
+                <div className="text-black text-[10px] md:text-xs xl:text-sm  font-medium">
                   {rooms.length} {translation?.room}, {adults}  {translation?.adults}{children ? `, ${children} Children` : ''}
                 </div>
               </div>
@@ -239,7 +239,7 @@ const HotelBookingCard = () => {
               {
                 location?.pathname === '/hotels/search' ? translation?.modify_search : translation?.search
               } {" "}
-              ({translation?.with}  {totalNights} {totalNights > 1 ? translation?.nights : translation?.nights})
+              ({translation.with}  {totalNights} {totalNights > 1 ? translation?.nights : translation?.nights})
             </div>
           </button>
         </div>

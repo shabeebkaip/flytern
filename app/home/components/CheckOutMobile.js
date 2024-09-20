@@ -41,7 +41,7 @@ const CheckOutMobile = ({ data, target, setData, keyValue, label }) => {
             <p className="pl-5 font-semibold">Check Out</p>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DateCalendar
-                value={parse(data?.checkOutDate, "yyyy-MM-dd", new Date())}
+                value={parse(data.checkOutDate, "yyyy-MM-dd", new Date())}
                 onChange={newValue => {
                   setData({
                     ...data,
@@ -49,7 +49,7 @@ const CheckOutMobile = ({ data, target, setData, keyValue, label }) => {
                   });
                   setAnchorEl(null);
                 }}
-                minDate={parse(data?.checkInDate, "yyyy-MM-dd", new Date())}
+                minDate={parse(data.checkInDate, "yyyy-MM-dd", new Date())}
               />
             </LocalizationProvider>
           </div>

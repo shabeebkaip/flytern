@@ -1,10 +1,10 @@
 <svg width="384" height="108" viewBox="0 0 384 108" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="384" height="108" fill="white"/>
 <circle cx="56" cy="54" r="11" fill="#01634E"/>
-<path d="M91.5 54C91.5 73.5246 75.4642 89.5 55.5 89.5C35.5358 89.5 19.5 73.5246 19.5 54C19.5 34.4754 35.5358 18.5 55.5 18.5C75.4642 18.5 91.5 34.4754 91.5 54Z" stroke="#EDEDED" stroke-width="15"/>
-<path d="M157 54.5H173" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
-<path d="M196 54.5H220" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
-<path d="M243 54.5H267" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
-<path d="M290 54.5H314" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
-<path d="M337 54.5H348" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
+<path d="M91.5 54C91.5 73.5246 75.4642 89.5 55.5 89.5C35.5358 89.5 19.5 73.5246 19.5 54C19.5 34.4754 35.5358 18.5 55.5 18.5C75.4642 18.5 91.5 34.4754 91.5 54Z" stroke="#EDEDED" strokeWidth="15"/>
+<path d="M157 54.5H173" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
+<path d="M196 54.5H220" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
+<path d="M243 54.5H267" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
+<path d="M290 54.5H314" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
+<path d="M337 54.5H348" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
 </svg>

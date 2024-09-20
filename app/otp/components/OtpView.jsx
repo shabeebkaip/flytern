@@ -69,16 +69,16 @@ const OtpView = () => {
             }
           }}
             className='duration-300 ease-in cursor-pointer hover:scale-105 w-7' width={100} height={100} />
-          <h4 class="text-black text-2xl font-bold ">{translation?.otp_verification}</h4>
+          <h4 className="text-black text-2xl font-bold ">{translation?.otp_verification}</h4>
         </div>
         <p>Please enter the OTP you received to {typeof window !== 'undefined' ? window.location.search.split('?')[2] : ''}</p>
-        <div class="flex flex-row items-center justify-between  w-full lg:max-w-sm gap-3 ">
+        <div className="flex flex-row items-center justify-between  w-full lg:max-w-sm gap-3 ">
           {
             inputRefs.map((inputRef, index) => (
-              <div class="sm:w-16 sm:h-16 h-10 w-10" key={index}>
+              <div className="sm:w-16 sm:h-16 h-10 w-10" key={index}>
                 <input
                   ref={inputRef}
-                  class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                  className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                   type="text"
                   name=""
                   id=""
@@ -99,7 +99,7 @@ const OtpView = () => {
             timer > 0 && <p>Expires in <span className='text-orange-400' >{timer}</span>  seconds</p>
           }
         </div>
-        <button class="w-full lg:max-w-sm h-12 mt-3 text-base font-medium text-white rounded-md bg-emerald-800" onClick={onOtpVerify}>{translation?.verify}</button>
+        <button className="w-full lg:max-w-sm h-12 mt-3 text-base font-medium text-white rounded-md bg-emerald-800" onClick={onOtpVerify}>{translation?.verify}</button>
       </div>
     </div>
   )

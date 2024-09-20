@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { setGlobalCookie } from '@/lib/utils';
 import { generalSidebarData } from '@/lib/constants';
-import Link from 'next/link';
 import TitleCard from '@/app/shared/components/TitleCard';
 import SideBar from '@/app/shared/components/SideBar';
 

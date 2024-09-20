@@ -5,14 +5,10 @@ import { getAboutApi } from '../api';
 import { Aboutsuccess } from '@/lib/slices/genaralSlice';
 
 const AboutUs = () => {
-
     const dispatch = useAppDispatch();
- 
-
     useEffect(() => {
       const getTerms = async () => {
         const data = await getAboutApi();
-  
         if (data) {
           dispatch(Aboutsuccess(data));
         }

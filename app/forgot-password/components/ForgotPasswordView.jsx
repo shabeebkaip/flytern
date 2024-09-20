@@ -103,7 +103,7 @@ const ForgotPasswordView = () => {
             value={data.mobile}
           />
         </div>
-        <button class="lg:max-w-[350px] h-12 mt-3 text-base font-medium text-white rounded-md bg-emerald-800 " onClick={onSave}>{translation?.send_verifcation}</button>
+        <button className="lg:max-w-[350px] h-12 mt-3 text-base font-medium text-white rounded-md bg-emerald-800 " onClick={onSave}>{translation?.send_verifcation}</button>
       </div>
     </div>
   );

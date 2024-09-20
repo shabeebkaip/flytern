@@ -57,7 +57,6 @@ const FlightInput = ({ label, defaultValue, image, ulta, value, onFieldChange, i
       <div className={`absolute flex ${ulta ? 'flex-col-reverse' : 'flex-col'} ${selectedLanguageAndCountry?.language?.code === 'ar' ? 'right-2 top-2' : 'left-2 top-2'}  items-center gap-3 `}>
         <Image width={24} height={24} src={image} alt='' className=' h-7 w-5' />
         <Image width={2} height={12} className='w-1 h-2' src={"/misc/dottedLine.png"} alt='' />
-        
       </div>
     </div>
   );

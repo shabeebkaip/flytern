@@ -1,10 +1,10 @@
 <svg width="384" height="108" viewBox="0 0 384 108" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="384" height="108" transform="matrix(-1 0 0 1 384 0)" fill="white"/>
 <circle cx="11" cy="11" r="11" transform="matrix(-1 0 0 1 339 43)" fill="#01634E"/>
-<path d="M292.5 54C292.5 73.5246 308.536 89.5 328.5 89.5C348.464 89.5 364.5 73.5246 364.5 54C364.5 34.4754 348.464 18.5 328.5 18.5C308.536 18.5 292.5 34.4754 292.5 54Z" stroke="#EDEDED" stroke-width="15"/>
-<path d="M227 54.5H211" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
-<path d="M188 54.5H164" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
-<path d="M141 54.5H117" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
-<path d="M94 54.5H70" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
-<path d="M47 54.5H36" stroke="#A8ABB4" stroke-width="6" stroke-linecap="round"/>
+<path d="M292.5 54C292.5 73.5246 308.536 89.5 328.5 89.5C348.464 89.5 364.5 73.5246 364.5 54C364.5 34.4754 348.464 18.5 328.5 18.5C308.536 18.5 292.5 34.4754 292.5 54Z" stroke="#EDEDED" strokeWidth="15"/>
+<path d="M227 54.5H211" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
+<path d="M188 54.5H164" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
+<path d="M141 54.5H117" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
+<path d="M94 54.5H70" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
+<path d="M47 54.5H36" stroke="#A8ABB4" strokeWidth="6" strokeLinecap="round"/>
 </svg>

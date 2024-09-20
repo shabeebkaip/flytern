@@ -11,7 +11,7 @@ const PaymentSuccess = ({ _paymentInfo }) => {
     return (
         <>
             <TitleCard>
-                <div class=" rounded  w-full p-5">
+                <div className=" rounded  w-full p-5">
                     {
                         _paymentInfo?.length ? _paymentInfo.map((item, index) =>
                             item.groupName === "ThankyouMsg" ? (

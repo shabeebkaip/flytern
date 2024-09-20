@@ -53,9 +53,9 @@ const PassengerAndCabin = ({ open, onClose, onApply, allowedCabin, cabinList,  c
             <div className="grid grid-cols-1 gap-5 p-0 md:grid-cols-1 w-100">
               <div className="w-full ">
                 <h6 className="text-black-500 text-[8px] md:text-[16px] font-normal font-['Inter']">
-                  {translation?.adults}
+                  {translation.adults}
                 </h6>
-                <span className="text-sm">{translation?.adult_description}</span>
+                <span className="text-sm">{translation.adult_description}</span>
               </div>
             </div>
             <div className="grid grid-cols-1 gap-5 p-0 md:grid-cols-1 w-100">
@@ -78,9 +78,9 @@ const PassengerAndCabin = ({ open, onClose, onApply, allowedCabin, cabinList,  c
             <div className="grid grid-cols-1 gap-5 p-0 md:grid-cols-1 w-100">
               <div className="w-full">
                 <h6 className="text-black-500 text-[8px] md:text-[16px] font-normal font-['Inter']">
-                  {translation?.children}
+                  {translation.children}
                 </h6>
-                <span className="text-sm">{translation?.children_description}</span>
+                <span className="text-sm">{translation.children_description}</span>
               </div>
             </div>
             <div className="grid grid-cols-1 gap-5 p-0 md:grid-cols-1 w-100">
@@ -106,7 +106,7 @@ const PassengerAndCabin = ({ open, onClose, onApply, allowedCabin, cabinList,  c
                 <h6 className="text-black-500 text-[13px] md:text-[16px] font-normal font-['Inter']">
                   {translation.infants}
                 </h6>
-                <span className="text-sm">{translation?.infant_description}</span>
+                <span className="text-sm">{translation.infant_description}</span>
               </div>
             </div>
             <div className="grid grid-cols-1 gap-5 p-0 md:grid-cols-1 w-100">
@@ -128,7 +128,7 @@ const PassengerAndCabin = ({ open, onClose, onApply, allowedCabin, cabinList,  c
           <div className="flex flex-col items-center justify-between w-full p-2 cursor-pointer ">
             <div className="flex items-start justify-center w-full ">
               <div className="w-full p-0">
-                <h6 className="mb-2 text-lg border-b">{translation?.chooseClass}</h6>
+                <h6 className="mb-2 text-lg border-b">{translation.chooseClass}</h6>
                 <RadioGroup
                   value={flightSearch?.allowedCabins && flightSearch?.allowedCabins[0]?.name}
                   onChange={(e) => {

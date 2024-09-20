@@ -168,17 +168,17 @@ const HotelBookingCard = () => {
         />
       </div>
       <div className="grid gap-5 p-2 sm:grid-cols-2 " id="users">
-        <div class=" p-2 bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex cursor-pointer" onClick={() => handleRoomPopoever("users")}>
-          <div class="grow shrink basis-0 flex-col justify-start items-start gap-[7px] inline-flex">
-            <div class="justify-start items-center gap-2.5 inline-flex">
-              <div class="w-5 h-5 relative">
+        <div className=" p-2 bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex cursor-pointer" onClick={() => handleRoomPopoever("users")}>
+          <div className="grow shrink basis-0 flex-col justify-start items-start gap-[7px] inline-flex">
+            <div className="justify-start items-center gap-2.5 inline-flex">
+              <div className="w-5 h-5 relative">
                 <Image src={person} alt="" width={50} height={50} />
               </div>
-              <div class="flex-col justify-start items-start gap-1.5 inline-flex">
-                <div class="text-gray-500 text-[10px] md:text-xs xl:text-sm  font-normal">
+              <div className="flex-col justify-start items-start gap-1.5 inline-flex">
+                <div className="text-gray-500 text-[10px] md:text-xs xl:text-sm  font-normal">
                   {translation?.rooms_guests}
                 </div>
-                <div class="text-black text-[10px] md:text-xs xl:text-sm  font-medium">
+                <div className="text-black text-[10px] md:text-xs xl:text-sm  font-medium">
                   {rooms.length} {translation?.room}, {adults}  {translation?.adults}{children ? `, ${children} Children` : ''}
                 </div>
               </div>

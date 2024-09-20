@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode:false,
+  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
@@ -13,13 +13,13 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname:'flagcdn.com'
+        hostname: 'flagcdn.com'
       },
       {
         protocol: 'https',
-        hostname:'api.tbotechnology.in'
+        hostname: 'api.tbotechnology.in'
       }
-     
+
     ],
   },
 
@@ -38,10 +38,15 @@ const nextConfig = {
         source: '/flights',
         destination: '/home'
       },
-      
+
 
     ];
   },
+
+  exportTrailingSlash: true,
 };
+
+
+
 
 export default nextConfig;

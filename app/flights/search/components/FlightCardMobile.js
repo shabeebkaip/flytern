@@ -112,7 +112,7 @@ const FlightCardMobile = ({ flight, index, flightIndex, flightResults, lang }) =
                             <span className="text-xs text-right cursor-pointer xl:text-sm text-emerald-800" onClick={handleMoreOptionsClick}>
                                 {flight.moreOptioncount} {translation?.more_options_available}
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className={`inline-block w-4 h-4 ml-1 ${more ? 'transform rotate-180' : ''}`}>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </span> : null
                     }

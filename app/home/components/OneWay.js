@@ -27,9 +27,9 @@ const OneWay = ({ flightReqBody, lang }) => {
   const [error, setError] = useState({});
   const [destinationList, setDestinationList] = useState([]);
   const [destinationList1, setDestinationList1] = useState([]);
-  const location = typeof window !== "undefined" ? window?.location : null;
+  const location = typeof window !== "undefined" ? window.location : null;
   const cabinList = useAppSelector((data) => data?.exploreState?.data?.cabinClass)
-  const defaultCabin = cabinList?.filter((data) => data?.isDefault === true)
+  const defaultCabin = cabinList?.filter((data) => data.isDefault === true)
   const [anchorElDate, setAnchorElDate] = useState(null);
   const [anchorElPassenger, setAnchorElPassenger] = useState(null);
   const [datePopoverOpen, setDatePopoverOpen] = useState(false);
@@ -49,12 +49,12 @@ const OneWay = ({ flightReqBody, lang }) => {
     }));
   }, [])
   const handlePassengerClick = (event) => {
-    setAnchorElPassenger(event?.currentTarget);
+    setAnchorElPassenger(event.currentTarget);
   };
 
 
   const handleDateClick = (event) => {
-    setAnchorElDate(event?.currentTarget);
+    setAnchorElDate(event.currentTarget);
     setDatePopoverOpen(true); // Open the calendar popover
   };
 
@@ -105,7 +105,7 @@ const OneWay = ({ flightReqBody, lang }) => {
   const onFieldChange = (field, value, index) => {
     dispatch(setFlightSearch({
       ...flightSearch,
-      searchList: flightSearch?.searchList?.map((search, i) =>
+      searchList: flightSearch.searchList.map((search, i) =>
         index === i ? { ...search, [field]: value } : search
       )
     }));
@@ -113,7 +113,7 @@ const OneWay = ({ flightReqBody, lang }) => {
   const onFieldSearchListChange = (field, value, index) => {
     dispatch(setFlightSearch({
       ...flightSearch,
-      searchList: flightSearch?.searchList?.map((search, i) =>
+      searchList: flightSearch.searchList.map((search, i) =>
         index === i ? { ...search, [field]: value } : search
       )
     }))
@@ -121,7 +121,7 @@ const OneWay = ({ flightReqBody, lang }) => {
   const onSearchDateFieldChange = (field, value, index) => {
     dispatch(setFlightSearch({
       ...flightSearch,
-      searchList: flightSearch?.searchList?.map((search, i) =>
+      searchList: flightSearch.searchList.map((search, i) =>
         index === i ? { ...search, [field]: value } : search
       )
     }))
@@ -140,14 +140,14 @@ const OneWay = ({ flightReqBody, lang }) => {
       dispatch(setFlightSearch({
         ...flightSearch,
         searchList: flightSearch?.searchList.map((search, i) =>
-          index === i ? { ...search, departure: destination?.airportCode, departureLabel: destination?.uniqueCombination } : search
+          index === i ? { ...search, departure: destination.airportCode, departureLabel: destination.uniqueCombination } : search
         )
       }))
     } else if (key === 'arrival') {
       dispatch(setFlightSearch({
         ...flightSearch,
         searchList: flightSearch?.searchList.map((search, i) =>
-          index === i ? { ...search, arrival: destination?.airportCode, arrivalLabel: destination?.uniqueCombination } : search
+          index === i ? { ...search, arrival: destination.airportCode, arrivalLabel: destination.uniqueCombination } : search
         )
       }))
     }
@@ -217,10 +217,10 @@ const OneWay = ({ flightReqBody, lang }) => {
   const handleSwap = () => {
     const newarrival = flightSearch?.searchList?.map((search) => ({
       ...search,
-      departure: search?.arrival,
-      departureLabel: search?.arrivalLabel,
-      arrival: search?.departure,
-      arrivalLabel: search?.departureLabel
+      departure: search.arrival,
+      departureLabel: search.arrivalLabel,
+      arrival: search.departure,
+      arrivalLabel: search.departureLabel
     }))
     dispatch(setFlightSearch({
       ...flightSearch,
@@ -244,12 +244,12 @@ const OneWay = ({ flightReqBody, lang }) => {
                     departureLabel: ""
                   })
                 }}
-                value={search?.departureLabel}
+                value={search.departureLabel}
               />
-              {error && <h4 className="text-xs text-red-500">{error?.departureLabel}</h4>}
-              {search?.departureLabel && destinationList?.length ? (
+              {error && <h4 className="text-xs text-red-500">{error.departureLabel}</h4>}
+              {search.departureLabel && destinationList.length ? (
                 <div className="absolute z-20 flex flex-col w-full h-40 gap-3 overflow-y-auto bg-white rounded-md shadow-md top-20 ">
-                  {destinationList?.map((destination, index) => (
+                  {destinationList.map((destination, index) => (
                     <div
                       className="flex items-center justify-between p-4 cursor-pointer hover:bg-stone-50"
                       onClick={() => {
@@ -261,10 +261,10 @@ const OneWay = ({ flightReqBody, lang }) => {
                       <div className="flex items-start justify-start gap-2">
                         <FlightTakeoffIcon style={{ color: "orange" }} />
                         <div className="flex flex-col gap-1">
-                          <p>{destination?.uniqueCombination}</p>
+                          <p>{destination.uniqueCombination}</p>
                         </div>
                       </div>
-                      <p className="text-font-gray">{destination?.airportCode}</p>
+                      <p className="text-font-gray">{destination.airportCode}</p>
                     </div>
                   ))}
                 </div>
@@ -301,16 +301,16 @@ const OneWay = ({ flightReqBody, lang }) => {
 
                   })
                 }}
-                value={search?.arrivalLabel}
+                value={search.arrivalLabel}
               />
-              {error && <h4 className="text-red-500">{error?.arrivalLabel}</h4>}
-              {search?.arrivalLabel && destinationList1?.length ? (
+              {error && <h4 className="text-red-500">{error.arrivalLabel}</h4>}
+              {search.arrivalLabel && destinationList1.length ? (
                 <div className="absolute z-20 flex flex-col w-full h-40 gap-3 overflow-y-auto bg-white rounded-md shadow-md top-20 ">
-                  {destinationList1?.map((destination, index) => (
+                  {destinationList1.map((destination, index) => (
                     <div
                       className="flex items-center justify-between p-4 cursor-pointer hover:bg-stone-50"
                       onClick={() => {
-                        onFieldChange("arrivalLabel", destination?.airportCode, 0);
+                        onFieldChange("arrivalLabel", destination.airportCode, 0);
                         handleNameAndCode('arrival', destination, 0)
                         setDestinationList1([]);
                       }}
@@ -319,10 +319,10 @@ const OneWay = ({ flightReqBody, lang }) => {
                       <div className="flex items-start justify-start gap-2">
                         <FlightLandIcon style={{ color: "orange" }} />
                         <div className="flex flex-col gap-1">
-                          <p>{destination?.airportName}</p>
+                          <p>{destination.airportName}</p>
                         </div>
                       </div>
-                      <p className="text-font-gray">{destination?.airportCode}</p>
+                      <p className="text-font-gray">{destination.airportCode}</p>
                     </div>
                   ))}
                 </div>
@@ -334,9 +334,9 @@ const OneWay = ({ flightReqBody, lang }) => {
                 <FlightDateInput
                   label={translation?.departure_date}
                   value={
-                    search?.departureDate
+                    search.departureDate
                       ? format(
-                        new Date(search?.departureDate),
+                        new Date(search.departureDate),
                         "dd MMM yyyy"
                       )
                       : null
@@ -372,7 +372,7 @@ const OneWay = ({ flightReqBody, lang }) => {
                         setDatePopoverOpen(false); // Close the calendar popover
                       }}
                       onAccept={handleDateAccept}
-                      value={parse(search?.departureDate, "yyyy-MM-dd", new Date())}
+                      value={parse(search.departureDate, "yyyy-MM-dd", new Date())}
                       minDate={new Date()}
                     />
                   </LocalizationProvider>
@@ -427,22 +427,22 @@ const OneWay = ({ flightReqBody, lang }) => {
         ))}
         <div className='grid grid-cols-2 gap-5'>
           <div>
-            <div class=" h-14 px-2.5 py-[15px] bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex w-full">
-              <div class="grow shrink basis-0 flex-col justify-start items-start gap-[7px] inline-flex">
-                <div class="justify-start items-center gap-2.5 inline-flex">
-                  <div class="w-5 h-5 px-px py-[2.71px] justify-center items-center flex">
+            <div className=" h-14 px-2.5 py-[15px] bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex w-full">
+              <div className="grow shrink basis-0 flex-col justify-start items-start gap-[7px] inline-flex">
+                <div className="justify-start items-center gap-2.5 inline-flex">
+                  <div className="w-5 h-5 px-px py-[2.71px] justify-center items-center flex">
                     <Image width={50} height={50} src={"/icons/TicketDiscount.svg"} alt="" />
                   </div>
                   <div>
-                    <div class="flex-col justify-start items-start gap-1.5 inline-flex">
-                      <div class="text-gray-500 text-xs md:text-sm font-normal ">
+                    <div className="flex-col justify-start items-start gap-1.5 inline-flex">
+                      <div className="text-gray-500 text-xs md:text-sm font-normal ">
                         {translation?.promo_code}
                       </div>
 
 
-                      <div class="text-black text-xs md:text-sm font-medium ">
+                      <div className="text-black text-xs md:text-sm font-medium ">
                         <input
-                          class="text-black text-[8px] md:text-sm font-medium font-inter focus:outline-none"
+                          className="text-black text-[8px] md:text-sm font-medium font-inter focus:outline-none"
                           placeholder={translation?.enter_promo_code}
                           onChange={handlePromoCodeChange}
                           value={flightSearch?.promoCode}
@@ -466,10 +466,10 @@ const OneWay = ({ flightReqBody, lang }) => {
               {translation?.direct_flight}
             </label>
             <Checkbox
-              checked={flightSearch?.isDirectFlight}
+              checked={flightSearch.isDirectFlight}
               onChange={() => dispatch(setFlightSearch({
                 ...flightSearch,
-                isDirectFlight: !flightSearch?.isDirectFlight
+                isDirectFlight: !flightSearch.isDirectFlight
 
               }))}
               style={{ color: "orange" }}

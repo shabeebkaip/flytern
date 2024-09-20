@@ -232,10 +232,10 @@ const RoundTrip = ({ flightReqBody, lang }) => {
   const handleSwap = () => {
     const newarrival = flightSearch?.searchList.map((search) => ({
       ...search,
-      departure: search?.arrival,
-      departureLabel: search?.arrivalLabel,
-      arrival: search?.departure,
-      arrivalLabel: search?.departureLabel
+      departure: search.arrival,
+      departureLabel: search.arrivalLabel,
+      arrival: search.departure,
+      arrivalLabel: search.departureLabel
     }))
     dispatch(setFlightSearch({
       ...flightSearch,
@@ -286,16 +286,16 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                 value={search.departureLabel}
                 id="departure"
               />
-              {error && <h4 className="text-xs text-red-500">{error?.departureLabel}</h4>}
+              {error && <h4 className="text-xs text-red-500">{error.departureLabel}</h4>}
               {search.departureLabel && destinationList?.length ? (
                 <div className="absolute z-20 flex flex-col w-full h-40 gap-3 overflow-y-auto bg-white rounded-md shadow-md top-20 ">
-                  {destinationList?.map((destination, index) => (
+                  {destinationList.map((destination, index) => (
                     <div
                       className="flex items-center justify-between p-4 cursor-pointer hover:bg-stone-50"
                       onClick={() => {
                         onFieldSearchListChange(
                           "departure",
-                          destination?.airportCode,
+                          destination.airportCode,
                           0
                         );
                         handleNameAndCode("departure", destination, 0);
@@ -307,7 +307,7 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                       <div className="flex items-start justify-start gap-2">
                         <FlightTakeoffIcon style={{ color: "orange" }} />
                         <div className="flex flex-col gap-1">
-                          <p>{destination?.uniqueCombination}</p>
+                          <p>{destination.uniqueCombination}</p>
                         </div>
                       </div>
                     </div>
@@ -330,11 +330,11 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                     arrivalLabel: ""
                   })
                 }}
-                value={search?.arrivalLabel}
+                value={search.arrivalLabel}
                 id={"arrival"}
               />
-              {error && <h4 className="text-xs text-red-500">{error?.arrivalLabel}</h4>}
-              {search?.arrivalLabel && destinationList1?.length ? (
+              {error && <h4 className="text-xs text-red-500">{error.arrivalLabel}</h4>}
+              {search.arrivalLabel && destinationList1?.length ? (
                 <div className="absolute z-20 flex flex-col w-full h-40 gap-3 overflow-y-auto bg-white rounded-md shadow-md top-20 ">
                   {destinationList1?.map((destination, flightIndex) => (
                     <div
@@ -353,11 +353,11 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                       <div className="flex items-start justify-start gap-2">
                         <FlightLandIcon style={{ color: 'orange' }} />
                         <div className="flex flex-col gap-1">
-                          <p>{destination?.uniqueCombination}</p>
+                          <p>{destination.uniqueCombination}</p>
                         </div>
                       </div>
                       <p className="text-font-gray">
-                        {destination?.airportCode}
+                        {destination.airportCode}
                       </p>
                     </div>
                   ))}
@@ -400,8 +400,8 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                   />
                 </div>
                 <Popover
-                  open={search?.openDeparture}
-                  anchorEl={search?.departureAnchorEl}
+                  open={search.openDeparture}
+                  anchorEl={search.departureAnchorEl}
                   onClose={() =>
                     handleCloseDepartureDatePicker(
                       index,
@@ -543,9 +543,9 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                                 new Date()
                               )}
                               minDate={
-                                search?.departureDate
+                                search.departureDate
                                   ? parse(
-                                    search?.departureDate,
+                                    search.departureDate,
                                     "yyyy-MM-dd",
                                     new Date()
                                   )
@@ -579,8 +579,8 @@ const RoundTrip = ({ flightReqBody, lang }) => {
                   {translation?.passenger_and_cabin}
                 </div>
                 <div className="text-xs font-medium text-black cursor-pointer md:text-sm ">
-                  {flightSearch?.adults} Adults{flightSearch?.child ? `, ${flightSearch?.child} Child` : ""}{flightSearch?.infants ? `, ${flightSearch?.infants} Infant` : ""}  {" "}
-                  / {flightSearch?.allowedCabins?.map((cabin) => cabin?.name)}
+                  {flightSearch.adults} Adults{flightSearch.child ? `, ${flightSearch.child} Child` : ""}{flightSearch.infants ? `, ${flightSearch.infants} Infant` : ""}  {" "}
+                  / {flightSearch?.allowedCabins?.map((cabin) => cabin.name)}
                 </div>
               </div>
             </div>
@@ -611,25 +611,25 @@ const RoundTrip = ({ flightReqBody, lang }) => {
       </div >
       <div className="grid grid-cols-2 gap-5">
         <div>
-          <div class=" h-14 px-2.5 py-[15px] bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex w-full">
-            <div class="grow shrink basis-0 flex-col justify-start items-start gap-[7px] inline-flex">
-              <div class="justify-start items-center gap-2.5 inline-flex">
-                <div class="w-5 h-5 px-px py-[2.71px] justify-center items-center flex">
+          <div className=" h-14 px-2.5 py-[15px] bg-white rounded-[5px] border border-zinc-100 justify-start items-center gap-2.5 inline-flex w-full">
+            <div className="grow shrink basis-0 flex-col justify-start items-start gap-[7px] inline-flex">
+              <div className="justify-start items-center gap-2.5 inline-flex">
+                <div className="w-5 h-5 px-px py-[2.71px] justify-center items-center flex">
                   <Image width={50} height={50} src={"/icons/TicketDiscount.svg"} alt="" />
                 </div>
                 <div>
-                  <div class="flex-col justify-start items-start gap-1.5 inline-flex">
-                    <div class="text-gray-500 text-xs md:text-sm font-normal ">
+                  <div className="flex-col justify-start items-start gap-1.5 inline-flex">
+                    <div className="text-gray-500 text-xs md:text-sm font-normal ">
                       {translation?.promo_code}
                     </div>
 
 
-                    <div class="text-black text-xs md:text-sm font-medium ">
+                    <div className="text-black text-xs md:text-sm font-medium ">
                       <input
-                        class="text-black text-[8px] md:text-sm font-medium font-inter focus:outline-none"
+                        className="text-black text-[8px] md:text-sm font-medium font-inter focus:outline-none"
                         placeholder="Enter Promo Code"
                         onChange={handlePromoCodeChange}
-                        value={flightSearch?.promoCode}
+                        value={flightSearch.promoCode}
                       />
 
                     </div>
@@ -651,10 +651,10 @@ const RoundTrip = ({ flightReqBody, lang }) => {
             {translation?.direct_flight}
           </label>
           <Checkbox
-            checked={flightSearch?.isDirectFlight}
+            checked={flightSearch.isDirectFlight}
             onChange={() => dispatch(setFlightSearch({
               ...flightSearch,
-              isDirectFlight: !flightSearch?.isDirectFlight
+              isDirectFlight: !flightSearch.isDirectFlight
 
             }))}
             style={{ color: "orange" }}

@@ -61,7 +61,7 @@ const HotelCard = ({ hotel, objectID }) => {
             <div className="h-full col-span-12 md:col-span-5 ">
                 <div className='flex flex-col h-full gap-1'>
                     <h3 className='font-medium text-black md:text-xl sm:text-base'>{hotel.hotelName}</h3>
-                    <div class="text-black text-[9px] sm:text-[11px] md:text-sm font-medium flex  justify-start  gap-1  ">
+                    <div className="text-black text-[9px] sm:text-[11px] md:text-sm font-medium flex  justify-start  gap-1  ">
                         <Rating name="read-only" value={hotel.rating} readOnly precision={0.5} size='small' />
                     </div>
                     <ul className='flex gap-7'>

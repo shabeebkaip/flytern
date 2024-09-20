@@ -45,7 +45,7 @@ const PackageDecription = () => {
             <div className='flex flex-col items-baseline justify-between sm:flex-row'>
                 <div className='flex flex-col gap-3 '>
                     <h3 className='text-xl font-bold text-black sm:text-3xl'>{packages[0] && packages[0].name && packages[0].name}</h3>
-                    <div class="text-black sm:text-base text-xsfont-medium flex items-center gap-1 "> <Image className='w-6 h-6' src="/package/star.svg" alt="" width={400} height={400}/>  <span className='text-2xl font-normal text-black '>{packages[0] && packages[0].ratings && packages[0].ratings}</span> </div>
+                    <div className="text-black sm:text-base text-xsfont-medium flex items-center gap-1 "> <Image className='w-6 h-6' src="/package/star.svg" alt="" width={400} height={400}/>  <span className='text-2xl font-normal text-black '>{packages[0] && packages[0].ratings && packages[0].ratings}</span> </div>
                 </div>
                 <div>
                     <h3 className='text-xs font-medium text-orange-400 sm:text-base '>{packages[0] && packages[0].currency && packages[0].currency} <span className='text-lg font-semibold sm:text-2xl'>{packages[0] && packages[0].price && parseFloat(packages[0].price).toFixed(3)}</span></h3>
