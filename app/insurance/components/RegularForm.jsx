@@ -13,9 +13,10 @@ import { arabic_translation } from '@/lib/constants'
 import { CustomDatePicker, CustomTextField } from '@/app/shared/components/CustomTextField'
 import { useAppSelector } from '@/lib/hooks'
 
-const RegularForm = ({ setMainData }) => {
+const RegularForm = ({ setMainData, mode }) => {
     const { insuranceFormList: { _lstPolicyPeriod, _lstPolicyType, _lstPolicyOption, maxPolicyDate, _lstPolicyRelationship } = {} } = useAppSelector(state => state.insuranceState);
     const [apiCallSuccess, setApiCallSuccess] = useState(false);
+    const { saveTraveller } = useAppSelector(state => state.insuranceState);
     const dispatch = useDispatch();
 
     const { enqueueSnackbar } = useSnackbar();
@@ -27,6 +28,21 @@ const RegularForm = ({ setMainData }) => {
         policyperiod: '',
         policyDate: format(new Date(), 'dd-MM-yyyy')  // This field is included in the data object
     });
+
+    useEffect(() => {
+        if (saveTraveller && mode === "edit") {
+            setData(prevData => {
+                const newData = {
+                    ...prevData,
+                    ...saveTraveller,
+                    policyperiod: saveTraveller.policyperiod,
+                    policyperiod: _lstPolicyPeriod.find(p => p.periodCode === saveTraveller.policyperiod) || '',
+                    policy_type: Number(saveTraveller.policy_type)
+                };
+                return newData;
+            });
+        }
+    }, [mode, saveTraveller]);
 
     const addInsurance = () => {
         const policyRelationshipValues = data.policy_type === 1
@@ -66,6 +82,7 @@ const RegularForm = ({ setMainData }) => {
     };
 
     useEffect(() => {
+        if (mode !== 'edit') {
         // Set default policy type if not already set
         if (!data.policy_type && _lstPolicyType && _lstPolicyType.length > 0) {
             setData(prevData => ({
@@ -96,6 +113,7 @@ const RegularForm = ({ setMainData }) => {
                 '001': 1,
             }));
         }
+    }
     }, [data.policy_type, data.policyplan, data.policyperiod, _lstPolicyType, _lstPolicyOption, _lstPolicyPeriod]);
 
     const onFieldChange = (key, value) => {
@@ -185,8 +203,10 @@ const RegularForm = ({ setMainData }) => {
                                 <div className='flex gap-5 sm:gap-12' key={index}>
                                     <Radio
                                         style={{ color: 'orange', padding: 0 }}
-                                        onChange={() => onFieldChange('policyplan', item.optionCode)}
-                                        checked={item.optionCode === data.policyplan}
+                                        onChange={() => {
+                                            onFieldChange('policyplan', String(item.optionCode));
+                                        }}
+                                        checked={String(item.optionCode) === String(data.policyplan)}
                                     />
                                     <h3 className='text-base font-normal text-black'>{item.information}</h3>
                                 </div>

@@ -26,7 +26,7 @@ const InsuranceDetails = () => {
     };
     if (editMode) {
         if (saveTraveller.id === "1") {
-            return <CovidForm onCancelEdit={handleCancelEdit} mode="edit" />;
+            return <CovidForm onCancelEdit={handleCancelEdit} mode = "edit" />;
         } else {
             return <RegularForm onCancelEdit={handleCancelEdit} mode="edit" />;
         }
